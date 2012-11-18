@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Scene Title="Simple Scene">
+  <MeshData>
+    <Mesh3 id="0" name="SimpleTriangle">
+      <Element3>
+        <Vertex id="0" x="1.0" y="0.0" z="4.0">
+          <Color r="1.0" g="0.0" b="0.0" a="1.0" />
+        </Vertex>
+        <Vertex id="1" x="0.0" y="1.0" z="4.0">
+          <Color r="0.0" g="1.0" b="0.0" a="1.0" />
+        </Vertex>
+        <Vertex id="2" x="0.0" y="0.0" z="4.0">
+          <Color r="0.0" g="0.0" b="1.0" a="1.0" />
+        </Vertex>
+        <Triangle a="0" b="1" c="2" />
+      </Element3>
+    </Mesh3>
+  </MeshData>
+  <Root>
+    <Geometry mesh="0" />
+  </Root>
+</Scene>

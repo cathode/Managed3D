@@ -1,0 +1,2157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="1.36" Name="NetSgl">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">c:\program files (x86)\microsoft fxcop 1.36\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded" NewOnly="False" />
+   <Report Status="Active" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <AssemblyReferenceDirectories>
+   <Directory>$(ProjectDir)/NetSgl/bin/Release/</Directory>
+  </AssemblyReferenceDirectories>
+  <Target Name="$(ProjectDir)/NetSgl/bin/Debug/NetSgl.dll" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="1.36">
+  <Namespaces>
+   <Namespace Name="NetSgl.Geometry3.Primitives">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2010-06-29 06:03:58Z">
+      <Issue>
+       <Item>NetSgl.Geometry3.Primitives</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="NetSgl.Geometry4">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2009-11-11 17:50:48Z">
+      <Issue>
+       <Item>NetSgl.Geometry4</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/NetSgl/bin/Debug/NetSgl.dll">
+    <Modules>
+     <Module Name="netsgl.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2009-11-11 17:50:48Z">
+        <Issue Name="NoStrongName">
+         <Item>'NetSgl.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="NetSgl">
+        <Types>
+         <Type Name="Angle">
+          <Members>
+           <Member Name="#Equals(NetSgl.Angle,NetSgl.Angle)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.Equals(Angle, Angle)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.Equals(Angle, Angle)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Addition(NetSgl.Angle,NetSgl.Angle)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator +(Angle, Angle)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator +(Angle, Angle)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Equality(NetSgl.Angle,NetSgl.Angle)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator ==(Angle, Angle)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator ==(Angle, Angle)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Inequality(NetSgl.Angle,NetSgl.Angle)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator !=(Angle, Angle)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator !=(Angle, Angle)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Subtraction(NetSgl.Angle,NetSgl.Angle)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator -(Angle, Angle)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Angle.operator -(Angle, Angle)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ToString()">
+            <Messages>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2009-11-11 17:50:48Z">
+              <Issue>
+               <Item>'double.ToString()'</Item>
+               <Item>'Angle.ToString()'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DisplayProfile">
+          <Members>
+           <Member Name="#frequency">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'DisplayProfile.frequency'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#isWidescreen">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'DisplayProfile.isWidescreen'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WSVGA">
+            <Messages>
+             <Message Id="WSVGA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>WSVGA</Item>
+               <Item>'DisplayProfile.WSVGA'</Item>
+               <Item>Wsvga</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WVGA">
+            <Messages>
+             <Message Id="WVGA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>WVGA</Item>
+               <Item>'DisplayProfile.WVGA'</Item>
+               <Item>Wvga</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WVGAPlus">
+            <Messages>
+             <Message Id="WVGA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>WVGA</Item>
+               <Item>'DisplayProfile.WVGAPlus'</Item>
+               <Item>Wvga</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WXGA">
+            <Messages>
+             <Message Id="WXGA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>WXGA</Item>
+               <Item>'DisplayProfile.WXGA'</Item>
+               <Item>Wxga</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DisplaySurface">
+          <Members>
+           <Member Name="#SupportsFullscreen">
+            <Messages>
+             <Message Id="Fullscreen" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>Fullscreen</Item>
+               <Item>'DisplaySurface.SupportsFullscreen'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Frame">
+          <Members>
+           <Member Name="#Item[System.Int32,System.Int32]">
+            <Messages>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Frame.this[int, int]'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Frame.this[int, int]'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IndexersShouldNotBeMultidimensional" Category="Microsoft.Design" CheckId="CA1023" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Frame.this[int, int]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#pixels">
+            <Messages>
+             <Message Id="Member" TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Frame.pixels'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Matrix4">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <Messages>
+             <Message Id="bz" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>bz</Item>
+               <Item>'bz'</Item>
+              </Issue>
+             </Message>
+             <Message Id="cw" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>cw</Item>
+               <Item>'cw'</Item>
+              </Issue>
+             </Message>
+             <Message Id="cx" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>cx</Item>
+               <Item>'cx'</Item>
+              </Issue>
+             </Message>
+             <Message Id="dw" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>dw</Item>
+               <Item>'dw'</Item>
+              </Issue>
+             </Message>
+             <Message Id="dy" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>dy</Item>
+               <Item>'dy'</Item>
+              </Issue>
+             </Message>
+             <Message Id="dz" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Matrix4.Matrix4(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)'</Item>
+               <Item>dz</Item>
+               <Item>'dz'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Add(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Add(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CreateOrthographicProjectionMatrix(System.Double,System.Double)">
+            <Messages>
+             <Message Id="h" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.CreateOrthographicProjectionMatrix(double, double)'</Item>
+               <Item>'h'</Item>
+              </Issue>
+             </Message>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.CreateOrthographicProjectionMatrix(double, double)'</Item>
+               <Item>'w'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CreatePerspectiveProjectionMatrix(System.Double,System.Double,System.Double,System.Double)">
+            <Messages>
+             <Message Id="farZ" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'farZ'</Item>
+               <Item>'Matrix4.CreatePerspectiveProjectionMatrix(double, double, double, double)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="height" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'height'</Item>
+               <Item>'Matrix4.CreatePerspectiveProjectionMatrix(double, double, double, double)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="nearZ" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'nearZ'</Item>
+               <Item>'Matrix4.CreatePerspectiveProjectionMatrix(double, double, double, double)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="width" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'width'</Item>
+               <Item>'Matrix4.CreatePerspectiveProjectionMatrix(double, double, double, double)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Equals(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Equals(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'Matrix4'</Item>
+               <Item>'Matrix4.Equals(object)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Item[System.Int32,System.Int32]">
+            <Messages>
+             <Message Id="i" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.this[int, int]'</Item>
+               <Item>'i'</Item>
+              </Issue>
+             </Message>
+             <Message Id="j" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.this[int, int]'</Item>
+               <Item>'j'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IndexersShouldNotBeMultidimensional" Category="Microsoft.Design" CheckId="CA1023" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Matrix4.this[int, int]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#get_Item(System.Int32,System.Int32)">
+              <Messages>
+               <Message Id="i*4" TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233" Created="2010-06-29 06:03:58Z">
+                <Issue>
+                 <Item>i*4</Item>
+                 <Item>'Matrix4.this.get(int, int)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+             <Accessor Name="#set_Item(System.Int32,System.Int32,System.Double)">
+              <Messages>
+               <Message Id="i*4" TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233" Created="2010-06-29 06:03:58Z">
+                <Issue>
+                 <Item>i*4</Item>
+                 <Item>'Matrix4.this.set(int, int, double)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Multiply(NetSgl.Matrix4)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'Matrix4.Multiply(Matrix4)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="other" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'other'</Item>
+               <Item>'Matrix4.Multiply(Matrix4)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Multiply(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Multiply(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Multiply(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="a" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'a'</Item>
+               <Item>'Matrix4.Multiply(Matrix4, Matrix4)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'b'</Item>
+               <Item>'Matrix4.Multiply(Matrix4, Matrix4)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Addition(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator +(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator +(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Equality(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator ==(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator ==(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Inequality(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator !=(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator !=(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Multiply(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator *(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator *(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Subtraction(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator -(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.operator -(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Subtract(NetSgl.Matrix4,NetSgl.Matrix4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Subtract(Matrix4, Matrix4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Matrix4.Subtract(Matrix4, Matrix4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="RasterizerBase">
+          <Messages>
+           <Message Id="Rasterizer" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+            <Issue Name="Type">
+             <Item>Rasterizer</Item>
+             <Item>'RasterizerBase'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="RaytracerRasterizer">
+          <Messages>
+           <Message Id="Rasterizer" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+            <Issue Name="Type">
+             <Item>Rasterizer</Item>
+             <Item>'RaytracerRasterizer'</Item>
+            </Issue>
+           </Message>
+           <Message Id="Raytracer" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+            <Issue Name="Type">
+             <Item>Raytracer</Item>
+             <Item>'RaytracerRasterizer'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="RenderArgs">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2010-06-29 06:03:58Z">
+            <Issue>
+             <Item>'RenderArgs'</Item>
+             <Item>EventArgs</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="SurfaceFormat">
+          <Members>
+           <Member Name="#Rgb16">
+            <Messages>
+             <Message Id="Rgb" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>Rgb</Item>
+               <Item>'SurfaceFormat.Rgb16'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Rgb24bpp">
+            <Messages>
+             <Message Id="bpp" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>bpp</Item>
+               <Item>'SurfaceFormat.Rgb24bpp'</Item>
+               <Item>Bpp</Item>
+              </Issue>
+             </Message>
+             <Message Id="Rgb" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>Rgb</Item>
+               <Item>'SurfaceFormat.Rgb24bpp'</Item>
+              </Issue>
+             </Message>
+             <Message Id="bpp" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>bpp</Item>
+               <Item>'SurfaceFormat.Rgb24bpp'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Rgb32bpp">
+            <Messages>
+             <Message Id="bpp" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>bpp</Item>
+               <Item>'SurfaceFormat.Rgb32bpp'</Item>
+               <Item>Bpp</Item>
+              </Issue>
+             </Message>
+             <Message Id="Rgb" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>Rgb</Item>
+               <Item>'SurfaceFormat.Rgb32bpp'</Item>
+              </Issue>
+             </Message>
+             <Message Id="bpp" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>bpp</Item>
+               <Item>'SurfaceFormat.Rgb32bpp'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Rgb8">
+            <Messages>
+             <Message Id="Rgb" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="Member">
+               <Item>Rgb</Item>
+               <Item>'SurfaceFormat.Rgb8'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Ticker">
+          <Messages>
+           <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+            <Issue Name="DependsOnFix">
+             <Item>'Ticker'</Item>
+             <Item>'Timer'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Callback(System.Object)">
+            <Messages>
+             <Message Id="System.DateTime.ToString(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'DateTime.ToString(string)'</Item>
+               <Item>'Ticker.Callback(object)'</Item>
+               <Item>'DateTime.ToString(string, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="VertexFlags">
+          <Messages>
+           <Message Id="Flags" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2010-06-29 06:03:58Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>Flags</Item>
+             <Item>'VertexFlags'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Viewport">
+          <Members>
+           <Member Name="#.ctor(NetSgl.DisplaySurface,NetSgl.RasterizerBase)">
+            <Messages>
+             <Message Id="rasterizer" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameter">
+               <Item>'Viewport.Viewport(DisplaySurface, RasterizerBase)'</Item>
+               <Item>rasterizer</Item>
+               <Item>'rasterizer'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#rasterizer">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Viewport.rasterizer'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="NetSgl.Geometry2">
+        <Types>
+         <Type Name="DVector2">
+          <Members>
+           <Member Name="#ZeroFunction">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2009-11-11 17:50:48Z">
+              <Issue>
+               <Item>'DVector2.ZeroFunction'</Item>
+               <Item>'Func&lt;Vector2&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IVector2">
+          <Members>
+           <Member Name="#X">
+            <Messages>
+             <Message Id="X" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'IVector2.X'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Y">
+            <Messages>
+             <Message Id="Y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'IVector2.Y'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Mesh2">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:54:07Z">
+            <Issue>
+             <Item>'Mesh2'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Polygon2">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Polygon2'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(System.Int32,System.Double,NetSgl.RadiusMode)">
+            <Messages>
+             <Message Id="mode" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-11-13 18:53:12Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'mode'</Item>
+               <Item>'Polygon2.Polygon2(int, double, RadiusMode)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Quad2">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:54:07Z">
+            <Issue>
+             <Item>'Quad2'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#A">
+            <Messages>
+             <Message Id="A" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad2.A'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#B">
+            <Messages>
+             <Message Id="B" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad2.B'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#C">
+            <Messages>
+             <Message Id="C" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad2.C'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#D">
+            <Messages>
+             <Message Id="D" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad2.D'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Triangle2">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Triangle2'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#A">
+            <Messages>
+             <Message Id="A" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle2.A'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#B">
+            <Messages>
+             <Message Id="B" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle2.B'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#C">
+            <Messages>
+             <Message Id="C" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle2.C'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vector2">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double)">
+            <Messages>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Vector2(double, double)'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Vector2(double, double)'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2, Vector2)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2, Vector2)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2, Vector2)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Add(Vector2, Vector2, Vector2, Vector2)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Equals(Vector2, Vector2)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Equals(Vector2, Vector2)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Subtract(NetSgl.Geometry2.Vector2,NetSgl.Geometry2.Vector2)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Subtract(Vector2, Vector2)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector2.Subtract(Vector2, Vector2)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vertex2">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double)">
+            <Messages>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vertex2.Vertex2(double, double)'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vertex2.Vertex2(double, double)'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="NetSgl.Geometry3">
+        <Types>
+         <Type Name="DRotation3">
+          <Members>
+           <Member Name="#ZeroAngleFunction">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2009-11-11 17:50:48Z">
+              <Issue>
+               <Item>'DRotation3.ZeroAngleFunction'</Item>
+               <Item>'Func&lt;Angle&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ZeroAxisFunction">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2009-11-11 17:50:48Z">
+              <Issue>
+               <Item>'DRotation3.ZeroAxisFunction'</Item>
+               <Item>'Func&lt;Vector3&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DVector3">
+          <Members>
+           <Member Name="#ZeroFunction">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2009-11-11 17:50:48Z">
+              <Issue>
+               <Item>'DVector3.ZeroFunction'</Item>
+               <Item>'Func&lt;Vector3&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IVector3">
+          <Members>
+           <Member Name="#Z">
+            <Messages>
+             <Message Id="Z" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'IVector3.Z'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Mesh3">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Mesh3'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Polygons">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Mesh3.Polygons'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Plane3">
+          <Messages>
+           <Message TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815" Created="2010-06-29 06:03:58Z">
+            <Issue Name="Equals">
+             <Item>'Plane3'</Item>
+            </Issue>
+            <Issue Name="op_Equality">
+             <Item>'Plane3'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Polygon3">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Polygon3'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(System.Int32,System.Double,NetSgl.RadiusMode)">
+            <Messages>
+             <Message Id="radius" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-11-13 18:53:12Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'radius'</Item>
+               <Item>'Polygon3.Polygon3(int, double, RadiusMode)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="sides" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-11-13 18:53:12Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'sides'</Item>
+               <Item>'Polygon3.Polygon3(int, double, RadiusMode)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsPlanar">
+            <Accessors>
+             <Accessor Name="#get_IsPlanar()">
+              <Messages>
+               <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Created="2010-06-29 06:03:58Z" FixCategory="Breaking">
+                <Issue Name="PropertyGetter" Level="Warning">
+                 <Item>'Polygon3.IsPlanar.get()'</Item>
+                 <Item>'NotImplementedException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Normal">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'Polygon3.Normal'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#get_Normal()">
+              <Messages>
+               <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Created="2010-06-29 06:03:58Z" FixCategory="Breaking">
+                <Issue Name="PropertyGetter" Level="Warning">
+                 <Item>'Polygon3.Normal.get()'</Item>
+                 <Item>'NotImplementedException'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Quad3">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Quad3'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(NetSgl.Geometry3.Vertex3,NetSgl.Geometry3.Vertex3,NetSgl.Geometry3.Vertex3,NetSgl.Geometry3.Vertex3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Quad3.Quad3(Vertex3, Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Quad3.Quad3(Vertex3, Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Quad3.Quad3(Vertex3, Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Quad3.Quad3(Vertex3, Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#A">
+            <Messages>
+             <Message Id="A" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad3.A'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#B">
+            <Messages>
+             <Message Id="B" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad3.B'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#C">
+            <Messages>
+             <Message Id="C" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad3.C'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#D">
+            <Messages>
+             <Message Id="D" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Quad3.D'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="QuadStrip3">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'QuadStrip3'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(System.Int32)">
+            <Messages>
+             <Message Id="2*quads" TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233" Created="2009-11-13 18:53:12Z">
+              <Issue>
+               <Item>2*quads</Item>
+               <Item>'QuadStrip3.QuadStrip3(int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Rotation3">
+          <Messages>
+           <Message TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815" Created="2009-11-11 17:50:48Z">
+            <Issue Name="op_Equality">
+             <Item>'Rotation3'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="OverloadOperatorEqualsOnOverridingValueTypeEquals" Category="Microsoft.Usage" CheckId="CA2231" Created="2009-11-11 17:52:12Z">
+              <Issue>
+               <Item>'Rotation3'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Triangle3">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Triangle3'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(NetSgl.Geometry3.Vertex3,NetSgl.Geometry3.Vertex3,NetSgl.Geometry3.Vertex3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Triangle3.Triangle3(Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Triangle3.Triangle3(Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Triangle3.Triangle3(Vertex3, Vertex3, Vertex3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#A">
+            <Messages>
+             <Message Id="A" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle3.A'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#B">
+            <Messages>
+             <Message Id="B" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle3.B'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#C">
+            <Messages>
+             <Message Id="C" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'Triangle3.C'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2009-11-13 18:53:12Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'Triangle3'</Item>
+               <Item>'Triangle3.Equals(object)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Equality(NetSgl.Geometry3.Triangle3,NetSgl.Geometry3.Triangle3)">
+            <Messages>
+             <Message Id="t" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameter">
+               <Item>'Triangle3.operator ==(Triangle3, Triangle3)'</Item>
+               <Item>t</Item>
+               <Item>'t1'</Item>
+              </Issue>
+              <Issue Name="MemberParameter">
+               <Item>'Triangle3.operator ==(Triangle3, Triangle3)'</Item>
+               <Item>t</Item>
+               <Item>'t2'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Inequality(NetSgl.Geometry3.Triangle3,NetSgl.Geometry3.Triangle3)">
+            <Messages>
+             <Message Id="t" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameter">
+               <Item>'Triangle3.operator !=(Triangle3, Triangle3)'</Item>
+               <Item>t</Item>
+               <Item>'t1'</Item>
+              </Issue>
+              <Issue Name="MemberParameter">
+               <Item>'Triangle3.operator !=(Triangle3, Triangle3)'</Item>
+               <Item>t</Item>
+               <Item>'t2'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vector3">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double,System.Double)">
+            <Messages>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Vector3(double, double, double)'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Vector3(double, double, double)'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+             <Message Id="z" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Vector3(double, double, double)'</Item>
+               <Item>'z'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Add(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Add(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CrossProduct(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.CrossProduct(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.CrossProduct(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DotProduct(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.DotProduct(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.DotProduct(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Equals(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Equals(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Interpolate(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Interpolate(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Interpolate(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+             <Message Id="c" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'c'</Item>
+              </Issue>
+             </Message>
+             <Message Id="d" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, Vector3, Vector3)'</Item>
+               <Item>'d'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Interpolate(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3,System.Double)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, double)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.Interpolate(Vector3, Vector3, double)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Addition(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator +(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator +(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Division(NetSgl.Geometry3.Vector3,System.Double)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator /(Vector3, double)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Equality(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator ==(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator ==(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Inequality(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator !=(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 18:04:32Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator !=(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Multiply(NetSgl.Geometry3.Vector3,System.Double)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator *(Vector3, double)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Subtraction(NetSgl.Geometry3.Vector3,NetSgl.Geometry3.Vector3)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator -(Vector3, Vector3)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector3.operator -(Vector3, Vector3)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vertex3">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double,System.Double)">
+            <Messages>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vertex3.Vertex3(double, double, double)'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vertex3.Vertex3(double, double, double)'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+             <Message Id="z" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vertex3.Vertex3(double, double, double)'</Item>
+               <Item>'z'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Flags">
+            <Messages>
+             <Message Id="Flags" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberNoAlternate">
+               <Item>Flags</Item>
+               <Item>'Vertex3.Flags'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="NetSgl.Geometry3.Primitives">
+        <Types>
+         <Type Name="Hexahedron">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2010-06-29 06:03:58Z">
+            <Issue>
+             <Item>'Hexahedron'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="NetSgl.Geometry4">
+        <Types>
+         <Type Name="DVector4">
+          <Members>
+           <Member Name="#.ctor(System.Func`1&lt;NetSgl.Geometry4.Vector4&gt;)">
+            <Messages>
+             <Message Id="function" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2010-06-29 06:33:16Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'function'</Item>
+               <Item>'DVector4.DVector4(Func&lt;Vector4&gt;)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Refresh()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-06-29 06:33:16Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'DVector4.Refresh()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IVector4">
+          <Members>
+           <Member Name="#W">
+            <Messages>
+             <Message Id="W" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-11 17:50:48Z">
+              <Issue Name="MemberMoreMeaningfulName">
+               <Item>'IVector4.W'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vector4">
+          <Members>
+           <Member Name="#.ctor(System.Double,System.Double,System.Double,System.Double)">
+            <Messages>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Vector4(double, double, double, double)'</Item>
+               <Item>'w'</Item>
+              </Issue>
+             </Message>
+             <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Vector4(double, double, double, double)'</Item>
+               <Item>'x'</Item>
+              </Issue>
+             </Message>
+             <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Vector4(double, double, double, double)'</Item>
+               <Item>'y'</Item>
+              </Issue>
+             </Message>
+             <Message Id="z" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Vector4(double, double, double, double)'</Item>
+               <Item>'z'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(NetSgl.Geometry4.Vector4,NetSgl.Geometry4.Vector4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Equals(Vector4, Vector4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.Equals(Vector4, Vector4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Equality(NetSgl.Geometry4.Vector4,NetSgl.Geometry4.Vector4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.operator ==(Vector4, Vector4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.operator ==(Vector4, Vector4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#op_Inequality(NetSgl.Geometry4.Vector4,NetSgl.Geometry4.Vector4)">
+            <Messages>
+             <Message Id="a" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.operator !=(Vector4, Vector4)'</Item>
+               <Item>'a'</Item>
+              </Issue>
+             </Message>
+             <Message Id="b" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'Vector4.operator !=(Vector4, Vector4)'</Item>
+               <Item>'b'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="NetSgl.SceneGraph">
+        <Types>
+         <Type Name="Camera">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'Camera'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="DirectionalLight">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'DirectionalLight'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="GeometryNode">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-11 17:50:48Z">
+            <Issue>
+             <Item>'GeometryNode'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="GroupNode">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-11 17:50:48Z">
+            <Issue>
+             <Item>'GroupNode'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="LightNode">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'LightNode'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Specular">
+            <Messages>
+             <Message Id="Specular" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2009-11-13 18:53:12Z">
+              <Issue Name="Member">
+               <Item>Specular</Item>
+               <Item>'LightNode.Specular'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Node">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-11 17:50:48Z">
+            <Issue>
+             <Item>'Node'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#IsReadOnly">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2010-06-29 06:03:58Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'Node.IsReadOnly'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RenderFlags">
+            <Messages>
+             <Message Id="Flags" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2010-06-29 06:03:58Z">
+              <Issue Name="MemberNoAlternate">
+               <Item>Flags</Item>
+               <Item>'Node.RenderFlags'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NodeRenderFlags">
+          <Messages>
+           <Message Id="Flags" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2010-06-29 06:03:58Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>Flags</Item>
+             <Item>'NodeRenderFlags'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="PointLight">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'PointLight'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="RootNode">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'RootNode'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Scene">
+          <Members>
+           <Member Name="#OnActiveCameraChanged(NetSgl.SceneGraph.CameraChangedEventArgs)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2010-06-29 06:03:58Z">
+              <Issue>
+               <Item>'Scene.OnActiveCameraChanged(CameraChangedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SpotLight">
+          <Messages>
+           <Message Id="SpotLight" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2009-11-13 18:53:12Z">
+            <Issue Name="TypeShouldBeDiscreteTerm">
+             <Item>SpotLight</Item>
+             <Item>'SpotLight'</Item>
+             <Item>Spotlight</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2009-11-13 18:53:12Z">
+            <Issue>
+             <Item>'SpotLight'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
+    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
+    <Resolution Name="TypeShouldBeDiscreteTerm">The compound word '{0}' in type name {1} exists as a discrete term. If your usage is intended to be single word, case it as '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Parameter">{0}, a parameter, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104">
+    <Resolution Name="Default">Remove the read-only designation from {0} or change the field to one that is an immutable reference type. If the reference type {1} is, in fact, immutable, exclude this message.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065">
+    <Resolution Name="PropertyGetter">{0} creates an exception of type {1}, an exception type that should not be raised in a property. If this exception instance might be raised, use a different exception type, convert this property into a method, or change this property's logic so that it no longer raises an exception.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberMoreMeaningfulName">Consider providing a more meaningful name than member name {0}.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameterMoreMeaningfulName">In method {0}, consider providing a more meaningful name than parameter name {1}.</Resolution>
+    <Resolution Name="Type">Correct the spelling of '{0}' in type name {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710">
+    <Resolution Name="Default">Rename {0} to end in '{1}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IndexersShouldNotBeMultidimensional" Category="Microsoft.Design" CheckId="CA1023">
+    <Resolution Name="Default">Redesign indexer {0} to use a single string or integer value as its index.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="OperationsShouldNotOverflow" Category="Microsoft.Usage" CheckId="CA2233">
+    <Resolution Name="Default">Correct the potential overflow in the operation '{0}' in {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="OverloadOperatorEqualsOnOverridingValueTypeEquals" Category="Microsoft.Usage" CheckId="CA2231">
+    <Resolution Name="Default">Because {0} is a value type that overrides ValueType.Equals, it should also overload the equality and inequality operators (== and !=).</Resolution>
+   </Rule>
+   <Rule TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815">
+    <Resolution Name="Equals">{0} should override Equals.</Resolution>
+    <Resolution Name="op_Equality">{0} should override the equality (==) and inequality (!=) operators.</Resolution>
+   </Rule>
+   <Rule TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814">
+    <Resolution Name="Default">{0} is a multidimensional array. Replace it with a jagged array if possible.</Resolution>
+   </Rule>
+   <Rule TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819">
+    <Resolution Name="Default">Change {0} to return a collection or make it a method.</Resolution>
+   </Rule>
+   <Rule TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801">
+    <Resolution Name="Default">Parameter {0} of {1} is never used. Remove the parameter or use it in the method body.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Resolution>
+   </Rule>
+   <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+    <Resolution Name="DependsOnFix">Implement IDisposable on {0} because it creates members of the following IDisposable types: {1}. If {0} has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726">
+    <Resolution Name="MemberNoAlternate">Replace the term '{0}' in member name {1} with an appropriate alternate or remove it entirely.</Resolution>
+    <Resolution Name="TypeNoAlternate">Replace the term '{0}' in type name {1} with an appropriate alternate or remove it entirely.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

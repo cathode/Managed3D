@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4D281C09-1C91-4C84-B0DC-AAFF8839264E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Managed3D</RootNamespace>
+    <AssemblyName>Managed3D</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Managed3D.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\Managed3D.XML</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Geometry\Angle.cs" />
+    <Compile Include="Geometry\CoordinateSystem3.cs" />
+    <Compile Include="Geometry\IMeshFragment.cs" />
+    <Compile Include="Geometry\Primitives\Sphere.cs" />
+    <Compile Include="Geometry\Ray3.cs" />
+    <None Include="..\Managed3D.snk">
+      <Link>Managed3D.snk</Link>
+    </None>
+    <None Include="Geometry\RDMesh.cs" />
+    <Compile Include="Geometry\Vector2f.cs" />
+    <Compile Include="Geometry\Vector2i.cs" />
+    <Compile Include="Geometry\Vector3f.cs" />
+    <Compile Include="Geometry\Vector3i.cs" />
+    <Compile Include="Geometry\Vector4f.cs" />
+    <Compile Include="Geometry\Vector4i.cs" />
+    <Compile Include="Geometry\__Extensions.cs" />
+    <Compile Include="Materials\Material.cs" />
+    <Compile Include="Modeling\Chamfer.cs" />
+    <Compile Include="Modeling\IEditableMesh.cs" />
+    <Compile Include="Platform\DisplayAdapter.cs" />
+    <Compile Include="Platform\DisplayDevice.cs" />
+    <Compile Include="Platform\DisplayProfile.cs" />
+    <Compile Include="Platform\DisplaySurface.cs" />
+    <Compile Include="Platform\Microsoft\Gdi32.cs" />
+    <Compile Include="Platform\Microsoft\PixelFormatDescriptor.cs" />
+    <Compile Include="Platform\Microsoft\PfdFlags.cs" />
+    <Compile Include="Platform\Microsoft\PfdPixelType.cs" />
+    <Compile Include="Platform\Microsoft\User32.cs" />
+    <Compile Include="Platform\Microsoft\ExtendedWindowStyle.cs" />
+    <Compile Include="Rendering\ManagedBufferColorPlane.cs" />
+    <Compile Include="Rendering\ManagedBuffer.cs" />
+    <Compile Include="Geometry\DynamicVector2.cs" />
+    <Compile Include="Geometry\Mesh2.cs" />
+    <Compile Include="Geometry\Polygon2.cs" />
+    <Compile Include="Geometry\Edge3.cs" />
+    <Compile Include="Geometry\Vertex2.cs" />
+    <Compile Include="Geometry\Plane3.cs" />
+    <Compile Include="Geometry\Polygon3.cs" />
+    <Compile Include="Geometry\TriangleFan3.cs" />
+    <Compile Include="Geometry\TriangleStrip3.cs" />
+    <None Include="Geometry\Mesh4.cs" />
+    <Compile Include="Geometry\QuadStrip3.cs" />
+    <Compile Include="Geometry\Vertex3.cs" />
+    <Compile Include="Geometry\Matrix2.cs" />
+    <Compile Include="Geometry\Matrix3.cs" />
+    <Compile Include="Geometry\Matrix4.cs" />
+    <Compile Include="Geometry\Model.cs" />
+    <Compile Include="Platform\DisplayAdapterEnumerator.cs" />
+    <Compile Include="Platform\Microsoft\WindowsDisplayAdapter.cs" />
+    <Compile Include="Platform\Microsoft\WindowsDisplayDevice.cs" />
+    <Compile Include="Platform\Microsoft\WindowsDisplayProfileEnumerator.cs" />
+    <Compile Include="Geometry\RadiusMode.cs" />
+    <Compile Include="Geometry\Quad2.cs" />
+    <Compile Include="Geometry\Triangle2.cs" />
+    <Compile Include="Geometry\Vector2.cs" />
+    <Compile Include="Geometry\Mesh3.cs" />
+    <Compile Include="Geometry\Primitives\Dodecahedron.cs" />
+    <Compile Include="Geometry\Primitives\Cube.cs" />
+    <Compile Include="Geometry\Primitives\Icosahedron.cs" />
+    <Compile Include="Geometry\Primitives\Octahedron.cs" />
+    <Compile Include="Geometry\Primitives\Tetrahedron.cs" />
+    <Compile Include="Geometry\Quad3.cs" />
+    <Compile Include="Geometry\Rotation3.cs" />
+    <Compile Include="Geometry\Triangle3.cs" />
+    <Compile Include="Geometry\Vector3.cs" />
+    <Compile Include="Geometry\DynamicVector4.cs" />
+    <Compile Include="Geometry\IVector3.cs" />
+    <Compile Include="Geometry\DynamicRotation3.cs" />
+    <Compile Include="Geometry\DynamicVector3.cs" />
+    <Compile Include="Geometry\IRotation3.cs" />
+    <Compile Include="Geometry\IVector2.cs" />
+    <Compile Include="Geometry\IVector4.cs" />
+    <Compile Include="Geometry\Vector4.cs" />
+    <None Include="Geometry\Matrix.cs" />
+    <Compile Include="Rendering\FrameOptions.cs" />
+    <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\ManagedBufferDepthPlane.cs" />
+    <Compile Include="Rendering\ManagedBufferStencilPlane.cs" />
+    <Compile Include="Rendering\ManagedRenderer.cs" />
+    <Compile Include="Rendering\ManagedRendererBitmapTarget.cs" />
+    <Compile Include="Rendering\ManagedRendererHostControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rendering\ManagedRendererHostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rendering\IManagedRendererTarget.cs" />
+    <Compile Include="Rendering\Raytraced\RaytracedRenderer.cs" />
+    <Compile Include="Rendering\RenderEventArgs.cs" />
+    <Compile Include="Geometry\PrimitiveKind.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\Renderer.cs" />
+    <Compile Include="Rendering\RendererInitializationEventArgs.cs" />
+    <Compile Include="Rendering\RendererOptions.cs" />
+    <Compile Include="Rendering\RenderStyle.cs" />
+    <Compile Include="Rendering\Software\SoftwareRenderer.cs" />
+    <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />
+    <Compile Include="SceneGraph\CameraMode.cs" />
+    <Compile Include="SceneGraph\DirectionalLight.cs" />
+    <Compile Include="SceneGraph\GeometryNode.cs" />
+    <Compile Include="SceneGraph\GroupNode.cs" />
+    <Compile Include="SceneGraph\LightNode.cs" />
+    <Compile Include="SceneGraph\NodeRenderFlags.cs" />
+    <Compile Include="SceneGraph\PointLight.cs" />
+    <Compile Include="SceneGraph\RootNode.cs" />
+    <Compile Include="SceneGraph\Scene.cs" />
+    <Compile Include="SceneGraph\Node.cs" />
+    <Compile Include="SceneGraph\SpotLight.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\ContainerElement.cs" />
+    <Compile Include="UI\Element.cs" />
+    <Compile Include="UI\ElementChildrenCollection.cs" />
+    <Compile Include="UI\Presentation\ElementMesher.cs" />
+    <Compile Include="SceneGraph\Camera.cs" />
+    <Compile Include="Geometry\VertexFlags.cs" />
+    <Compile Include="__HashCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Samples\EmptyScene.xml" />
+    <Content Include="Samples\SimpleScene.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modeling\BooleanModifiers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
