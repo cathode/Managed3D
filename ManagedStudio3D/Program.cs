@@ -80,7 +80,7 @@ namespace ManagedStudio3D
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.Initialize(options);
-            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
+            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWXGA;
             renderer.Start();
         }
 

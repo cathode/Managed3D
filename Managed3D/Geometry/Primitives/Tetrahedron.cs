@@ -12,9 +12,19 @@ namespace Managed3D.Geometry.Primitives
 {
     public sealed class Tetrahedron : Mesh3
     {
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tetrahedron"/> class.
+        /// </summary>
         public Tetrahedron()
         {
-            
+            throw new NotImplementedException();
         }
+
+        public Tetrahedron(double radius)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

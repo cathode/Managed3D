@@ -56,7 +56,7 @@ namespace Managed3D.Rendering
 
         void UpdateText()
         {
-            this.Text = string.Format("{0} - {1} frames/second", this.Title, this.lastFps);
+            this.Text = string.Format("{0} frames/second", this.lastFps.ToString("F3"));
         }
         protected override void OnClosed(EventArgs e)
         {

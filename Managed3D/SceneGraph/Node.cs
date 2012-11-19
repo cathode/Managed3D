@@ -39,7 +39,7 @@ namespace Managed3D.SceneGraph
         private IVector3 orientation = Node.DefaultOrientation;
         private NodeRenderFlags renderFlags;
         #endregion
-        #region Methods - Public
+        #region Methods
         /// <summary>
         /// Adds a child <see cref="Node"/> to the current <see cref="Node"/>.
         /// </summary>
@@ -105,6 +105,14 @@ namespace Managed3D.SceneGraph
         public bool Remove(Node item)
         {
             return this.children.Remove(item);
+        }
+
+        /// <summary>
+        /// Forces the node to update it's bounding volume information for potential visibility determination.
+        /// </summary>
+        public virtual void UpdateBoundingVolume()
+        {
+
         }
         #endregion
         #region Properties
