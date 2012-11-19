@@ -80,59 +80,33 @@ namespace Managed3D.Rendering
             }
             this.Invalidate();
         }
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
 
-            if (e.Button == MouseButtons.Left)
+            if (Control.MouseButtons == MouseButtons.Left)
             {
-                if (this.isPanning)
-                {
-                    this.isZooming = true;
-                    this.sx = e.X;
-                    this.sy = e.Y;
-                }
-                else
-                {
-                    this.isRotating = true;
-                    this.rx = e.X;
-                    this.ry = e.Y;
-                }
+                this.rx = e.X;
+                this.ry = e.Y;
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (Control.MouseButtons == MouseButtons.Right)
             {
-                if (this.isRotating)
-                {
-                    this.tx = e.X;
-                    this.ty = e.Y;
-                }
+                this.tx = e.X;
+                this.ty = e.Y;
             }
-            else if (e.Button == (MouseButtons.Left | MouseButtons.Right))
+            else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
                 this.sx = e.X;
                 this.sy = e.Y;
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            base.OnMouseUp(e);
-
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                this.isZooming = false;
-               
-            }
-            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                this.isZooming = false;
-            }
-        }
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
-            if (e.Button == MouseButtons.Left)
+            if (Control.MouseButtons == MouseButtons.Left)
             {
                 var xdelta = e.X - this.rx;
                 var ydelta = e.Y - this.ry;
@@ -140,15 +114,15 @@ namespace Managed3D.Rendering
                 this.ry += ydelta;
                 this.scene.ActiveCamera.Orientation = (Vector3)this.scene.ActiveCamera.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
             }
-            else if (e.Button == MouseButtons.Right)
+            else if (Control.MouseButtons == MouseButtons.Right)
             {
                 var xdelta = e.X - this.tx;
                 var ydelta = e.Y - this.ty;
                 this.tx += xdelta;
                 this.ty += ydelta;
-                this.scene.ActiveCamera.Position = (Vector3)this.scene.ActiveCamera.Position + new Vector3(0, xdelta * this.sensitivity, ydelta * this.sensitivity);
+                this.scene.ActiveCamera.Position = (Vector3)this.scene.ActiveCamera.Position + new Vector3(-xdelta * (this.sensitivity * 2), -ydelta * (this.sensitivity * 2), 0);
             }
-            else if (e.Button == (MouseButtons.Left | MouseButtons.Right))
+            else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
                 var xdelta = e.X - this.sx;
                 var ydelta = e.Y - this.sy;
