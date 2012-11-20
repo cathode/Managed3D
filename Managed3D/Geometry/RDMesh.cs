@@ -16,33 +16,46 @@ namespace Managed3D.Geometry
     /// </summary>
     public class RDMesh
     {
-        private RDVertex[] vertices;
-        private RDFace[] triangles;
-        private RDEdge[] edges;
-        #region Types
-        public struct RDFace
-        {
-            public int A;
-            public int B;
-            public int C;
-        }
+        private Dictionary<ushort, RDVertex> vertices;
+        private Dictionary<ushort, RDEdge> edges;
+        private Dictionary<ushort, RDFace> faces;
 
-        public struct RDEdge
-        {
-            public int V1;
-            public int V2;
-            public int T1;
-            public int T2;
-        }
+        private Dictionary<ushort, RDSparseAttributes> attributes;
+    }
 
-        public sealed class RDVertex
-        {
-            double X;
-            double Y;
-            double Z;
+    public class RDSparseAttributes
+    {
+        public bool IsHidden;
+        public Vector4f Color;
+    }
 
-            int[] Faces;
-        }
-        #endregion
+    public class RDVertex
+    {
+        public double X;
+        public double Y;
+        public double Z;
+
+        public uint[] Edges;
+    }
+
+    public class RDFace
+    {
+        public uint EdgeA;
+        public uint EdgeB;
+        public uint EdgeC;
+    }
+
+    public class RDEdge
+    {
+        public uint VertexA;
+        public uint VertexB;
+
+        public uint FaceA;
+        public uint FaceB;
+
+        public uint EdgeA;
+        public uint EdgeB;
+        public uint EdgeC;
+        public uint EdgeD;
     }
 }
