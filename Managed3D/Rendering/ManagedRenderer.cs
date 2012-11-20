@@ -98,6 +98,7 @@ namespace Managed3D.Rendering
         {
             Monitor.Enter(this.frontBufferLock);
         }
+
         public void ReleaseFrontBufferLock()
         {
             Monitor.Exit(this.frontBufferLock);

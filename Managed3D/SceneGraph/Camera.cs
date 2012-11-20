@@ -106,10 +106,9 @@ namespace Managed3D.SceneGraph
             cam.mode = CameraMode.Isometric;
             cam.Orientation = new Vector3(45, 35.264, 0);
             cam.Position = new Vector3(0, 0, 0);
-            
+
             return cam;
         }
-
         #endregion
     }
 }

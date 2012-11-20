@@ -179,6 +179,7 @@
     <Compile Include="Rendering\RenderStyle.cs" />
     <Compile Include="Rendering\Software\SoftwareRenderer.cs" />
     <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />
+    <Compile Include="SceneGraph\CameraFacing.cs" />
     <Compile Include="SceneGraph\CameraMode.cs" />
     <Compile Include="SceneGraph\DirectionalLight.cs" />
     <Compile Include="SceneGraph\GeometryNode.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="SceneGraph\Scene.cs" />
     <Compile Include="SceneGraph\Node.cs" />
     <Compile Include="SceneGraph\SpotLight.cs" />
+    <Compile Include="SceneGraph\SpriteNode.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\ContainerElement.cs" />
     <Compile Include="UI\Element.cs" />

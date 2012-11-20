@@ -15,7 +15,17 @@ namespace Managed3D.Geometry
     /// </summary>
     public sealed class DynamicVector3 : IVector3
     {
-        #region Constructors - Public
+
+        #region Fields - Private
+        public static readonly Func<Vector3> ZeroFunction = delegate
+        {
+            return Vector3.Zero;
+        };
+        private Func<Vector3> function;
+
+
+        #endregion
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicVector3"/> class.
         /// </summary>
@@ -33,15 +43,6 @@ namespace Managed3D.Geometry
                 throw new ArgumentNullException("function");
             this.function = function;
         }
-        #endregion
-        #region Fields - Private
-        private Func<Vector3> function;
-        #endregion
-        #region Fields - Public
-        public static readonly Func<Vector3> ZeroFunction = delegate
-        {
-            return Vector3.Zero;
-        };
         #endregion
         #region Properties - Public
         public Func<Vector3> Function

@@ -156,7 +156,18 @@ namespace Managed3D.Platform
         }
 
         /// <summary>
-        /// Gets a device-independent <see cref="DisplayProfile"/> for WXGA (1280x800).
+        /// Gets a device-independent <see cref="DisplayProfile"/> for 720p HDTV (1280x720).
+        /// </summary>
+        public static DisplayProfile Generic720p
+        {
+            get
+            {
+                return DisplayProfile.generic720p;
+            }
+        }
+
+        /// <summary>
+        /// Gets a device-independent <see cref="DisplayProfile"/> for WXGA (1280x768).
         /// </summary>
         public static DisplayProfile GenericWXGA
         {

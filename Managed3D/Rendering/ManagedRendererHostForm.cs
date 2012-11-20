@@ -14,13 +14,15 @@ namespace Managed3D.Rendering
 {
     public sealed class ManagedRendererHostForm : Form
     {
+        #region Fields
         private readonly ManagedRenderer renderer;
         private ManagedRendererHostControl hostControl;
         private DateTime lastCheck;
         private int framesRendered;
         private double lastFps;
-
-        internal ManagedRendererHostForm(ManagedRenderer renderer)
+        #endregion
+        #region Constructors
+        public ManagedRendererHostForm(ManagedRenderer renderer)
         {
             this.renderer = renderer;
             this.renderer.PostRender += new EventHandler<RenderEventArgs>(renderer_PostRender);
@@ -32,6 +34,7 @@ namespace Managed3D.Rendering
             renderer.AttachTarget(this.hostControl);
             this.Controls.Add(hostControl);
         }
+        #endregion
 
         void renderer_PostRender(object sender, RenderEventArgs e)
         {

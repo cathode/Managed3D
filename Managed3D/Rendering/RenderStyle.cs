@@ -17,15 +17,23 @@ namespace Managed3D.Rendering
     public enum RenderStyle
     {
         /// <summary>
-        /// Indicates the 3D object(s) are displayed in wireframe mode; only the line segments 
+        /// Indicates that edges of faces are rendered explicitly.
         /// </summary>
         Wireframe = 0,
 
         /// <summary>
-        /// Indicates the objecs to be rendered are displayed as solid
+        /// Indicates that faces of objects are rendered using a solid color filling algorithm.
         /// </summary>
         Solid = 1,
+
+        /// <summary>
+        /// Indicates that faces of objects are rendered using a smooth shading algorithm.
+        /// </summary>
         Smooth = 2,
+
+        /// <summary>
+        /// Indicates that faces of objects are rendered using an image-based material or texture.
+        /// </summary>
         Textured = 3,
     }
 }
