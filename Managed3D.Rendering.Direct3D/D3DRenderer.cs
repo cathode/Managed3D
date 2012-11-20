@@ -87,7 +87,7 @@ namespace Managed3D.Rendering.Direct3D
         {
             base.OnPreRender(e);
 
-            context.ClearRenderTargetView(this.renderTarget, new Color4(Scene.BackgroundColor.X, Scene.BackgroundColor.Y, Scene.BackgroundColor.Z));
+            context.ClearRenderTargetView(this.renderTarget, new Color4(this.BackgroundColor.X, this.BackgroundColor.Y, this.BackgroundColor.Z));
         }
         protected override void OnRender(RenderEventArgs e)
         {

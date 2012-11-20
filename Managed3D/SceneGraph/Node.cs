@@ -39,6 +39,118 @@ namespace Managed3D.SceneGraph
         private IVector3 orientation = Node.DefaultOrientation;
         private NodeRenderFlags renderFlags;
         #endregion
+        #region Properties
+        /// <summary>
+        /// Gets the number of child in the current <see cref="Node"/>.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return this.children.Count;
+            }
+        }
+        public static IVector3 DefaultOrientation
+        {
+            get
+            {
+                return new Vector3(0, 0, 0);
+            }
+        }
+        public static IVector3 DefaultPosition
+        {
+            get
+            {
+                return Vector3.Zero;
+            }
+        }
+        public static IVector3 DefaultScale
+        {
+            get
+            {
+                return new Vector3(1, 1, 1);
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates if the current <see cref="Node"/> is read-only.
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets an <see cref="IRotation3"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
+        /// </summary>
+        public IVector3 Orientation
+        {
+            get
+            {
+                return this.orientation;
+            }
+            set
+            {
+                this.orientation = value ?? Node.DefaultOrientation;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets an <see cref="IVector3"/> which determines the position of the current <see cref="Node"/> relative to it's parent.
+        /// </summary>
+        public IVector3 Position
+        {
+            get
+            {
+                return this.position;
+            }
+            set
+            {
+                this.position = value ?? Node.DefaultPosition;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets flags that determine how (or if) the current <see cref="Node"/> is rendered.
+        /// </summary>
+        public virtual NodeRenderFlags RenderFlags
+        {
+            get
+            {
+                return this.renderFlags;
+            }
+            set
+            {
+                this.renderFlags = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets an <see cref="IVector3"/> which determines the scale of the current <see cref="Node"/> relative to it's parent.
+        /// </summary>
+        public IVector3 Scale
+        {
+            get
+            {
+                return this.scale;
+            }
+            set
+            {
+                this.scale = value ?? Node.DefaultScale;
+            }
+        }
+
+        public virtual bool HasChildren
+        {
+            get
+            {
+                return false;
+            }
+        }
+        #endregion
         #region Methods
         /// <summary>
         /// Adds a child <see cref="Node"/> to the current <see cref="Node"/>.
@@ -114,117 +226,29 @@ namespace Managed3D.SceneGraph
         {
 
         }
-        #endregion
-        #region Properties
+        public virtual Vector3 GetExtents()
+        {
+            return new Vector3(0, 0, 0);
+        }
         /// <summary>
-        /// Gets the number of child in the current <see cref="Node"/>.
+        /// Recursively calculates the geometry extents of the current node and
+        /// all child nodes of the current node.
         /// </summary>
-        public int Count
+        /// <returns></returns>
+        public Vector3 GetGraphExtents()
         {
-            get
-            {
-                return this.children.Count;
-            }
-        }
-        public static IVector3 DefaultOrientation
-        {
-            get
-            {
-                return new Vector3(0, 0, 0);
-            }
-        }
-        public static IVector3 DefaultPosition
-        {
-            get
-            {
-                return Vector3.Zero;
-            }
-        }
-        public static IVector3 DefaultScale
-        {
-            get
-            {
-                return new Vector3(1, 1, 1);
-            }
-        }
+            var ext = this.GetExtents();
 
-        /// <summary>
-        /// Gets a value that indicates if the current <see cref="Node"/> is read-only.
-        /// </summary>
-        public bool IsReadOnly
-        {
-            get
+            foreach (var node in this.children)
             {
-                return false;
-            }
-        }
+                var nx = node.GetGraphExtents();
 
-        /// <summary>
-        /// Gets or sets an <see cref="IRotation3"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
-        /// </summary>
-        public IVector3 Orientation
-        {
-            get
-            {
-                return this.orientation;
+                ext = new Vector3((nx.X > ext.X) ? nx.X : ext.X,
+                                  (nx.Y > ext.Y) ? nx.Y : ext.Y,
+                                  (nx.Z > ext.Z) ? nx.Z : ext.Z);
             }
-            set
-            {
-                this.orientation = value ?? Node.DefaultOrientation;
-            }
-        }
 
-        /// <summary>
-        /// Gets or sets an <see cref="IVector3"/> which determines the position of the current <see cref="Node"/> relative to it's parent.
-        /// </summary>
-        public IVector3 Position
-        {
-            get
-            {
-                return this.position;
-            }
-            set
-            {
-                this.position = value ?? Node.DefaultPosition;
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets flags that determine how (or if) the current <see cref="Node"/> is rendered.
-        /// </summary>
-        public virtual NodeRenderFlags RenderFlags
-        {
-            get
-            {
-                return this.renderFlags;
-            }
-            set
-            {
-                this.renderFlags = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets an <see cref="IVector3"/> which determines the scale of the current <see cref="Node"/> relative to it's parent.
-        /// </summary>
-        public IVector3 Scale
-        {
-            get
-            {
-                return this.scale;
-            }
-            set
-            {
-                this.scale = value ?? Node.DefaultScale;
-            }
-        }
-
-        public virtual bool HasChildren
-        {
-            get
-            {
-                return false;
-            }
+            return ext;
         }
         #endregion
     }

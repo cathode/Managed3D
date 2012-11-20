@@ -181,6 +181,7 @@
     <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />
     <Compile Include="SceneGraph\CameraFacing.cs" />
     <Compile Include="SceneGraph\CameraMode.cs" />
+    <Compile Include="SceneGraph\CameraModifierLock.cs" />
     <Compile Include="SceneGraph\DirectionalLight.cs" />
     <Compile Include="SceneGraph\GeometryNode.cs" />
     <Compile Include="SceneGraph\GroupNode.cs" />

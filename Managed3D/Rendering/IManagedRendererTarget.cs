@@ -9,7 +9,9 @@ namespace Managed3D.Rendering
 {
     public interface IManagedRendererTarget
     {
+        #region Methods
         void UpdateDisplayProfile(DisplayProfile profile);
         void ConsumeFrameBuffer(ManagedBuffer buffer);
+        #endregion
     }
 }

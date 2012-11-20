@@ -26,10 +26,7 @@ namespace Managed3D.SceneGraph
         /// </summary>
         private Camera activeCamera;
 
-        /// <summary>
-        /// Backing field for the <see cref="Scene.BackgroundColor"/> property.
-        /// </summary>
-        private Vector4f backgroundColor;
+        
 
         private Vector4f ambientLight;
         #endregion
@@ -40,7 +37,7 @@ namespace Managed3D.SceneGraph
         public Scene()
         {
             this.root = new GroupNode();
-            this.ActiveCamera = new Camera();
+            this.DefaultCamera = new Camera();
         }
         #endregion
         #region Events
@@ -49,11 +46,11 @@ namespace Managed3D.SceneGraph
         /// </summary>
         public event EventHandler<CameraChangedEventArgs> ActiveCameraChanged;
         #endregion
-        #region Properties - Public
+        #region Properties
         /// <summary>
         /// Gets or sets the active camera for the scene.
         /// </summary>
-        public Camera ActiveCamera
+        public Camera DefaultCamera
         {
             get
             {
@@ -61,7 +58,7 @@ namespace Managed3D.SceneGraph
             }
             set
             {
-                this.activeCamera = value ?? new Camera();
+                this.activeCamera = value;
             }
         }
 
@@ -79,20 +76,7 @@ namespace Managed3D.SceneGraph
                 this.ambientLight = value;
             }
         }
-        /// <summary>
-        /// Gets or sets the background color of the scene.
-        /// </summary>
-        public Vector4f BackgroundColor
-        {
-            get
-            {
-                return this.backgroundColor;
-            }
-            set
-            {
-                this.backgroundColor = value;
-            }
-        }
+   
 
         /// <summary>
         /// Gets the root node of the scene.

@@ -40,7 +40,7 @@ namespace Managed3D.Rendering.Software
             base.OnPreRender(e);
 
             // Perform some necessary tasks prior to frame rendering
-            var clearColor = this.Scene != null ? this.Scene.BackgroundColor : new Vector4f(0, 0, 0, 1);
+            var clearColor = this.BackgroundColor;
             this.AcquireBackBufferLock();
             this.BackBuffer.Color.Clear(clearColor);
             //this.BackBuffer.
@@ -56,9 +56,9 @@ namespace Managed3D.Rendering.Software
         {
             base.OnRender(e);
 
-            var camPos = this.Scene.ActiveCamera.Position;
-            var camRot = this.Scene.ActiveCamera.Orientation;
-            var camScale = this.Scene.ActiveCamera.Scale;
+            var camPos = this.ActiveCamera.Position;
+            var camRot = this.ActiveCamera.Orientation;
+            var camScale = this.ActiveCamera.Scale;
 
             var buffer = this.BackBuffer;
             var matrix = Matrix4.Identity;
@@ -79,14 +79,14 @@ namespace Managed3D.Rendering.Software
             // Pulls the x/y coords into the center of the screen rather than 1 edge.
             //var projection = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0); 
             Matrix4 projection;
-            if (this.Scene.ActiveCamera.Mode == CameraMode.Isometric)
+            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic))
             {
                 //this.Scene.ActiveCamera.Orientation = new Vector3(45, 35.264, 0);
                 projection = Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
             }
             else
             {
-                projection = Matrix4.CreatePerspectiveProjectionMatrix(this.Scene.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
+                projection = Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
             }
 
             projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
@@ -129,7 +129,7 @@ namespace Managed3D.Rendering.Software
         {
 
             var newState = new RenderState();
-            newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * state.WorldMatrix;
+            newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
             newState.ViewMatrix = state.ViewMatrix;
             newState.ProjectionMatrix = state.ProjectionMatrix;
             var world = newState.WorldMatrix;

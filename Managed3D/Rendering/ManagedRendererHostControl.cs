@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Threading;
 using Managed3D.Geometry;
 using Managed3D.Platform;
+using Managed3D.SceneGraph;
 
 namespace Managed3D.Rendering
 {
@@ -40,12 +41,14 @@ namespace Managed3D.Rendering
         private double sensitivity = 0.322;
         internal Managed3D.SceneGraph.Scene scene;
         private bool isAutoRotateEnabled;
+        private ManagedRenderer renderer;
         #endregion
         #region Constructors
-        internal ManagedRendererHostControl()
+        internal ManagedRendererHostControl(ManagedRenderer renderer)
         {
             this.Padding = new Padding(0, 0, 0, 0);
             this.Margin = new Padding(0, 0, 0, 0);
+            this.renderer = renderer;
         }
         #endregion
         #region Methods
@@ -112,7 +115,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ry;
                 this.rx += xdelta;
                 this.ry += ydelta;
-                this.scene.ActiveCamera.Orientation = (Vector3)this.scene.ActiveCamera.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
+                this.renderer.ActiveCamera.Orientation = (Vector3)this.renderer.ActiveCamera.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
@@ -120,7 +123,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ty;
                 this.tx += xdelta;
                 this.ty += ydelta;
-                this.scene.ActiveCamera.Position = (Vector3)this.scene.ActiveCamera.Position + new Vector3(-xdelta * (this.sensitivity * 2), -ydelta * (this.sensitivity * 2), 0);
+                this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(-xdelta * (this.sensitivity * 2), -ydelta * (this.sensitivity * 2), 0);
             }
             else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
@@ -129,7 +132,7 @@ namespace Managed3D.Rendering
                 this.sx += xdelta;
                 this.sy += ydelta;
                 var scale = (xdelta / 2.0 + ydelta / 2.0) / 2.0 * sensitivity;
-                this.scene.ActiveCamera.Scale = (Vector3)this.scene.ActiveCamera.Scale + new Vector3(scale, scale, scale);
+                this.renderer.ActiveCamera.Scale = (Vector3)this.renderer.ActiveCamera.Scale + new Vector3(scale, scale, scale);
             }
         }
 
@@ -137,8 +140,43 @@ namespace Managed3D.Rendering
         {
             base.OnKeyDown(e);
 
-            if (e.KeyCode == Keys.Space)
-                this.isAutoRotateEnabled = !this.isAutoRotateEnabled;
+            switch (e.KeyCode)
+            {
+                case Keys.NumPad2:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.South;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad4:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.West;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad6:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.East;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad8:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.North;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad7:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.Above;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad9:
+                    this.renderer.ActiveCamera.Facing = CameraFacing.Below;
+                    this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.Space:
+                    this.isAutoRotateEnabled = !this.isAutoRotateEnabled;
+                    break;
+            }
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -149,7 +187,7 @@ namespace Managed3D.Rendering
 
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
-                this.scene.ActiveCamera.Orientation = (Vector3)this.scene.ActiveCamera.Orientation + new Vector3(0, 0.33, 0);
+                this.scene.Root.Orientation = (Vector3)this.scene.Root.Orientation + new Vector3(0, 0.33, 0);
             //e.Graphics.DrawImage(this.frontBitmap, this.ClientRectangle);
         }
 
@@ -161,7 +199,7 @@ namespace Managed3D.Rendering
         private unsafe void RendererPostRenderCallback(object sender, RenderEventArgs e)
         {
             if (this.isAutoRotateEnabled)
-                this.scene.ActiveCamera.Orientation = (Vector3)this.scene.ActiveCamera.Orientation + new Vector3(0, 1, 0);
+                this.scene.Root.Orientation = (Vector3)this.scene.Root.Orientation + new Vector3(0, 1, 0);
         }
         #endregion
 

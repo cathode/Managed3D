@@ -52,5 +52,23 @@ namespace Managed3D.SceneGraph
             }
         }
         #endregion
+        #region Methods
+        public override Vector3 GetExtents()
+        {
+            var ext = new Vector3(0, 0, 0);
+
+            foreach (var poly in this.geometry)
+            {
+                foreach (var vt in poly.Vertices)
+                {
+                    ext = new Vector3((vt.X > ext.X) ? vt.X : ext.X,
+                                      (vt.Y > ext.Y) ? vt.Y : ext.Y,
+                                      (vt.Z > ext.Z) ? vt.Z : ext.Z);
+                }
+            }
+
+            return ext;
+        }
+        #endregion
     }
 }

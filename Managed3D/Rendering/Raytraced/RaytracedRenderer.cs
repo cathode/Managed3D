@@ -68,7 +68,7 @@ namespace Managed3D.Rendering.Raytraced
 
         protected virtual Vector4f TraceRay(Ray3 ray)
         {
-            return this.Scene.BackgroundColor;
+            return this.BackgroundColor;
         }
         #endregion
     }

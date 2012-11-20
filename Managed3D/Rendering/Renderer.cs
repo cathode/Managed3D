@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using Managed3D.Platform;
 using Managed3D.SceneGraph;
+using Managed3D.Geometry;
 
 namespace Managed3D.Rendering
 {
@@ -22,6 +23,11 @@ namespace Managed3D.Rendering
     public abstract class Renderer : IRenderer
     {
         #region Fields
+        /// <summary>
+        /// Backing field for the <see cref="Renderer.ActiveCamera"/> property.
+        /// </summary>
+        private Camera activeCamera;
+
         /// <summary>
         /// Backing field for the <see cref="Renderer.IsInitialized"/> property.
         /// </summary>
@@ -41,6 +47,11 @@ namespace Managed3D.Rendering
         /// Backing field for the <see cref="Renderer.Scene"/> property.
         /// </summary>
         private Scene scene;
+
+        /// <summary>
+        /// Backing field for the <see cref="Scene.BackgroundColor"/> property.
+        /// </summary>
+        private Vector4f backgroundColor;
         #endregion
         #region Constructors
         /// <summary>
@@ -94,6 +105,20 @@ namespace Managed3D.Rendering
         #endregion
         #region Properties
         /// <summary>
+        /// Gets or sets the background color of the scene.
+        /// </summary>
+        public Vector4f BackgroundColor
+        {
+            get
+            {
+                return this.backgroundColor;
+            }
+            set
+            {
+                this.backgroundColor = value;
+            }
+        }
+        /// <summary>
         /// Gets a value indicating whether the current renderer has been initialized.
         /// </summary>
         public bool IsInitialized
@@ -144,6 +169,18 @@ namespace Managed3D.Rendering
             {
                 this.scene = value;
                 this.OnSceneChanged(EventArgs.Empty);
+            }
+        }
+
+        public Camera ActiveCamera
+        {
+            get
+            {
+                return this.activeCamera;
+            }
+            set
+            {
+                this.activeCamera = value;
             }
         }
         #endregion
@@ -278,6 +315,8 @@ namespace Managed3D.Rendering
         {
             if (this.SceneChanged != null)
                 this.SceneChanged(this, e);
+
+            this.ActiveCamera = this.Scene.DefaultCamera;
         }
 
         /// <summary>

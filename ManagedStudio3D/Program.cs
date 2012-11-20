@@ -28,16 +28,13 @@ namespace ManagedStudio3D
         {
             Console.WriteLine("Starting ManagedStudio3D...");
 
-            Program.scene = new Scene()
-            {
-                // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
-                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
-            };
+            Program.scene = new Scene();
+           
             // scene.ActiveCamera.Orientation = new Managed3D.Geometry.Rotation3(Angle.FromDegrees(10), new Vector3(0, 0, 1));
 
             var root = new GeometryNode();
             root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
-            scene.ActiveCamera = Camera.CreateIsometric();
+            scene.DefaultCamera = Camera.CreateIsometric();
 
             Program.scene.Root = root;
             //scene.Root.Orientation = new Vector3(-35.264, -45, 90);
@@ -76,11 +73,16 @@ namespace ManagedStudio3D
         }
         private static void RunSoftwareMode()
         {
-            var renderer = new SoftwareRenderer();
+            var renderer = new SoftwareRenderer()
+            {
+                // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
+                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
+            };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWXGA;
+            renderer.ActiveCamera = Camera.CreateWithFacing(CameraFacing.Above);
             renderer.Start();
         }
 

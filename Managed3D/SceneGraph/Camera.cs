@@ -31,6 +31,11 @@ namespace Managed3D.SceneGraph
         /// Backing field for the <see cref="Camera.Mode"/> property.
         /// </summary>
         private CameraMode mode;
+
+        /// <summary>
+        /// Backing field for the <see cref="Camera.ModifierLock"/> property.
+        /// </summary>
+        private CameraModifierLock modifierLock;
         #endregion
         #region Constructors
         /// <summary>
@@ -97,6 +102,23 @@ namespace Managed3D.SceneGraph
                 this.mode = value;
             }
         }
+
+        public CameraModifierLock ModifierLock
+        {
+            get
+            {
+                return this.modifierLock;
+            }
+            set
+            {
+                this.modifierLock = value;
+            }
+        }
+        public CameraFacing Facing
+        {
+            get;
+            set;
+        }
         #endregion
         #region Methods
 
@@ -108,6 +130,33 @@ namespace Managed3D.SceneGraph
             cam.Position = new Vector3(0, 0, 0);
 
             return cam;
+        }
+
+        public static Camera CreateWithFacing(CameraFacing facing)
+        {
+            var cam = new Camera();
+            cam.mode = CameraMode.Orthographic;
+            cam.Facing = facing;
+            cam.UpdateFacing();
+            return cam;
+        }
+
+        public void UpdateFacing()
+        {
+            var rot = new Vector3(0, 0, 0);
+            if (this.Facing.HasFlag(CameraFacing.Above))
+                rot += new Vector3(90, 0, 0);
+            else if (this.Facing.HasFlag(CameraFacing.Below))
+                rot += new Vector3(-90, 0, 0);
+
+            if (this.Facing.HasFlag(CameraFacing.East))
+                rot += new Vector3(0, 90, 0);
+            else if (this.Facing.HasFlag(CameraFacing.South))
+                rot += new Vector3(0, 180, 0);
+            else if (this.Facing.HasFlag(CameraFacing.West))
+                rot += new Vector3(0, -90, 0);
+
+            this.Orientation = rot;
         }
         #endregion
     }

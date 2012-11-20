@@ -29,7 +29,7 @@ namespace Managed3D.Rendering
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            this.hostControl = new ManagedRendererHostControl();
+            this.hostControl = new ManagedRendererHostControl(this.renderer);
             this.hostControl.scene = renderer.Scene;
             renderer.AttachTarget(this.hostControl);
             this.Controls.Add(hostControl);

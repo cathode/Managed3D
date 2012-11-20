@@ -83,7 +83,7 @@ namespace Managed3D.Rendering.OpenGL
         protected override void OnSceneChanged(EventArgs e)
         {
             base.OnSceneChanged(e);
-            var clamped = this.Scene.BackgroundColor.Clamp();
+            var clamped = this.BackgroundColor.Clamp();
             GL.ClearColor((float)clamped.X,
                           (float)clamped.Y,
                           (float)clamped.Z,
