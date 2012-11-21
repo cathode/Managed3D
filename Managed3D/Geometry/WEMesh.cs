@@ -50,16 +50,31 @@ namespace Managed3D.Geometry
 
         }
 
+        /// <summary>
+        /// Deletes the face with the specified index.
+        /// </summary>
+        /// <param name="faceIndex"></param>
         public void DeleteFace(uint faceIndex)
         {
 
         }
 
+        /// <summary>
+        /// Adds a vertex to the specified 
+        /// </summary>
+        /// <param name="vertex"></param>
+        /// <returns></returns>
         public uint AddVertex(Vector3 vertex)
         {
             return 0;
         }
 
+        /// <summary>
+        /// Creates an edge between the vertices with the specified indices.
+        /// </summary>
+        /// <param name="vertexA"></param>
+        /// <param name="vertexB"></param>
+        /// <returns></returns>
         public uint CreateEdge(uint vertexA, uint vertexB)
         {
             return 0;

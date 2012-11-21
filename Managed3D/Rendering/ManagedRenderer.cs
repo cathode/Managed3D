@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Managed3D.Geometry;
 
 namespace Managed3D.Rendering
 {
@@ -168,5 +169,10 @@ namespace Managed3D.Rendering
             this.ReleaseFrontBufferLock();
         }
         #endregion
+
+        public void ZoomExtents(Geometry.Vector3 vector3)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

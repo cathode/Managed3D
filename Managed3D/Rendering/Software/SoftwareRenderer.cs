@@ -79,7 +79,7 @@ namespace Managed3D.Rendering.Software
             // Pulls the x/y coords into the center of the screen rather than 1 edge.
             //var projection = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0); 
             Matrix4 projection;
-            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic))
+            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic) || true)
             {
                 //this.Scene.ActiveCamera.Orientation = new Vector3(45, 35.264, 0);
                 projection = Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);

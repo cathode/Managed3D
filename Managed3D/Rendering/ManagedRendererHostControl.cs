@@ -172,6 +172,10 @@ namespace Managed3D.Rendering
                     this.renderer.ActiveCamera.UpdateFacing();
                     break;
 
+                case Keys.Z:
+                    this.renderer.ZoomExtents(this.scene.Root.GetGraphExtents());
+                    break;
+
                 case Keys.Space:
                     this.isAutoRotateEnabled = !this.isAutoRotateEnabled;
                     break;

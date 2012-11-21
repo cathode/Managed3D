@@ -226,10 +226,16 @@ namespace Managed3D.SceneGraph
         {
 
         }
+
+        /// <summary>
+        /// Calculates the extents of the current node.
+        /// </summary>
+        /// <returns></returns>
         public virtual Vector3 GetExtents()
         {
             return new Vector3(0, 0, 0);
         }
+
         /// <summary>
         /// Recursively calculates the geometry extents of the current node and
         /// all child nodes of the current node.

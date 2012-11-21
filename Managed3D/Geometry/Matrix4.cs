@@ -586,6 +586,13 @@ namespace Managed3D.Geometry
         {
             return Matrix4.CreateRotationMatrix(vec.X, vec.Y, vec.Z);
         }
+        /// <summary>
+        /// Creates a new matrix that represents a Euler rotation.
+        /// </summary>
+        /// <param name="x">The rotation amount (in degress) on the X plane.</param>
+        /// <param name="y">The rotation amount (in degrees) on the Y plane.</param>
+        /// <param name="z">The rotation amount (in degrees) on the Z plane.</param>
+        /// <returns>A new <see cref="Matrix4"/> instance containing the result of the rotation.</returns>
         public static Matrix4 CreateRotationMatrix(double x, double y, double z)
         {
             x = Angle.RadiansFromDegrees(x);
