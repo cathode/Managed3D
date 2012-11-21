@@ -128,6 +128,18 @@ namespace Managed3D.Geometry
         {
             return new Vector3(vertex.X, vertex.Y, vertex.Z);
         }
+
+        public Vector3 ToVector3()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Vector2 IVector2.ToVector2()
+        {
+            throw new System.NotImplementedException();
+        }
         #endregion
+
+        
     }
 }

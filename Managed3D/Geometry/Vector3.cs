@@ -535,5 +535,15 @@ namespace Managed3D.Geometry
             return string.Format("({0}, {1}, {2})", this.X, this.Y, this.Z);
         }
         #endregion
+
+        Vector3 IVector3.ToVector3()
+        {
+            throw new NotImplementedException();
+        }
+
+        Vector2 IVector2.ToVector2()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

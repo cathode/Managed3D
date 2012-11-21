@@ -12,9 +12,14 @@ namespace Managed3D.Geometry
 {
     public interface IVector4 : Managed3D.Geometry.IVector3
     {
+        #region Properties
         double W
         {
             get;
         }
+        #endregion
+        #region Methods
+        Vector4 ToVector4();
+        #endregion
     }
 }

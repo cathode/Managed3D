@@ -79,7 +79,7 @@ namespace Managed3D.Rendering.Software
             // Pulls the x/y coords into the center of the screen rather than 1 edge.
             //var projection = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0); 
             Matrix4 projection;
-            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic) || true)
+            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic))
             {
                 //this.Scene.ActiveCamera.Orientation = new Vector3(45, 35.264, 0);
                 projection = Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
@@ -89,7 +89,7 @@ namespace Managed3D.Rendering.Software
                 projection = Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
             }
 
-            projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
+            //projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
             //var matrix = Matrix4.CreatePerspectiveProjectionMatrix(Angle.FromDegrees(75), 1, 0.1, 1000);
 
 
@@ -129,7 +129,7 @@ namespace Managed3D.Rendering.Software
         {
 
             var newState = new RenderState();
-            newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
+            newState.WorldMatrix = Matrix4.CreateTranslationMatrix(node.Position) *  Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
             newState.ViewMatrix = state.ViewMatrix;
             newState.ProjectionMatrix = state.ProjectionMatrix;
             var world = newState.WorldMatrix;
@@ -168,30 +168,14 @@ namespace Managed3D.Rendering.Software
                     {
                         if (i == (poly.Vertices.Length - 1))
                         {
-                            var a = newState.WorldMatrix * poly.Vertices[i];
-                            a = newState.ViewMatrix * a;
-                            a = newState.ProjectionMatrix * a;
-
-                            var b = newState.WorldMatrix * poly.Vertices[0];
-                            b = newState.ViewMatrix * b;
-                            b = newState.ProjectionMatrix * b;
-
-                            a = wvp * poly.Vertices[i];
-                            b = wvp * poly.Vertices[0];
+                            var a = wvp * poly.Vertices[i];
+                            var b = wvp * poly.Vertices[0];
                             this.DrawLine(a, b);
                         }
                         else
                         {
-                            var a = newState.WorldMatrix * poly.Vertices[i];
-                            a = newState.ViewMatrix * a;
-                            a = newState.ProjectionMatrix * a;
-
-                            var b = newState.WorldMatrix * poly.Vertices[i + 1];
-                            b = newState.ViewMatrix * b;
-                            b = newState.ProjectionMatrix * b;
-
-                            a = wvp * poly.Vertices[i];
-                            b = wvp * poly.Vertices[i + 1];
+                            var a = wvp * poly.Vertices[i];
+                            var b = wvp * poly.Vertices[i + 1];
                             this.DrawLine(a, b);
                         }
                     }

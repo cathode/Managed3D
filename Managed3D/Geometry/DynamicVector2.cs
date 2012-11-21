@@ -79,5 +79,11 @@ namespace Managed3D.Geometry
         }
 
         #endregion
+        #region Methods
+        public Vector2 ToVector2()
+        {
+            return this.Function();
+        }
+        #endregion
     }
 }

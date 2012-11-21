@@ -110,5 +110,11 @@ namespace Managed3D.Geometry
             }
         }
         #endregion
+
+
+        public Vector2 ToVector2()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

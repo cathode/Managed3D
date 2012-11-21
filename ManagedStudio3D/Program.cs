@@ -83,6 +83,7 @@ namespace ManagedStudio3D
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWXGA;
             renderer.ActiveCamera = Camera.CreateWithFacing(CameraFacing.Above);
+            //renderer.ActiveCamera.Mode = CameraMode.Perspective;
             renderer.Start();
         }
 

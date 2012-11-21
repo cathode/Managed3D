@@ -21,9 +21,8 @@ namespace Managed3D.Geometry
         {
             return Vector3.Zero;
         };
+
         private Func<Vector3> function;
-
-
         #endregion
         #region Constructors
         /// <summary>
@@ -33,6 +32,7 @@ namespace Managed3D.Geometry
         {
             this.function = DynamicVector3.ZeroFunction;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,6 +56,7 @@ namespace Managed3D.Geometry
                 this.function = value ?? DynamicVector3.ZeroFunction;
             }
         }
+
         public double X
         {
             get
@@ -63,6 +64,7 @@ namespace Managed3D.Geometry
                 return this.Function().X;
             }
         }
+
         public double Y
         {
             get
@@ -70,12 +72,26 @@ namespace Managed3D.Geometry
                 return this.Function().Y;
             }
         }
+
         public double Z
         {
             get
             {
                 return this.Function().Z;
             }
+        }
+        #endregion
+        #region Methods
+        public Vector3 ToVector3()
+        {
+            return this.Function();
+        }
+
+        Vector2 IVector2.ToVector2()
+        {
+            var sn3 = this.ToVector3();
+
+            return new Vector2(sn3.X, sn3.Y);
         }
         #endregion
     }

@@ -141,5 +141,23 @@ namespace Managed3D.Geometry
             this.z = vec.Z;
         }
         #endregion
+
+
+        public Vector4 ToVector4()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        Vector3 IVector3.ToVector3()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        Vector2 IVector2.ToVector2()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

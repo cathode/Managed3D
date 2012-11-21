@@ -446,5 +446,26 @@ namespace Managed3D.Geometry
             return (left.X != right.X) || (left.Y != right.Y);
         }
         #endregion
+
+        double IVector2.X
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        double IVector2.Y
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        Vector2 IVector2.ToVector2()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

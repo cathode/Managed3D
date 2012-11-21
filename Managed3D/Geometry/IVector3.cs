@@ -22,5 +22,8 @@ namespace Managed3D.Geometry
             get;
         }
         #endregion
+        #region Methods
+        Vector3 ToVector3();
+        #endregion
     }
 }

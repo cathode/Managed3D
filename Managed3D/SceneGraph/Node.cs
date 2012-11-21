@@ -150,6 +150,23 @@ namespace Managed3D.SceneGraph
                 return false;
             }
         }
+
+        public ReferenceSpace OrientationSpace
+        {
+            get;
+            set;
+        }
+
+        public ReferenceSpace PositionSpace
+        {
+            get;
+            set;
+        }
+        public ReferenceSpace ScalingSpace
+        {
+            get;
+            set;
+        }
         #endregion
         #region Methods
         /// <summary>

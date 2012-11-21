@@ -188,6 +188,7 @@
     <Compile Include="SceneGraph\LightNode.cs" />
     <Compile Include="SceneGraph\NodeRenderFlags.cs" />
     <Compile Include="SceneGraph\PointLight.cs" />
+    <Compile Include="SceneGraph\ReferenceSpace.cs" />
     <Compile Include="SceneGraph\RootNode.cs" />
     <Compile Include="SceneGraph\Scene.cs" />
     <Compile Include="SceneGraph\Node.cs" />
