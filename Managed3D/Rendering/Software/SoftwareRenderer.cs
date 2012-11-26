@@ -70,7 +70,7 @@ namespace Managed3D.Rendering.Software
 
 
             // Set up the view matrix
-            var view = Matrix4.CreateRotationMatrix(-camRot.X, -camRot.Y, -camRot.Z) * Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z) * Matrix4.CreateScalingMatrix(-camScale.X, -camScale.Y, -camScale.Z);
+            var view = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z) * Matrix4.CreateRotationMatrix(-camRot.X, -camRot.Y, -camRot.Z) * Matrix4.CreateScalingMatrix(-camScale.X, -camScale.Y, -camScale.Z);
 
 
 
@@ -129,7 +129,7 @@ namespace Managed3D.Rendering.Software
         {
 
             var newState = new RenderState();
-            newState.WorldMatrix = Matrix4.CreateTranslationMatrix(node.Position) *  Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
+            newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
             newState.ViewMatrix = state.ViewMatrix;
             newState.ProjectionMatrix = state.ProjectionMatrix;
             var world = newState.WorldMatrix;

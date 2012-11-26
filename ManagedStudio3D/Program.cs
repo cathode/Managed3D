@@ -55,8 +55,14 @@ namespace ManagedStudio3D
 
         private static void RunDirect3DMode()
         {
-            var renderer = new D3DRenderer();
+            var renderer = new D3DRenderer()
+            {
+                // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
+                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
+            };
+
             var options = new RendererOptions();
+            options.Profile = Managed3D.Platform.DisplayProfile.Generic720p;
 
             renderer.Scene = scene;
             renderer.Initialize(options);
@@ -83,7 +89,7 @@ namespace ManagedStudio3D
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWXGA;
             renderer.ActiveCamera = Camera.CreateWithFacing(CameraFacing.Above);
-            //renderer.ActiveCamera.Mode = CameraMode.Perspective;
+            renderer.ActiveCamera.Mode = CameraMode.Isometric;
             renderer.Start();
         }
 
