@@ -93,7 +93,6 @@
     <Compile Include="Geometry\Vector3i.cs" />
     <Compile Include="Geometry\Vector4f.cs" />
     <Compile Include="Geometry\Vector4i.cs" />
-    <Compile Include="Geometry\WEMesh.cs" />
     <Compile Include="Geometry\__Extensions.cs" />
     <Compile Include="Materials\Material.cs" />
     <Compile Include="Modeling\Chamfer.cs" />

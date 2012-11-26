@@ -11,7 +11,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a vertex of a polygon in three-dimensional space.
     /// </summary>
-    public sealed class Vertex3 : IVector3
+    public class Vertex3 : IVector3
     {
         #region Fields
         private double x;

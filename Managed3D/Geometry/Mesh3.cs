@@ -14,7 +14,8 @@ namespace Managed3D.Geometry
     /// </summary>
     public class Mesh3 : IEnumerable<Polygon3>
     {
-        #region Fields - Private
+        #region Fields
+
         private Polygon3[] polygons;
         #endregion
         #region Constructors

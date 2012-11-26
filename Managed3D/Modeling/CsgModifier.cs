@@ -8,5 +8,6 @@ namespace Managed3D.Modeling
 {
     public class CsgModifier
     {
+
     }
 }

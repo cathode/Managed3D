@@ -164,6 +164,7 @@ namespace Managed3D.Rendering.Software
                             continue;
                     }
 
+                    
                     for (int i = 0; i < poly.Vertices.Length; ++i)
                     {
                         if (i == (poly.Vertices.Length - 1))

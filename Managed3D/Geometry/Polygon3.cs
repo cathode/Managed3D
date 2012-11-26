@@ -182,6 +182,8 @@ namespace Managed3D.Geometry
             }
         }
 
+        
+
         /// <summary>
         /// Decomposes the current polygon into triangles.
         /// </summary>
