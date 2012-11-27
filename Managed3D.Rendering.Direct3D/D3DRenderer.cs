@@ -93,7 +93,9 @@ namespace Managed3D.Rendering.Direct3D
         {
             base.OnRender(e);
 
-          
+            var verts = new DataStream(12 * 3, true, true);
+
+            //verts.Write(
             
 
         }
