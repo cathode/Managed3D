@@ -358,6 +358,10 @@ namespace Managed3D.Geometry
             return a == b;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
         #region Arithmetic Methods
         /// <summary>

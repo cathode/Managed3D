@@ -30,31 +30,31 @@ namespace Managed3D.Geometry.Primitives
         public Cube(double size)
         {
             this.size = size;
-            double s = size / 2;
-            var a = new Vertex3(s, s, s);
-            var b = new Vertex3(s, -s, s);
-            var c = new Vertex3(-s, -s, s);
-            var d = new Vertex3(-s, s, s);
-            var e = new Vertex3(s, s, -s);
-            var f = new Vertex3(s, -s, -s);
-            var g = new Vertex3(-s, -s, -s);
-            var h = new Vertex3(-s, s, -s);
 
-            this.Polygons = new Polygon3[]
-            {
-                new Triangle3(a, b, c),
-                new Triangle3(c, d, a),
-                new Triangle3(e, a, d),
-                new Triangle3(d, h, e),
-                new Triangle3(e, f, b),
-                new Triangle3(b, a, e),
-                new Triangle3(b, f, g),
-                new Triangle3(g, c, b),
-                new Triangle3(d, c, g),
-                new Triangle3(g, h, d),
-                new Triangle3(h, g, f),
-                new Triangle3(f, e, h)
+            var r = size * 0.5;
+            var verts = new Vertex3[8];
+            verts[0] = new Vertex3(r, r, r);
+            verts[1] = new Vertex3(r, -r, r);
+            verts[2] = new Vertex3(-r, -r, r);
+            verts[3] = new Vertex3(-r, r, r);
+
+            verts[4] = new Vertex3(r, r, -r);
+            verts[5] = new Vertex3(r, -r, -r);
+            verts[6] = new Vertex3(-r, -r, -r);
+            verts[7] = new Vertex3(-r, r, -r);
+
+            this.Polygons = new Quad3[] { 
+                // Top and bottom
+                new Quad3(verts, 0, 1, 2, 3),
+                new Quad3(verts, 7, 6, 5, 4),
+
+                new Quad3(verts, 0, 3, 7, 4),
+                new Quad3(verts, 1, 0, 4, 5),
+                new Quad3(verts, 2, 1, 5, 6),
+                new Quad3(verts, 3, 2, 6, 7),
+                
             };
+
         }
         #endregion
         #region Fields - Private

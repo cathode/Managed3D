@@ -82,6 +82,7 @@
     <Compile Include="Geometry\CoordinateSystem3.cs" />
     <Compile Include="Geometry\FastMesh.cs" />
     <Compile Include="Geometry\IMeshFragment.cs" />
+    <Compile Include="Geometry\Primitives\MengerSponge.cs" />
     <Compile Include="IO\ImporterBase.cs" />
     <Compile Include="IO\ObjImporter.cs" />
     <Compile Include="Geometry\Primitives\Sphere.cs" />
@@ -98,10 +99,15 @@
     <Compile Include="Geometry\Vector4i.cs" />
     <Compile Include="Geometry\__Extensions.cs" />
     <Compile Include="Materials\Material.cs" />
+    <Compile Include="Modeling\BoundingVolume.cs" />
     <Compile Include="Modeling\Chamfer.cs" />
     <Compile Include="Modeling\CsgModifier.cs" />
     <Compile Include="Modeling\CsgOperation.cs" />
+    <Compile Include="Modeling\EditableMesh.cs" />
+    <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
     <Compile Include="Modeling\IEditableMesh.cs" />
+    <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
+    <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\SliceModifier.cs" />
     <Compile Include="Platform\DisplayAdapter.cs" />
     <Compile Include="Platform\DisplayDevice.cs" />

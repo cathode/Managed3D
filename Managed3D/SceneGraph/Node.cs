@@ -167,6 +167,18 @@ namespace Managed3D.SceneGraph
             get;
             set;
         }
+
+        public virtual bool IsStatic
+        {
+            get
+            {
+                foreach (var child in this.children)
+                    if (!child.IsStatic)
+                        return false;
+
+                return true;
+            }
+        }
         #endregion
         #region Methods
         /// <summary>

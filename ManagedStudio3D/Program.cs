@@ -36,7 +36,7 @@ namespace ManagedStudio3D
             root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
             scene.DefaultCamera = Camera.CreateIsometric();
 
-            Program.scene.Root = root;
+            
             //scene.Root.Orientation = new Vector3(-35.264, -45, 90);
             scene.Root.Scale = new Vector3(1.5, 1.5, 1.5);
             root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Cube(40))
@@ -48,6 +48,10 @@ namespace ManagedStudio3D
             {
                 Position = new Vector3(35, 90, 0)
             });
+
+            root = new Managed3D.Geometry.Primitives.MengerSponge(60, 1);
+            Program.scene.Root = root;
+
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();
             //Program.RunOpenGLMode();
@@ -87,9 +91,8 @@ namespace ManagedStudio3D
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.Initialize(options);
-            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWXGA;
-            renderer.ActiveCamera = Camera.CreateWithFacing(CameraFacing.Above);
-            renderer.ActiveCamera.Mode = CameraMode.Isometric;
+            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
+            renderer.ActiveCamera = Camera.CreateIsometric();
             renderer.Start();
         }
 

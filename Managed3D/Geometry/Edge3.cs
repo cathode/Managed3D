@@ -10,17 +10,34 @@ using System.Text;
 
 namespace Managed3D.Geometry
 {
-    public struct Edge3
+    /// <summary>
+    /// Represents an edge of a polygon.
+    /// </summary>
+    public class Edge3
     {
-        public Vector3 A
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Edge3"/> class.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        public Edge3(Vertex3 a, Vertex3 b)
+        {
+            this.A = a;
+            this.B = b;
+        }
+        #endregion
+        #region Properties
+        public Vertex3 A
         {
             get;
             set;
         }
-        public Vector3 B
+        public Vertex3 B
         {
             get;
             set;
         }
+        #endregion
     }
 }

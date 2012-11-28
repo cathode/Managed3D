@@ -15,7 +15,6 @@ namespace Managed3D.Geometry
     public class Mesh3 : IEnumerable<Polygon3>
     {
         #region Fields
-
         private Polygon3[] polygons;
         #endregion
         #region Constructors
@@ -45,7 +44,7 @@ namespace Managed3D.Geometry
             }
         }
         #endregion
-        #region Indexers - Public
+        #region Indexers
         public Polygon3 this[int index]
         {
             get

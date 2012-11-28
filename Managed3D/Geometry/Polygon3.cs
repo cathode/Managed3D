@@ -22,6 +22,7 @@ namespace Managed3D.Geometry
         /// Holds the vertices of the current <see cref="Polygon3"/>.
         /// </summary>
         private readonly Vertex3[] vertices;
+        private readonly Edge3[] edges;
         #endregion
         #region Constructors
         /// <summary>
@@ -69,11 +70,15 @@ namespace Managed3D.Geometry
             }
 
             this.vertices = new Vertex3[sides];
+            this.edges = new Edge3[sides];
+
             for (int i = sides - 1; i >= 0; i--)
             {
                 this.vertices[i] = new Vertex3(v.X, v.Y, v.Z);
                 v = m * v;
             }
+
+            this.RegenerateEdges();
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon3"/> class from the specified vertices.
@@ -86,16 +91,21 @@ namespace Managed3D.Geometry
             if (vertices.Length < 3)
                 throw new ArgumentException("Vertices contains less than 3 elements.", "vertices");
             this.vertices = vertices;
+            this.edges = new Edge3[vertices.Length];
+            this.RegenerateEdges();
         }
 
         public Polygon3(Vertex3[] verts, params int[] indices)
         {
             this.vertices = new Vertex3[indices.Length];
+            this.edges = new Edge3[indices.Length];
 
             for (int i = 0; i < indices.Length; i++)
             {
                 this.vertices[i] = verts[indices[i]];
             }
+
+            this.RegenerateEdges();
         }
         #endregion
         #region Properties
@@ -141,6 +151,14 @@ namespace Managed3D.Geometry
                 return this.vertices;
             }
         }
+
+        public IEnumerable<Edge3> Edges
+        {
+            get
+            {
+                return this.edges;
+            }
+        }
         #endregion
         #region Indexers
         /// <summary>
@@ -161,6 +179,15 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
+        public void RegenerateEdges()
+        {
+            var m = this.vertices.Length;
+
+            for (int i = 0; i < m; ++i)
+                this.edges[i] = new Edge3(this.vertices[i], this.vertices[(i + 1) % m]);
+
+        }
+
         /// <summary>
         /// Returns an enumerator for the current <see cref="Polygon3"/>.
         /// </summary>
@@ -182,8 +209,6 @@ namespace Managed3D.Geometry
             }
         }
 
-        
-
         /// <summary>
         /// Decomposes the current polygon into triangles.
         /// </summary>
@@ -197,6 +222,7 @@ namespace Managed3D.Geometry
             yield return new Triangle3(this.vertices[0], this.vertices[1], this.vertices[2]);
             //throw new NotImplementedException();
         }
+
         #endregion
     }
 }
