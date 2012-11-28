@@ -20,7 +20,7 @@ namespace Managed3D.Geometry
         /// </summary>
         private readonly Vertex2[] vertices;
         #endregion
-        #region Constructors - Public
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon2"/> class.
         /// </summary>

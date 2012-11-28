@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Managed3D.Geometry;
 
 namespace Managed3D.Modeling
 {
@@ -55,6 +56,17 @@ namespace Managed3D.Modeling
         {
             get;
             set;
+        }
+        #endregion
+        #region Methods
+        /// <summary>
+        /// Determines if the specified point is contained 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Contains(Vector3 point)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
