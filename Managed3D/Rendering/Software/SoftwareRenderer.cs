@@ -89,7 +89,7 @@ namespace Managed3D.Rendering.Software
                 projection = Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
             }
 
-            //projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
+            projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
             //var matrix = Matrix4.CreatePerspectiveProjectionMatrix(Angle.FromDegrees(75), 1, 0.1, 1000);
 
 

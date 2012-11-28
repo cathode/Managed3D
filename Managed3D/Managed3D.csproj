@@ -103,9 +103,7 @@
     <Compile Include="Modeling\Chamfer.cs" />
     <Compile Include="Modeling\CsgModifier.cs" />
     <Compile Include="Modeling\CsgOperation.cs" />
-    <Compile Include="Modeling\EditableMesh.cs" />
     <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
-    <Compile Include="Modeling\IEditableMesh.cs" />
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\SliceModifier.cs" />

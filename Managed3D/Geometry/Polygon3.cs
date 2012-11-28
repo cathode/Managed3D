@@ -223,6 +223,21 @@ namespace Managed3D.Geometry
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Finds and returns a <see cref="Vector3"/> that describes the position of the incenter of the current <see cref="Polygon3"/>.
+        /// </summary>
+        /// <returns></returns>
+        public Vector3 GetIncenter()
+        {
+            var sum = new Vector3(0, 0, 0);
+            foreach (var vt in this.vertices)
+            {
+                sum += vt;
+            }
+
+            return sum / this.vertices.Length;
+        }
+        
         #endregion
     }
 }

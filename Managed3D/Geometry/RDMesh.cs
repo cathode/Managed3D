@@ -16,11 +16,88 @@ namespace Managed3D.Geometry
     /// </summary>
     public class RDMesh
     {
-        private Dictionary<ushort, RDVertex> vertices;
-        private Dictionary<ushort, RDEdge> edges;
-        private Dictionary<ushort, RDFace> faces;
+        private Dictionary<uint, RDVertex> vertices;
+        private Dictionary<uint, RDEdge> edges;
+        private Dictionary<uint, RDFace> faces;
 
         private Dictionary<ushort, RDSparseAttributes> attributes;
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RDMesh"/> class.
+        /// </summary>
+        public RDMesh()
+        {
+
+        }
+
+        #endregion
+        #region Methods
+        public uint CreateVertex(double x, double y, double z)
+        {
+            var vertex = new Vertex3(x, y, z);
+
+            throw new NotImplementedException();
+            //this.vertices.add
+        }
+
+        public void DeleteFace(uint faceIndex)
+        {
+
+        }
+
+        public void DeleteFace(Polygon3 face)
+        {
+
+        }
+
+        public void DeleteEdge(uint edgeIndex)
+        {
+            var edge = this.edges[edgeIndex];
+
+
+        }
+
+        public void DeleteEdge(Edge3 edge)
+        {
+
+        }
+
+        public void DeleteVertex(uint vertexIndex)
+        {
+
+        }
+
+        public void WeldVertex(uint subjectIndex, uint targetIndex)
+        {
+            var subject = this.vertices[subjectIndex];
+            var target = this.vertices[targetIndex];
+
+            // Find all edges and faces that reference the subject vertex.
+
+            var edges = from e in this.edges.Values
+                        where e.A == subject || e.B == subject
+                        select e;
+
+            var faces = edges.SelectMany(e => new[] { e.Left, e.Right }).Where(f => f != null).Distinct();
+
+            // Update them so they point at the target vertex
+
+            foreach (var e in edges)
+
+                if (e.A == subject)
+                    e.A = target;
+                else if (e.B == subject)
+                    e.B = target;
+
+            //foreach (var f in faces)
+            //    for (int i = 0; i < f.Vertices.Length; ++i)
+            //        if (f[i] == subject)
+            //            f[i] = target;
+
+            // Delete the subject vertex
+            this.DeleteVertex(subjectIndex);
+        }
+        #endregion
     }
 
     public class RDSparseAttributes
@@ -49,8 +126,8 @@ namespace Managed3D.Geometry
     public class RDVertex
     {
         #region Fields
-        private List<RDEdge> edges;
-        private List<RDFace> faces;
+        internal List<RDEdge> edges;
+        internal List<RDFace> faces;
         #endregion
         #region Properties
         public IEnumerable<RDEdge> ConnectedEdges
@@ -77,8 +154,8 @@ namespace Managed3D.Geometry
     public class RDFace
     {
         #region Fields
-        private readonly List<RDVertex> vertices;
-        private readonly List<RDEdge> edges;
+        public int V1, V2, V3;
+        public int E1, E2, E3;
         #endregion
         #region Constructors
         /// <summary>
@@ -86,33 +163,9 @@ namespace Managed3D.Geometry
         /// </summary>
         public RDFace()
         {
-            this.vertices = new List<RDVertex>();
-            this.edges = new List<RDEdge>();
         }
         #endregion
         #region Properties
-        /// <summary>
-        /// Gets the vertices that make up the corners of the face.
-        /// </summary>
-        public IEnumerable<RDVertex> Vertices
-        {
-            get
-            {
-                return this.vertices;
-            }
-        }
-
-        /// <summary>
-        /// Gets the edges that make up the boundary of the face.
-        /// </summary>
-        public IEnumerable<RDEdge> Edges
-        {
-            get
-            {
-                return this.edges;
-            }
-        }
-
         /// <summary>
         /// Gets the faces which share edges with the current face.
         /// </summary>
@@ -120,13 +173,19 @@ namespace Managed3D.Geometry
         {
             get
             {
-                foreach (var edge in this.edges)
-                    if (edge.Left != this && edge.Left != null)
-                        yield return edge.Left;
-                    else if (edge.Right != this && edge.Right != null)
-                        yield return edge.Right;
+                throw new NotImplementedException();
             }
         }
+        #endregion
+        #region Methods
+        public void InsertVertex(RDVertex vertex)
+        {
+            // Save edges of the current face.
+            //var edges = this.edges.ToArray();
+
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 
@@ -136,22 +195,22 @@ namespace Managed3D.Geometry
     public class RDEdge
     {
         #region Fields
-        private RDVertex u;
-        private RDVertex v;
-        private RDFace a;
-        private RDFace b;
+        private RDVertex a;
+        private RDVertex b;
+        private RDFace left;
+        private RDFace right;
         private readonly List<RDEdge> neighbors;
         #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="RDEdge"/> class.
         /// </summary>
-        /// <param name="u"></param>
-        /// <param name="v"></param>
-        public RDEdge(RDVertex u, RDVertex v)
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        public RDEdge(RDVertex a, RDVertex b)
         {
-            this.A = u;
-            this.B = v;
+            this.A = a;
+            this.B = b;
             this.neighbors = new List<RDEdge>();
         }
         #endregion
@@ -163,11 +222,11 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.u;
+                return this.a;
             }
             set
             {
-                this.u = value;
+                this.a = value;
             }
         }
 
@@ -178,11 +237,11 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.v;
+                return this.b;
             }
             set
             {
-                this.v = value;
+                this.b = value;
             }
         }
 
@@ -193,11 +252,11 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.a;
+                return this.left;
             }
             set
             {
-                this.a = value;
+                this.left = value;
             }
         }
 
@@ -205,11 +264,11 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.b;
+                return this.right;
             }
             set
             {
-                this.b = value;
+                this.right = value;
             }
         }
 

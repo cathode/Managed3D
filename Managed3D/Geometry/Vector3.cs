@@ -130,6 +130,11 @@ namespace Managed3D.Geometry
             return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
+        public static Vector3 operator -(Vector3 left, IVector3 right)
+        {
+            return left - right.ToVector3();
+        }
+
         /// <summary>
         /// Calculates inequality of two vectors.
         /// </summary>
@@ -183,6 +188,11 @@ namespace Managed3D.Geometry
         public static Vector3 operator +(Vector3 left, Vector3 right)
         {
             return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        }
+
+        public static Vector3 operator +(Vector3 left, IVector3 right)
+        {
+            return left + right.ToVector3();
         }
 
         /// <summary>
@@ -332,6 +342,20 @@ namespace Managed3D.Geometry
         public static double DotProduct(Vector3 a, Vector3 b)
         {
             return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
+        }
+
+        public double DistanceTo(Vector3 other)
+        {
+            return Vector3.DistanceBetween(this, other);
+        }
+
+        public static double DistanceBetween(Vector3 a, Vector3 b)
+        {
+            var xd = b.x - a.x;
+            var yd = b.y - a.y;
+            var zd = b.z - a.z;
+
+            return Math.Sqrt(xd * xd + yd * yd + zd * zd);
         }
 
         /// <summary>

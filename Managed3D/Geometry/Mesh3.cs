@@ -6,6 +6,9 @@
  *****************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Managed3D.Geometry
 {
@@ -43,27 +46,14 @@ namespace Managed3D.Geometry
                 this.polygons = value;
             }
         }
-        #endregion
-        #region Indexers
-        public Polygon3 this[int index]
-        {
-            get
-            {
-                return this.polygons[index];
-            }
-            set
-            {
-                this.polygons[index] = value;
-            }
-        }
+
         #endregion
         #region Methods
+ 
+
         public IEnumerator<Polygon3> GetEnumerator()
         {
-            for (int i = 0; i < this.polygons.Length; i++)
-            {
-                yield return this.polygons[i];
-            }
+            throw new NotImplementedException();
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {

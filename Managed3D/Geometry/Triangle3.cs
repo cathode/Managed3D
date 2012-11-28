@@ -129,6 +129,17 @@ namespace Managed3D.Geometry
         {
             return string.Format("({0}, {1}, {2})", this.A, this.B, this.C);
         }
+        /// <summary>
+        /// Gets the position on the current polygon at which the specified edge intersects it.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public IVector3 GetIntersection(Edge3 line)
+        {
+            var e1 = this.B.ToVector3() - this.A.ToVector3();
+            var e2 = this.C.ToVector3() - this.A.ToVector3();
+            return null;
+        }
         #endregion
         #region Operators
         public static bool operator ==(Triangle3 t1, Triangle3 t2)

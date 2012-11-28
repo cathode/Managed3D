@@ -38,6 +38,23 @@ namespace Managed3D.Geometry
             get;
             set;
         }
+
+        public Polygon3 Left
+        {
+            get;
+            set;
+        }
+        public Polygon3 Right
+        {
+            get;
+            set;
+        }
+        #endregion
+        #region Methods
+        public Vector3 GetCenter()
+        {
+            return (this.A.ToVector3() + this.B.ToVector3()) / 2.0;
+        }
         #endregion
     }
 }

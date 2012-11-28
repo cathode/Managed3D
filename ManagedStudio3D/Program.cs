@@ -11,6 +11,7 @@ using Managed3D.Rendering.OpenGL;
 using Managed3D.Rendering.Software;
 using Managed3D.SceneGraph;
 using Managed3D.Rendering.Direct3D;
+using Managed3D.Geometry.Primitives;
 
 namespace ManagedStudio3D
 {
@@ -49,7 +50,7 @@ namespace ManagedStudio3D
                 Position = new Vector3(35, 90, 0)
             });
 
-            root = new Managed3D.Geometry.Primitives.MengerSponge(60, 1);
+            root = new GeometryNode(new MengerSponge(60, 0));
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();
