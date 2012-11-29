@@ -16,6 +16,13 @@ namespace Managed3D.SceneGraph
     /// </summary>
     public abstract class Node
     {
+        #region Fields
+        private readonly List<Node> children = new List<Node>();
+        private IVector3 position = Node.DefaultPosition;
+        private IVector3 scale = Node.DefaultScale;
+        private IVector3 orientation = Node.DefaultOrientation;
+        private NodeRenderFlags renderFlags;
+        #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -32,13 +39,6 @@ namespace Managed3D.SceneGraph
             this.children.AddRange(children);
         }
         #endregion
-        #region Fields
-        private readonly List<Node> children = new List<Node>();
-        private IVector3 position = Node.DefaultPosition;
-        private IVector3 scale = Node.DefaultScale;
-        private IVector3 orientation = Node.DefaultOrientation;
-        private NodeRenderFlags renderFlags;
-        #endregion
         #region Properties
         /// <summary>
         /// Gets the number of child in the current <see cref="Node"/>.
@@ -50,6 +50,7 @@ namespace Managed3D.SceneGraph
                 return this.children.Count;
             }
         }
+
         public static IVector3 DefaultOrientation
         {
             get
@@ -57,6 +58,7 @@ namespace Managed3D.SceneGraph
                 return new Vector3(0, 0, 0);
             }
         }
+
         public static IVector3 DefaultPosition
         {
             get
@@ -64,6 +66,7 @@ namespace Managed3D.SceneGraph
                 return Vector3.Zero;
             }
         }
+
         public static IVector3 DefaultScale
         {
             get
@@ -143,37 +146,53 @@ namespace Managed3D.SceneGraph
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if the current <see cref="Node"/> contains any child nodes.
+        /// </summary>
         public virtual bool HasChildren
         {
             get
             {
-                return false;
+                return this.children.Count > 0;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's orientation is interpreted by the renderer.
+        /// </summary>
         public ReferenceSpace OrientationSpace
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's position is interpreted by the renderer.
+        /// </summary>
         public ReferenceSpace PositionSpace
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's scale is interpreted by the renderer.
+        /// </summary>
         public ReferenceSpace ScalingSpace
         {
             get;
             set;
         }
 
-        public virtual bool IsStatic
+        /// <summary>
+        /// Gets a value that indicates if the current node, and all of it's child nodes, contain only static geometry.
+        /// </summary>
+        public virtual bool IsGeometryStatic
         {
             get
             {
                 foreach (var child in this.children)
-                    if (!child.IsStatic)
+                    if (!child.IsGeometryStatic)
                         return false;
 
                 return true;
@@ -192,6 +211,7 @@ namespace Managed3D.SceneGraph
 
             this.children.Add(item);
         }
+
         /// <summary>
         /// Removes all child nodes from the current <see cref="Node"/>.
         /// </summary>
@@ -199,6 +219,7 @@ namespace Managed3D.SceneGraph
         {
             this.children.Clear();
         }
+
         /// <summary>
         /// Determines if the specified <see cref="Node"/> is a child of the current <see cref="Node"/>.
         /// </summary>
@@ -208,6 +229,7 @@ namespace Managed3D.SceneGraph
         {
             return this.children.Contains(item);
         }
+
         /// <summary>
         /// Determines if the current <see cref="Node"/> contains the specified item,
         /// and searches all children for the specified item.
@@ -221,6 +243,7 @@ namespace Managed3D.SceneGraph
                     return true;
             return false;
         }
+
         /// <summary>
         /// Copies the child nodes of the current <see cref="Node"/> into <paramref name="array"/>, starting at <paramref name="arrayIndex"/>.
         /// </summary>
@@ -230,6 +253,7 @@ namespace Managed3D.SceneGraph
         {
             this.children.CopyTo(array, arrayIndex);
         }
+
         /// <summary>
         /// Gets an enumerator that allows iteration of the child nodes in the current <see cref="Node"/>.
         /// </summary>
@@ -238,6 +262,7 @@ namespace Managed3D.SceneGraph
         {
             return this.children.GetEnumerator();
         }
+
         /// <summary>
         /// Removes the specifed <see cref="Node"/> from the current <see cref="Node"/>.
         /// </summary>
@@ -253,7 +278,7 @@ namespace Managed3D.SceneGraph
         /// </summary>
         public virtual void UpdateBoundingVolume()
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>

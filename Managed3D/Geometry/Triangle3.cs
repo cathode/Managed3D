@@ -205,6 +205,25 @@ namespace Managed3D.Geometry
 
             return null;
         }
+
+        /// <summary>
+        /// Calculates the intersection of one triangle with another.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public Edge3 GetIntersection(Triangle3 other)
+        {
+            var q1 = this.A.ToVector3();
+            var q2 = this.B.ToVector3();
+            var q3 = this.C.ToVector3();
+            var r1 = other.A.ToVector3();
+            var r2 = other.B.ToVector3();
+            var r3 = other.C.ToVector3();
+
+            var n1 = Vector3.CrossProduct(q2 - q1, q3 - q1);
+
+            throw new NotImplementedException();
+        }
         #endregion
         #region Operators
         public static bool operator ==(Triangle3 t1, Triangle3 t2)

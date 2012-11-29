@@ -50,7 +50,7 @@ namespace ManagedStudio3D
                 Position = new Vector3(35, 90, 0)
             });
 
-            root = new GeometryNode(new MengerSponge(60, 0));
+            root = new GeometryNode(new MengerSponge(60, 1));
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();
