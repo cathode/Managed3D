@@ -131,7 +131,7 @@ namespace Managed3D.Geometry
 
         public Vector3 ToVector3()
         {
-            throw new System.NotImplementedException();
+            return new Vector3(this.X, this.Y, this.Z);
         }
 
         Vector2 IVector2.ToVector2()

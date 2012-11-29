@@ -29,8 +29,9 @@ namespace Managed3D.Modeling
 
             // Find all edges that pass through the plane.
 
-            var vertices = mesh.SelectMany(poly => poly.Vertices).Distinct();
-
+            var isec = from e in mesh.SelectMany(poly => poly.Edges).Distinct()
+                       where e.A.X > sub.X
+                       select e;
 
 
             var result = new Mesh3();

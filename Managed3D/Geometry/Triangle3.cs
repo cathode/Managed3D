@@ -4,6 +4,7 @@
  * This software is released under the terms and conditions of the MIT/X11    *
  * license. See the 'license.txt' file for details.                           *
  *****************************************************************************/
+using System;
 
 namespace Managed3D.Geometry
 {
@@ -136,8 +137,72 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public IVector3 GetIntersection(Edge3 line)
         {
-            var e1 = this.B.ToVector3() - this.A.ToVector3();
-            var e2 = this.C.ToVector3() - this.A.ToVector3();
+            // Set up vector variables;
+            Vector3 a, b, c, p, q;
+            a = this.A.ToVector3();
+            b = this.B.ToVector3();
+            c = this.C.ToVector3();
+            p = line.A;
+            q = line.B;
+
+            // Vector from A to C
+            var ex = this.C.X - this.A.X;
+            var ey = this.C.Y - this.A.Y;
+            var ez = this.C.Z - this.A.Z;
+
+            // Vector from A to B
+            var fx = this.B.X - this.A.X;
+            var fy = this.B.Y - this.A.Y;
+            var fz = this.B.Z - this.A.Z;
+
+            // Cross product of e and f
+            var nx = (fy * ez) - (fz * ey);
+            var ny = (fz * ex) - (fx * ez);
+            var nz = (fx * ey) - (fy * ex);
+
+            // Normalize
+            var m = Math.Sqrt((nx * nx) + (ny * ny) + (nz * nz));
+            nx /= m;
+            ny /= m;
+            nz /= m;
+
+            // Ray direction vector
+            var dx = line.B.X - line.A.X;
+            var dy = line.B.Y - line.A.Y;
+            var dz = line.B.Z - line.A.Z;
+
+            m = Math.Sqrt((dx * dx) + (dy * dy) + (dz * dz));
+            dx /= m;
+            dy /= m;
+            dz /= m;
+
+            // Dot product of ray and normal, tells us if ray is pointing towards the triangle.
+            m = (dx * nx) + (dy * ny) + (dz * nz);
+
+            // Value of m determines the relationship of the vectors:
+            // m < 0: Vectors are opposed
+            // m == 0: Vectors are perpendicular
+            // m > 0: Vectors point the same way
+            if (m < 0)
+            {
+                var gx = this.A.X - line.A.X;
+                var gy = this.A.Y - line.A.Y;
+                var gz = this.A.Z - line.A.Z;
+
+                var t = (gx * nx) + (gy * ny) + (gz * nz);
+
+                if (t < 0)
+                {
+                    var k = t / m;
+
+                    var sx = p.X + (dx * k);
+                    var sy = p.Y + (dy * k);
+                    var sz = p.Z + (dz * k);
+
+                    return new Vector3(sx, sy, sz);
+                }
+            }
+
             return null;
         }
         #endregion

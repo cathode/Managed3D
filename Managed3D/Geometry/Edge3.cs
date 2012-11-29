@@ -23,17 +23,17 @@ namespace Managed3D.Geometry
         /// <param name="b"></param>
         public Edge3(Vertex3 a, Vertex3 b)
         {
-            this.A = a;
-            this.B = b;
+            this.A = a.ToVector3();
+            this.B = b.ToVector3();
         }
         #endregion
         #region Properties
-        public Vertex3 A
+        public Vector3 A
         {
             get;
             set;
         }
-        public Vertex3 B
+        public Vector3 B
         {
             get;
             set;
@@ -53,7 +53,47 @@ namespace Managed3D.Geometry
         #region Methods
         public Vector3 GetCenter()
         {
-            return (this.A.ToVector3() + this.B.ToVector3()) / 2.0;
+            return (this.A + this.B) / 2.0;
+        }
+
+        public Vector3 GetIntersectionX()
+        {
+            return this.GetIntersectionX(0.0);
+        }
+
+        /// <summary>
+        /// Calculates the point at which the edge intersects the X plane.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public Vector3 GetIntersectionX(double x)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vector3 GetIntersectionY()
+        {
+            return this.GetIntersectionY(0.0);
+        }
+
+        /// <summary>
+        /// Calculates the point at which the edge intersects the Y plane.
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public Vector3 GetIntersectionY(double y)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Calculates the point at which the edge intersects the Z plane.
+        /// </summary>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public Vector3 GetIntersectionZ(double z)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
