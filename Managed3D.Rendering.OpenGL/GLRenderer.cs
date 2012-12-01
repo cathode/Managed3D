@@ -27,9 +27,28 @@ namespace Managed3D.Rendering.OpenGL
         private bool isDisposed;
         #endregion
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GLRenderer"/> class.
+        /// </summary>
+        public GLRenderer()
+        {
+            this.deviceContext = IntPtr.Zero;
+            this.renderingContext = IntPtr.Zero;
+            this.windowHandle = IntPtr.Zero;
+            this.isDisposed = false;
+        }
         ~GLRenderer()
         {
             this.Dispose(false);
+        }
+        #endregion
+        #region Properties
+        public bool IsDisposed
+        {
+            get
+            {
+                return this.isDisposed;
+            }
         }
         #endregion
         #region Methods

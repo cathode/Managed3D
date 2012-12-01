@@ -30,7 +30,7 @@ namespace Managed3D.Modeling
             // Find all edges that pass through the plane.
 
             var isec = from e in mesh.SelectMany(poly => poly.Edges).Distinct()
-                       where e.A.X > sub.X
+                       where e.P.X > sub.X
                        select e;
 
 

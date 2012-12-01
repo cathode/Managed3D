@@ -23,17 +23,17 @@ namespace Managed3D.Geometry
         /// <param name="b"></param>
         public Edge3(Vertex3 a, Vertex3 b)
         {
-            this.A = a.ToVector3();
-            this.B = b.ToVector3();
+            this.P = a.ToVector3();
+            this.Q = b.ToVector3();
         }
         #endregion
         #region Properties
-        public Vector3 A
+        public Vector3 P
         {
             get;
             set;
         }
-        public Vector3 B
+        public Vector3 Q
         {
             get;
             set;
@@ -44,6 +44,7 @@ namespace Managed3D.Geometry
             get;
             set;
         }
+
         public Polygon3 Right
         {
             get;
@@ -53,48 +54,62 @@ namespace Managed3D.Geometry
         #region Methods
         public Vector3 GetCenter()
         {
-            return (this.A + this.B) / 2.0;
+            return (this.P + this.Q) / 2.0;
         }
 
-        public Vector3 GetIntersectionX()
+        public Vector3 GetIntersectionXY()
         {
-            return this.GetIntersectionX(0.0);
+            return this.GetIntersectionXY(0.0);
         }
 
         /// <summary>
-        /// Calculates the point at which the edge intersects the X plane.
+        /// Calculates the point at which the edge intersects the XY plane.
         /// </summary>
-        /// <param name="x"></param>
+        /// <param name="z">The offset of the XY plane along the Z axis.</param>
         /// <returns></returns>
-        public Vector3 GetIntersectionX(double x)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Vector3 GetIntersectionY()
-        {
-            return this.GetIntersectionY(0.0);
-        }
-
-        /// <summary>
-        /// Calculates the point at which the edge intersects the Y plane.
-        /// </summary>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public Vector3 GetIntersectionY(double y)
+        public Vector3 GetIntersectionXY(double z)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Calculates the point at which the edge intersects the Z plane.
+        /// Calculates the point at which the edge intersects the XY plane.
         /// </summary>
-        /// <param name="z"></param>
         /// <returns></returns>
-        public Vector3 GetIntersectionZ(double z)
+        public Vector3 GetIntersectionYZ()
+        {
+            return this.GetIntersectionYZ(0.0);
+        }
+
+        /// <summary>
+        /// Calculates the point at which the edge intersects the YZ plane.
+        /// </summary>
+        /// <param name="x">The offset of the YZ plane along the X axis.</param>
+        /// <returns></returns>
+        public Vector3 GetIntersectionYZ(double x)
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Calculates the edge's intersection with the ZX plane.
+        /// </summary>
+        /// <returns></returns>
+        public Vector3 GetIntersectionZX()
+        {
+            return this.GetIntersectionZX(0.0);
+        }
+
+        /// <summary>
+        /// Calculates the point at which the edge intersects the ZX plane.
+        /// </summary>
+        /// <param name="y">The offset of the ZX plane along the Y axis.</param>
+        /// <returns></returns>
+        public Vector3 GetIntersectionZX(double y)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

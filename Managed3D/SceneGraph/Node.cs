@@ -310,6 +310,8 @@ namespace Managed3D.SceneGraph
 
             return ext;
         }
+
+        
         #endregion
     }
 }

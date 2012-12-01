@@ -34,10 +34,10 @@ namespace Managed3D.Rendering
         private double ty;
         private double sx;
         private double sy;
-        private bool isRotating;
-        private bool isPanning;
-        private bool isZooming;
-        private double autoRotate = 0.0;
+        //private bool isRotating;
+        //private bool isPanning;
+        //private bool isZooming;
+        //private double autoRotate = 0.0;
         private double sensitivity = 0.322;
         internal Managed3D.SceneGraph.Scene scene;
         private bool isAutoRotateEnabled;

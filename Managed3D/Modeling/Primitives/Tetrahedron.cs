@@ -7,11 +7,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Managed3D.Geometry;
 
-namespace Managed3D.Geometry.Primitives
+namespace Managed3D.Modeling.Primitives
 {
-    public sealed class Tetrahedron : Mesh3
+    public sealed class Tetrahedron : ProceduralMesh
     {
+        #region Fields
+
+        #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Tetrahedron"/> class.
@@ -21,10 +25,32 @@ namespace Managed3D.Geometry.Primitives
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tetrahedron"/> class.
+        /// </summary>
+        /// <param name="radius"></param>
         public Tetrahedron(double radius)
         {
             throw new NotImplementedException();
         }
         #endregion
+
+        #region Methods
+        protected override IEnumerable<ProcedureParameter> InitializeParameters()
+        {
+            yield return new ProcedureParameter("radius");
+            yield return new ProcedureParameter("mode");
+        }
+        #endregion
+
+        public override void RecalculateMesh()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void ApplyParameters()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -36,6 +36,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,38 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsInferRequires>False</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestEnsures>False</CodeContractsSuggestEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -82,6 +115,7 @@
     <Compile Include="Geometry\CoordinateSystem3.cs" />
     <Compile Include="Geometry\FastMesh.cs" />
     <Compile Include="Geometry\IMeshFragment.cs" />
+    <Compile Include="Geometry\IRenderable.cs" />
     <Compile Include="Geometry\Primitives\MengerSponge.cs" />
     <Compile Include="IO\ImporterBase.cs" />
     <Compile Include="IO\ObjImporter.cs" />
@@ -106,6 +140,10 @@
     <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
+    <Compile Include="Modeling\Primitives\Box.cs" />
+    <Compile Include="Modeling\ProceduralMesh.cs" />
+    <Compile Include="Modeling\ProcedureParameter.cs" />
+    <Compile Include="Modeling\ProcedureParameterCollection.cs" />
     <Compile Include="Modeling\SliceModifier.cs" />
     <Compile Include="Platform\DisplayAdapter.cs" />
     <Compile Include="Platform\DisplayDevice.cs" />
@@ -148,7 +186,7 @@
     <Compile Include="Geometry\Primitives\Cube.cs" />
     <Compile Include="Geometry\Primitives\Icosahedron.cs" />
     <Compile Include="Geometry\Primitives\Octahedron.cs" />
-    <Compile Include="Geometry\Primitives\Tetrahedron.cs" />
+    <Compile Include="Modeling\Primitives\Tetrahedron.cs" />
     <Compile Include="Geometry\Quad3.cs" />
     <Compile Include="Geometry\Rotation3.cs" />
     <Compile Include="Geometry\Triangle3.cs" />

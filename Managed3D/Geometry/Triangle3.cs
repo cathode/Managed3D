@@ -142,8 +142,8 @@ namespace Managed3D.Geometry
             a = this.A.ToVector3();
             b = this.B.ToVector3();
             c = this.C.ToVector3();
-            p = line.A;
-            q = line.B;
+            p = line.P;
+            q = line.Q;
 
             // Vector from A to C
             var ex = this.C.X - this.A.X;
@@ -167,9 +167,9 @@ namespace Managed3D.Geometry
             nz /= m;
 
             // Ray direction vector
-            var dx = line.B.X - line.A.X;
-            var dy = line.B.Y - line.A.Y;
-            var dz = line.B.Z - line.A.Z;
+            var dx = line.Q.X - line.P.X;
+            var dy = line.Q.Y - line.P.Y;
+            var dz = line.Q.Z - line.P.Z;
 
             m = Math.Sqrt((dx * dx) + (dy * dy) + (dz * dz));
             dx /= m;
@@ -185,9 +185,9 @@ namespace Managed3D.Geometry
             // m > 0: Vectors point the same way
             if (m < 0)
             {
-                var gx = this.A.X - line.A.X;
-                var gy = this.A.Y - line.A.Y;
-                var gz = this.A.Z - line.A.Z;
+                var gx = this.A.X - line.P.X;
+                var gy = this.A.Y - line.P.Y;
+                var gz = this.A.Z - line.P.Z;
 
                 var t = (gx * nx) + (gy * ny) + (gz * nz);
 

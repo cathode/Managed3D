@@ -13,12 +13,18 @@ namespace Managed3D.Geometry
     public enum RadiusMode
     {
         /// <summary>
-        /// The radius is calculated from the center to each vertex of the polygon.
+        /// The radius is calculated from the center of the object to each vertex of the polygon.
         /// </summary>
         Vertex = 0x0,
+
         /// <summary>
-        /// The radius is calculated from the center to the midpoint of each edge of the polygon.
+        /// The radius is calculated from the center of the object to the midpoint of each edge of the polygon.
         /// </summary>   
         Edge = 0x1,
+
+        /// <summary>
+        /// The radicus is calculated from the center of the object to the incenter of the face.
+        /// </summary>
+        Face = 0x2,
     }
 }
