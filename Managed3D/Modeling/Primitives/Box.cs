@@ -19,6 +19,12 @@ namespace Managed3D.Modeling.Primitives
         //private
         #endregion
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Box"/> class.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public Box(double x, double y, double z)
         {
 

@@ -19,15 +19,29 @@ namespace Managed3D.Modeling
     public abstract class ProceduralMesh : Mesh3
     {
         #region Fields
-        
+        private ProcedureParameterCollection parameters;
         #endregion
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProceduralMesh"/> class.
+        /// </summary>
         protected ProceduralMesh()
         {
-            this.InitializeParameters();
+            var pl = this.InitializeParameters();
+
+            foreach (var p in pl)
+                this.parameters.Add(p);
         }
         #endregion
+        #region Properties
+
+        #endregion
         #region Methods
+        public object GetParameterValue(string name)
+        {
+            return this.parameters[name];
+        }
+
         public abstract void RecalculateMesh();
 
         /// <summary>

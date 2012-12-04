@@ -124,7 +124,7 @@
     <None Include="..\Managed3D.snk">
       <Link>Managed3D.snk</Link>
     </None>
-    <Compile Include="Geometry\RDMesh.cs" />
+    <Compile Include="Modeling\EditableMesh.cs" />
     <Compile Include="Geometry\Vector2f.cs" />
     <Compile Include="Geometry\Vector2i.cs" />
     <Compile Include="Geometry\Vector3f.cs" />
@@ -137,6 +137,10 @@
     <Compile Include="Modeling\Chamfer.cs" />
     <Compile Include="Modeling\CsgModifier.cs" />
     <Compile Include="Modeling\CsgOperation.cs" />
+    <Compile Include="Modeling\EditableMeshEdge.cs" />
+    <Compile Include="Modeling\EditableMeshEdgeData.cs" />
+    <Compile Include="Modeling\EditableMeshFace.cs" />
+    <Compile Include="Modeling\EditableMeshVertex.cs" />
     <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />

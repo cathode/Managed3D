@@ -13,6 +13,7 @@ namespace Managed3D.Geometry
 {
     /// <summary>
     /// Describes the absolute minimum requirements for a 3d mesh to be rendered.
+    /// Essentially this is a vertex table.
     /// </summary>
     public interface IRenderable
     {
@@ -26,11 +27,6 @@ namespace Managed3D.Geometry
         }
 
         IEnumerable<IRenderableFace> Faces
-        {
-            get;
-        }
-
-        IEnumerable<IRenderableEdge> Edges
         {
             get;
         }
@@ -57,26 +53,17 @@ namespace Managed3D.Geometry
 
     public interface IRenderableFace
     {
-        int VertexA
+        uint A
         {
             get;
         }
-        int VertexB
+
+        uint B
         {
             get;
         }
-        int VertexC
-        {
-            get;
-        }
-    }
-    public interface IRenderableEdge
-    {
-        int P
-        {
-            get;
-        }
-        int Q
+
+        uint C
         {
             get;
         }

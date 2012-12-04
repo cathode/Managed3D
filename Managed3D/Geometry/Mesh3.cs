@@ -49,8 +49,6 @@ namespace Managed3D.Geometry
 
         #endregion
         #region Methods
- 
-
         public IEnumerator<Polygon3> GetEnumerator()
         {
             throw new NotImplementedException();

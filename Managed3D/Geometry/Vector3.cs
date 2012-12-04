@@ -15,7 +15,7 @@ namespace Managed3D.Geometry
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector3 : IVector3, IEquatable<IVector3>, IEquatable<Vector3>
     {
-        #region Fields - Private
+        #region Fields
         /// <summary>
         /// Backing field for the static <see cref="Vector3.Zero"/> property.
         /// </summary>

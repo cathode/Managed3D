@@ -14,7 +14,8 @@ namespace Managed3D.Modeling.Primitives
     public sealed class Tetrahedron : ProceduralMesh
     {
         #region Fields
-
+        private double radius;
+        private RadiusMode mode;
         #endregion
         #region Constructors
         /// <summary>
@@ -50,7 +51,9 @@ namespace Managed3D.Modeling.Primitives
 
         protected override void ApplyParameters()
         {
-            throw new NotImplementedException();
+            this.radius = (double)this.GetParameterValue("radius");
+            this.mode = (RadiusMode)this.GetParameterValue("mode");
+                
         }
     }
 }
