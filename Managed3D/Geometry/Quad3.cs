@@ -67,6 +67,19 @@ namespace Managed3D.Geometry
             : base(verts[a], verts[b], verts[c], verts[d])
         {
         }
+
+        public Quad3(double width, double height)
+        {
+            var x1 = width / -2.0;
+            var x2 = width / 2.0;
+            var y1 = height / -2.0;
+            var y2 = height / 2.0;
+
+            this.A = new Vertex3(x1, y1, 0.0);
+            this.B = new Vertex3(x1, y2, 0.0);
+            this.C = new Vertex3(x2, y2, 0.0);
+            this.D = new Vertex3(x2, y1, 0.0);
+        }
         #endregion
         #region Properties
         /// <summary>

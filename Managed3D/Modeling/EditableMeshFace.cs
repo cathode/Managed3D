@@ -19,6 +19,7 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Properties
+
         public EditableMeshEdge EdgeRing
         {
             get;
@@ -66,11 +67,30 @@ namespace Managed3D.Modeling
         /// <returns></returns>
         public IEnumerable<EditableMeshEdge> GetEdges()
         {
-            var start = this.EdgeRing;
+            var e = this.EdgeRing;
 
-            while (true)
+            if (e.AF == this)
             {
-
+                yield return e;
+                do
+                {
+                    e = e.ACW;
+                    yield return e;
+                } while (e != this.EdgeRing);
+            }
+            else if (e.BF == this)
+            {
+                yield return e;
+                do
+                {
+                    e = e.BCW;
+                    yield return e;
+                } while (e != this.EdgeRing);
+            }
+            else
+            {
+                // edge ring is somehow not associated with the current face?!?
+                throw new NotImplementedException();
             }
         }
         #endregion

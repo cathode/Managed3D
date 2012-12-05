@@ -315,8 +315,6 @@ namespace Managed3D.Rendering
         {
             if (this.SceneChanged != null)
                 this.SceneChanged(this, e);
-
-            this.ActiveCamera = this.Scene.DefaultCamera;
         }
 
         /// <summary>

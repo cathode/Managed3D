@@ -35,7 +35,7 @@ namespace ManagedStudio3D
 
             var root = new GeometryNode();
             root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
-            scene.DefaultCamera = Camera.CreateIsometric();
+            //scene.DefaultCamera = Camera.CreateIsometric();
 
             
             //scene.Root.Orientation = new Vector3(-35.264, -45, 90);
@@ -50,7 +50,7 @@ namespace ManagedStudio3D
                 Position = new Vector3(35, 90, 0)
             });
 
-            root = new GeometryNode(new MengerSponge(60, 1));
+            //root = new GeometryNode(new MengerSponge(60, 1));
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();

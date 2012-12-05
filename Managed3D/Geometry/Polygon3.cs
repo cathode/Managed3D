@@ -237,7 +237,28 @@ namespace Managed3D.Geometry
 
             return sum / this.vertices.Length;
         }
-        
+
+        public void Translate(double x, double y, double z)
+        {
+            foreach (var v in this.vertices)
+            {
+                v.X += x;
+                v.Y += y;
+                v.Z += z;
+            }
+        }
+        public void Translate(Vector3 value)
+        {
+            this.Translate(value.X, value.Y, value.Z);
+        }
+
+        /// <summary>
+        /// Inverts the order of the vertices of the current polygon.
+        /// </summary>
+        public void Flip()
+        {
+            Array.Reverse(this.vertices);
+        }
         #endregion
     }
 }

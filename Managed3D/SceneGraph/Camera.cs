@@ -130,7 +130,7 @@ namespace Managed3D.SceneGraph
         public static Camera CreateIsometric()
         {
             var cam = new Camera();
-            cam.mode = CameraMode.Isometric;
+            cam.mode = CameraMode.Orthographic;
             cam.Orientation = new Vector3(45, 35.264, 0);
             cam.Position = new Vector3(0, 0, 0);
 

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{67C3F2D6-AC62-4465-8734-4888189D5BCC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managed3D", "Managed3D\Managed3D.csproj", "{4D281C09-1C91-4C84-B0DC-AAFF8839264E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedStudio3D", "ManagedStudio3D\ManagedStudio3D.csproj", "{3D433939-E619-497D-BC08-51562C2924F7}"
@@ -10,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managed3D.Rendering.Direct3D", "Managed3D.Rendering.Direct3D\Managed3D.Rendering.Direct3D.csproj", "{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managed3D.Rendering.OpenGL", "Managed3D.Rendering.OpenGL\Managed3D.Rendering.OpenGL.csproj", "{FA159E90-1017-4A96-B782-2BFFA3397D00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,16 +41,6 @@ Global
 		{4D281C09-1C91-4C84-B0DC-AAFF8839264E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4D281C09-1C91-4C84-B0DC-AAFF8839264E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4D281C09-1C91-4C84-B0DC-AAFF8839264E}.Release|x86.ActiveCfg = Release|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{67C3F2D6-AC62-4465-8734-4888189D5BCC}.Release|x86.ActiveCfg = Release|Any CPU
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -61,6 +51,16 @@ Global
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}.Release|x86.ActiveCfg = Release|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|x86.ActiveCfg = Release|Any CPU
 		{FA159E90-1017-4A96-B782-2BFFA3397D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA159E90-1017-4A96-B782-2BFFA3397D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA159E90-1017-4A96-B782-2BFFA3397D00}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

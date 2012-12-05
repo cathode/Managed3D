@@ -21,13 +21,6 @@ namespace Managed3D.SceneGraph
         /// </summary>
         private Node root;
 
-        /// <summary>
-        /// Backing field for the <see cref="Scene.ActiveCamera"/> property.
-        /// </summary>
-        private Camera activeCamera;
-
-        
-
         private Vector4f ambientLight;
         #endregion
         #region Constructors
@@ -37,31 +30,9 @@ namespace Managed3D.SceneGraph
         public Scene()
         {
             this.root = new GroupNode();
-            this.DefaultCamera = new Camera();
         }
-        #endregion
-        #region Events
-        /// <summary>
-        /// Raised when the <see cref="ActiveCamera"/> property changes.
-        /// </summary>
-        public event EventHandler<CameraChangedEventArgs> ActiveCameraChanged;
         #endregion
         #region Properties
-        /// <summary>
-        /// Gets or sets the active camera for the scene.
-        /// </summary>
-        public Camera DefaultCamera
-        {
-            get
-            {
-                return this.activeCamera;
-            }
-            set
-            {
-                this.activeCamera = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets a color used to control the global ambient lighting in the scene.
         /// </summary>
@@ -91,13 +62,6 @@ namespace Managed3D.SceneGraph
             {
                 this.root = value;
             }
-        }
-        #endregion
-        #region Methods
-        private void OnActiveCameraChanged(CameraChangedEventArgs e)
-        {
-            if (this.ActiveCameraChanged != null)
-                this.ActiveCameraChanged(this, e);
         }
         #endregion
     }

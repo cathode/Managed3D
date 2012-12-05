@@ -39,10 +39,8 @@ namespace Managed3D.Modeling
         public ProcedureParameter(string name)
         {
             Contract.Requires(name != null);
-            Contract.Requires(owner != null);
 
             this.name = name;
-            this.owner = owner;
             this.validator = ProcedureParameter.DefaultValidator;
         }
         /// <summary>

@@ -143,6 +143,7 @@ namespace Managed3D.Rendering.Software
 
             if (node is GeometryNode && ((GeometryNode)node).Geometry != null)
             {
+                
                 var mesh = ((GeometryNode)node).Geometry;
                 foreach (var poly in mesh.Polygons)
                 {

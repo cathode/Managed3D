@@ -73,6 +73,16 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Methods
+        public IEnumerable<EditableMeshFace> SurroundingFaces()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<EditableMeshEdge> SurroundingEdges()
+        {
+            throw new NotImplementedException();
+        }
+
         Vector3 IVector3.ToVector3()
         {
             return new Vector3(this.x, this.y, this.z);
