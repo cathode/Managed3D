@@ -71,6 +71,7 @@ namespace ManagedStudio3D
 
             renderer.Scene = scene;
             renderer.Initialize(options);
+            renderer.ActiveCamera = Camera.CreateIsometric();
             renderer.Start();
         }
 

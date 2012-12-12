@@ -95,6 +95,7 @@ namespace Managed3D.Rendering
         {
             this.targets.Remove(target);
         }
+
         public void AcquireFrontBufferLock()
         {
             Monitor.Enter(this.frontBufferLock);
@@ -118,6 +119,15 @@ namespace Managed3D.Rendering
 
             this.ReleaseBackBufferLock();
             this.ReleaseFrontBufferLock();
+        }
+
+        /// <summary>
+        /// Zooms the active camera to fit the entire scene in the viewport.
+        /// </summary>
+        /// <param name="vector3"></param>
+        public void ZoomExtents(Geometry.Vector3 vector3)
+        {
+            throw new NotImplementedException();
         }
 
         protected void AcquireBackBufferLock()
@@ -170,9 +180,6 @@ namespace Managed3D.Rendering
         }
         #endregion
 
-        public void ZoomExtents(Geometry.Vector3 vector3)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

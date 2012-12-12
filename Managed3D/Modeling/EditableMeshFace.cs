@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Managed3D.Geometry;
 
 namespace Managed3D.Modeling
 {
     /// <summary>
     /// Represents an <see cref="EditableMesh"/> face (triangle).
     /// </summary>
-    public class EditableMeshFace
+    public class EditableMeshFace : IRenderableFace
     {
         #region Constructors
         /// <summary>
@@ -94,5 +95,31 @@ namespace Managed3D.Modeling
             }
         }
         #endregion
+
+
+
+        uint IRenderableFace.A
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        uint IRenderableFace.B
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        uint IRenderableFace.C
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ using SlimDX.Windows;
 using Device = SlimDX.Direct3D11.Device;
 using Resource = SlimDX.Direct3D11.Resource;
 using System.Windows.Forms;
+using Managed3D.SceneGraph;
 
 namespace Managed3D.Rendering.Direct3D
 {
@@ -74,11 +75,56 @@ namespace Managed3D.Rendering.Direct3D
             using (var factory = swapChain.GetParent<Factory>())
                 factory.SetWindowAssociation(form.Handle, WindowAssociationFlags.IgnoreAltEnter);
 
-          
+            
             form.KeyDown += (o, e) =>
             {
                 if (e.Alt && e.KeyCode == Keys.Enter)
                     swapChain.IsFullScreen = !swapChain.IsFullScreen;
+                else
+                    switch (e.KeyCode)
+                    {
+                        case Keys.NumPad2:
+                            this.ActiveCamera.Facing = CameraFacing.South;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad4:
+                            this.ActiveCamera.Facing = CameraFacing.West;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad6:
+                            this.ActiveCamera.Facing = CameraFacing.East;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad8:
+                            this.ActiveCamera.Facing = CameraFacing.North;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad7:
+                            this.ActiveCamera.Facing = CameraFacing.Above;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad9:
+                            this.ActiveCamera.Facing = CameraFacing.Below;
+                            this.ActiveCamera.UpdateFacing();
+                            break;
+
+                        case Keys.NumPad5:
+                            this.ActiveCamera = Camera.CreateIsometric();
+                            break;
+
+                        case Keys.Z:
+                            //this.ZoomExtents(this.Scene.Root.GetGraphExtents());
+                            break;
+
+                        case Keys.Space:
+                            //this.isAutoRotateEnabled = !this.isAutoRotateEnabled;
+                            break;
+                    }
             };
 
         }
@@ -103,6 +149,11 @@ namespace Managed3D.Rendering.Direct3D
         {
             base.OnPostRender(e);
             swapChain.Present(0, PresentFlags.None);
+        }
+
+        private void RenderNode(Node node)
+        {
+            
         }
         #endregion
     }

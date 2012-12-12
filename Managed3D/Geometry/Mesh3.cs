@@ -51,7 +51,8 @@ namespace Managed3D.Geometry
         #region Methods
         public IEnumerator<Polygon3> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var poly in this.polygons)
+                yield return poly;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {

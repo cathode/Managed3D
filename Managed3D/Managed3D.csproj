@@ -117,6 +117,7 @@
     <Compile Include="Geometry\IMeshFragment.cs" />
     <Compile Include="Geometry\IRenderable.cs" />
     <Compile Include="Geometry\Primitives\MengerSponge.cs" />
+    <Compile Include="Geometry\Quaternion.cs" />
     <Compile Include="IO\ImporterBase.cs" />
     <Compile Include="IO\ObjImporter.cs" />
     <Compile Include="Geometry\Primitives\Sphere.cs" />
@@ -132,7 +133,6 @@
     <Compile Include="Geometry\Vector4f.cs" />
     <Compile Include="Geometry\Vector4i.cs" />
     <Compile Include="Geometry\__Extensions.cs" />
-    <Compile Include="Materials\Material.cs" />
     <Compile Include="Modeling\BoundingVolume.cs" />
     <Compile Include="Modeling\Chamfer.cs" />
     <Compile Include="Modeling\CsgModifier.cs" />
@@ -217,6 +217,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Rendering\IManagedRendererTarget.cs" />
+    <Compile Include="Rendering\Materials\MaterialBase.cs" />
     <Compile Include="Rendering\Raytraced\RaytracedRenderer.cs" />
     <Compile Include="Rendering\RenderEventArgs.cs" />
     <Compile Include="Geometry\PrimitiveKind.cs" />
@@ -225,11 +226,15 @@
     <Compile Include="Rendering\RendererInitializationEventArgs.cs" />
     <Compile Include="Rendering\RendererOptions.cs" />
     <Compile Include="Rendering\RenderStyle.cs" />
+    <Compile Include="Rendering\Software\Shaders\PixelShader.cs" />
+    <Compile Include="Rendering\Software\Shaders\VertexShader.cs" />
     <Compile Include="Rendering\Software\SoftwareRenderer.cs" />
     <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />
     <Compile Include="SceneGraph\CameraFacing.cs" />
     <Compile Include="SceneGraph\CameraMode.cs" />
     <Compile Include="SceneGraph\CameraModifierLock.cs" />
+    <Compile Include="SceneGraph\Constraint.cs" />
+    <Compile Include="SceneGraph\ConstraintTarget.cs" />
     <Compile Include="SceneGraph\DirectionalLight.cs" />
     <Compile Include="SceneGraph\GeometryNode.cs" />
     <Compile Include="SceneGraph\GroupNode.cs" />

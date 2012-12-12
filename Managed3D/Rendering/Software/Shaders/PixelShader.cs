@@ -9,13 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Managed3D.Materials
+namespace Managed3D.Rendering.Software.Shaders
 {
     /// <summary>
-    /// Represents a graphics material.
+    /// Represents the basic functionality shared by pixel shaders for the software renderer.
     /// </summary>
-    public class Material
+    public abstract class PixelShader
     {
-        // Currently just a placeholder.
+
     }
 }

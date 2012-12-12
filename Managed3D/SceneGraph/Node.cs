@@ -18,6 +18,7 @@ namespace Managed3D.SceneGraph
     {
         #region Fields
         private readonly List<Node> children = new List<Node>();
+        private readonly List<Constraint> constraints;
         private IVector3 position = Node.DefaultPosition;
         private IVector3 scale = Node.DefaultScale;
         private IVector3 orientation = Node.DefaultOrientation;
@@ -29,6 +30,8 @@ namespace Managed3D.SceneGraph
         /// </summary>
         protected Node()
         {
+            this.children = new List<Node>();
+            this.constraints = new List<Constraint>();
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -36,6 +39,9 @@ namespace Managed3D.SceneGraph
         /// <param name="children"></param>
         protected Node(params Node[] children)
         {
+            this.children = new List<Node>();
+            this.constraints = new List<Constraint>();
+            
             this.children.AddRange(children);
         }
         #endregion
@@ -196,6 +202,17 @@ namespace Managed3D.SceneGraph
                         return false;
 
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of child nodes of the current <see cref="Node"/>.
+        /// </summary>
+        public IEnumerable<Node> Children
+        {
+            get
+            {
+                return this.children;
             }
         }
         #endregion

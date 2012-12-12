@@ -39,7 +39,6 @@ namespace Managed3D.Modeling
             set;
         }
 
-
         public double X
         {
             get;
@@ -60,7 +59,7 @@ namespace Managed3D.Modeling
         #endregion
         #region Methods
         /// <summary>
-        /// Determines if the specified point is contained 
+        /// Determines if the specified point is contained by the bounding volume.
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>

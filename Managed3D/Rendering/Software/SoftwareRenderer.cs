@@ -63,21 +63,14 @@ namespace Managed3D.Rendering.Software
             var buffer = this.BackBuffer;
             var matrix = Matrix4.Identity;
 
-            // Set up the world matrix
-
+            // Set up the world matrix.
             var world = Matrix4.Identity;
 
+            // Set up the view matrix.
+            var view = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z) * Matrix4.CreateRotationMatrix(-camRot.X, -camRot.Y, -camRot.Z) * Matrix4.CreateScalingMatrix(camScale.X, camScale.Y, camScale.Z);
 
 
-            // Set up the view matrix
-            var view = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z) * Matrix4.CreateRotationMatrix(-camRot.X, -camRot.Y, -camRot.Z) * Matrix4.CreateScalingMatrix(-camScale.X, -camScale.Y, -camScale.Z);
-
-
-
-            // Set up the projection matrix
-
-            // Pulls the x/y coords into the center of the screen rather than 1 edge.
-            //var projection = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0); 
+            // Set up the projection matrix.
             Matrix4 projection;
             if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic))
             {
@@ -89,8 +82,8 @@ namespace Managed3D.Rendering.Software
                 projection = Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
             }
 
+            // Pulls the x/y coords into the center of the screen.
             projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
-            //var matrix = Matrix4.CreatePerspectiveProjectionMatrix(Angle.FromDegrees(75), 1, 0.1, 1000);
 
 
 
@@ -127,11 +120,17 @@ namespace Managed3D.Rendering.Software
 
         private void RenderNode(RenderState state, Node node)
         {
-
             var newState = new RenderState();
             newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
             newState.ViewMatrix = state.ViewMatrix;
             newState.ProjectionMatrix = state.ProjectionMatrix;
+
+            if (node.Count > 0)
+            {
+                foreach (var child in node)
+                    this.RenderNode(newState, child);
+            }
+
             var world = newState.WorldMatrix;
             var view = newState.ViewMatrix;
             var proj = newState.ProjectionMatrix;
@@ -184,9 +183,7 @@ namespace Managed3D.Rendering.Software
                 }
             }
 
-            if (node.Count > 0)
-                foreach (var child in node)
-                    this.RenderNode(newState, child);
+            
         }
 
         protected override void OnStarting(EventArgs e)

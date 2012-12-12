@@ -226,11 +226,23 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Operators
+        /// <summary>
+        /// Compares the vertices of two triangles and determines if they represent the same triangle.
+        /// </summary>
+        /// <param name="t1">The first <see cref="Triangle3"/> to compare.</param>
+        /// <param name="t2">The second <see cref="Triangle3"/> to compare.</param>
+        /// <returns>true if the triangles represent the same geometry; otherwise, false.</returns>
         public static bool operator ==(Triangle3 t1, Triangle3 t2)
         {
             return t1.A == t2.A && t1.B == t2.B && t1.C == t2.C;
         }
 
+        /// <summary>
+        /// Compares the vertices of two triangles and determines if they represent different triangles.
+        /// </summary>
+        /// <param name="t1">The first <see cref="Triangle3"/> to compare.</param>
+        /// <param name="t2">The second <see cref="Triangle3"/> to compare.</param>
+        /// <returns>true if the triangles represent different geometry; otherwise, false.</returns>
         public static bool operator !=(Triangle3 t1, Triangle3 t2)
         {
             return t1.A != t2.A || t1.B != t2.B || t1.C != t2.C;

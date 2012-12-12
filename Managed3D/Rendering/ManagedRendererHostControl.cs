@@ -115,7 +115,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ry;
                 this.rx += xdelta;
                 this.ry += ydelta;
-                this.renderer.ActiveCamera.Orientation = (Vector3)this.renderer.ActiveCamera.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
+                this.renderer.Scene.Root.Orientation = (Vector3)this.renderer.Scene.Root.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
@@ -170,6 +170,10 @@ namespace Managed3D.Rendering
                 case Keys.NumPad9:
                     this.renderer.ActiveCamera.Facing = CameraFacing.Below;
                     this.renderer.ActiveCamera.UpdateFacing();
+                    break;
+
+                case Keys.NumPad5:
+                    this.renderer.ActiveCamera = Camera.CreateIsometric();
                     break;
 
                 case Keys.Z:

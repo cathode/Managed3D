@@ -8,12 +8,11 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents an immutable 3D mesh that can be streamed directly to graphics hardware.
     /// </summary>
-    public sealed class FastMesh
+    public sealed class FastMesh : IRenderable
     {
         #region Fields
-        private float[] vertices;
-        private uint[] faces;
-        private uint[] edges;
+        private FastVertex[] vertices;
+        private FastFace[] faces;
         #endregion
         #region Constructors
         /// <summary>
@@ -24,11 +23,77 @@ namespace Managed3D.Geometry
         /// <param name="edgeCount"></param>
         internal FastMesh(uint vertexCount, uint faceCount, uint edgeCount)
         {
-            this.vertices = new float[vertexCount];
-            this.faces = new uint[faceCount];
-            this.edges = new uint[edgeCount];
 
         }
         #endregion
+
+        public IEnumerable<IRenderableVertex> Vertices
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IEnumerable<IRenderableFace> Faces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
+        public IEnumerable<IRenderableEdge> Edges
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+    }
+
+    public struct FastVertex : IRenderableVertex
+    {
+
+        public double X
+        {
+            get;
+            internal set;
+        }
+
+        public double Y
+        {
+            get;
+            internal set;
+        }
+
+        public double Z
+        {
+            get;
+            internal set;
+        }
+    }
+
+    public struct FastFace : IRenderableFace
+    {
+        public uint A
+        {
+            get;
+            internal set;
+        }
+
+        public uint B
+        {
+            get;
+            internal set;
+        }
+
+        public uint C
+        {
+            get;
+            internal set;
+        }
     }
 }

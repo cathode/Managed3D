@@ -40,11 +40,21 @@ namespace Managed3D.Modeling
         {
             get
             {
-                throw new NotImplementedException();
+                foreach (var wv in this.vertices.Values)
+                    yield return wv;
             }
         }
 
         IEnumerable<IRenderableFace> IRenderable.Faces
+        {
+            get
+            {
+                foreach (var wf in this.faces.Values)
+                    yield return wf;
+            }
+        }
+
+        IEnumerable<IRenderableEdge> IRenderable.Edges
         {
             get
             {
@@ -132,9 +142,16 @@ namespace Managed3D.Modeling
 
             throw new NotImplementedException();
         }
+
+        internal static EditableMeshFace NextFaceAroundVertexCCW(EditableMeshVertex vertex, EditableMeshFace known)
+        {
+
+            throw new NotImplementedException();
+        }
         #endregion
 
 
+       
     }
 
     public class EMSparseAttribute

@@ -238,6 +238,12 @@ namespace Managed3D.Geometry
             return sum / this.vertices.Length;
         }
 
+        /// <summary>
+        /// Translates all vertices of the polygon by the specified x, y, and z values.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public void Translate(double x, double y, double z)
         {
             foreach (var v in this.vertices)
@@ -247,13 +253,18 @@ namespace Managed3D.Geometry
                 v.Z += z;
             }
         }
+
+        /// <summary>
+        /// Translates all the vertices of the polygon by the specified vector amount.
+        /// </summary>
+        /// <param name="value"></param>
         public void Translate(Vector3 value)
         {
             this.Translate(value.X, value.Y, value.Z);
         }
 
         /// <summary>
-        /// Inverts the order of the vertices of the current polygon.
+        /// Inverts direction that the polygon faces by reversing the order of the vertex list.
         /// </summary>
         public void Flip()
         {

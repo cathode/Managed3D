@@ -10,6 +10,9 @@ namespace Managed3D.SceneGraph
     /// </summary>
     public class SpriteNode : Node
     {
-
+        public SpriteNode()
+        {
+            this.OrientationSpace = ReferenceSpace.View;
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace Managed3D.Geometry
         {
             get;
         }
+
+        IEnumerable<IRenderableEdge> Edges
+        {
+            get;
+        }
         #endregion
     }
 
@@ -40,10 +45,12 @@ namespace Managed3D.Geometry
         {
             get;
         }
+
         double Y
         {
             get;
         }
+
         double Z
         {
             get;
@@ -64,6 +71,19 @@ namespace Managed3D.Geometry
         }
 
         uint C
+        {
+            get;
+        }
+    }
+
+    public interface IRenderableEdge
+    {
+        uint P
+        {
+            get;
+        }
+
+        uint Q
         {
             get;
         }
