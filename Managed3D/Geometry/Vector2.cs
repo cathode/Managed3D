@@ -21,7 +21,7 @@ namespace Managed3D.Geometry
     /// </list>
     /// </para>
     /// </remarks>
-    public struct Vector2 : IVector2
+    public struct Vector2 
     {
         #region Fields
         /// <summary>
@@ -63,8 +63,8 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector2"/> struct.
         /// </summary>
-        /// <param name="vector">An <see cref="IVector2"/> containing the X and Y values to use for the new <see cref="Vector2"/> instance.</param>
-        public Vector2(IVector2 vector)
+        /// <param name="vector">An <see cref="Vector2"/> containing the X and Y values to use for the new <see cref="Vector2"/> instance.</param>
+        public Vector2(Vector2 vector)
         {
             this.x = vector.X;
             this.y = vector.Y;
@@ -446,26 +446,5 @@ namespace Managed3D.Geometry
             return (left.X != right.X) || (left.Y != right.Y);
         }
         #endregion
-
-        double IVector2.X
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        double IVector2.Y
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        Vector2 IVector2.ToVector2()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

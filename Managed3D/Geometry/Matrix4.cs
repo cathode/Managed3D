@@ -28,7 +28,7 @@ namespace Managed3D.Geometry
     /// D | 12 | 13 | 14 | 15 |
     /// </code>
     /// </remarks>
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size = 128, Pack = 8)]
     public struct Matrix4 : IEquatable<Matrix4>
     {
         #region Fields
@@ -435,22 +435,22 @@ namespace Managed3D.Geometry
                                m.dx * s, m.dy * s, m.dz * s, m.dw * s);
 
         }
-        public Vector3 Multiply(IVector3 vector)
+        public Vector3 Multiply(Vector3 vector)
         {
             return Matrix4.Multiply(this, vector);
         }
-        public static Vector3 Multiply(Matrix4 matrix, IVector3 vector)
+        public static Vector3 Multiply(Matrix4 matrix, Vector3 vector)
         {
             var v4 = matrix * new Vector4(vector.X, vector.Y, vector.Z, 1.0);
             return new Vector3(v4.X / v4.W, v4.Y / v4.W, v4.Z / v4.W);
         }
 
-        public Vector4 Multiply(IVector4 v)
+        public Vector4 Multiply(Vector4 v)
         {
             return Matrix4.Multiply(this, v);
         }
 
-        public static Vector4 Multiply(Matrix4 m, IVector4 v)
+        public static Vector4 Multiply(Matrix4 m, Vector4 v)
         {
             return new Vector4(m.ax * v.X + m.ay * v.Y + m.az * v.Z + m.aw * v.W,
                                m.bx * v.X + m.by * v.Y + m.bz * v.Z + m.bw * v.W,
@@ -522,31 +522,31 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double nearZ, double farZ)
         {
-          /*
-            double size = nearZ * Math.Tan(fov.Radians / 2.0);
-            double left = -size;
-            double right = size;
-            double bottom = -size / aspect;
-            double top = size / aspect;
+            /*
+              double size = nearZ * Math.Tan(fov.Radians / 2.0);
+              double left = -size;
+              double right = size;
+              double bottom = -size / aspect;
+              double top = size / aspect;
           
 
-            var m = new Matrix4(2.0 * nearZ / (right - left), 0.0, 0.0, 0.0,
-                                0.0, 2.0 * nearZ / (top - bottom), 0.0, 0.0,
-                                0.0, 0.0, (farZ + nearZ) / (farZ - nearZ), -2.0 * farZ * nearZ / (farZ - nearZ),
-                                0.0, 0.0, -1.0, 0.0);
+              var m = new Matrix4(2.0 * nearZ / (right - left), 0.0, 0.0, 0.0,
+                                  0.0, 2.0 * nearZ / (top - bottom), 0.0, 0.0,
+                                  0.0, 0.0, (farZ + nearZ) / (farZ - nearZ), -2.0 * farZ * nearZ / (farZ - nearZ),
+                                  0.0, 0.0, -1.0, 0.0);
 
-            return m;
+              return m;
 
-            var ax = 1.0 / Math.Tan(fov.Radians);
-            var by = aspect / Math.Tan(fov.Radians);
-            var cz = (farZ + nearZ) / (farZ - nearZ);
-            var cw = -2.0 * farZ * nearZ / (farZ - nearZ);
+              var ax = 1.0 / Math.Tan(fov.Radians);
+              var by = aspect / Math.Tan(fov.Radians);
+              var cz = (farZ + nearZ) / (farZ - nearZ);
+              var cw = -2.0 * farZ * nearZ / (farZ - nearZ);
 
-            return new Matrix4(ax, 0.0, 0.0, 0.0,
-                               0.0, by, 0.0, 0.0,
-                               0.0, 0.0, cz, 1.0,
-                               0.0, 0.0, cw, 0.0);
-           */
+              return new Matrix4(ax, 0.0, 0.0, 0.0,
+                                 0.0, by, 0.0, 0.0,
+                                 0.0, 0.0, cz, 1.0,
+                                 0.0, 0.0, cw, 0.0);
+             */
 
             double xymax = nearZ * Math.Tan(fov.Radians);
             double ymin = -xymax;
@@ -574,7 +574,7 @@ namespace Managed3D.Geometry
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static Matrix4 CreateTranslationMatrix(IVector3 t)
+        public static Matrix4 CreateTranslationMatrix(Vector3 t)
         {
 
             return new Matrix4(1, 0, 0, t.X,
@@ -591,7 +591,7 @@ namespace Managed3D.Geometry
                                0, 0, 0, 1);
         }
 
-        public static Matrix4 CreateScalingMatrix(IVector3 s)
+        public static Matrix4 CreateScalingMatrix(Vector3 s)
         {
             return new Matrix4(s.X, 0, 0, 0,
                                0, s.Y, 0, 0,
@@ -613,26 +613,17 @@ namespace Managed3D.Geometry
         /// <param name="angle"></param>
         /// <param name="axis"></param>
         /// <returns></returns>
-        public static Matrix4 CreateRotationMatrix(Angle angle, IVector3 axis)
+        public static Matrix4 CreateRotationMatrix(Angle angle, Vector3 axis)
         {
-            double cosA = angle.Cosine;
-            double sinA = angle.Sine;
-            var u = new Vector3(axis).Normalize();
-            double x = u.X;
-            double y = u.Y;
-            double z = u.Z;
+            var q = new Quaternion(angle.Radians, axis);
 
-            return new Matrix4(1 + (1 - cosA) * (x * x - 1), (1 - cosA) * x * y - z * sinA, (1 - cosA) * x * z + y * sinA, 0,
-                (1 - cosA) * x * y + z * sinA, 1 + (1 - cosA) * (y * y - 1), (1 - cosA) * y * z - x * sinA, 0,
-                (1 - cosA) * x * z - y * sinA, (1 - cosA) * y * z + x * sinA, 1 + (1 - cosA) * (z * z - 1), 0,
-                0, 0, 0, 1);
-
+            return q.ToRotationMatrix();
         }
         public static Matrix4 CreateRotationMatrix(double deg, double x, double y, double z)
         {
             return Matrix4.CreateRotationMatrix(Angle.FromDegrees(deg), new Vector3(x, y, z));
         }
-        public static Matrix4 CreateRotationMatrix(IVector3 vec)
+        public static Matrix4 CreateRotationMatrix(Vector3 vec)
         {
             return Matrix4.CreateRotationMatrix(vec.X, vec.Y, vec.Z);
         }
@@ -784,14 +775,14 @@ namespace Managed3D.Geometry
         /// <param name="matrix"></param>
         /// <param name="vector"></param>
         /// <returns></returns>
-        public static Vector3 operator *(Matrix4 matrix, IVector3 vector)
+        public static Vector3 operator *(Matrix4 matrix, Vector3 vector)
         {
             return Matrix4.Multiply(matrix, vector);
         }
 
         public static Vertex3 operator *(Matrix4 matrix, Vertex3 vertex)
         {
-            var result = Matrix4.Multiply(matrix, vertex);
+            var result = Matrix4.Multiply(matrix, vertex.Position);
             return new Vertex3(result.X, result.Y, result.Z)
             {
                 Color = vertex.Color,
@@ -805,7 +796,7 @@ namespace Managed3D.Geometry
         /// <param name="matrix"></param>
         /// <param name="vector"></param>
         /// <returns></returns>
-        public static Vector4 operator *(Matrix4 matrix, IVector4 vector)
+        public static Vector4 operator *(Matrix4 matrix, Vector4 vector)
         {
             return Matrix4.Multiply(matrix, vector);
         }

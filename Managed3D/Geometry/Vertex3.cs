@@ -11,7 +11,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a vertex of a polygon in three-dimensional space.
     /// </summary>
-    public class Vertex3 : IVector3
+    public class Vertex3
     {
         #region Fields
         private double x;
@@ -116,6 +116,14 @@ namespace Managed3D.Geometry
                 this.z = value;
             }
         }
+
+        public Vector3 Position
+        {
+            get
+            {
+                return new Vector3(this.x, this.y, this.z);
+            }
+        }
         #endregion
         #region Methods
         public override string ToString()
@@ -133,13 +141,6 @@ namespace Managed3D.Geometry
         {
             return new Vector3(this.X, this.Y, this.Z);
         }
-
-        Vector2 IVector2.ToVector2()
-        {
-            throw new System.NotImplementedException();
-        }
         #endregion
-
-        
     }
 }

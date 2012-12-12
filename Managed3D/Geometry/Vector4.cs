@@ -13,7 +13,7 @@ namespace Managed3D.Geometry
     /// A four-dimensional double-precision floating point vector.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
-    public struct Vector4 : IVector4
+    public struct Vector4 
     {
         #region Fields
         /// <summary>
@@ -209,21 +209,6 @@ namespace Managed3D.Geometry
         public Vector4 Normalize()
         {
             throw new NotImplementedException();
-        }
-
-        Vector4 IVector4.ToVector4()
-        {
-            return new Vector4(this.x, this.y, this.z, this.w);
-        }
-
-        Vector3 IVector3.ToVector3()
-        {
-            return new Vector3(this.x, this.y, this.z);
-        }
-
-        Vector2 IVector2.ToVector2()
-        {
-            return new Vector2(this.x, this.y);
         }
         #endregion
         #region Operators

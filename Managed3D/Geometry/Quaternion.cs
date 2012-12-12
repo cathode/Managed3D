@@ -8,7 +8,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a quaternion.
     /// </summary>
-    public class Quaternion : IVector4
+    public class Quaternion
     {
         #region Fields
         private double x, y, z, w;
@@ -47,6 +47,21 @@ namespace Managed3D.Geometry
             this.y = (cz * sy * cx) + (sz * cy * sx);
             this.z = (sz * cy * cx) - (cz * sy * sx);
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Quaternion"/> class.
+        /// </summary>
+        /// <param name="w"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        public Quaternion(double w, double x, double y, double z)
+        {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
         #endregion
         #region Properties
         public double W
@@ -80,6 +95,15 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
+        public static Quaternion Multiply(Quaternion q1, Quaternion q2)
+        {
+            var w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
+            var x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
+            var y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;
+            var z = q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w;
+
+            return new Quaternion(w, x, y, z);
+        }
         public Vector4 ToVector4()
         {
             return new Vector4(this.X, this.Y, this.Z, this.W);
@@ -105,9 +129,21 @@ namespace Managed3D.Geometry
                 1 - 2 * ((y * y) + (z * z)), 2 * ((x * y) - (s * z)), 2 * ((x * z) + (s * y)), 0,
                 2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
                 2 * ((x * z) - (s * y)), 2 * ((y * z) + (s * x)), 1 - 2 * ((x * x) + (y * y)), 0,
-                0, 0, 0, 0);
+                0, 0, 0, 1);
 
             return matrix;
+        }
+        #endregion
+        #region Operators
+        /// <summary>
+        /// Multiplies two quaternions. Quaternion multiplication is not commutative, so order matters.
+        /// </summary>
+        /// <param name="q1"></param>
+        /// <param name="q2"></param>
+        /// <returns></returns>
+        public static Quaternion operator *(Quaternion q1, Quaternion q2)
+        {
+            return Quaternion.Multiply(q1, q2);
         }
         #endregion
     }

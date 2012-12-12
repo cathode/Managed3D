@@ -232,7 +232,7 @@ namespace Managed3D.Geometry
             var sum = new Vector3(0, 0, 0);
             foreach (var vt in this.vertices)
             {
-                sum += vt;
+                sum += vt.Position;
             }
 
             return sum / this.vertices.Length;

@@ -19,9 +19,9 @@ namespace Managed3D.SceneGraph
         #region Fields
         private readonly List<Node> children = new List<Node>();
         private readonly List<Constraint> constraints;
-        private IVector3 position = Node.DefaultPosition;
-        private IVector3 scale = Node.DefaultScale;
-        private IVector3 orientation = Node.DefaultOrientation;
+        private Vector3 position = Node.DefaultPosition;
+        private Vector3 scale = Node.DefaultScale;
+        private Vector3 orientation = Node.DefaultOrientation;
         private NodeRenderFlags renderFlags;
         #endregion
         #region Constructors
@@ -57,7 +57,7 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public static IVector3 DefaultOrientation
+        public static Vector3 DefaultOrientation
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public static IVector3 DefaultPosition
+        public static Vector3 DefaultPosition
         {
             get
             {
@@ -73,7 +73,7 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public static IVector3 DefaultScale
+        public static Vector3 DefaultScale
         {
             get
             {
@@ -95,7 +95,7 @@ namespace Managed3D.SceneGraph
         /// <summary>
         /// Gets or sets an <see cref="IRotation3"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
         /// </summary>
-        public IVector3 Orientation
+        public Vector3 Orientation
         {
             get
             {
@@ -103,14 +103,14 @@ namespace Managed3D.SceneGraph
             }
             set
             {
-                this.orientation = value ?? Node.DefaultOrientation;
+                this.orientation = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets an <see cref="IVector3"/> which determines the position of the current <see cref="Node"/> relative to it's parent.
+        /// Gets or sets an <see cref="Vector3"/> which determines the position of the current <see cref="Node"/> relative to it's parent.
         /// </summary>
-        public IVector3 Position
+        public Vector3 Position
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Managed3D.SceneGraph
             }
             set
             {
-                this.position = value ?? Node.DefaultPosition;
+                this.position = value;
             }
         }
 
@@ -138,9 +138,9 @@ namespace Managed3D.SceneGraph
         }
 
         /// <summary>
-        /// Gets or sets an <see cref="IVector3"/> which determines the scale of the current <see cref="Node"/> relative to it's parent.
+        /// Gets or sets an <see cref="Vector3"/> which determines the scale of the current <see cref="Node"/> relative to it's parent.
         /// </summary>
-        public IVector3 Scale
+        public Vector3 Scale
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Managed3D.SceneGraph
             }
             set
             {
-                this.scale = value ?? Node.DefaultScale;
+                this.scale = value;
             }
         }
 

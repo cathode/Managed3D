@@ -13,7 +13,7 @@ namespace Managed3D.Geometry
     /// Represents a three-dimensional vector using three double-precision floating point numbers.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector3 : IVector3, IEquatable<IVector3>, IEquatable<Vector3>
+    public struct Vector3 : IEquatable<Vector3>
     {
         #region Fields
         /// <summary>
@@ -40,9 +40,9 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector3"/> struct.
         /// </summary>
-        /// <param name="vector">A <see cref="Managed3D.Geometry.IVector2"/> instance supplying x and y values.</param>
+        /// <param name="vector">A <see cref="Managed3D.Geometry.Vector2"/> instance supplying x and y values.</param>
         /// <remarks>The z value defaults to 0.</remarks>
-        public Vector3(Managed3D.Geometry.IVector2 vector)
+        public Vector3(Managed3D.Geometry.Vector2 vector)
         {
             this.x = vector.X;
             this.y = vector.Y;
@@ -52,8 +52,8 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector3"/> struct.
         /// </summary>
-        /// <param name="vector">A <see cref="IVector3"/> instance supplying x, y and z values.</param>
-        public Vector3(IVector3 vector)
+        /// <param name="vector">A <see cref="Vector3"/> instance supplying x, y and z values.</param>
+        public Vector3(Vector3 vector)
         {
             this.x = vector.X;
             this.y = vector.Y;
@@ -82,6 +82,72 @@ namespace Managed3D.Geometry
             get
             {
                 return Vector3.zero;
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the positive X-axis.
+        /// </summary>
+        public Vector3 Right
+        {
+            get
+            {
+                return new Vector3(1.0, 0.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the negative X-axis.
+        /// </summary>
+        public Vector3 Left
+        {
+            get
+            {
+                return new Vector3(-1.0, 0.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the positive Y-axis.
+        /// </summary>
+        public Vector3 Up
+        {
+            get
+            {
+                return new Vector3(0.0, 1.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the negative Y-axis.
+        /// </summary>
+        public Vector3 Down
+        {
+            get
+            {
+                return new Vector3(0.0, -1.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the positive Z-axis.
+        /// </summary>
+        public Vector3 Forward
+        {
+            get
+            {
+                return new Vector3(0.0, 0.0, 1.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the negative Z-axis.
+        /// </summary>
+        public Vector3 Backward
+        {
+            get
+            {
+                return new Vector3(0.0, 0.0, -1.0);
             }
         }
 
@@ -128,11 +194,6 @@ namespace Managed3D.Geometry
         public static Vector3 operator -(Vector3 left, Vector3 right)
         {
             return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
-        }
-
-        public static Vector3 operator -(Vector3 left, IVector3 right)
-        {
-            return left - right.ToVector3();
         }
 
         /// <summary>
@@ -188,11 +249,6 @@ namespace Managed3D.Geometry
         public static Vector3 operator +(Vector3 left, Vector3 right)
         {
             return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
-        }
-
-        public static Vector3 operator +(Vector3 left, IVector3 right)
-        {
-            return left + right.ToVector3();
         }
 
         /// <summary>
@@ -381,16 +437,6 @@ namespace Managed3D.Geometry
         }
 
         /// <summary>
-        /// Compares the current <see cref="Vector3"/> and the specified <see cref="IVector3"/> for equality.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool Equals(IVector3 other)
-        {
-            return this.X == other.X && this.Y == other.Y && this.Z == other.Z;
-        }
-
-        /// <summary>
         /// Compares the current <see cref="Vector3"/> and the specified <see cref="Vector3"/> for equality.
         /// </summary>
         /// <param name="other"></param>
@@ -558,16 +604,11 @@ namespace Managed3D.Geometry
         {
             return string.Format("({0}, {1}, {2})", this.X, this.Y, this.Z);
         }
+
+        public Matrix4 ToTranslationMatrix()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
-
-        Vector3 IVector3.ToVector3()
-        {
-            throw new NotImplementedException();
-        }
-
-        Vector2 IVector2.ToVector2()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

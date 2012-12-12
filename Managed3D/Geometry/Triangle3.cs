@@ -135,7 +135,7 @@ namespace Managed3D.Geometry
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public IVector3 GetIntersection(Edge3 line)
+        public Vector3 GetIntersection(Edge3 line)
         {
             // Set up vector variables;
             Vector3 a, b, c, p, q;
@@ -203,7 +203,8 @@ namespace Managed3D.Geometry
                 }
             }
 
-            return null;
+            throw new NotImplementedException();
+            //return null;
         }
 
         /// <summary>

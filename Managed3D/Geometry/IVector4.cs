@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Managed3D.Geometry
 {
-    public interface IVector4 : Managed3D.Geometry.IVector3
+    public interface Vector4 : Managed3D.Geometry.Vector3
     {
         #region Properties
         double W

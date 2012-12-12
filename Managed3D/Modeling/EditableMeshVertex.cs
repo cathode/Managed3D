@@ -9,7 +9,7 @@ namespace Managed3D.Modeling
     /// <summary>
     /// Represents a vertex of an editable mesh.
     /// </summary>
-    public class EditableMeshVertex : IVector3, IRenderableVertex
+    public class EditableMeshVertex : IRenderableVertex
     {
         #region Fields
         private double x;
@@ -114,16 +114,6 @@ namespace Managed3D.Modeling
         /// </summary>
         /// <returns></returns>
         public IEnumerable<EditableMeshEdge> SurroundingEdges()
-        {
-            throw new NotImplementedException();
-        }
-
-        Vector3 IVector3.ToVector3()
-        {
-            return new Vector3(this.x, this.y, this.z);
-        }
-
-        Vector2 IVector2.ToVector2()
         {
             throw new NotImplementedException();
         }

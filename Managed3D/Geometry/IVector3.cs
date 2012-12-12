@@ -11,7 +11,8 @@ namespace Managed3D.Geometry
     /// <summary>
     /// A three-dimensional double-precision floating point vector.
     /// </summary>
-    public interface IVector3 : Managed3D.Geometry.IVector2
+    [Obsolete]
+    public interface Vector3 : Managed3D.Geometry.Vector2
     {
         #region Properties
         /// <summary>

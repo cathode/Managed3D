@@ -10,7 +10,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a vertex of a polygon in two-dimensional space.
     /// </summary>
-    public sealed class Vertex2 : IVector2
+    public sealed class Vertex2 
     {
         #region Fields - Private
         /// <summary>
