@@ -124,20 +124,6 @@ namespace Managed3D.Geometry
 
             return new Quaternion(w, x, y, z);
         }
-        public Vector4 ToVector4()
-        {
-            return new Vector4(this.X, this.Y, this.Z, this.W);
-        }
-
-        public Vector3 ToVector3()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Vector2 ToVector2()
-        {
-            throw new NotImplementedException();
-        }
 
         public Matrix4 ToRotationMatrix()
         {
