@@ -121,7 +121,7 @@ namespace Managed3D.Rendering.Software
         private void RenderNode(RenderState state, Node node)
         {
             var newState = new RenderState();
-            newState.WorldMatrix = Matrix4.CreateRotationMatrix(node.Orientation) * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
+            newState.WorldMatrix = node.Orientation.ToRotationMatrix() * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
             newState.ViewMatrix = state.ViewMatrix;
             newState.ProjectionMatrix = state.ProjectionMatrix;
 

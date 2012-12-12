@@ -131,7 +131,7 @@ namespace Managed3D.SceneGraph
         {
             var cam = new Camera();
             cam.mode = CameraMode.Orthographic;
-            cam.Orientation = new Vector3(45, 35.264, 0);
+            cam.Orientation = new Quaternion(0.0, new Vector3(1.0, 1.0, 1.0));
             cam.Position = new Vector3(0, 0, 0);
 
             return cam;
@@ -148,20 +148,18 @@ namespace Managed3D.SceneGraph
 
         public void UpdateFacing()
         {
-            var rot = new Vector3(0, 0, 0);
-            if (this.Facing.HasFlag(CameraFacing.Above))
-                rot += new Vector3(90, 0, 0);
-            else if (this.Facing.HasFlag(CameraFacing.Below))
-                rot += new Vector3(-90, 0, 0);
-
-            if (this.Facing.HasFlag(CameraFacing.East))
-                rot += new Vector3(0, 90, 0);
-            else if (this.Facing.HasFlag(CameraFacing.South))
-                rot += new Vector3(0, 180, 0);
-            else if (this.Facing.HasFlag(CameraFacing.West))
-                rot += new Vector3(0, -90, 0);
-
-            this.Orientation = rot;
+            switch (this.Facing)
+            {
+                case CameraFacing.Above:
+                    //this.Orientation.Axis = Vector3.Down;
+                    break;
+                case CameraFacing.Below:
+                    //this.Orientation.Axis = Vector3.Up;
+                    break;
+                case CameraFacing.East:
+                    //this.Orientation.Axis = Vector3.Left;
+                    break;
+            }
         }
         #endregion
     }

@@ -115,7 +115,10 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ry;
                 this.rx += xdelta;
                 this.ry += ydelta;
-                this.renderer.Scene.Root.Orientation = (Vector3)this.renderer.Scene.Root.Orientation + new Vector3(ydelta * this.sensitivity, xdelta * this.sensitivity, 0);
+                this.renderer.ActiveCamera.Orientation = new Quaternion(xdelta * sensitivity, Vector3.Right) * new Quaternion(ydelta * sensitivity, Vector3.Up) * this.renderer.ActiveCamera.Orientation;
+                //var or = this.renderer.ActiveCamera.Orientation;
+                
+                //Console.WriteLine("cam-r: {0}", or.FindAngle());
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
@@ -195,7 +198,7 @@ namespace Managed3D.Rendering
 
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
-                this.scene.Root.Orientation = (Vector3)this.scene.Root.Orientation + new Vector3(0, 0.33, 0);
+                this.scene.Root.Orientation.Rotate(0.01);
             //e.Graphics.DrawImage(this.frontBitmap, this.ClientRectangle);
         }
 
@@ -206,8 +209,7 @@ namespace Managed3D.Rendering
 
         private unsafe void RendererPostRenderCallback(object sender, RenderEventArgs e)
         {
-            if (this.isAutoRotateEnabled)
-                this.scene.Root.Orientation = (Vector3)this.scene.Root.Orientation + new Vector3(0, 1, 0);
+
         }
         #endregion
 

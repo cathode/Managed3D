@@ -43,7 +43,7 @@ namespace ManagedStudio3D
             root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Cube(40))
             {
                 Position = new Vector3(150, 0, 0),
-                Orientation = new Vector3(20,0,0),
+                //Orientation = new Vector3(20,0,0),
             });
             root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Icosahedron(55))
             {

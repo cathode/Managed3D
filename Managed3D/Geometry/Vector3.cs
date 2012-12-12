@@ -88,7 +88,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the positive X-axis.
         /// </summary>
-        public Vector3 Right
+        public static Vector3 Right
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the negative X-axis.
         /// </summary>
-        public Vector3 Left
+        public static Vector3 Left
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the positive Y-axis.
         /// </summary>
-        public Vector3 Up
+        public static Vector3 Up
         {
             get
             {
@@ -121,7 +121,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the negative Y-axis.
         /// </summary>
-        public Vector3 Down
+        public static Vector3 Down
         {
             get
             {
@@ -132,7 +132,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the positive Z-axis.
         /// </summary>
-        public Vector3 Forward
+        public static Vector3 Forward
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the negative Z-axis.
         /// </summary>
-        public Vector3 Backward
+        public static Vector3 Backward
         {
             get
             {

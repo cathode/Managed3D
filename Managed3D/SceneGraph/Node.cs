@@ -21,7 +21,7 @@ namespace Managed3D.SceneGraph
         private readonly List<Constraint> constraints;
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
-        private Vector3 orientation = Node.DefaultOrientation;
+        private Quaternion orientation = Node.DefaultOrientation;
         private NodeRenderFlags renderFlags;
         #endregion
         #region Constructors
@@ -57,11 +57,11 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public static Vector3 DefaultOrientation
+        public static Quaternion DefaultOrientation
         {
             get
             {
-                return new Vector3(0, 0, 0);
+                return new Quaternion(0.0, Vector3.Up);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Managed3D.SceneGraph
         /// <summary>
         /// Gets or sets an <see cref="IRotation3"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
         /// </summary>
-        public Vector3 Orientation
+        public Quaternion Orientation
         {
             get
             {
