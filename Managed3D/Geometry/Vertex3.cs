@@ -14,10 +14,12 @@ namespace Managed3D.Geometry
     public class Vertex3
     {
         #region Fields
+        public const int SizeOf = 8 + 8 + 8 + 16 + 8 + 4;
         private double x;
         private double y;
         private double z;
         private Vector4f color;
+        private Vector2f textureCoordinates;
         private VertexFlags flags;
         #endregion
         #region Constructors

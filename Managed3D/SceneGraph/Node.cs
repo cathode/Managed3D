@@ -19,7 +19,7 @@ namespace Managed3D.SceneGraph
         #region Fields
         private readonly List<Node> children = new List<Node>();
         private readonly List<Constraint> constraints;
-        private readonly List<IRenderable> renderables = new List<IRenderable>();
+        private readonly List<Mesh3> renderables = new List<Mesh3>();
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
         private Quaternion orientation = Node.DefaultOrientation;
@@ -94,7 +94,7 @@ namespace Managed3D.SceneGraph
         }
 
         /// <summary>
-        /// Gets or sets an <see cref="IRotation3"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
+        /// Gets or sets a <see cref="Quaternion"/> which determines the orientation of the current <see cref="Node"/> relative to it's parent.
         /// </summary>
         public Quaternion Orientation
         {
@@ -217,7 +217,7 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public List<IRenderable> Renderables
+        public List<Mesh3> Renderables
         {
             get
             {

@@ -9,7 +9,7 @@ using System;
 namespace Managed3D.Geometry
 {
     [Flags]
-    public enum VertexFlags
+    public enum VertexFlags : int
     {
         None = 0x0,
         VertexColor = 0x1,

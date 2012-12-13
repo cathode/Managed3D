@@ -19,6 +19,7 @@ namespace Managed3D.Geometry
     {
         #region Fields
         private Polygon3[] polygons;
+        private Vertex3[] vertices;
         #endregion
         #region Constructors
         /// <summary>
