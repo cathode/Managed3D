@@ -34,17 +34,13 @@ namespace ManagedStudio3D
             // scene.ActiveCamera.Orientation = new Managed3D.Geometry.Rotation3(Angle.FromDegrees(10), new Vector3(0, 0, 1));
 
             var root = new GeometryNode();
-            root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
+            //root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
             //scene.DefaultCamera = Camera.CreateIsometric();
 
             
             //scene.Root.Orientation = new Vector3(-35.264, -45, 90);
             scene.Root.Scale = new Vector3(1.5, 1.5, 1.5);
-            root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Cube(40))
-            {
-                Position = new Vector3(150, 0, 0),
-                //Orientation = new Vector3(20,0,0),
-            });
+            //root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Cube(40));
             root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Icosahedron(55))
             {
                 Position = new Vector3(35, 90, 0)
