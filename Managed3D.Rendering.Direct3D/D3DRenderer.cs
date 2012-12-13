@@ -42,7 +42,7 @@ namespace Managed3D.Rendering.Direct3D
 
         public override void Stop()
         {
-            throw new NotImplementedException();
+            this.form.Close();
         }
 
         protected override void OnInitializing(RendererInitializationEventArgs args)
@@ -139,11 +139,7 @@ namespace Managed3D.Rendering.Direct3D
         {
             base.OnRender(e);
 
-            var verts = new DataStream(12 * 3, true, true);
-
-            //verts.Write(
-            
-
+            this.RenderNode(this.Scene.Root);
         }
         protected override void OnPostRender(RenderEventArgs e)
         {
@@ -153,7 +149,14 @@ namespace Managed3D.Rendering.Direct3D
 
         private void RenderNode(Node node)
         {
-            
+            if (node.HasChildren)
+                foreach (var child in node.Children)
+                    this.RenderNode(child);
+
+            foreach (var renderable in node.Renderables)
+            {
+
+            }
         }
         #endregion
     }

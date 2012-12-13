@@ -103,6 +103,7 @@ namespace Managed3D.Rendering.Software
 
         internal class RenderState
         {
+            
             internal Matrix4 WorldMatrix;
             internal Matrix4 ViewMatrix;
             internal Matrix4 ProjectionMatrix;
@@ -120,26 +121,11 @@ namespace Managed3D.Rendering.Software
 
         private void RenderNode(RenderState state, Node node)
         {
-            var newState = new RenderState();
-            var rotm = node.Orientation.ToRotationMatrix();
-            newState.WorldMatrix = node.Orientation.ToRotationMatrix() * Matrix4.CreateTranslationMatrix(node.Position) * Matrix4.CreateScalingMatrix(node.Scale) * state.WorldMatrix;
-            newState.ViewMatrix = state.ViewMatrix;
-            newState.ProjectionMatrix = state.ProjectionMatrix;
-
             if (node.Count > 0)
             {
                 foreach (var child in node)
-                    this.RenderNode(newState, child);
+                    this.RenderNode(state, child);
             }
-
-            var world = newState.WorldMatrix;
-            var view = newState.ViewMatrix;
-            var proj = newState.ProjectionMatrix;
-
-            var wvp = proj * view * world;
-            var wv = view * world;
-
-            var cameraUp = new Vector3(0, 0, 1);
 
             if (node is GeometryNode && ((GeometryNode)node).Geometry != null)
             {
@@ -153,16 +139,16 @@ namespace Managed3D.Rendering.Software
                     // Cull backfacing polygons.
                     if (true) // TODO: Allow per-mesh or per-poly control over whether backfacing polys are culled or not.
                     {
-                        var p1 = wv * poly.Vertices[0];
-                        var p2 = wv * poly.Vertices[1];
-                        var p3 = wv * poly.Vertices[2];
-                        var faceNormal = Vector3.CrossProduct((Vector3)p3 - (Vector3)p2, (Vector3)p3 - (Vector3)p1);
+                        //var p1 = wv * poly.Vertices[0];
+                        //var p2 = wv * poly.Vertices[1];
+                        //var p3 = wv * poly.Vertices[2];
+                        //var faceNormal = Vector3.CrossProduct((Vector3)p3 - (Vector3)p2, (Vector3)p3 - (Vector3)p1);
 
-                        faceNormal = faceNormal.Normalize();
+                        //faceNormal = faceNormal.Normalize();
 
-                        var dp = Vector3.DotProduct(cameraUp, faceNormal);
-                        if (dp > 0)
-                            continue;
+                        //var dp = Vector3.DotProduct(cameraUp, faceNormal);
+                        //if (dp > 0)
+                        //    continue;
                     }
 
                     
@@ -170,15 +156,15 @@ namespace Managed3D.Rendering.Software
                     {
                         if (i == (poly.Vertices.Length - 1))
                         {
-                            var a = wvp * poly.Vertices[i];
-                            var b = wvp * poly.Vertices[0];
-                            this.DrawLine(a, b);
+                            //var a = wvp * poly.Vertices[i];
+                            //var b = wvp * poly.Vertices[0];
+                            //this.DrawLine(a, b);
                         }
                         else
                         {
-                            var a = wvp * poly.Vertices[i];
-                            var b = wvp * poly.Vertices[i + 1];
-                            this.DrawLine(a, b);
+                            //var a = wvp * poly.Vertices[i];
+                            //var b = wvp * poly.Vertices[i + 1];
+                            //this.DrawLine(a, b);
                         }
                     }
                 }

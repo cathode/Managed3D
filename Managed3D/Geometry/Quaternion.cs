@@ -113,6 +113,14 @@ namespace Managed3D.Geometry
                 return this.z;
             }
         }
+
+        public double Length
+        {
+            get
+            {
+                return Math.Sqrt(w * w + x * x + y * y + z * z);
+            }
+        }
         #endregion
         #region Methods
         public static Quaternion Multiply(Quaternion q1, Quaternion q2)
@@ -127,7 +135,8 @@ namespace Managed3D.Geometry
 
         public Matrix4 ToRotationMatrix()
         {
-            this.Normalize();
+            if (this.Length != 1)
+                this.Normalize();
 
             var x = this.x;
             var y = this.y;

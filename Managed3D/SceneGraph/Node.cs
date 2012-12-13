@@ -19,6 +19,7 @@ namespace Managed3D.SceneGraph
         #region Fields
         private readonly List<Node> children = new List<Node>();
         private readonly List<Constraint> constraints;
+        private readonly List<IRenderable> renderables = new List<IRenderable>();
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
         private Quaternion orientation = Node.DefaultOrientation;
@@ -213,6 +214,14 @@ namespace Managed3D.SceneGraph
             get
             {
                 return this.children;
+            }
+        }
+
+        public List<IRenderable> Renderables
+        {
+            get
+            {
+                return this.renderables;
             }
         }
         #endregion

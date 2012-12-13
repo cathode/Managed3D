@@ -53,8 +53,8 @@ namespace ManagedStudio3D
             //root = new GeometryNode(new MengerSponge(60, 1));
             Program.scene.Root = root;
 
-            //Program.RunDirect3DMode();
-            Program.RunSoftwareMode();
+            Program.RunDirect3DMode();
+            //Program.RunSoftwareMode();
             //Program.RunOpenGLMode();
         }
 
