@@ -52,6 +52,13 @@ namespace Managed3D.Rendering
         /// Backing field for the <see cref="Scene.BackgroundColor"/> property.
         /// </summary>
         private Vector4f backgroundColor;
+
+        private int frameCount;
+
+        private DateTime lastCheck;
+
+        private double lastRate;
+        private double currentRate;
         #endregion
         #region Constructors
         /// <summary>
@@ -275,6 +282,16 @@ namespace Managed3D.Rendering
         {
             if (this.PostRender != null)
                 this.PostRender(this, e);
+
+            ++this.frameCount;
+
+            var tdelta = DateTime.Now - this.lastCheck;
+            if (tdelta.Milliseconds > 500)
+            {
+                this.lastRate = this.currentRate;
+                this.currentRate = this.frameCount / tdelta.TotalSeconds;
+                this.lastCheck = DateTime.Now;
+            }
         }
 
         /// <summary>

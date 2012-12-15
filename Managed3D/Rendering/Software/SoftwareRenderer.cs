@@ -19,8 +19,8 @@ namespace Managed3D.Rendering.Software
     public class SoftwareRenderer : ManagedRenderer
     {
         #region Fields
-        private Form hostForm;
         private Thread thread;
+        private Matrix4 projectionMatrix;
         #endregion
         #region Methods
         protected override void OnInitializing(RendererInitializationEventArgs e)
@@ -50,6 +50,16 @@ namespace Managed3D.Rendering.Software
         protected override void OnProfileChanged(EventArgs e)
         {
             base.OnProfileChanged(e);
+
+            if (this.ActiveCamera == null)
+                this.projectionMatrix = Matrix4.Identity;
+            else
+            {
+                var buffer = this.BackBuffer;
+                this.projectionMatrix = (this.ActiveCamera.Mode == CameraMode.Perspective)
+                    ? Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000)
+                    : Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
+            }
         }
 
         protected override void OnRender(RenderEventArgs e)
@@ -61,37 +71,14 @@ namespace Managed3D.Rendering.Software
             var camScale = this.ActiveCamera.Scale;
 
             var buffer = this.BackBuffer;
-            var matrix = Matrix4.Identity;
+            var state = new SoftwareRendererState();
 
             // Set up the world matrix.
-            var world = Matrix4.Identity;
+            var worldMatrix = Matrix4.Identity;
 
             // Set up the view matrix.
-            var view = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z) * Matrix4.CreateRotationMatrix(-camRot.X, -camRot.Y, -camRot.Z) * Matrix4.CreateScalingMatrix(camScale.X, camScale.Y, camScale.Z);
-
-
-            // Set up the projection matrix.
-            Matrix4 projection;
-            if ((this.ActiveCamera.Mode == CameraMode.Isometric) || (this.ActiveCamera.Mode == CameraMode.Orthographic))
-            {
-                //this.Scene.ActiveCamera.Orientation = new Vector3(45, 35.264, 0);
-                projection = Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
-            }
-            else
-            {
-                projection = Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
-            }
-
-            // Pulls the x/y coords into the center of the screen.
-            projection *= Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
-
-
-
-            var state = new RenderState();
-
-            state.ProjectionMatrix = projection;
-            state.ViewMatrix = view;
-            state.WorldMatrix = world;
+            var viewMatrix = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z)
+                * Matrix4.CreateScalingMatrix(camScale.X, camScale.Y, camScale.Z);
 
             this.AcquireBackBufferLock();
 
@@ -101,87 +88,9 @@ namespace Managed3D.Rendering.Software
             this.ReleaseBackBufferLock();
         }
 
-        internal class RenderState
-        {
-            
-            internal Matrix4 WorldMatrix;
-            internal Matrix4 ViewMatrix;
-            internal Matrix4 ProjectionMatrix;
-
-            public RenderState Clone()
-            {
-                return new RenderState()
-                {
-                    WorldMatrix = this.WorldMatrix,
-                    ViewMatrix = this.ViewMatrix,
-                    ProjectionMatrix = this.ProjectionMatrix,
-                };
-            }
-        }
-
-        private void RenderNode(RenderState state, Node node)
-        {
-            if (node.Count > 0)
-            {
-                foreach (var child in node)
-                    this.RenderNode(state, child);
-            }
-
-            if (node is GeometryNode && ((GeometryNode)node).Geometry != null)
-            {
-                
-                var mesh = ((GeometryNode)node).Geometry;
-                foreach (var poly in mesh.Polygons)
-                {
-                    if (poly == null)
-                        continue;
-
-                    // Cull backfacing polygons.
-                    if (true) // TODO: Allow per-mesh or per-poly control over whether backfacing polys are culled or not.
-                    {
-                        //var p1 = wv * poly.Vertices[0];
-                        //var p2 = wv * poly.Vertices[1];
-                        //var p3 = wv * poly.Vertices[2];
-                        //var faceNormal = Vector3.CrossProduct((Vector3)p3 - (Vector3)p2, (Vector3)p3 - (Vector3)p1);
-
-                        //faceNormal = faceNormal.Normalize();
-
-                        //var dp = Vector3.DotProduct(cameraUp, faceNormal);
-                        //if (dp > 0)
-                        //    continue;
-                    }
-
-                    
-                    for (int i = 0; i < poly.Vertices.Length; ++i)
-                    {
-                        if (i == (poly.Vertices.Length - 1))
-                        {
-                            //var a = wvp * poly.Vertices[i];
-                            //var b = wvp * poly.Vertices[0];
-                            //this.DrawLine(a, b);
-                        }
-                        else
-                        {
-                            //var a = wvp * poly.Vertices[i];
-                            //var b = wvp * poly.Vertices[i + 1];
-                            //this.DrawLine(a, b);
-                        }
-                    }
-                }
-            }
-
-            
-        }
-
         protected override void OnStarting(EventArgs e)
         {
             base.OnStarting(e);
-
-            this.hostForm = new ManagedRendererHostForm(this);
-
-            this.thread = new Thread(this.RunForm);
-
-            this.thread.Start();
         }
 
         protected override void OnStopping(EventArgs e)
@@ -259,9 +168,79 @@ namespace Managed3D.Rendering.Software
             }
         }
 
-        private void RunForm()
+        private void RenderNode(SoftwareRendererState state, Node node)
         {
-            Application.Run(this.hostForm);
+            // Traverse the graph starting at the current node, render them first.
+            // AKA, depth-first search
+            if (node.Count > 0)
+                foreach (var child in node)
+                    this.RenderNode(state, child);
+
+
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents state information used for rendering a frame.
+    /// </summary>
+    public sealed class SoftwareRendererState
+    {
+        #region Fields
+        private readonly SoftwareRenderer renderer;
+        private Matrix4 worldMatrix;
+        private Matrix4 viewMatrix;
+        private Matrix4 projectionMatrix;
+        private Stack<Matrix4> matrices = new Stack<Matrix4>();
+        #endregion
+        #region Constructors
+        public SoftwareRendererState(SoftwareRenderer renderer)
+        {
+            this.renderer = renderer;
+        }
+        #endregion
+        #region Properties
+        public Matrix4 WorldMatrix
+        {
+            get
+            {
+                return this.worldMatrix;
+            }
+        }
+
+        public Matrix4 ViewMatrix
+        {
+            get
+            {
+                return this.viewMatrix;
+            }
+        }
+
+        public Matrix4 ProjectionMatrix
+        {
+            get
+            {
+                return this.projectionMatrix;
+            }
+        }
+        #endregion
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instances of the <see cref="RenderState"/> class.
+        /// </summary>
+        public SoftwareRendererState()
+        {
+
+        }
+        #endregion
+        #region Methods
+        public void PushMatrix()
+        {
+            this.matrices.Push(this.matrices.Peek() * Matrix4.Identity);
+        }
+        public void PopMatrix()
+        {
+            this.matrices.Pop();
         }
         #endregion
     }

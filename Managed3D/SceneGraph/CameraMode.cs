@@ -19,25 +19,10 @@ namespace Managed3D.SceneGraph
         /// Indicates that the camera provides a perspective view of the scene.
         /// </summary>
         Perspective = 0x0,
-        
+
         /// <summary>
         /// Indicates that the camera provides an orthographic view of the scene.
         /// </summary>
         Orthographic = 0x1,
-
-        /// <summary>
-        /// Indicates that the camera provides an isometric view of the scene.
-        /// </summary>
-        Isometric,
-
-        /// <summary>
-        /// Indicates that the camera provides a dimetric view of the scene.
-        /// </summary>
-        Dimetric,
-
-        /// <summary>
-        /// Indicates that the camera provides a trimetric view of the scene.
-        /// </summary>
-        Trimetric,
     }
 }

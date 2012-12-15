@@ -8,10 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Managed3D.Geometry;
 
 namespace Managed3D.Rendering.Software.Shaders
 {
-    class VertexShader
+    /// <summary>
+    /// Represents a vertex shader.
+    /// </summary>
+    public class VertexShader
     {
+        #region Methods
+        public virtual Vertex3 Shade(Vertex3 v)
+        {
+            return v;
+        }
+        #endregion
     }
 }

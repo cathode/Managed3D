@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Managed3D.Rendering
 {
-    public sealed class ManagedRendererHostForm : Form
+    public sealed class ManagedRendererHostForm : Form, IManagedRendererTarget
     {
         #region Fields
         private readonly ManagedRenderer renderer;
@@ -31,7 +31,6 @@ namespace Managed3D.Rendering
 
             this.hostControl = new ManagedRendererHostControl(this.renderer);
             this.hostControl.scene = renderer.Scene;
-            renderer.AttachTarget(this.hostControl);
             this.Controls.Add(hostControl);
         }
         #endregion
@@ -41,7 +40,7 @@ namespace Managed3D.Rendering
             this.framesRendered++;
 
             var elapsed = DateTime.Now - this.lastCheck;
-            if (elapsed.TotalMilliseconds > 1000)
+            if (elapsed.TotalMilliseconds > 500)
             {
                 this.lastFps = framesRendered / elapsed.TotalSeconds;
                 this.lastCheck = DateTime.Now;
@@ -77,6 +76,35 @@ namespace Managed3D.Rendering
         {
             get;
             set;
+        }
+
+        public void UpdateDisplayProfile(Platform.DisplayProfile profile)
+        {
+            if (!this.IsDisposed && !this.hostControl.IsDisposed)
+            {
+                this.hostControl.Invoke((Action)delegate
+                {
+                    this.hostControl.UpdateDisplayProfile(profile);
+                });
+            }
+        }
+
+        public void ConsumeFrameBuffer(ManagedBuffer buffer)
+        {
+            if (!this.IsDisposed && !this.hostControl.IsDisposed)
+            {
+                try
+                {
+                    this.hostControl.Invoke((Action)delegate
+                    {
+                        if (!this.IsDisposed && !this.hostControl.IsDisposed)
+                            this.hostControl.ConsumeFrameBuffer(buffer);
+                    });
+                }
+                catch
+                {
+                }
+            }
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Managed3D.Geometry.Primitives
     /// <summary>
     /// Represents a cube primitive in 3d space. This class is immutable.
     /// </summary>
-    public sealed class Cube : FastMesh
+    public sealed class Cube : Mesh3
     {
-        #region Constructors
+        #region Constructors - Public
         /// <summary>
         /// Initializes a new instance of the <see cref="Cube"/> class using the default size.
         /// </summary>
@@ -28,58 +28,45 @@ namespace Managed3D.Geometry.Primitives
         /// </summary>
         /// <param name="size">The size of the new <see cref="Cube"/>.</param>
         public Cube(double size)
-            : base(8, 6, 12)
         {
             this.size = size;
 
             var r = size * 0.5;
-            var verts = new FastVertex[8];
-            verts[0] = new FastVertex(r, r, r);
-            verts[1] = new FastVertex(r, -r, r);
-            verts[2] = new FastVertex(-r, -r, r);
-            verts[3] = new FastVertex(-r, r, r);
+            var verts = new Vertex3[8];
+            verts[0] = new Vertex3(r, r, r);
+            verts[1] = new Vertex3(r, -r, r);
+            verts[2] = new Vertex3(-r, -r, r);
+            verts[3] = new Vertex3(-r, r, r);
 
-            verts[4] = new FastVertex(r, r, -r);
-            verts[5] = new FastVertex(r, -r, -r);
-            verts[6] = new FastVertex(-r, -r, -r);
-            verts[7] = new FastVertex(-r, r, -r);
+            verts[4] = new Vertex3(r, r, -r);
+            verts[5] = new Vertex3(r, -r, -r);
+            verts[6] = new Vertex3(-r, -r, -r);
+            verts[7] = new Vertex3(-r, r, -r);
 
-            var faces = new FastFace[] { 
+            this.Polygons = new Quad3[] { 
                 // Top and bottom
-                new FastFace(0, 1, 2),
-                new FastFace(2,3, 0),
-                new FastFace(4,5,6),
-                new FastFace(4,6,7),
+                new Quad3(verts, 0, 1, 2, 3),
+                new Quad3(verts, 7, 6, 5, 4),
 
-                new FastFace(),
-                new FastFace(7,1,0),
-            };
-
-            var edges = new FastEdge[] 
-            {
-                new FastEdge(0,1),
-                new FastEdge(1,2),
-                new FastEdge(2,3),
-                new FastEdge(3,0),
-                new FastEdge(0,4),
-                new FastEdge(1,7),
-                new FastEdge(2,6),
-                new FastEdge(3,5),
-                new FastEdge(4,5),
-                new FastEdge(5,6),
-                new FastEdge(6,7),
+                new Quad3(verts, 0, 3, 7, 4),
+                new Quad3(verts, 1, 0, 4, 5),
+                new Quad3(verts, 2, 1, 5, 6),
+                new Quad3(verts, 3, 2, 6, 7),
+                
             };
 
         }
         #endregion
-        #region Fields
+        #region Fields - Private
+        private double size;
+        #endregion
+        #region Fields - Public
         /// <summary>
         /// Holds the default size of a new <see cref="Cube"/>, if none is specified when the object is created.
         /// </summary>
         public const double DefaultSize = 1.0;
-        private double size;
         #endregion
-        #region Properties
+        #region Properties - Public
         /// <summary>
         /// Gets the size of the current <see cref="Cube"/>.
         /// </summary>

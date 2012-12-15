@@ -507,9 +507,29 @@ namespace Managed3D.Geometry
                                0, 0, 0, 1);
         }
 
+        /// <summary>
+        /// Creates and returns an orthographic projection matrix for the specified set of clipping planes.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="top"></param>
+        /// <param name="bottom"></param>
+        /// <param name="near"></param>
+        /// <param name="far"></param>
+        /// <returns></returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double left, double right, double top, double bottom, double near, double far)
         {
-            throw new NotImplementedException();
+            var x = 2.0 / (right - left);
+            var y = 2.0 / (top - bottom);
+            var z = -2.0 / (far - near);
+            var a = (right + left) / (right - left) * -1.0;
+            var b = (top + bottom) / (top - bottom) * -1.0;
+            var c = (far + near) / (far - near) * -1.0;
+
+            return new Matrix4(x, 0, 0, a,
+                               0, y, 0, b,
+                               0, 0, z, c,
+                               0, 0, 0, 1);
         }
 
         /// <summary>
@@ -522,51 +542,16 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double nearZ, double farZ)
         {
-            /*
-              double size = nearZ * Math.Tan(fov.Radians / 2.0);
-              double left = -size;
-              double right = size;
-              double bottom = -size / aspect;
-              double top = size / aspect;
-          
+            var fv = fov.Degrees;
+            aspect = 840.0 / 600.0;
+            nearZ = 1.0;
+            farZ = 1000.0;
+            var s = 1.0 / Math.Tan(fov.Degrees * 0.5 * (Math.PI / 180.0));
 
-              var m = new Matrix4(2.0 * nearZ / (right - left), 0.0, 0.0, 0.0,
-                                  0.0, 2.0 * nearZ / (top - bottom), 0.0, 0.0,
-                                  0.0, 0.0, (farZ + nearZ) / (farZ - nearZ), -2.0 * farZ * nearZ / (farZ - nearZ),
-                                  0.0, 0.0, -1.0, 0.0);
-
-              return m;
-
-              var ax = 1.0 / Math.Tan(fov.Radians);
-              var by = aspect / Math.Tan(fov.Radians);
-              var cz = (farZ + nearZ) / (farZ - nearZ);
-              var cw = -2.0 * farZ * nearZ / (farZ - nearZ);
-
-              return new Matrix4(ax, 0.0, 0.0, 0.0,
-                                 0.0, by, 0.0, 0.0,
-                                 0.0, 0.0, cz, 1.0,
-                                 0.0, 0.0, cw, 0.0);
-             */
-
-            double xymax = nearZ * Math.Tan(fov.Radians);
-            double ymin = -xymax;
-            double xmin = -xymax;
-
-            double width = xymax - xmin;
-            double height = xymax - ymin;
-
-            double depth = farZ - nearZ;
-            double q = -(farZ + nearZ) / depth;
-            double qn = -2 * (farZ * nearZ) / depth;
-
-            double w = 2 * nearZ / width;
-            w = w / aspect;
-            double h = 2 * nearZ / height;
-
-            return new Matrix4(w, 0, 0, 0,
-                               0, h, 0, 0,
-                               0, 0, q, -1,
-                               0, 0, qn, 0);
+            return new Matrix4(s, 0, 0, 0,
+                               0, s, 0, 0,
+                               0, 0, -(farZ / (farZ - nearZ)), -1,
+                               0, 0, -((farZ * nearZ) / (farZ - nearZ)), 0);
         }
 
         /// <summary>
