@@ -432,7 +432,8 @@ namespace Managed3D.Geometry
         public override bool Equals(object obj)
         {
             if (obj is Vector3)
-                return this == (Vector3)obj;
+                return Vector3.Equals(this, (Vector3)obj);
+
             return false;
         }
 
@@ -598,6 +599,14 @@ namespace Managed3D.Geometry
                 var d = Math.Sqrt(sum);
                 return new Vector3(v.X / d, v.Y / d, v.Z / d);
             }
+        }
+
+        public Vector3 Round(int decimalPlaces)
+        {
+            return new Vector3(
+                Math.Round(this.x, decimalPlaces),
+                Math.Round(this.y, decimalPlaces),
+                Math.Round(this.z, decimalPlaces));
         }
 
         public override string ToString()

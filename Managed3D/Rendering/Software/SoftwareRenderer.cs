@@ -56,7 +56,8 @@ namespace Managed3D.Rendering.Software
             else
             {
                 var buffer = this.BackBuffer;
-                this.projectionMatrix = (this.ActiveCamera.Mode == CameraMode.Perspective)
+                this.projectionMatrix =  Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
+                this.projectionMatrix *= (this.ActiveCamera.Mode == CameraMode.Perspective)
                     ? Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000)
                     : Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
             }
@@ -71,18 +72,21 @@ namespace Managed3D.Rendering.Software
             var camScale = this.ActiveCamera.Scale;
 
             var buffer = this.BackBuffer;
-            var state = new SoftwareRendererState();
+            var state = new SoftwareRendererState(this);
 
             // Set up the world matrix.
             var worldMatrix = Matrix4.Identity;
 
             // Set up the view matrix.
-            var viewMatrix = Matrix4.CreateTranslationMatrix(-camPos.X, -camPos.Y, -camPos.Z)
-                * Matrix4.CreateScalingMatrix(camScale.X, camScale.Y, camScale.Z);
+            state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
+            state.Scale(camScale.X, camScale.Y, camScale.Z);
+            state.Rotate(camRot);
+            state.ProjectionMatrix = this.projectionMatrix;
 
+            SoftwareRendererState.GlobalState = state;
             this.AcquireBackBufferLock();
 
-            this.RenderNode(state, this.Scene.Root);
+            this.RenderNode(this.Scene.Root);
 
             // Rendering complete.
             this.ReleaseBackBufferLock();
@@ -168,15 +172,60 @@ namespace Managed3D.Rendering.Software
             }
         }
 
-        private void RenderNode(SoftwareRendererState state, Node node)
+        private void DrawTriangle(Vertex3 p1, Vertex3 p2, Vertex3 p3)
         {
+            // draw the triangle
+
+            // draw edges of triangle
+            this.DrawLine(p1, p2);
+            this.DrawLine(p2, p3);
+            this.DrawLine(p3, p1);
+        }
+
+        private void RenderNode(Node node)
+        {
+            var state = SoftwareRendererState.GlobalState;
+
+            state.PushMatrix();
+
+            state.Translate(node.Position);
+            state.Rotate(node.Orientation);
+            state.Scale(node.Scale);
+
             // Traverse the graph starting at the current node, render them first.
             // AKA, depth-first search
             if (node.Count > 0)
                 foreach (var child in node)
-                    this.RenderNode(state, child);
+                    this.RenderNode(child);
 
+            foreach (var renderable in node.Renderables)
+            {
+                foreach (var poly in renderable)
+                {
+                    var verts = new Vertex3[poly.Vertices.Length];
+                    for (int i = 0; i < verts.Length; ++i)
+                    {
+                        // transform and project vertices.
+                        verts[i] = state.Transform(poly.Vertices[i]);
 
+                    }
+                    if (verts.Length == 3)
+                    {
+                        this.DrawTriangle(verts[0], verts[1], verts[2]);
+                    }
+                    else if (verts.Length == 4)
+                    {
+                        this.DrawTriangle(verts[0], verts[1], verts[2]);
+                        this.DrawTriangle(verts[2], verts[3], verts[0]);
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+            }
+
+            state.PopMatrix();
         }
         #endregion
     }
@@ -187,60 +236,89 @@ namespace Managed3D.Rendering.Software
     public sealed class SoftwareRendererState
     {
         #region Fields
+        internal static SoftwareRendererState GlobalState;
+
         private readonly SoftwareRenderer renderer;
-        private Matrix4 worldMatrix;
-        private Matrix4 viewMatrix;
-        private Matrix4 projectionMatrix;
+        private Matrix4 worldView;
         private Stack<Matrix4> matrices = new Stack<Matrix4>();
         #endregion
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SoftwareRendererState"/> class.
+        /// </summary>
+        /// <param name="renderer">The <see cref="SoftwareRenderer"/> that this instance represents state for.</param>
         public SoftwareRendererState(SoftwareRenderer renderer)
         {
             this.renderer = renderer;
+            this.worldView = Matrix4.Identity;
         }
         #endregion
         #region Properties
-        public Matrix4 WorldMatrix
+        /// <summary>
+        /// Gets a <see cref="Matrix4"/> that is a combined world and view transformation matrix.
+        /// </summary>
+        public Matrix4 WorldViewMatrix
         {
             get
             {
-                return this.worldMatrix;
+                return this.worldView;
             }
         }
 
-        public Matrix4 ViewMatrix
-        {
-            get
-            {
-                return this.viewMatrix;
-            }
-        }
-
+        /// <summary>
+        /// Gets a <see cref="Matrix4"/> that is a projection transformation matrix.
+        /// </summary>
         public Matrix4 ProjectionMatrix
         {
-            get
-            {
-                return this.projectionMatrix;
-            }
-        }
-        #endregion
-        #region Constructors
-        /// <summary>
-        /// Initializes a new instances of the <see cref="RenderState"/> class.
-        /// </summary>
-        public SoftwareRendererState()
-        {
-
+            get;
+            set;
         }
         #endregion
         #region Methods
         public void PushMatrix()
         {
-            this.matrices.Push(this.matrices.Peek() * Matrix4.Identity);
+            // make copies of current matrix.
+            var newWvp = this.worldView * Matrix4.Identity;
+
+            this.matrices.Push(this.worldView);
+
+            this.worldView = newWvp;
         }
+
         public void PopMatrix()
         {
-            this.matrices.Pop();
+            if (this.matrices.Count > 0)
+                this.worldView = this.matrices.Pop();
+        }
+
+        public Vertex3 Transform(Vertex3 input)
+        {
+            return this.ProjectionMatrix * (this.worldView * input);
+        }
+
+        public void Translate(Vector3 translation)
+        {
+            this.worldView = this.worldView * Matrix4.CreateTranslationMatrix(translation);
+        }
+
+        public void Translate(double x, double y, double z)
+        {
+            this.Translate(new Vector3(x, y, z));
+        }
+
+        public void Scale(Vector3 scaling)
+        {
+            this.worldView *= Matrix4.CreateScalingMatrix(scaling);
+        }
+
+        public void Scale(double x, double y, double z)
+        {
+            this.Scale(new Vector3(x, y, z));
+        }
+
+        public void Rotate(Quaternion rotation)
+        {
+            this.worldView *= Matrix4.CreateRotationMatrix(rotation);
         }
         #endregion
     }

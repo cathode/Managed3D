@@ -131,7 +131,7 @@ namespace Managed3D.SceneGraph
         {
             var cam = new Camera();
             cam.mode = CameraMode.Orthographic;
-            cam.Orientation = new Quaternion(0.0, new Vector3(1.0, 1.0, 1.0));
+            cam.Orientation = new Quaternion(new Vector3(1.0, 1.0, 1.0), 0.0);
             cam.Position = new Vector3(0, 0, 0);
 
             return cam;

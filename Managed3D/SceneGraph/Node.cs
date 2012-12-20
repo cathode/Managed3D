@@ -62,7 +62,7 @@ namespace Managed3D.SceneGraph
         {
             get
             {
-                return new Quaternion(0.0, Vector3.Up);
+                return new Quaternion(Vector3.Up, 0.0);
             }
         }
 

@@ -115,7 +115,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ry;
                 this.rx += xdelta;
                 this.ry += ydelta;
-                this.renderer.ActiveCamera.Orientation = new Quaternion(xdelta * sensitivity, Vector3.Right) * new Quaternion(ydelta * sensitivity, Vector3.Up) * this.renderer.ActiveCamera.Orientation;
+                this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Right, Angle.FromDegrees(xdelta * sensitivity)) * new Quaternion(Vector3.Up, Angle.FromDegrees(ydelta * sensitivity));
                 //var or = this.renderer.ActiveCamera.Orientation;
                 
                 //Console.WriteLine("cam-r: {0}", or.FindAngle());
@@ -198,8 +198,7 @@ namespace Managed3D.Rendering
 
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
-                this.scene.Root.Orientation.Rotate(0.01);
-            //e.Graphics.DrawImage(this.frontBitmap, this.ClientRectangle);
+                this.scene.Root.Orientation *= new Quaternion(new Vector3(1,1,0), Angle.FromDegrees(0.5));
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)

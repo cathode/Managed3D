@@ -32,24 +32,9 @@ namespace ManagedStudio3D
 
             Program.scene = new Scene();
 
-            // scene.ActiveCamera.Orientation = new Managed3D.Geometry.Rotation3(Angle.FromDegrees(10), new Vector3(0, 0, 1));
-
             var root = new GeometryNode();
-            //root.Geometry = new Managed3D.Geometry.Primitives.Cube(60);
-            //scene.DefaultCamera = Camera.CreateIsometric();
+            root.Renderables.Add(new Cube(75));
 
-
-            //scene.Root.Orientation = new Vector3(-35.264, -45, 90);
-            scene.Root.Scale = new Vector3(1.5, 1.5, 1.5);
-            //root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Cube(40));
-            root.Add(new GeometryNode(new Managed3D.Geometry.Primitives.Icosahedron(55))
-            {
-                Position = new Vector3(35, 90, 0)
-            });
-
-            root = new GeometryNode();
-            root.Renderables.Add(new Cube(10));
-            //root.Renderables.Add(new MengerSponge(5, 1));
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();
@@ -69,8 +54,9 @@ namespace ManagedStudio3D
             options.Profile = Managed3D.Platform.DisplayProfile.Generic720p;
 
             renderer.Scene = scene;
-            renderer.Initialize(options);
             renderer.ActiveCamera = Camera.CreateIsometric();
+            renderer.Initialize(options);
+            
             renderer.Start();
         }
 
@@ -91,9 +77,10 @@ namespace ManagedStudio3D
             };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
+            //renderer.ActiveCamera = Camera.CreateIsometric();
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
-            renderer.ActiveCamera = Camera.CreateIsometric();
+           
             var target = new ManagedRendererHostForm(renderer);
             target.Load += delegate
             {
@@ -105,8 +92,6 @@ namespace ManagedStudio3D
             };
             System.Windows.Forms.Application.Run(target);
         }
-
-
         #endregion
     }
 }

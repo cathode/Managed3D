@@ -13,23 +13,28 @@ namespace Managed3D.Geometry
     public class Quaternion
     {
         #region Fields
-        private double w;
-        private double x;
-        private double y;
-        private double z;
+        private readonly double w;
+        private readonly double x;
+        private readonly double y;
+        private readonly double z;
         #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Quaternion"/> class.
         /// </summary>
-        /// <param name="angle">The angle of rotation, in degrees.</param>
         /// <param name="axis">The axis about which to rotate.</param>
-        public Quaternion(double angle, Vector3 axis)
+        /// <param name="angle">The angle of rotation, in radians.</param>
+        public Quaternion(Vector3 axis, double angle)
+            : this(axis, Angle.FromRadians(angle))
         {
-            angle = Managed3D.Geometry.Angle.RadiansFromDegrees(angle);
+        }
 
-            double res = Math.Sin(angle / 2.0);
-            var w = Math.Cos(angle / 2.0);
+        public Quaternion(Vector3 axis, Angle angle)
+        {
+            var rads = angle.Radians;
+
+            double res = Math.Sin(rads / 2.0);
+            var w = Math.Cos(rads / 2.0);
             var x = axis.X * res;
             var y = axis.Y * res;
             var z = axis.Z * res;
@@ -45,6 +50,7 @@ namespace Managed3D.Geometry
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Quaternion"/> class.
         /// </summary>
@@ -83,6 +89,9 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Properties
+        /// <summary>
+        /// Gets the W component of the quaternion.
+        /// </summary>
         public double W
         {
             get
@@ -90,6 +99,10 @@ namespace Managed3D.Geometry
                 return this.w;
             }
         }
+
+        /// <summary>
+        /// Gets the X component of the quaternion.
+        /// </summary>
         public double X
         {
             get
@@ -98,6 +111,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets the Y component of the quaternion.
+        /// </summary>
         public double Y
         {
             get
@@ -106,6 +122,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets the Z component of the quaternion.
+        /// </summary>
         public double Z
         {
             get
@@ -114,6 +133,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets the length (magnitude) of the quaternion.
+        /// </summary>
         public double Length
         {
             get
@@ -135,13 +157,12 @@ namespace Managed3D.Geometry
 
         public Matrix4 ToRotationMatrix()
         {
-            if (this.Length != 1)
-                this.Normalize();
+            var q = (this.Length == 1) ? this : this.Normalized();
 
-            var x = this.x;
-            var y = this.y;
-            var z = this.z;
-            var s = this.w;
+            var x = q.x;
+            var y = q.y;
+            var z = q.z;
+            var s = q.w;
             var matrix = new Matrix4(
                 1 - 2 * ((y * y) + (z * z)), 2 * ((x * y) - (s * z)), 2 * ((x * z) + (s * y)), 0,
                 2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
@@ -151,52 +172,45 @@ namespace Managed3D.Geometry
             return matrix;
         }
 
-        public void Normalize()
+        public Quaternion Normalized()
         {
             var m = Math.Sqrt(w * w + x * x + y * y + z * z);
-            this.w = w / m;
-            this.x = x / m;
-            this.y = y / m;
-            this.z = z / m;
+            return new Quaternion(w / m, x / m, y / m, z / m);
         }
 
-        public void Rotate(double degrees)
+
+        public Quaternion RotateBy(double degrees)
         {
-            Vector3 axis;
-            double angle;
-            this.GetAxisAngle(out axis, out angle);
-            var rq = new Quaternion(degrees, axis);
+            var rq = new Quaternion(this.GetAxis(), degrees);
 
             var q = rq * this;
-            this.w = q.w;
-            this.x = q.x;
-            this.y = q.y;
-            this.z = q.z;
+            return new Quaternion(q.w, q.x, q.y, q.z);
         }
 
-        public Vector3 FindAxis()
+        public Vector3 GetAxis()
         {
-            var angle = Math.Acos(this.w);
-            var tinv = 1.0 / Math.Sin(angle);
+            var m = Math.Sqrt(1 - (this.w * this.w));
 
-            return new Vector3(this.x * tinv, this.y * tinv, this.z * tinv);
+            return new Vector3(this.x / m, this.y / m, this.z / m);
         }
 
-        public Angle FindAngle()
+        public Angle GetAngle()
         {
-            return Angle.FromRadians(Math.Acos(this.w) * 2);
+            return Angle.FromRadians(2.0 * Math.Acos(this.w));
         }
+
         public Quaternion GetConjugate()
         {
             return new Quaternion(w, -x, -y, -z);
         }
 
-        public void GetAxisAngle(out Vector3 axis, out double angle)
+        public void GetAxisAngle(out Vector3 axis, out Angle angle)
         {
-            var scale = Math.Sqrt(w * w + x * x + y * y + z * z);
+            var a = 2.0 * Math.Acos(this.w);
+            var m = Math.Sqrt(1 - (this.w * this.w));
 
-            axis = new Vector3(x / scale, y / scale, z / scale);
-            angle = Math.Acos(w) * 2.0;
+            axis = new Vector3(this.x / m, this.y / m, this.z / m);
+            angle = Angle.FromRadians(a);
         }
         #endregion
         #region Operators

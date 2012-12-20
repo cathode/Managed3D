@@ -501,6 +501,8 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the orthographic projection matrix for the specified width and height.</returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double width, double height, double nearZ, double farZ)
         {
+            //   return Matrix4.CreateOrthographicProjectionMatrix(width / 2.0, width / -2.0, height / -2.0, height / 2.0, nearZ, farZ);
+
             return new Matrix4(1, 0, 0, 0,
                                0, 1, 0, 0,
                                0, 0, 1, 0,
@@ -519,6 +521,8 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double left, double right, double top, double bottom, double near, double far)
         {
+            return Matrix4.Identity;
+
             var x = 2.0 / (right - left);
             var y = 2.0 / (top - bottom);
             var z = -2.0 / (far - near);
@@ -542,8 +546,10 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double nearZ, double farZ)
         {
+            return Matrix4.Identity;
+
             var fv = fov.Degrees;
-            aspect = 840.0 / 600.0;
+            //aspect = 840.0 / 600.0;
             nearZ = 1.0;
             farZ = 1000.0;
             var s = 1.0 / Math.Tan(fov.Degrees * 0.5 * (Math.PI / 180.0));
@@ -600,7 +606,7 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static Matrix4 CreateRotationMatrix(Angle angle, Vector3 axis)
         {
-            var q = new Quaternion(angle.Radians, axis);
+            var q = new Quaternion(axis, angle.Radians);
 
             return q.ToRotationMatrix();
         }
@@ -646,6 +652,11 @@ namespace Managed3D.Geometry
                                 0, 0, 0, 1);
 
             return Z * Y * X;
+        }
+
+        public static Matrix4 CreateRotationMatrix(Quaternion rotation)
+        {
+            return rotation.ToRotationMatrix();
         }
         #endregion
         #region Operators
@@ -786,5 +797,7 @@ namespace Managed3D.Geometry
             return Matrix4.Multiply(matrix, vector);
         }
         #endregion
+
+
     }
 }

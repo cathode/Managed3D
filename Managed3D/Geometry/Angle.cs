@@ -77,7 +77,7 @@ namespace Managed3D.Geometry
         public override bool Equals(object obj)
         {
             if (obj is Angle)
-                return this == (Angle)obj;
+                return Angle.Equals(this, (Angle)obj);
 
             return false;
         }
@@ -100,7 +100,7 @@ namespace Managed3D.Geometry
         /// <returns>true if both angles are equal, otherwise false.</returns>
         public static bool Equals(Angle a, Angle b)
         {
-            return a == b;
+            return a.degrees == b.degrees;
         }
 
         /// <summary>

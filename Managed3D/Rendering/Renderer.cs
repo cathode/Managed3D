@@ -67,6 +67,12 @@ namespace Managed3D.Rendering
         protected Renderer()
         {
             this.profile = DisplayProfile.Default;
+            this.activeCamera = new Camera()
+            {
+                FieldOfView = Angle.FromDegrees(45),
+                FocalDistance = 1000,
+                Mode = CameraMode.Perspective
+            };
         }
         #endregion
         #region Events

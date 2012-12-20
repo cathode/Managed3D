@@ -53,8 +53,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Geometry\Quaternion_Tests.cs" />
+    <Compile Include="Geometry\Vector3_Tests.cs" />
     <Compile Include="Modeling\EditableMesh_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Managed3D\Managed3D.csproj">
+      <Project>{4d281c09-1c91-4c84-b0dc-aaff8839264e}</Project>
+      <Name>Managed3D</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
