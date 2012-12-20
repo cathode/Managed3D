@@ -32,9 +32,28 @@ namespace ManagedStudio3D
 
             Program.scene = new Scene();
 
-            var root = new GeometryNode();
-            root.Renderables.Add(new Cube(75));
-
+            var root = new Node(
+                new Node(new Cube(50))
+                {
+                    Position = new Vector3(50, 0, 0),
+                    Visibility = VisibilityGroup.G0,
+                },
+                new Node(new Cube(50))
+                {
+                    Position = new Vector3(-50, 0, 0),
+                    Visibility = VisibilityGroup.G0 | VisibilityGroup.G1
+                },
+                new Node(new Cube(50))
+                {
+                    Position = new Vector3(0, -50, 0),
+                    Visibility = VisibilityGroup.G1,
+                },
+                new Node(new Cube(50))
+                {
+                    Position = new Vector3(0, 50, 0),
+                    Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
+                });
+            
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();
@@ -56,7 +75,7 @@ namespace ManagedStudio3D
             renderer.Scene = scene;
             renderer.ActiveCamera = Camera.CreateIsometric();
             renderer.Initialize(options);
-            
+
             renderer.Start();
         }
 
@@ -77,10 +96,10 @@ namespace ManagedStudio3D
             };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
-            //renderer.ActiveCamera = Camera.CreateIsometric();
+            renderer.ActiveCamera = Camera.CreateIsometric();
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
-           
+
             var target = new ManagedRendererHostForm(renderer);
             target.Load += delegate
             {

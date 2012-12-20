@@ -155,18 +155,18 @@ namespace Managed3D.Rendering.OpenGL
             //GL.Rotate(node.Orientation.Angle.Degrees, axis.X, axis.Y, axis.Z);
             GL.Translate(node.Position.X, node.Position.Y, node.Position.Z);
 
-            if (node is GeometryNode)
-            {
-                var mesh = ((GeometryNode)node).Geometry;
-                foreach (var poly in mesh.Polygons)
-                {
-                    GL.Begin(BeginMode.Polygon);
-                    foreach (var vert in poly.Vertices)
-                        GL.Vertex3(vert.X, vert.Y, vert.Z);
+            //if (node is GeometryNode)
+            //{
+            //    var mesh = ((GeometryNode)node).Geometry;
+            //    foreach (var poly in mesh.Polygons)
+            //    {
+            //        GL.Begin(BeginMode.Polygon);
+            //        foreach (var vert in poly.Vertices)
+            //            GL.Vertex3(vert.X, vert.Y, vert.Z);
 
-                    GL.End();
-                }
-            }
+            //        GL.End();
+            //    }
+            //}
         }
 
         private void IdleFunc_Callback()

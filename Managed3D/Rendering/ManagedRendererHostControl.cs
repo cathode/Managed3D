@@ -117,7 +117,7 @@ namespace Managed3D.Rendering
                 this.ry += ydelta;
                 this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Right, Angle.FromDegrees(xdelta * sensitivity)) * new Quaternion(Vector3.Up, Angle.FromDegrees(ydelta * sensitivity));
                 //var or = this.renderer.ActiveCamera.Orientation;
-                
+
                 //Console.WriteLine("cam-r: {0}", or.FindAngle());
             }
             else if (Control.MouseButtons == MouseButtons.Right)
@@ -142,45 +142,66 @@ namespace Managed3D.Rendering
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-
+            var cam = this.renderer.ActiveCamera;
             switch (e.KeyCode)
             {
                 case Keys.NumPad2:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.South;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.South;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad4:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.West;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.West;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad6:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.East;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.East;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad8:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.North;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.North;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad7:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.Above;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.Above;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad9:
-                    this.renderer.ActiveCamera.Facing = CameraFacing.Below;
-                    this.renderer.ActiveCamera.UpdateFacing();
+                    cam.Facing = CameraFacing.Below;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad5:
-                    this.renderer.ActiveCamera = Camera.CreateIsometric();
+                    cam = Camera.CreateIsometric();
+                    break;
+
+                case Keys.D1:
+                    if (cam.VisibleGroups.HasFlag(VisibilityGroup.G0))
+                        cam.VisibleGroups &= ~VisibilityGroup.G0;
+                    else
+                        cam.VisibleGroups |= VisibilityGroup.G0;
+                    break;
+
+                case Keys.D2:
+                    if (cam.VisibleGroups.HasFlag(VisibilityGroup.G1))
+                        cam.VisibleGroups &= ~VisibilityGroup.G1;
+                    else
+                        cam.VisibleGroups |= VisibilityGroup.G1;
+                    break;
+
+                case Keys.D3:
+                    if (cam.VisibleGroups.HasFlag(VisibilityGroup.G2))
+                        cam.VisibleGroups &= ~VisibilityGroup.G2;
+                    else
+                        cam.VisibleGroups |= VisibilityGroup.G2;
                     break;
 
                 case Keys.Z:
-                    this.renderer.ZoomExtents(this.scene.Root.GetGraphExtents());
+                    //this.renderer.ZoomExtents(this.scene.Root.GetGraphExtents());
                     break;
 
                 case Keys.Space:
@@ -198,7 +219,7 @@ namespace Managed3D.Rendering
 
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
-                this.scene.Root.Orientation *= new Quaternion(new Vector3(1,1,0), Angle.FromDegrees(0.5));
+                this.scene.Root.Orientation *= new Quaternion(new Vector3(1, 1, 0), Angle.FromDegrees(0.5));
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)

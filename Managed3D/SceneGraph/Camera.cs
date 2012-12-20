@@ -44,6 +44,7 @@ namespace Managed3D.SceneGraph
         public Camera()
         {
             this.fieldOfView = Angle.FromDegrees(45);
+            this.VisibleGroups = VisibilityGroup.All;
         }
 
         /// <summary>
@@ -120,6 +121,12 @@ namespace Managed3D.SceneGraph
         /// Gets or sets a predefined value that indicates the facing of the camera.
         /// </summary>
         public CameraFacing Facing
+        {
+            get;
+            set;
+        }
+
+        public VisibilityGroup VisibleGroups
         {
             get;
             set;

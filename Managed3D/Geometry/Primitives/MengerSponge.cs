@@ -19,12 +19,6 @@ namespace Managed3D.Geometry.Primitives
         /// <param name="iterations"></param>
         public MengerSponge(double radius, int iterations)
         {
-            // Set up 0-level geometry (cube)
-            var r = radius;
-
-           
-
-
         }
         #endregion
     }

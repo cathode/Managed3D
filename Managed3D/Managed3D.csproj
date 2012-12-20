@@ -96,12 +96,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
     <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
     <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
     <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
@@ -116,7 +116,7 @@
     <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
-    <CodeContractsUseBaseLine>True</CodeContractsUseBaseLine>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
     <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
     <CodeContractsCustomRewriterAssembly />
     <CodeContractsCustomRewriterClass />
@@ -270,17 +270,15 @@
     <Compile Include="SceneGraph\Constraint.cs" />
     <Compile Include="SceneGraph\ConstraintTarget.cs" />
     <Compile Include="SceneGraph\DirectionalLight.cs" />
-    <Compile Include="SceneGraph\GeometryNode.cs" />
-    <Compile Include="SceneGraph\GroupNode.cs" />
     <Compile Include="SceneGraph\LightNode.cs" />
     <Compile Include="SceneGraph\NodeRenderFlags.cs" />
     <Compile Include="SceneGraph\PointLight.cs" />
     <Compile Include="SceneGraph\ReferenceSpace.cs" />
-    <Compile Include="SceneGraph\RootNode.cs" />
     <Compile Include="SceneGraph\Scene.cs" />
     <Compile Include="SceneGraph\Node.cs" />
     <Compile Include="SceneGraph\SpotLight.cs" />
     <Compile Include="SceneGraph\SpriteNode.cs" />
+    <Compile Include="SceneGraph\VisibilityGroup.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\ContainerElement.cs" />
     <Compile Include="UI\Element.cs" />

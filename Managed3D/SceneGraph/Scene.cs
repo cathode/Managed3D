@@ -29,7 +29,7 @@ namespace Managed3D.SceneGraph
         /// </summary>
         public Scene()
         {
-            this.root = new GroupNode();
+            this.root = new Node();
         }
         #endregion
         #region Properties

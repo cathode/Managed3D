@@ -14,12 +14,12 @@ namespace Managed3D.SceneGraph
     /// <summary>
     /// Represents a node within the scene graph.
     /// </summary>
-    public abstract class Node
+    public class Node
     {
         #region Fields
-        private readonly List<Node> children = new List<Node>();
+        private readonly List<Node> children;
         private readonly List<Constraint> constraints;
-        private readonly List<Mesh3> renderables = new List<Mesh3>();
+        private readonly List<Mesh3> renderables;
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
         private Quaternion orientation = Node.DefaultOrientation;
@@ -29,21 +29,29 @@ namespace Managed3D.SceneGraph
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
         /// </summary>
-        protected Node()
+        public Node()
         {
             this.children = new List<Node>();
             this.constraints = new List<Constraint>();
+            this.renderables = new List<Mesh3>();
+           
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
         /// </summary>
         /// <param name="children"></param>
-        protected Node(params Node[] children)
+        public Node(params Node[] children)
         {
             this.children = new List<Node>();
             this.constraints = new List<Constraint>();
-            
+            this.renderables = new List<Mesh3>();
+
             this.children.AddRange(children);
+        }
+
+        public Node(params Mesh3[] renderables) : this()
+        {
+            this.renderables.AddRange(renderables);
         }
         #endregion
         #region Properties
@@ -165,7 +173,7 @@ namespace Managed3D.SceneGraph
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's orientation is interpreted by the renderer.
+        /// Gets or sets the <see cref="PositionSpace"/> that indicates how the node's orientation is interpreted by the renderer.
         /// </summary>
         public ReferenceSpace OrientationSpace
         {
@@ -174,7 +182,7 @@ namespace Managed3D.SceneGraph
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's position is interpreted by the renderer.
+        /// Gets or sets the <see cref="PositionSpace"/> that indicates how the node's position is interpreted by the renderer.
         /// </summary>
         public ReferenceSpace PositionSpace
         {
@@ -183,7 +191,7 @@ namespace Managed3D.SceneGraph
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ReferenceSpace"/> that indicates how the node's scale is interpreted by the renderer.
+        /// Gets or sets the <see cref="PositionSpace"/> that indicates how the node's scale is interpreted by the renderer.
         /// </summary>
         public ReferenceSpace ScalingSpace
         {
@@ -223,6 +231,17 @@ namespace Managed3D.SceneGraph
             {
                 return this.renderables;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that indicates the <see cref="VisibilityGroup"/>(s) which the current node belongs to.
+        /// Cameras can be configured to show or hide specific visibility groups, preventing entire node branches from
+        /// being rendered if the topmost node in the branch would be hidden.
+        /// </summary>
+        public VisibilityGroup Visibility
+        {
+            get;
+            set;
         }
         #endregion
         #region Methods

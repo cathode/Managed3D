@@ -56,7 +56,7 @@ namespace Managed3D.Rendering.Software
             else
             {
                 var buffer = this.BackBuffer;
-                this.projectionMatrix =  Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
+                this.projectionMatrix = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
                 this.projectionMatrix *= (this.ActiveCamera.Mode == CameraMode.Perspective)
                     ? Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000)
                     : Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
@@ -81,7 +81,7 @@ namespace Managed3D.Rendering.Software
             state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
             state.Scale(camScale.X, camScale.Y, camScale.Z);
             state.Rotate(camRot);
-            state.ProjectionMatrix = this.projectionMatrix;
+            state.SetProjectionMatrix(this.projectionMatrix);
 
             SoftwareRendererState.GlobalState = state;
             this.AcquireBackBufferLock();
@@ -184,8 +184,12 @@ namespace Managed3D.Rendering.Software
 
         private void RenderNode(Node node)
         {
-            var state = SoftwareRendererState.GlobalState;
+            // If the node is not visible, then all of it's child nodes are invisible too.
+            // Abort rendering of the current node immediately if that's the case.
+            if (!this.ActiveCamera.VisibleGroups.HasFlag(node.Visibility))
+                return;
 
+            var state = SoftwareRendererState.GlobalState;
             state.PushMatrix();
 
             state.Translate(node.Position);
@@ -237,10 +241,10 @@ namespace Managed3D.Rendering.Software
     {
         #region Fields
         internal static SoftwareRendererState GlobalState;
-
         private readonly SoftwareRenderer renderer;
-        private Matrix4 worldView;
-        private Stack<Matrix4> matrices = new Stack<Matrix4>();
+        private Stack<Matrix4> worldMatrices = new Stack<Matrix4>();
+        private Stack<Matrix4> viewMatrices = new Stack<Matrix4>();
+        private Stack<Matrix4> projectionMatrices = new Stack<Matrix4>();
         #endregion
         #region Constructors
         /// <summary>
@@ -250,55 +254,95 @@ namespace Managed3D.Rendering.Software
         public SoftwareRendererState(SoftwareRenderer renderer)
         {
             this.renderer = renderer;
-            this.worldView = Matrix4.Identity;
+
+            this.WorldMatrix = Matrix4.Identity;
+            this.ViewMatrix = Matrix4.Identity;
+            this.ProjectionMatrix = Matrix4.Identity;
+
+            this.UpdateDerivedMatrices();
         }
         #endregion
         #region Properties
-        /// <summary>
-        /// Gets a <see cref="Matrix4"/> that is a combined world and view transformation matrix.
-        /// </summary>
-        public Matrix4 WorldViewMatrix
+        public Matrix4 WorldMatrix
         {
-            get
-            {
-                return this.worldView;
-            }
+            get;
+            private set;
         }
 
+        public Matrix4 ViewMatrix
+        {
+            get;
+            private set;
+        }
+
+        public Matrix4 WorldViewProjection
+        {
+            get;
+            private set;
+        }
+
+        public Matrix4 ViewProjection
+        {
+            get;
+            private set;
+        }
         /// <summary>
         /// Gets a <see cref="Matrix4"/> that is a projection transformation matrix.
         /// </summary>
         public Matrix4 ProjectionMatrix
         {
             get;
-            set;
+            private set;
         }
         #endregion
         #region Methods
         public void PushMatrix()
         {
-            // make copies of current matrix.
-            var newWvp = this.worldView * Matrix4.Identity;
+            this.worldMatrices.Push(this.WorldMatrix);
+            this.WorldMatrix *= Matrix4.Identity; // New instance
+            this.viewMatrices.Push(this.ViewMatrix);
+            this.ViewMatrix *= Matrix4.Identity;
+            this.projectionMatrices.Push(this.ProjectionMatrix);
+            this.ProjectionMatrix *= Matrix4.Identity;
 
-            this.matrices.Push(this.worldView);
-
-            this.worldView = newWvp;
+            this.UpdateDerivedMatrices();
         }
 
         public void PopMatrix()
         {
-            if (this.matrices.Count > 0)
-                this.worldView = this.matrices.Pop();
+            if (this.worldMatrices.Count > 0)
+            {
+                this.WorldMatrix = this.worldMatrices.Pop();
+                this.ViewMatrix = this.viewMatrices.Pop();
+                this.ProjectionMatrix = this.projectionMatrices.Pop();
+            }
+
+            this.UpdateDerivedMatrices();
         }
 
         public Vertex3 Transform(Vertex3 input)
         {
-            return this.ProjectionMatrix * (this.worldView * input);
+            return this.WorldViewProjection * input;
+        }
+
+        public Vertex3 Transform(Vertex3 input, ReferenceSpace space)
+        {
+            // Allow selective transformation based on the scope of the vertex input.
+            if (space == ReferenceSpace.Object)
+                return this.WorldViewProjection * input;
+            else if (space == ReferenceSpace.World)
+                return this.ViewProjection * input;
+            else if (space == ReferenceSpace.View)
+                return this.ProjectionMatrix * input;
+            else
+                return input;
         }
 
         public void Translate(Vector3 translation)
         {
-            this.worldView = this.worldView * Matrix4.CreateTranslationMatrix(translation);
+            this.WorldMatrix *= Matrix4.CreateTranslationMatrix(translation);
+
+            this.UpdateDerivedMatrices();
         }
 
         public void Translate(double x, double y, double z)
@@ -308,7 +352,9 @@ namespace Managed3D.Rendering.Software
 
         public void Scale(Vector3 scaling)
         {
-            this.worldView *= Matrix4.CreateScalingMatrix(scaling);
+            this.WorldMatrix *= Matrix4.CreateScalingMatrix(scaling);
+
+            this.UpdateDerivedMatrices();
         }
 
         public void Scale(double x, double y, double z)
@@ -318,7 +364,26 @@ namespace Managed3D.Rendering.Software
 
         public void Rotate(Quaternion rotation)
         {
-            this.worldView *= Matrix4.CreateRotationMatrix(rotation);
+            this.WorldMatrix *= Matrix4.CreateRotationMatrix(rotation);
+
+            this.UpdateDerivedMatrices();
+        }
+
+        public void SetProjectionMatrix(Matrix4 projectionMatrix)
+        {
+            this.ProjectionMatrix = projectionMatrix;
+
+            this.UpdateDerivedMatrices();
+        }
+
+        private void UpdateDerivedMatrices()
+        {
+            this.ViewProjection = this.ProjectionMatrix * Matrix4.Identity;
+            this.ViewProjection *= this.ViewMatrix;
+            this.WorldViewProjection = this.ProjectionMatrix * Matrix4.Identity;
+            this.WorldViewProjection *= this.ViewMatrix;
+            this.WorldViewProjection *= this.WorldMatrix;
+
         }
         #endregion
     }

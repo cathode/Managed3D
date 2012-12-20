@@ -501,7 +501,10 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the orthographic projection matrix for the specified width and height.</returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double width, double height, double nearZ, double farZ)
         {
-            //   return Matrix4.CreateOrthographicProjectionMatrix(width / 2.0, width / -2.0, height / -2.0, height / 2.0, nearZ, farZ);
+            var left =  (width / -2.0);
+            var right = (width / 2.0);
+
+            return Matrix4.CreateOrthographicProjectionMatrix(-1, 1, 1, -1, -1, 1);
 
             return new Matrix4(1, 0, 0, 0,
                                0, 1, 0, 0,
@@ -521,11 +524,12 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double left, double right, double top, double bottom, double near, double far)
         {
-            return Matrix4.Identity;
+            //return Matrix4.Identity;
 
             var x = 2.0 / (right - left);
             var y = 2.0 / (top - bottom);
             var z = -2.0 / (far - near);
+
             var a = (right + left) / (right - left) * -1.0;
             var b = (top + bottom) / (top - bottom) * -1.0;
             var c = (far + near) / (far - near) * -1.0;
@@ -546,13 +550,13 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double nearZ, double farZ)
         {
-            return Matrix4.Identity;
+            //return Matrix4.Identity;
 
             var fv = fov.Degrees;
             //aspect = 840.0 / 600.0;
-            nearZ = 1.0;
-            farZ = 1000.0;
-            var s = 1.0 / Math.Tan(fov.Degrees * 0.5 * (Math.PI / 180.0));
+            nearZ = 0.1;
+            farZ = 100.0;
+            var s = 1.0 / Math.Tan(fov.Radians * 0.5);
 
             return new Matrix4(s, 0, 0, 0,
                                0, s, 0, 0,
