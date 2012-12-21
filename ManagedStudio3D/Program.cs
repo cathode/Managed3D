@@ -52,8 +52,12 @@ namespace ManagedStudio3D
                 {
                     Position = new Vector3(0, 50, 0),
                     Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
+                }, new LabelNode("Sample Label")
+                {
+                    Position = new Vector3(75, 75, 0)
                 });
-            
+
+            //root = new LabelNode("Sample Label");
             Program.scene.Root = root;
 
             //Program.RunDirect3DMode();

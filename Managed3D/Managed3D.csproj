@@ -270,6 +270,7 @@
     <Compile Include="SceneGraph\Constraint.cs" />
     <Compile Include="SceneGraph\ConstraintTarget.cs" />
     <Compile Include="SceneGraph\DirectionalLight.cs" />
+    <Compile Include="SceneGraph\LabelNode.cs" />
     <Compile Include="SceneGraph\LightNode.cs" />
     <Compile Include="SceneGraph\NodeRenderFlags.cs" />
     <Compile Include="SceneGraph\PointLight.cs" />
