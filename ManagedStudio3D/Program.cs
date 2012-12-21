@@ -96,19 +96,12 @@ namespace ManagedStudio3D
             };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
-            renderer.ActiveCamera = Camera.CreateIsometric();
+            renderer.ActiveCamera.Facing = CameraFacing.Isometric;
+            renderer.ActiveCamera.Mode = CameraMode.Orthographic;
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
 
             var target = new ManagedRendererHostForm(renderer);
-            target.Load += delegate
-            {
-                new Thread((ThreadStart)delegate
-                {
-                    renderer.AttachTarget(target);
-                    renderer.Start();
-                }).Start();
-            };
             System.Windows.Forms.Application.Run(target);
         }
         #endregion

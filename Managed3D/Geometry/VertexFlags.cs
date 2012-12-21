@@ -13,5 +13,6 @@ namespace Managed3D.Geometry
     {
         None = 0x0,
         VertexColor = 0x1,
+        HideOutgoingEdges = 0x2,
     }
 }

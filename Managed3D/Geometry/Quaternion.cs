@@ -29,9 +29,16 @@ namespace Managed3D.Geometry
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Quaterion"/> class.
+        /// </summary>
+        /// <param name="axis">A <see cref="Vector3"/> that describes the axis of the rotation.</param>
+        /// <param name="angle"></param>
         public Quaternion(Vector3 axis, Angle angle)
         {
             var rads = angle.Radians;
+
+            axis = axis.Normalize();
 
             double res = Math.Sin(rads / 2.0);
             var w = Math.Cos(rads / 2.0);
@@ -145,6 +152,10 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
+        public static Quaternion Create(double x, double y, double z, double a)
+        {
+            throw new NotImplementedException();
+        }
         public static Quaternion Multiply(Quaternion q1, Quaternion q2)
         {
             var w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;

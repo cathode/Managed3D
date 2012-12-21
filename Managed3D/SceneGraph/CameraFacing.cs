@@ -50,5 +50,11 @@ namespace Managed3D.SceneGraph
         /// Indicates the camera is mirrored horizontally.
         /// </summary>
         Mirrored = 0x40,
+
+        Isometric,
+
+        Trimetric,
+
+        Dimetric,
     }
 }

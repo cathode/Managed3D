@@ -59,13 +59,13 @@ namespace Managed3D.Geometry
         {
             Contract.Requires(sides > 2);
 
-            var m = Matrix4.CreateRotationMatrix(Angle.FromDegrees(360.0 / sides), new Vector3(0, 1, 0));
+            var m = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / sides));
 
             Vector3 v = new Vector3(radius, 0, 0);
 
             if (mode == RadiusMode.Edge)
             {
-                var rm = Matrix4.CreateRotationMatrix(Angle.FromDegrees(360.0 / (sides * 2)), new Vector3(0, 1, 0));
+                var rm = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / (sides * 2)));
                 v = rm * v;
             }
 

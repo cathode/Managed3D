@@ -176,7 +176,8 @@ namespace Managed3D.Rendering
                     break;
 
                 case Keys.NumPad5:
-                    cam = Camera.CreateIsometric();
+                    cam.Facing = CameraFacing.Isometric;
+                    cam.UpdateFacing();
                     break;
 
                 case Keys.D1:
@@ -219,7 +220,10 @@ namespace Managed3D.Rendering
 
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
-                this.scene.Root.Orientation *= new Quaternion(new Vector3(1, 1, 0), Angle.FromDegrees(0.5));
+            {
+                var axis = this.renderer.ActiveCamera.Orientation.GetAxis();
+                this.renderer.ActiveCamera.Orientation *= new Quaternion(axis, Angle.FromDegrees(0.5));
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs pevent)

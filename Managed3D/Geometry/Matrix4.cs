@@ -501,7 +501,7 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the orthographic projection matrix for the specified width and height.</returns>
         public static Matrix4 CreateOrthographicProjectionMatrix(double width, double height, double nearZ, double farZ)
         {
-            var left =  (width / -2.0);
+            var left = (width / -2.0);
             var right = (width / 2.0);
 
             return Matrix4.CreateOrthographicProjectionMatrix(-1, 1, 1, -1, -1, 1);
@@ -545,30 +545,27 @@ namespace Managed3D.Geometry
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <param name="nearZ">The distance to the near-z clipping plane.</param>
-        /// <param name="farZ">The distance to the far-z clipping plane.</param>
+        /// <param name="near">The distance to the near-z clipping plane.</param>
+        /// <param name="far">The distance to the far-z clipping plane.</param>
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
-        public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double nearZ, double farZ)
+        public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double near, double far)
         {
             //return Matrix4.Identity;
+            var fy = fov.Degrees;
+            fy = 90;
+            var f = 1.0 / Math.Tan(fy / 2.0);
 
-            var fv = fov.Degrees;
-            //aspect = 840.0 / 600.0;
-            nearZ = 0.1;
-            farZ = 100.0;
-            var s = 1.0 / Math.Tan(fov.Radians * 0.5);
-
-            return new Matrix4(s, 0, 0, 0,
-                               0, s, 0, 0,
-                               0, 0, -(farZ / (farZ - nearZ)), -1,
-                               0, 0, -((farZ * nearZ) / (farZ - nearZ)), 0);
+            return new Matrix4(f / aspect, 0, 0, 0,
+                               0, f, 0, 0,
+                               0, 0, (far + near) / (near - far), -1,
+                               0, 0, (2 * far * near) / (near - far), 0);
         }
 
         /// <summary>
-        /// Creates and returns a new translation matrix
+        /// Creates a matrix that describes a translation operation.
         /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
+        /// <param name="t">A <see cref="Vector3"/> that describes the translation amount.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the translation operation.</returns>
         public static Matrix4 CreateTranslationMatrix(Vector3 t)
         {
 
@@ -578,6 +575,13 @@ namespace Managed3D.Geometry
                                0, 0, 0, 1);
         }
 
+        /// <summary>
+        /// Creates a matrix that describes a translation operation.
+        /// </summary>
+        /// <param name="x">The translation along the x axis.</param>
+        /// <param name="y">The translation along the y axis.</param>
+        /// <param name="z">The translation along the z axis.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the translation operation.</returns>
         public static Matrix4 CreateTranslationMatrix(double x, double y, double z)
         {
             return new Matrix4(1, 0, 0, x,
@@ -586,6 +590,11 @@ namespace Managed3D.Geometry
                                0, 0, 0, 1);
         }
 
+        /// <summary>
+        /// Creates a matrix that describes a scaling operation.
+        /// </summary>
+        /// <param name="s">A <see cref="Vector3"/> that describes the x, y, and z value to scale by.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the scaling operation.</returns>
         public static Matrix4 CreateScalingMatrix(Vector3 s)
         {
             return new Matrix4(s.X, 0, 0, 0,
@@ -594,6 +603,26 @@ namespace Managed3D.Geometry
                                0, 0, 0, 1.0);
         }
 
+        /// <summary>
+        /// Creates a matrix that describes a scaling operation.
+        /// </summary>
+        /// <param name="s">The value to scale by along the x, y, and z axes.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the scaling operation.</returns>
+        public static Matrix4 CreateScalingMatrix(double s)
+        {
+            return new Matrix4(s, 0, 0, 0,
+                               0, s, 0, 0,
+                               0, 0, s, 0,
+                               0, 0, 0, 1);
+        }
+
+        /// <summary>
+        /// Creates a matrix that describes a scaling operation.
+        /// </summary>
+        /// <param name="x">The value to scale by along the x axis.</param>
+        /// <param name="y">The value to scale by along the y axis.</param>
+        /// <param name="z">The value to scale by along the z axis.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the scaling operation.</returns>
         public static Matrix4 CreateScalingMatrix(double x, double y, double z)
         {
             return new Matrix4(x, 0, 0, 0,
@@ -603,25 +632,58 @@ namespace Managed3D.Geometry
         }
 
         /// <summary>
-        /// Creates a matrix that rotates around an axis.
+        /// Creates a matrix that describes a rotation operation.
         /// </summary>
-        /// <param name="angle"></param>
-        /// <param name="axis"></param>
-        /// <returns></returns>
-        public static Matrix4 CreateRotationMatrix(Angle angle, Vector3 axis)
+        /// <param name="axis">A unit <see cref="Vector3"/> that describes the axis along which the rotation is performed.</param>
+        /// <param name="angle">The amount of rotation.</param>
+        /// <returns>A new <see cref="Matrix4"/> that describes the rotation operation.</returns>
+        public static Matrix4 CreateRotationMatrix(Vector3 axis, Angle angle)
         {
             var q = new Quaternion(axis, angle.Radians);
+            q = (q.Length == 1) ? q : q.Normalized();
 
-            return q.ToRotationMatrix();
+            var x = q.X;
+            var y = q.Y;
+            var z = q.Z;
+            var s = q.W;
+            return new Matrix4(
+                1 - 2 * ((y * y) + (z * z)), 2 * ((x * y) - (s * z)), 2 * ((x * z) + (s * y)), 0,
+                2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
+                2 * ((x * z) - (s * y)), 2 * ((y * z) + (s * x)), 1 - 2 * ((x * x) + (y * y)), 0,
+                0, 0, 0, 1);
         }
-        public static Matrix4 CreateRotationMatrix(double deg, double x, double y, double z)
+
+        /// <summary>
+        /// Creates a matrix that describes a rotation operation.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the axis around which the rotation is performed.</param>
+        /// <param name="y">The y-coordinate of the axis around which the rotation is performed.</param>
+        /// <param name="z">The z-coordinate of the axis around which the rotation is performed.</param>
+        /// <param name="a">The rotation amount, in radians.</param>
+        /// <returns></returns>
+        public static Matrix4 CreateRotationMatrix(double x, double y, double z, double a)
         {
-            return Matrix4.CreateRotationMatrix(Angle.FromDegrees(deg), new Vector3(x, y, z));
+            throw new NotImplementedException();
+            //var q = new Quaternion(new Vector3(x, y, z), a);
+            //var q = (q.Length == 1) ? q : q.Normalized();
+
+            //var x = q.X;
+            //var y = q.Y;
+            //var z = q.Z;
+            //var s = q.W;
+            //return new Matrix4(
+            //    1 - 2 * ((y * y) + (z * z)), 2 * ((x * y) - (s * z)), 2 * ((x * z) + (s * y)), 0,
+            //    2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
+            //    2 * ((x * z) - (s * y)), 2 * ((y * z) + (s * x)), 1 - 2 * ((x * x) + (y * y)), 0,
+            //    0, 0, 0, 1);
+            
         }
+
         public static Matrix4 CreateRotationMatrix(Vector3 vec)
         {
             return Matrix4.CreateRotationMatrix(vec.X, vec.Y, vec.Z);
         }
+
         /// <summary>
         /// Creates a new matrix that represents a Euler rotation.
         /// </summary>

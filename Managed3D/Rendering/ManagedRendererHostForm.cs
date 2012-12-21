@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Managed3D.Rendering
 {
@@ -69,6 +70,12 @@ namespace Managed3D.Rendering
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            new Thread((ThreadStart)delegate
+            {
+                renderer.AttachTarget(this);
+                renderer.Start();
+            }).Start();
 
             this.hostControl.Invalidate();
         }

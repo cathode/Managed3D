@@ -176,10 +176,13 @@ namespace Managed3D.Rendering.Software
         {
             // draw the triangle
 
-            // draw edges of triangle
-            this.DrawLine(p1, p2);
-            this.DrawLine(p2, p3);
-            this.DrawLine(p3, p1);
+            // draw edges of triangle, but check if two neighboring vertices are set to hide their outgoing edges we skip drawing that line.
+            if (!p1.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p2.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
+                this.DrawLine(p1, p2);
+            if (!p2.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p3.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
+                this.DrawLine(p2, p3);
+            if (!p3.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p1.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
+                this.DrawLine(p3, p1);
         }
 
         private void RenderNode(Node node)
@@ -219,6 +222,9 @@ namespace Managed3D.Rendering.Software
                     }
                     else if (verts.Length == 4)
                     {
+                        verts[0].Flags |= VertexFlags.HideOutgoingEdges;
+                        verts[2].Flags |= VertexFlags.HideOutgoingEdges;
+
                         this.DrawTriangle(verts[0], verts[1], verts[2]);
                         this.DrawTriangle(verts[2], verts[3], verts[0]);
                     }

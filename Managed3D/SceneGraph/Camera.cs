@@ -138,7 +138,7 @@ namespace Managed3D.SceneGraph
         {
             var cam = new Camera();
             cam.mode = CameraMode.Orthographic;
-            cam.Orientation = new Quaternion(new Vector3(1.0, 1.0, 1.0), 0.0);
+            cam.Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(45)) * new Quaternion(Vector3.Left, Angle.FromDegrees(45));
             cam.Position = new Vector3(0, 0, 0);
 
             return cam;
@@ -165,6 +165,10 @@ namespace Managed3D.SceneGraph
                     break;
                 case CameraFacing.East:
                     //this.Orientation.Axis = Vector3.Left;
+                    break;
+
+                case CameraFacing.Isometric:
+                    this.Orientation = new Quaternion(Vector3.Left, Angle.FromDegrees(45)) * new Quaternion(Vector3.Up, Angle.FromDegrees(45));
                     break;
             }
         }
