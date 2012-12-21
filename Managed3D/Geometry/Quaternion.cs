@@ -13,6 +13,7 @@ namespace Managed3D.Geometry
     public class Quaternion
     {
         #region Fields
+        public static readonly Quaternion Identity = new Quaternion(1.0, 0.0, 0.0, 0.0);
         private readonly double w;
         private readonly double x;
         private readonly double y;

@@ -550,15 +550,30 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double near, double far)
         {
-            //return Matrix4.Identity;
-            var fy = fov.Degrees;
-            fy = 90;
-            var f = 1.0 / Math.Tan(fy / 2.0);
+            fov = Angle.FromDegrees(45);
+            near = 0.1;
+            far = 100.0;
+            aspect = 0.75;
+            var fy = fov.Radians;
+            var f = near * Math.Tan(fy / 2.0);
+            var left = -f;
+            var right = f;
+            var bottom = -f / aspect;
+            var top = f / aspect;
 
-            return new Matrix4(f / aspect, 0, 0, 0,
-                               0, f, 0, 0,
-                               0, 0, (far + near) / (near - far), -1,
-                               0, 0, (2 * far * near) / (near - far), 0);
+
+            var m0 = 2 * near / (right - left);
+            var m5 = 2 * near / (top - bottom);
+            var m8 = (right + left) / (right - left);
+            var m9 = (top + bottom) / (top - bottom);
+            var m10 = -(far + near) / (far - near);
+            var m11 = -1.0;
+            var m14 = -(2.0 * far * near) / (far - near);
+
+            return new Matrix4(m0, 0, 0, 0,
+                               0, m5, 0, 0,
+                               m8, m9, m10, m11,
+                               0, 0, m14, 0);
         }
 
         /// <summary>
@@ -676,7 +691,7 @@ namespace Managed3D.Geometry
             //    2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
             //    2 * ((x * z) - (s * y)), 2 * ((y * z) + (s * x)), 1 - 2 * ((x * x) + (y * y)), 0,
             //    0, 0, 0, 1);
-            
+
         }
 
         public static Matrix4 CreateRotationMatrix(Vector3 vec)

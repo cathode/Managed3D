@@ -237,47 +237,52 @@ namespace Managed3D.Rendering.Software
 
             if (node is LabelNode)
             {
-                var labelNode = node as LabelNode;
-                var buffer = this.BackBuffer;
-                var cp = this.BackBuffer.Color;
-                var pix = labelNode.Bitmap;
-
                 var v = state.Transform(new Vertex3(node.Position.X, node.Position.Y, node.Position.Z));
 
-                var ymax = labelNode.BitmapSize.Y;
-                var xmax = labelNode.BitmapSize.X;
-
-                var stride = labelNode.BitmapSize.X;
-
-                var vx = (int)v.X;
-                var vy = (int)v.Y;
-
-                if (vy + ymax > buffer.Height)
-                    ymax = buffer.Height - vy;
-                if (vx + xmax > buffer.Width)
-                    xmax = buffer.Width - vx;
-                if (vx < 0)
-                    vx = 0;
-                if (vy < 0)
-                    vy = 0;
-
-                for (int y = 0, ym = vy; y < ymax; ++y, ++ym)
+                if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z))
                 {
-                    for (int x = 0, xm = vx; x < xmax; ++x, ++xm)
+
+                    var labelNode = node as LabelNode;
+                    var buffer = this.BackBuffer;
+                    var cp = this.BackBuffer.Color;
+                    var pix = labelNode.Bitmap;
+
+
+
+                    var ymax = labelNode.BitmapSize.Y;
+                    var xmax = labelNode.BitmapSize.X;
+
+                    var stride = labelNode.BitmapSize.X;
+
+                    var vx = (int)v.X;
+                    var vy = (int)v.Y;
+
+                    if (vy + ymax > buffer.Height)
+                        ymax = buffer.Height - vy;
+                    if (vx + xmax > buffer.Width)
+                        xmax = buffer.Width - vx;
+                    if (vx < 0)
+                        vx = 0;
+                    if (vy < 0)
+                        vy = 0;
+
+                    for (int y = 0, ym = vy; y < ymax; ++y, ++ym)
                     {
-                        var cpc = cp[xm, ym];
-                        var pc = pix[(y * stride) + x];
+                        for (int x = 0, xm = vx; x < xmax; ++x, ++xm)
+                        {
+                            var cpc = cp[xm, ym];
+                            var pc = pix[(y * stride) + x];
 
-                        var cx = (cpc.X * (1.0f - pc.W)) + (pc.X * pc.W);
-                        var cy = (cpc.Y * (1.0f - pc.W)) + (pc.Y * pc.W);
-                        var cz = (cpc.Z * (1.0f - pc.W)) + (pc.Z * pc.W);
-                        var cw = 1.0f;
+                            var cx = (cpc.X * (1.0f - pc.W)) + (pc.X * pc.W);
+                            var cy = (cpc.Y * (1.0f - pc.W)) + (pc.Y * pc.W);
+                            var cz = (cpc.Z * (1.0f - pc.W)) + (pc.Z * pc.W);
+                            var cw = 1.0f;
 
-                        cp[xm, ym] = new Vector4f(cx, cy, cz, cw);
+                            cp[xm, ym] = new Vector4f(cx, cy, cz, cw);
+                        }
                     }
                 }
             }
-
             state.PopMatrix();
         }
         #endregion

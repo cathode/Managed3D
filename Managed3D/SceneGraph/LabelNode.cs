@@ -61,6 +61,12 @@ namespace Managed3D.SceneGraph
                 return this.bitmapSize;
             }
         }
+
+        public Vector4f TextColor
+        {
+            get;
+            set;
+        }
         #endregion
         #region Methods
         private unsafe void RegenerateBitmap()
@@ -74,7 +80,7 @@ namespace Managed3D.SceneGraph
             g.Clear(Color.Transparent);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.DrawString(this.text, font, Brushes.Red, 0, 0);
+            g.DrawString(this.text, font, new SolidBrush(Color.FromArgb(255, (byte)(this.TextColor.X * 255), (byte)(this.TextColor.Y * 255), (byte)(this.TextColor.Z * 255))), 0, 0);
 
             var bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
             this.bitmapSize = new Vector2i(bmpData.Width, bmpData.Height);

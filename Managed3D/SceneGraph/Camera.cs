@@ -158,13 +158,27 @@ namespace Managed3D.SceneGraph
             switch (this.Facing)
             {
                 case CameraFacing.Above:
-                    //this.Orientation.Axis = Vector3.Down;
+                    this.Orientation = new Quaternion(Vector3.Left, Angle.FromDegrees(90));
                     break;
+
                 case CameraFacing.Below:
-                    //this.Orientation.Axis = Vector3.Up;
+                    this.Orientation = new Quaternion(Vector3.Right, Angle.FromDegrees(90));
                     break;
+
                 case CameraFacing.East:
-                    //this.Orientation.Axis = Vector3.Left;
+                    this.Orientation = new Quaternion(Vector3.Forward, Angle.FromDegrees(90));
+                    break;
+
+                case CameraFacing.West:
+                    this.Orientation = new Quaternion(Vector3.Backward, Angle.FromDegrees(90));
+                    break;
+
+                case CameraFacing.North:
+                    this.Orientation = Quaternion.Identity;
+                    break;
+
+                case CameraFacing.South:
+                    this.Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(180));
                     break;
 
                 case CameraFacing.Isometric:

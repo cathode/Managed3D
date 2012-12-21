@@ -6,13 +6,12 @@
  *****************************************************************************/
 using System;
 using Managed3D.Geometry;
+using Managed3D.Geometry.Primitives;
 using Managed3D.Rendering;
+using Managed3D.Rendering.Direct3D;
 using Managed3D.Rendering.OpenGL;
 using Managed3D.Rendering.Software;
 using Managed3D.SceneGraph;
-using Managed3D.Rendering.Direct3D;
-using Managed3D.Geometry.Primitives;
-using System.Threading;
 
 namespace ManagedStudio3D
 {
@@ -54,7 +53,8 @@ namespace ManagedStudio3D
                     Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
                 }, new LabelNode("Sample Label")
                 {
-                    Position = new Vector3(75, 75, 0)
+                    Position = new Vector3(75, 75, 0),
+                    Visibility = VisibilityGroup.G2,
                 });
 
             //root = new LabelNode("Sample Label");
@@ -93,11 +93,11 @@ namespace ManagedStudio3D
         }
         private static void RunSoftwareMode()
         {
-            var renderer = new SoftwareRenderer()
-            {
+            var renderer = new SoftwareRenderer();
+            //{
                 // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
-                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
-            };
+            //    BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
+           // };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.ActiveCamera.Facing = CameraFacing.Isometric;
