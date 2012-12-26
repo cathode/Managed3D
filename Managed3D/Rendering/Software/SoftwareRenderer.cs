@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Managed3D.Geometry;
 using Managed3D.SceneGraph;
+using System.Linq;
 
 namespace Managed3D.Rendering.Software
 {
@@ -172,9 +173,85 @@ namespace Managed3D.Rendering.Software
             }
         }
 
+        private class Span
+        {
+            #region Fields
+            internal double X1;
+            internal double X2;
+            internal Vector4f C1;
+            internal Vector4f C2;
+            #endregion
+            internal Span(Vector4f c1, double x1, Vector4f c2, double x2)
+            {
+                this.C1 = c1;
+                this.C2 = c2;
+                this.X1 = x1;
+                this.X2 = x2;
+            }
+        }
+
+        private void DrawSpan(Edge3 e1, Edge3 e2)
+        {
+            var cp = this.BackBuffer.Color;
+            var dp = this.BackBuffer.Depth;
+
+            var e1yd = e1.Q.Y - e1.P.Y;
+            if (e1yd == 0.0)
+                return;
+
+            var e2yd = e2.Q.Y - e2.P.Y;
+            if (e2yd == 0.0)
+                return;
+
+            var e1xd = e1.Q.X - e1.P.X;
+            var e2xd = e2.Q.X - e2.P.X;
+
+            var e1colord = (e1.Q.Color - e1.P.Color);
+            var e2colord = (e2.Q.Color - e2.P.Color);
+
+            var f1 = (e2.P.Y - e1.P.Y) / e1yd;
+            var f1step = 1.0 / e1yd;
+            var f2 = 0.0;
+            var f2step = 1.0 / e2yd;
+
+            for (int y = (int)e2.P.Y; y < e2.Q.Y; y++)
+            {
+                var span = new Span(e1.P.Color + (e1colord * f1), e1.P.X + (e1xd * f1), e2.P.Color + (e2colord * f2), e2.P.X + (e2xd * f2));
+
+                var xd = span.X2 - span.X1;
+                if (xd == 0.0)
+                    continue;
+
+                var cd = span.C2 - span.C1;
+
+                var sf = 0.0;
+                var sfstep = 1.0 / xd;
+                for (int x = (int)span.X1; x < span.X2; x++)
+                {
+                    if (x > 0 && x < this.BackBuffer.Width && y > 0 && y < this.BackBuffer.Height)
+                    {
+                        cp[x, y] = span.C1 + (cd * sf);
+                    }
+
+                    sf += sfstep;
+                }
+
+                f1 += f1step;
+                f2 += f2step;
+            }
+
+        }
+
         private void DrawTriangle(Vertex3 p1, Vertex3 p2, Vertex3 p3)
         {
             // draw the triangle
+            var edges = (from e in new Edge3[] { new Edge3(p1, p2), new Edge3(p2, p3), new Edge3(p3, p1) }
+                         let length = Math.Abs(e.Q.Y - e.P.Y)
+                         orderby length
+                         select e).ToArray();
+
+            //this.DrawSpan(edges[0], edges[1]);
+            //this.DrawSpan(edges[0], edges[2]);
 
             // draw edges of triangle, but check if two neighboring vertices are set to hide their outgoing edges we skip drawing that line.
             if (!p1.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p2.Flags.HasFlag(VertexFlags.HideOutgoingEdges))

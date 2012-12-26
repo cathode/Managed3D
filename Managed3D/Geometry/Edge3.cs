@@ -21,19 +21,19 @@ namespace Managed3D.Geometry
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        public Edge3(Vertex3 a, Vertex3 b)
+        public Edge3(Vertex3 p, Vertex3 q)
         {
-            this.P = a.ToVector3();
-            this.Q = b.ToVector3();
+            this.P = p;
+            this.Q = q;
         }
         #endregion
         #region Properties
-        public Vector3 P
+        public Vertex3 P
         {
             get;
             set;
         }
-        public Vector3 Q
+        public Vertex3 Q
         {
             get;
             set;
@@ -54,7 +54,9 @@ namespace Managed3D.Geometry
         #region Methods
         public Vector3 GetCenter()
         {
-            return (this.P + this.Q) / 2.0;
+            throw new NotImplementedException();
+
+            //return (this.P + this.Q) / 2.0;
         }
 
         public Vector3 GetIntersectionXY()

@@ -142,8 +142,8 @@ namespace Managed3D.Geometry
             a = this.A.ToVector3();
             b = this.B.ToVector3();
             c = this.C.ToVector3();
-            p = line.P;
-            q = line.Q;
+            p = line.P.ToVector3();
+            q = line.Q.ToVector3();
 
             // Vector from A to C
             var ex = this.C.X - this.A.X;

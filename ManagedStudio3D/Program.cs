@@ -93,11 +93,11 @@ namespace ManagedStudio3D
         }
         private static void RunSoftwareMode()
         {
-            var renderer = new SoftwareRenderer();
-            //{
+            var renderer = new SoftwareRenderer()
+            {
                 // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
-            //    BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
-           // };
+                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
+            };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.ActiveCamera.Facing = CameraFacing.Isometric;

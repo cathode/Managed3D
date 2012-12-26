@@ -260,7 +260,7 @@
     <Compile Include="Rendering\RendererOptions.cs" />
     <Compile Include="Rendering\RenderStyle.cs" />
     <Compile Include="Rendering\Software\Fragment.cs" />
-    <Compile Include="Rendering\Software\Shaders\PixelShader.cs" />
+    <Compile Include="Rendering\Software\Shaders\FragmentShader.cs" />
     <Compile Include="Rendering\Software\Shaders\VertexShader.cs" />
     <Compile Include="Rendering\Software\SoftwareRenderer.cs" />
     <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />

@@ -11,6 +11,17 @@ namespace Managed3D.Rendering.Software
     /// </summary>
     public struct Fragment
     {
-       
+        #region Fields
+        public ushort X;
+        public ushort Y;
+
+        public double Z;
+
+        public Vector4f Color;
+
+        #endregion
+        #region Methods
+
+        #endregion
     }
 }
