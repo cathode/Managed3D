@@ -149,6 +149,8 @@
     <Compile Include="Geometry\IMeshFragment.cs" />
     <Compile Include="Geometry\IRenderable.cs" />
     <Compile Include="Geometry\MeshData.cs" />
+    <Compile Include="Geometry\IPath.cs" />
+    <Compile Include="Geometry\Primitives\Box.cs" />
     <Compile Include="Geometry\Primitives\MengerSponge.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
     <Compile Include="IO\ImporterBase.cs" />

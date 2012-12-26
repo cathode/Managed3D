@@ -12,14 +12,7 @@ namespace Managed3D.Geometry
     /// A two-dimensional double-precision floating point vector. This type is immutable.
     /// </summary>
     /// <remarks>
-    /// Most instance members mutate the current instance instead of returning a new instance containing the result.
-    /// <para>Instance methods which modify the current instance:
-    /// <list type="unordered">
-    /// <item><see cref="Vector2.Absolute()"/></item>
-    /// <item><see cref="Vector2.Add(Managed3D.Geometry.Vector2)"/></item>
-    /// <item><see cref="Vector2.Ceiling()"/></item>
-    /// </list>
-    /// </para>
+    /// This type is immutable.
     /// </remarks>
     public struct Vector2 
     {
@@ -171,7 +164,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Returns the absolute value of a specified vector.
         /// </summary>
-        /// <param name="vector">The <see cref="Vector2"/> to get the absolute value of.</param>
+        /// <param name="v">The <see cref="Vector2"/> to get the absolute value of.</param>
         /// <returns>A new <see cref="Vector2"/> that is the absolute value of <paramref name="vector"/>.</returns>
         public static Vector2 Absolute(Vector2 v)
         {
@@ -389,6 +382,17 @@ namespace Managed3D.Geometry
         public static Vector2 operator *(Vector2 vector, double scalar)
         {
             return new Vector2(vector.X * scalar, vector.Y * scalar);
+        }
+
+        /// <summary>
+        /// Multiplies a <see cref="Vector2"/> by a scalar value.
+        /// </summary>
+        /// <param name="vector">The <see cref="Vector2"/> to be multiplied.</param>
+        /// <param name="scalar">The scalar value to multiply by.</param>
+        /// <returns>A new <see cref="Vector2"/> that is the result of the multiplication.</returns>
+        public static Vector2 operator *(double scalar, Vector2 vector)
+        {
+            return vector * scalar;
         }
 
         /// <summary>

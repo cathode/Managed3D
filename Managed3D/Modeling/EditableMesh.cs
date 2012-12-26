@@ -6,13 +6,13 @@
  *****************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Managed3D.Geometry;
-using System.Diagnostics.Contracts;
 using WEdge = Managed3D.Modeling.EditableMeshEdge;
-using WVertex = Managed3D.Modeling.EditableMeshVertex;
 using WFace = Managed3D.Modeling.EditableMeshFace;
+using WVertex = Managed3D.Modeling.EditableMeshVertex;
 namespace Managed3D.Modeling
 {
     /// <summary>
@@ -154,6 +154,65 @@ namespace Managed3D.Modeling
        
     }
 
+    /// <summary>
+    /// Half-edge editable mesh implementation.
+    /// </summary>
+    public class EMesh
+    {
+
+    }
+
+    public class HEdge
+    {
+        public HEdge Opposite
+        {
+            get;
+            set;
+        }
+
+        public HEdge Next
+        {
+            get;
+            set;
+        }
+
+        public HEdge Previous
+        {
+            get;
+            set;
+        }
+
+        public Vector3 Start
+        {
+            get;
+            set;
+        }
+        public Vector3 End
+        {
+            get;
+            set;
+        }
+
+        public HFace Face
+        {
+            get;
+            set;
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this == this.Next.Previous);
+            Contract.Invariant(this == this.Opposite.Opposite);
+            Contract.Invariant(this.Face == this.Next.Face);
+        }
+    }
+
+    public class HFace
+    {
+        
+    }
+
     public class EMSparseAttribute
     {
         #region Properties
@@ -176,11 +235,4 @@ namespace Managed3D.Modeling
         }
         #endregion
     }
-
-
-
-   
-
-
-
 }

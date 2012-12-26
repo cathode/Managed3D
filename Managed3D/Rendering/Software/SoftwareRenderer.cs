@@ -79,8 +79,8 @@ namespace Managed3D.Rendering.Software
             var worldMatrix = Matrix4.Identity;
 
             // Set up the view matrix.
-            state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
             state.Scale(camScale.X, camScale.Y, camScale.Z);
+            state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
             state.Rotate(camRot);
             state.SetProjectionMatrix(this.projectionMatrix);
 
@@ -312,24 +312,24 @@ namespace Managed3D.Rendering.Software
                 }
             }
 
-            if (node is LabelNode)
+            if (node is SpriteNode)
             {
                 var v = state.Transform(new Vertex3(node.Position.X, node.Position.Y, node.Position.Z));
 
                 if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z))
                 {
 
-                    var labelNode = node as LabelNode;
+                    var spr = node as SpriteNode;
                     var buffer = this.BackBuffer;
                     var cp = this.BackBuffer.Color;
-                    var pix = labelNode.Bitmap;
+                    var pix = spr.Bitmap;
 
 
 
-                    var ymax = labelNode.BitmapSize.Y;
-                    var xmax = labelNode.BitmapSize.X;
+                    var ymax = spr.BitmapSize.Y;
+                    var xmax = spr.BitmapSize.X;
 
-                    var stride = labelNode.BitmapSize.X;
+                    var stride = spr.BitmapSize.X;
 
                     var vx = (int)v.X;
                     var vy = (int)v.Y;

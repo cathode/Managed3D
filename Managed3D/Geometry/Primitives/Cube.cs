@@ -15,7 +15,7 @@ namespace Managed3D.Geometry.Primitives
     /// </summary>
     public sealed class Cube : Mesh3
     {
-        #region Constructors - Public
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Cube"/> class using the default size.
         /// </summary>
@@ -57,16 +57,16 @@ namespace Managed3D.Geometry.Primitives
 
         }
         #endregion
-        #region Fields - Private
+        #region Fields
         private double size;
         #endregion
-        #region Fields - Public
+        #region Fields
         /// <summary>
         /// Holds the default size of a new <see cref="Cube"/>, if none is specified when the object is created.
         /// </summary>
         public const double DefaultSize = 1.0;
         #endregion
-        #region Properties - Public
+        #region Properties
         /// <summary>
         /// Gets the size of the current <see cref="Cube"/>.
         /// </summary>
