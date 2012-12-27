@@ -392,6 +392,12 @@ namespace Managed3D.Geometry
             return Matrix4.Multiply(this, other);
         }
 
+        /// <summary>
+        /// Calculates the product of two matrices. This operation is not commutative.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static Matrix4 Multiply(Matrix4 left, Matrix4 right)
         {
             return new Matrix4(left.ax * right.ax + left.ay * right.bx + left.az * right.cx + left.aw * right.dx,
@@ -499,17 +505,17 @@ namespace Managed3D.Geometry
         /// <param name="w">Width</param>
         /// <param name="h">Height</param>
         /// <returns>A <see cref="Matrix4"/> that is the orthographic projection matrix for the specified width and height.</returns>
-        public static Matrix4 CreateOrthographicProjectionMatrix(double width, double height, double nearZ, double farZ)
+        public static Matrix4 CreateOrthographicProjectionMatrix(double width, double height, double near, double far)
         {
-            var left = (width / -2.0);
-            var right = (width / 2.0);
+            //var left = (width / -2.0);
+            //var right = (width / 2.0);
+            //var top = (height / 2.0);
+            //var bottom = (height / -2.0);
 
-            return Matrix4.CreateOrthographicProjectionMatrix(-1, 1, 1, -1, -1, 1);
+            //return Matrix4.CreateOrthographicProjectionMatrix(right, top, far, left, bottom, near);
 
-            return new Matrix4(1, 0, 0, 0,
-                               0, 1, 0, 0,
-                               0, 0, 1, 0,
-                               0, 0, 0, 1);
+            return Matrix4.CreateOrthographicProjectionMatrix(1, 1, 1, -1, -1, -1);
+
         }
 
         /// <summary>
@@ -522,10 +528,8 @@ namespace Managed3D.Geometry
         /// <param name="near"></param>
         /// <param name="far"></param>
         /// <returns></returns>
-        public static Matrix4 CreateOrthographicProjectionMatrix(double left, double right, double top, double bottom, double near, double far)
+        public static Matrix4 CreateOrthographicProjectionMatrix(double right, double top, double far, double left, double bottom, double near)
         {
-            //return Matrix4.Identity;
-
             var x = 2.0 / (right - left);
             var y = 2.0 / (top - bottom);
             var z = -2.0 / (far - near);

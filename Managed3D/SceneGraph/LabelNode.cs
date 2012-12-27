@@ -15,8 +15,6 @@ namespace Managed3D.SceneGraph
     {
         #region Fields
         private string text;
-        private Vector4f[] bitmap;
-        private Vector2i bitmapSize;
         private double fontSize;
         #endregion
         #region Constructors

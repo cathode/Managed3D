@@ -20,7 +20,6 @@ namespace Managed3D.Rendering.Software
     public class SoftwareRenderer : ManagedRenderer
     {
         #region Fields
-        private Thread thread;
         private Matrix4 projectionMatrix;
         #endregion
         #region Methods
@@ -82,6 +81,8 @@ namespace Managed3D.Rendering.Software
             state.Scale(camScale.X, camScale.Y, camScale.Z);
             state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
             state.Rotate(camRot);
+
+            // Set up the projection matrix.
             state.SetProjectionMatrix(this.projectionMatrix);
 
             SoftwareRendererState.GlobalState = state;
@@ -272,9 +273,10 @@ namespace Managed3D.Rendering.Software
             var state = SoftwareRendererState.GlobalState;
             state.PushMatrix();
 
-            state.Translate(node.Position);
-            state.Rotate(node.Orientation);
             state.Scale(node.Scale);
+            state.Rotate(node.Orientation);
+            state.Translate(node.Position);
+            
 
             // Traverse the graph starting at the current node, render them first.
             // AKA, depth-first search
@@ -318,44 +320,37 @@ namespace Managed3D.Rendering.Software
 
                 if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z))
                 {
-
                     var spr = node as SpriteNode;
                     var buffer = this.BackBuffer;
                     var cp = this.BackBuffer.Color;
                     var pix = spr.Bitmap;
 
-
-
-                    var ymax = spr.BitmapSize.Y;
-                    var xmax = spr.BitmapSize.X;
-
                     var stride = spr.BitmapSize.X;
 
-                    var vx = (int)v.X;
-                    var vy = (int)v.Y;
+                    var x1 = (int)(v.X - (spr.BitmapSize.X / 2.0));
+                    var y1 = (int)(v.Y - (spr.BitmapSize.Y / 2.0));
+                    var x2 = x1 + spr.BitmapSize.X;
+                    var y2 = y1 + spr.BitmapSize.Y;
 
-                    if (vy + ymax > buffer.Height)
-                        ymax = buffer.Height - vy;
-                    if (vx + xmax > buffer.Width)
-                        xmax = buffer.Width - vx;
-                    if (vx < 0)
-                        vx = 0;
-                    if (vy < 0)
-                        vy = 0;
-
-                    for (int y = 0, ym = vy; y < ymax; ++y, ++ym)
+                    for (int y = y1, yp = 0; y < y2; ++y, ++yp)
                     {
-                        for (int x = 0, xm = vx; x < xmax; ++x, ++xm)
+                        if (y < 0 || y >= buffer.Height)
+                            continue;
+
+                        for (int x = x1, xp = 0; x < x2; ++x, ++xp)
                         {
-                            var cpc = cp[xm, ym];
-                            var pc = pix[(y * stride) + x];
+                            if (x < 0 || x >= buffer.Width)
+                                continue;
+
+                            var cpc = cp[x, y];
+                            var pc = pix[(yp * stride) + xp];
 
                             var cx = (cpc.X * (1.0f - pc.W)) + (pc.X * pc.W);
                             var cy = (cpc.Y * (1.0f - pc.W)) + (pc.Y * pc.W);
                             var cz = (cpc.Z * (1.0f - pc.W)) + (pc.Z * pc.W);
                             var cw = 1.0f;
 
-                            cp[xm, ym] = new Vector4f(cx, cy, cz, cw);
+                            cp[x, y] = new Vector4f(cx, cy, cz, cw);
                         }
                     }
                 }
@@ -500,6 +495,10 @@ namespace Managed3D.Rendering.Software
             this.UpdateDerivedMatrices();
         }
 
+        /// <summary>
+        /// Sets the projection matrix for the render state.
+        /// </summary>
+        /// <param name="projectionMatrix"></param>
         public void SetProjectionMatrix(Matrix4 projectionMatrix)
         {
             this.ProjectionMatrix = projectionMatrix;
@@ -514,7 +513,6 @@ namespace Managed3D.Rendering.Software
             this.WorldViewProjection = this.ProjectionMatrix * Matrix4.Identity;
             this.WorldViewProjection *= this.ViewMatrix;
             this.WorldViewProjection *= this.WorldMatrix;
-
         }
         #endregion
     }

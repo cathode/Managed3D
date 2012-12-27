@@ -9,4 +9,4 @@ using System.Reflection;
 
 [assembly: AssemblyTitle("Managed3D")]
 [assembly: AssemblyDescription("Managed3D API library")]
-[assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]

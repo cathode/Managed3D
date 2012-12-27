@@ -32,7 +32,10 @@ namespace Managed3D.Modeling
         /// </summary>
         public EditableMesh()
         {
-
+            this.vertices = new Dictionary<uint, WVertex>();
+            this.edges = new Dictionary<uint, WEdge>();
+            this.faces = new Dictionary<uint, WFace>();
+            this.attributes = new Dictionary<ushort, EMSparseAttribute>();
         }
         #endregion
         #region Properties
