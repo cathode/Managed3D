@@ -221,8 +221,8 @@ namespace Managed3D.Rendering
             this.needsUpdate = false;
             if (this.isAutoRotateEnabled)
             {
-                var axis = this.renderer.ActiveCamera.Orientation.GetAxis();
-                this.renderer.ActiveCamera.Orientation *= new Quaternion(axis, Angle.FromDegrees(0.5));
+                //var axis = this.renderer.ActiveCamera.Orientation.GetAxis();
+                this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Up, Angle.FromDegrees(0.5));
             }
         }
 

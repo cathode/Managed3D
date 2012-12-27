@@ -201,6 +201,9 @@ namespace Managed3D.Geometry
 
         public Vector3 GetAxis()
         {
+            if (this.w == 1.0)
+                return Vector3.Up;
+
             var m = Math.Sqrt(1 - (this.w * this.w));
 
             return new Vector3(this.x / m, this.y / m, this.z / m);
