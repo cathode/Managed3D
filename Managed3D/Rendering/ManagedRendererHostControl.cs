@@ -111,14 +111,18 @@ namespace Managed3D.Rendering
 
             if (Control.MouseButtons == MouseButtons.Left)
             {
-                var xdelta = e.X - this.rx;
-                var ydelta = e.Y - this.ry;
-                this.rx += xdelta;
-                this.ry += ydelta;
-                this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Up, Angle.FromDegrees(-xdelta * sensitivity));
-                //var or = this.renderer.ActiveCamera.Orientation;
-
-                //Console.WriteLine("cam-r: {0}", or.FindAngle());
+                if (Control.ModifierKeys == Keys.Control)
+                {
+                    this.renderer.ActiveCamera.Orientation = Quaternion.LookAt(new Vector3(e.X - (e.X / 2.0), e.Y - (e.Y / 2.0), 10));
+                }
+                else
+                {
+                    var xdelta = e.X - this.rx;
+                    var ydelta = e.Y - this.ry;
+                    this.rx += xdelta;
+                    this.ry += ydelta;
+                    this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Up, Angle.FromDegrees(-xdelta * sensitivity));
+                }
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
@@ -166,12 +170,12 @@ namespace Managed3D.Rendering
                     break;
 
                 case Keys.NumPad7:
-                    cam.Facing = CameraFacing.Above;
+                    cam.Facing = CameraFacing.Up;
                     cam.UpdateFacing();
                     break;
 
                 case Keys.NumPad9:
-                    cam.Facing = CameraFacing.Below;
+                    cam.Facing = CameraFacing.Down;
                     cam.UpdateFacing();
                     break;
 
@@ -199,6 +203,13 @@ namespace Managed3D.Rendering
                         cam.VisibleGroups &= ~VisibilityGroup.G2;
                     else
                         cam.VisibleGroups |= VisibilityGroup.G2;
+                    break;
+
+                case Keys.D4:
+                     if (cam.VisibleGroups.HasFlag(VisibilityGroup.G3))
+                        cam.VisibleGroups &= ~VisibilityGroup.G3;
+                    else
+                        cam.VisibleGroups |= VisibilityGroup.G3;
                     break;
 
                 case Keys.Z:

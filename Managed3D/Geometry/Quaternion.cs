@@ -157,6 +157,28 @@ namespace Managed3D.Geometry
         {
             throw new NotImplementedException();
         }
+
+        public static Quaternion LookAt(Vector3 lookAt)
+        {
+            var up = Vector3.Up;
+            var forward = lookAt;
+            Vector3.OrthoNormalize(ref forward, ref up);
+            var right = Vector3.CrossProduct(up, forward);
+
+            var w = 1.0 + right.X + up.Y + forward.Z;
+
+            w = Math.Sqrt(w) * 0.5;
+
+
+            var w4Recip = 1.0 / (4.0 * w);
+            var x = (up.Z - forward.Y) * w4Recip;
+            var y = (forward.X - right.Z) * w4Recip;
+            var z = (right.Y - up.X) * w4Recip;
+
+            return new Quaternion(w, x, y, z).Normalized();
+
+        }
+
         public static Quaternion Multiply(Quaternion q1, Quaternion q2)
         {
             var w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;

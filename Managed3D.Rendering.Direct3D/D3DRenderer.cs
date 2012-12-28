@@ -125,12 +125,12 @@ namespace Managed3D.Rendering.Direct3D
                             break;
 
                         case Keys.NumPad7:
-                            this.ActiveCamera.Facing = CameraFacing.Above;
+                            this.ActiveCamera.Facing = CameraFacing.Up;
                             this.ActiveCamera.UpdateFacing();
                             break;
 
                         case Keys.NumPad9:
-                            this.ActiveCamera.Facing = CameraFacing.Below;
+                            this.ActiveCamera.Facing = CameraFacing.Down;
                             this.ActiveCamera.UpdateFacing();
                             break;
 

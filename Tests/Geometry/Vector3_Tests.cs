@@ -15,5 +15,33 @@ namespace Tests.Geometry
 
             Assert.AreEqual(v1, v2);
         }
+
+        [TestMethod]
+        public void OrthoNormal()
+        {
+            var a = new Vector3(1, 0, 0);
+            var b = new Vector3(0, 1, 0);
+
+            var c = Vector3.CrossProduct(a, b);
+
+            var expected = new Vector3(0, 0, 1);
+
+            Assert.AreEqual(expected, c);
+
+            var dot = Vector3.DotProduct(a, b);
+        }
+
+        [TestMethod]
+        public void OrthoNormal_ZeroResult()
+        {
+            var a = new Vector3(1, 0, 0);
+            var b = new Vector3(1, 0, 0);
+
+            var actual = Vector3.CrossProduct(a, b);
+
+            var expected = Vector3.Zero;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

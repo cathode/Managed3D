@@ -58,7 +58,7 @@ namespace ManagedStudio3D
                 });
 
             //root = new LabelNode("Sample Label");
-            Program.scene.Root = new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 12));
+            Program.scene.Root = new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5));
 
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();

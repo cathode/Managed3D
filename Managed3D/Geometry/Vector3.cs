@@ -114,28 +114,6 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(0.0, 0.0, 1.0);
-            }
-        }
-
-        /// <summary>
-        /// Gets a unit vector that points along the negative Y-axis.
-        /// </summary>
-        public static Vector3 Down
-        {
-            get
-            {
-                return new Vector3(0.0, 0.0, -1.0);
-            }
-        }
-
-        /// <summary>
-        /// Gets a unit vector that points along the positive Z-axis.
-        /// </summary>
-        public static Vector3 Forward
-        {
-            get
-            {
                 return new Vector3(0.0, 1.0, 0.0);
             }
         }
@@ -143,11 +121,33 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a unit vector that points along the negative Z-axis.
         /// </summary>
-        public static Vector3 Backward
+        public static Vector3 Down
         {
             get
             {
                 return new Vector3(0.0, -1.0, 0.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the positive Y-axis.
+        /// </summary>
+        public static Vector3 Forward
+        {
+            get
+            {
+                return new Vector3(0.0, 0.0, 1.0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a unit vector that points along the negative Y-axis.
+        /// </summary>
+        public static Vector3 Backward
+        {
+            get
+            {
+                return new Vector3(0.0, 0.0, -1.0);
             }
         }
 
@@ -436,6 +436,18 @@ namespace Managed3D.Geometry
 
             return false;
         }
+
+        public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent)
+        {
+            normal = normal.Normalize();
+
+            var proj = normal * Vector3.DotProduct(tangent, normal);
+
+            tangent -= proj;
+
+            tangent = tangent.Normalize();
+        }
+
 
         /// <summary>
         /// Compares the current <see cref="Vector3"/> and the specified <see cref="Vector3"/> for equality.

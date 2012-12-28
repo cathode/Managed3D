@@ -8,53 +8,46 @@ namespace Managed3D.SceneGraph
     /// <summary>
     /// Enumerates pre-defined  facings of a camera.
     /// </summary>
-    [Flags]
+  
     public enum CameraFacing
     {
         /// <summary>
         /// Indicates the camera has no explicit direction or facing.
         /// </summary>
-        Any = 0x00,
+        Forward = 0x00,
 
-        /// <summary>
-        /// Indicates the camera is positioned above the scene, looking down.
-        /// </summary>
-        Above = 0x01,
-
-        /// <summary>
-        /// Indicates the camera is positioned below the scene, looking up.
-        /// </summary>
-        Below = 0x02,
+        Backward = 0x01,
 
         /// <summary>
         /// Indicates the camera is facing north. This is the default facing.
         /// </summary>
-        North = 0x04,
-
-        /// <summary>
-        /// Indicates the camera is facing east. 
-        /// </summary>
-        East = 0x08,
+        North = Forward,
 
         /// <summary>
         /// Indicates the camera is facing south.
         /// </summary>
-        South = 0x10,
+        South = Backward,
+
+        /// <summary>
+        /// Indicates the camera is positioned above the scene, looking down.
+        /// </summary>
+        Up = 0x02,
+
+        /// <summary>
+        /// Indicates the camera is positioned below the scene, looking up.
+        /// </summary>
+        Down = 0x03,
+
+        /// <summary>
+        /// Indicates the camera is facing east. 
+        /// </summary>
+        East = 0x04,
 
         /// <summary>
         /// Indicates the camera is facing west.
         /// </summary>
-        West = 0x20,
+        West = 0x05,
 
-        /// <summary>
-        /// Indicates the camera is mirrored horizontally.
-        /// </summary>
-        Mirrored = 0x40,
-
-        Isometric,
-
-        Trimetric,
-
-        Dimetric,
+        Isometric = 0x06,
     }
 }

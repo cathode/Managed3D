@@ -33,13 +33,13 @@ namespace Managed3D.Modeling.Primitives
 
             int tipIndex = sides;
             int baseIndex = sides + 1;
-            vertices[tipIndex] = new Vertex3(0, 0, height); // Tip of cone
+            vertices[tipIndex] = new Vertex3(0, height, 0); // Tip of cone
             vertices[baseIndex] = new Vertex3(0, 0, 0); // Center of base
 
             for (int i = 0; i < sides; ++i)
             {
                 var theta = alpha * i;
-                vertices[i] = new Vertex3(Math.Cos(theta) * radius, Math.Sin(theta) * radius, 0);
+                vertices[i] = new Vertex3(Math.Cos(theta) * radius, 0, Math.Sin(theta) * radius);
             }
 
             var polys = new List<Polygon3>();
