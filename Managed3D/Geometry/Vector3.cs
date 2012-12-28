@@ -114,7 +114,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(0.0, 1.0, 0.0);
+                return new Vector3(0.0, 0.0, 1.0);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(0.0, -1.0, 0.0);
+                return new Vector3(0.0, 0.0, -1.0);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(0.0, 0.0, 1.0);
+                return new Vector3(0.0, 1.0, 0.0);
             }
         }
 
@@ -147,7 +147,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(0.0, 0.0, -1.0);
+                return new Vector3(0.0, -1.0, 0.0);
             }
         }
 

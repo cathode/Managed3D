@@ -532,16 +532,20 @@ namespace Managed3D.Geometry
         {
             var x = 2.0 / (right - left);
             var y = 2.0 / (top - bottom);
-            var z = -2.0 / (far - near);
+            var z = 2.0 / (far - near);
 
             var a = (right + left) / (right - left) * -1.0;
             var b = (top + bottom) / (top - bottom) * -1.0;
             var c = (far + near) / (far - near) * -1.0;
 
-            return new Matrix4(x, 0, 0, a,
-                               0, y, 0, b,
-                               0, 0, z, c,
-                               0, 0, 0, 1);
+            //TODO: Fix orthographic projection
+            a = b = c = 0;
+            x = y = z = 1.0;
+
+            return new Matrix4(x, 0, 0, 0,
+                               0, y, 0, 0,
+                               0, 0, z, 0,
+                               a, b, c, 1);
         }
 
         /// <summary>

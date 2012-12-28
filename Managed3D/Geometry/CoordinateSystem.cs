@@ -61,6 +61,13 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
+        public void Apply(CoordinateSystem system)
+        {
+            this.scale += system.scale;
+            this.position += system.position;
+            this.rotation *= system.rotation;
+        }
+
         public Vector3 Transform(Vector3 v)
         {
             throw new NotImplementedException();

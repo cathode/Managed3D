@@ -28,7 +28,7 @@ namespace Managed3D.Geometry
         /// </summary>
         public Vertex3()
         {
-            this.color = Vector4f.Color(0, 1, 1, 1);
+            this.color = Vector4f.Color(0, 0, 0, 1);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Managed3D.Geometry
             this.y = y;
             this.z = z;
 
-            this.color = Vector4f.Color(0, 1, 1, 1);
+            this.color = Vector4f.Color(0, 0, 0, 1);
         }
         #endregion
         #region Properties

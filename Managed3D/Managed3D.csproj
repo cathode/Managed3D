@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="Geometry\Angle.cs" />
     <Compile Include="Geometry\CoordinateSystem.cs" />
+    <Compile Include="Geometry\Extents3.cs" />
     <Compile Include="Geometry\FastMesh.cs" />
     <Compile Include="Geometry\IMeshFragment.cs" />
     <Compile Include="Geometry\IRenderable.cs" />

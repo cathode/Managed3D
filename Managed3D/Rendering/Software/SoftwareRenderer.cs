@@ -316,7 +316,7 @@ namespace Managed3D.Rendering.Software
 
             if (node is SpriteNode)
             {
-                var v = state.Transform(new Vertex3(node.Position.X, node.Position.Y, node.Position.Z));
+                var v = state.Transform(new Vertex3(node.Position.X, node.Position.Y, node.Position.Z), ReferenceSpace.Object);
 
                 if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z))
                 {
