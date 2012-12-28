@@ -181,6 +181,7 @@
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
+    <Compile Include="Modeling\Primitives\Cone.cs" />
     <Compile Include="Modeling\ProceduralMesh.cs" />
     <Compile Include="Modeling\ProcedureParameter.cs" />
     <Compile Include="Modeling\ProcedureParameterCollection.cs" />

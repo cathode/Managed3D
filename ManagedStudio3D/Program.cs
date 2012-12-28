@@ -58,7 +58,7 @@ namespace ManagedStudio3D
                 });
 
             //root = new LabelNode("Sample Label");
-            Program.scene.Root = root;
+            Program.scene.Root = new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 12));
 
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();
@@ -95,8 +95,7 @@ namespace ManagedStudio3D
         {
             var renderer = new SoftwareRenderer()
             {
-                // Same eye-pleasing grey used as the default viewport background by 3DS Max 2011.
-                BackgroundColor = new Vector4f(0.11764705882f, 0.11764705882f, 0.11764705882f, 1.0f),
+                BackgroundColor = new Vector4f(0.9f, 0.9f, 0.9f, 1.0f),
             };
             var options = new RendererOptions();
             renderer.Scene = Program.scene;

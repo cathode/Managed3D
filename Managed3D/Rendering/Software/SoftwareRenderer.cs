@@ -78,7 +78,7 @@ namespace Managed3D.Rendering.Software
             var worldMatrix = Matrix4.Identity;
 
             // Set up the view matrix.
-            state.Scale(camScale.X, camScale.Y, camScale.Z);
+            state.Scale(-camScale.X, -camScale.Y, -camScale.Z);
             state.Translate(-camPos.X, -camPos.Y, -camPos.Z);
             state.Rotate(camRot);
 

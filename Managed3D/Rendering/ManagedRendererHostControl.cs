@@ -115,7 +115,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ry;
                 this.rx += xdelta;
                 this.ry += ydelta;
-                this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Right, Angle.FromDegrees(xdelta * sensitivity)) * new Quaternion(Vector3.Up, Angle.FromDegrees(ydelta * sensitivity));
+                this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Up, Angle.FromDegrees(-xdelta * sensitivity));
                 //var or = this.renderer.ActiveCamera.Orientation;
 
                 //Console.WriteLine("cam-r: {0}", or.FindAngle());
@@ -126,7 +126,7 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ty;
                 this.tx += xdelta;
                 this.ty += ydelta;
-                this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(-xdelta * (this.sensitivity * 2), -ydelta * (this.sensitivity * 2), 0);
+                this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(xdelta * (this.sensitivity * 2), ydelta * (this.sensitivity * 2), 0);
             }
             else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
