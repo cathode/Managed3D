@@ -112,7 +112,7 @@ namespace Managed3D.Platform
         }
 
         /// <summary>
-        /// Gets a device-independent <see cref="DisplayProfile"/> for WVGA (Wide Video Graphics Array).
+        /// Gets a device-independent <see cref="DisplayProfile"/> for WVGA (800 x 480).
         /// </summary>
         public static DisplayProfile GenericWVGA
         {
@@ -123,7 +123,7 @@ namespace Managed3D.Platform
         }
 
         /// <summary>
-        /// Gets a device-independent <see cref="DisplayProfile"/> for GenericWVGA+ (Wide Video Graphics Array Plus).
+        /// Gets a device-independent <see cref="DisplayProfile"/> for WVGA+ (854 x 480).
         /// </summary>
         public static DisplayProfile GenericWVGAPlus
         {
@@ -178,7 +178,28 @@ namespace Managed3D.Platform
         }
 
         /// <summary>
-        /// Gets a generic <see cref="DisplayProfile"/> for WQXGA (2560x1600).
+        /// Gets a generic <see cref="DisplayProfile"/> for WSXGA+ (1680 x 1050).
+        /// </summary>
+        public static DisplayProfile GenericWSXGAPlus
+        {
+            get
+            {
+                return DisplayProfile.genericWSXGAPlus;
+            }
+        }
+
+        /// <summary>
+        /// Gets a generic <see cref="DisplayProfile"/> for WQHD (2560 x 1440).
+        /// </summary>
+        public static DisplayProfile GenericWQHD
+        {
+            get
+            {
+                return DisplayProfile.genericWQHD;
+            }
+        }
+        /// <summary>
+        /// Gets a generic <see cref="DisplayProfile"/> for WQXGA (2560 x 1600).
         /// </summary>
         public static DisplayProfile GenericWQXGA
         {

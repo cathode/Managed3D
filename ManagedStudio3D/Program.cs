@@ -34,32 +34,32 @@ namespace ManagedStudio3D
             var root = new Node(
                 new Node(new Cube(50))
                 {
-                    Position = new Vector3(50, 0, 0),
+                    Position = new Vector3(150, 0, 0),
                     Visibility = VisibilityGroup.G0,
                 },
                 new Node(new Cube(50))
                 {
-                    Position = new Vector3(-50, 0, 0),
+                    Position = new Vector3(-150, 0, 0),
                     Visibility = VisibilityGroup.G0 | VisibilityGroup.G1
                 },
                 new Node(new Cube(50))
                 {
-                    Position = new Vector3(0, -50, 0),
+                    Position = new Vector3(0, -150, 0),
                     Visibility = VisibilityGroup.G1,
                 },
                 new Node(new Cube(50))
                 {
-                    Position = new Vector3(0, 50, 0),
+                    Position = new Vector3(0, 150, 0),
                     Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
                 }, new LabelNode("Sample Label")
                 {
-                    Position = new Vector3(75, 75, 0),
+                    Position = new Vector3(100, 100, 0),
                     Visibility = VisibilityGroup.G2,
                 });
 
-            //root = new LabelNode("Sample Label");
-            Program.scene.Root = new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5));
 
+            root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
+            scene.Root = root;
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();
             //Program.RunOpenGLMode();

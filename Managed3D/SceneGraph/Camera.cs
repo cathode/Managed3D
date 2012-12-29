@@ -131,6 +131,30 @@ namespace Managed3D.SceneGraph
             get;
             set;
         }
+
+        //public Vector3 Up
+        //{
+        //    get
+        //    {
+        //        return Vector3.Up;
+        //    }
+        //}
+
+        //public Vector3 Left
+        //{
+        //    get
+        //    {
+        //        return Vector3.Left;
+        //    }
+        //}
+
+        //public Vector3 Forward
+        //{
+        //    get
+        //    {
+        //        return Vector3.Forward;
+        //    }
+        //}
         #endregion
         #region Methods
 
@@ -138,8 +162,8 @@ namespace Managed3D.SceneGraph
         {
             var cam = new Camera();
             cam.mode = CameraMode.Orthographic;
-            cam.Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(45)) * new Quaternion(Vector3.Left, Angle.FromDegrees(45));
-            cam.Position = new Vector3(0, 0, 0);
+            cam.Facing = CameraFacing.Isometric;
+            cam.UpdateFacing();
 
             return cam;
         }
@@ -182,7 +206,7 @@ namespace Managed3D.SceneGraph
                     break;
 
                 case CameraFacing.Isometric:
-                    this.Orientation = new Quaternion(Vector3.Left, Angle.FromDegrees(45)) * new Quaternion(Vector3.Up, Angle.FromDegrees(45));
+                    this.Orientation = new Quaternion(new Vector3(1.0, 0.0, 0.0), Angle.FromDegrees(35.264)) *new Quaternion(Vector3.Up, Angle.FromDegrees(45));
                     break;
             }
         }

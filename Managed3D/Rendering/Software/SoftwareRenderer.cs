@@ -276,7 +276,7 @@ namespace Managed3D.Rendering.Software
             state.Scale(node.Scale);
             state.Rotate(node.Orientation);
             state.Translate(node.Position);
-            
+
 
             // Traverse the graph starting at the current node, render them first.
             // AKA, depth-first search
@@ -318,7 +318,8 @@ namespace Managed3D.Rendering.Software
             {
                 var v = state.Transform(new Vertex3(node.Position.X, node.Position.Y, node.Position.Z), ReferenceSpace.Object);
 
-                if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z))
+                if (!double.IsInfinity(v.X) && !double.IsInfinity(v.Y) && !double.IsInfinity(v.Z)
+                    && !double.IsNaN(v.X) && !double.IsNaN(v.Y) && !double.IsNaN(v.Z))
                 {
                     var spr = node as SpriteNode;
                     var buffer = this.BackBuffer;
