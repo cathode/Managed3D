@@ -197,11 +197,11 @@ namespace Managed3D.Rendering.Software
             var dp = this.BackBuffer.Depth;
 
             var e1yd = e1.Q.Y - e1.P.Y;
-            if (e1yd == 0.0)
+            if (e1yd < 0.00001 && e1yd > -0.00001)
                 return;
 
             var e2yd = e2.Q.Y - e2.P.Y;
-            if (e2yd == 0.0)
+            if (e2yd < 0.00001 && e2yd > -0.00001)
                 return;
 
             var e1xd = e1.Q.X - e1.P.X;
@@ -240,16 +240,35 @@ namespace Managed3D.Rendering.Software
                 f1 += f1step;
                 f2 += f2step;
             }
-
         }
 
         private void DrawTriangle(Vertex3 p1, Vertex3 p2, Vertex3 p3)
         {
-            // draw the triangle
-            var edges = (from e in new Edge3[] { new Edge3(p1, p2), new Edge3(p2, p3), new Edge3(p3, p1) }
-                         let length = Math.Abs(e.Q.Y - e.P.Y)
-                         orderby length
-                         select e).ToArray();
+            // -----------------
+            // Draw the triangle
+            // -----------------
+
+            // Find the vertex with the middle y value.
+            var ps = new Vertex3[] { p1, p2, p3 };
+            ps = ps.OrderBy(p => p.Y).ToArray();
+
+            var ystart = (int)ps[0].Y;
+            var ymid = (int)ps[1].Y;
+            var yend = (int)ps[2].Y;
+
+            var e1 = new Edge3(ps[0], ps[1]);
+            var e2 = new Edge3(ps[0], ps[2]);
+            var e3 = new Edge3(ps[1], ps[2]);
+
+            if (ymid > ystart)
+            {
+
+            }
+
+            if (yend > ymid)
+            {
+
+            }
 
             //this.DrawSpan(edges[0], edges[1]);
             //this.DrawSpan(edges[0], edges[2]);

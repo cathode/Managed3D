@@ -90,7 +90,23 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public Vector3 GetIntersectionYZ(double x)
         {
-            throw new NotImplementedException();
+            var x1 = this.P.X;
+            var x2 = this.Q.X;
+            var y1 = this.P.Y;
+            var y2 = this.Q.Y;
+            var z1 = this.P.Z;
+            var z2 = this.P.Z;
+
+            var k1 = -x2 / (x1 - x2);
+            var k2 = 1 - k1;
+            var xf =  1.0 / (x2 - x1);
+
+            //var xdist = 
+            //k1 *= x;
+            //k2 *= 1.0 - x;
+            var isect = ((k1 * this.P.ToVector3()) + (this.Q.ToVector3() * k2)) * xf;
+
+            return isect;
         }
 
         /// <summary>

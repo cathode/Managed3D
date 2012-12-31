@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Geometry\Quaternion_Tests.cs" />
+    <Compile Include="Geometry\Edge3_Test.cs" />
     <Compile Include="Geometry\Vector3_Tests.cs" />
     <Compile Include="Modeling\EditableMesh_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
