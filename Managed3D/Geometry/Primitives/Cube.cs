@@ -43,18 +43,35 @@ namespace Managed3D.Geometry.Primitives
             verts[6] = new Vertex3(-r, -r, -r);
             verts[7] = new Vertex3(-r, r, -r);
 
+            var edges = new Edge3[]
+            {
+                new Edge3(verts, 0, 1),
+                new Edge3(verts, 1, 2),
+                new Edge3(verts, 2, 3),
+                new Edge3(verts, 3, 0),
+
+                new Edge3(verts, 4, 5),
+                new Edge3(verts, 5, 6),
+                new Edge3(verts, 6, 7),
+                new Edge3(verts, 7, 4),
+
+                new Edge3(verts, 0, 6),
+                new Edge3(verts, 1, 5),
+                new Edge3(verts, 2, 4),
+                new Edge3(verts, 3, 7),
+            };
+
             this.Polygons = new Quad3[] { 
                 // Top and bottom
-                new Quad3(verts, 0, 1, 2, 3),
-                new Quad3(verts, 7, 6, 5, 4),
-
+                new Quad3(edges, 0, 1, 2, 3),
+                new Quad3(edges, 4, 5, 6, 7),
+                //new Quad3(edges,  
                 new Quad3(verts, 0, 3, 7, 4),
                 new Quad3(verts, 1, 0, 4, 5),
                 new Quad3(verts, 2, 1, 5, 6),
                 new Quad3(verts, 3, 2, 6, 7),
                 
             };
-
         }
         #endregion
         #region Fields

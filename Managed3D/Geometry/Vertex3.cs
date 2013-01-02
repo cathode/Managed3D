@@ -14,10 +14,8 @@ namespace Managed3D.Geometry
     public class Vertex3
     {
         #region Fields
-        public const int SizeOf = 8 + 8 + 8 + 16 + 8 + 4;
-        private double x;
-        private double y;
-        private double z;
+        private Vector3 position;
+        private Vector3 normal;
         private Vector4f color;
         private Vector2f textureCoordinates;
         private VertexFlags flags;
@@ -39,10 +37,7 @@ namespace Managed3D.Geometry
         /// <param name="z"></param>
         public Vertex3(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-
+            this.position = new Vector3(x, y, z);
             this.color = Vector4f.Color(0, 0, 0, 1);
         }
         #endregion
@@ -81,11 +76,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.x;
-            }
-            set
-            {
-                this.x = value;
+                return this.position.X;
             }
         }
 
@@ -96,11 +87,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.y;
-            }
-            set
-            {
-                this.y = value;
+                return this.position.Y;
             }
         }
 
@@ -111,11 +98,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.z;
-            }
-            set
-            {
-                this.z = value;
+                return this.position.Z;
             }
         }
 
@@ -123,7 +106,23 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return new Vector3(this.x, this.y, this.z);
+                return this.position;
+            }
+            set
+            {
+                this.position = value;
+            }
+        }
+
+        public Vector3 Normal
+        {
+            get
+            {
+                return this.normal;
+            }
+            set
+            {
+                this.normal = value;
             }
         }
         #endregion

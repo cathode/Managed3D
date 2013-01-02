@@ -15,6 +15,9 @@ namespace Managed3D.Geometry
     /// </summary>
     public class Edge3
     {
+        #region Fields
+        private EdgeFlags flags;
+        #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Edge3"/> class.
@@ -25,6 +28,11 @@ namespace Managed3D.Geometry
         {
             this.P = p;
             this.Q = q;
+        }
+        public Edge3(Vertex3[] vertices, int p, int q)
+        {
+            this.P = vertices[p];
+            this.Q = vertices[q];
         }
         #endregion
         #region Properties
@@ -49,6 +57,18 @@ namespace Managed3D.Geometry
         {
             get;
             set;
+        }
+
+        public EdgeFlags Flags
+        {
+            get
+            {
+                return this.flags;
+            }
+            set
+            {
+                this.flags = value;
+            }
         }
         #endregion
         #region Methods

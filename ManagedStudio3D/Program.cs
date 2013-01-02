@@ -31,16 +31,21 @@ namespace ManagedStudio3D
 
             Program.scene = new Scene();
 
+            var c1 = new Cube(50);
+            c1.Polygons[0].Edges[0].Flags = EdgeFlags.Invisible;
+
             var root = new Node(
-                new Node(new Cube(50))
+                new Node(c1)
                 {
                     Position = new Vector3(150, 0, 0),
                     Visibility = VisibilityGroup.G0,
+                    TransformOrder = TransformOrder.RotateTranslateScale,
                 },
                 new Node(new Cube(50))
                 {
                     Position = new Vector3(-150, 0, 0),
-                    Visibility = VisibilityGroup.G0 | VisibilityGroup.G1
+                    Visibility = VisibilityGroup.G0 | VisibilityGroup.G1,
+                    TransformOrder = TransformOrder.TranslateRotateScale,
                 },
                 new Node(new Cube(50))
                 {

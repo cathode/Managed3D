@@ -83,6 +83,12 @@ namespace Managed3D.SceneGraph
             }
         }
 
+        public TransformOrder TransformOrder
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets a value that indicates if the current <see cref="Node"/> is read-only.
         /// </summary>

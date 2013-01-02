@@ -68,6 +68,12 @@ namespace Managed3D.Geometry
         {
         }
 
+        public Quad3(Edge3[] edges, int a, int b, int c, int d)
+            : base(edges, a, b, c, d)
+        {
+
+        }
+
         public Quad3(double width, double height)
         {
             var x1 = width / -2.0;
@@ -139,6 +145,37 @@ namespace Managed3D.Geometry
             set
             {
                 this[3] = value;
+            }
+        }
+
+        public Edge3 AB
+        {
+            get
+            {
+                return this.edges[0];
+            }
+        }
+
+        public Edge3 BC
+        {
+            get
+            {
+                return this.edges[1];
+            }
+        }
+
+        public Edge3 CD
+        {
+            get
+            {
+                return this.edges[2];
+            }
+        }
+        public Edge3 DA
+        {
+            get
+            {
+                return this.edges[3];
             }
         }
 

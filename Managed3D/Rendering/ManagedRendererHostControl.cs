@@ -34,9 +34,9 @@ namespace Managed3D.Rendering
         private double ty;
         private double sx;
         private double sy;
-        //private bool isRotating;
-        //private bool isPanning;
-        //private bool isZooming;
+        private bool isRotating;
+        private bool isPanning;
+        private bool isZooming;
         //private double autoRotate = 0.0;
         private double sensitivity = 0.322;
         internal Managed3D.SceneGraph.Scene scene;
@@ -92,16 +92,41 @@ namespace Managed3D.Rendering
             {
                 this.rx = e.X;
                 this.ry = e.Y;
+                this.isRotating = true;
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
                 this.tx = e.X;
                 this.ty = e.Y;
+                this.isPanning = true;
+                
             }
             else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
                 this.sx = e.X;
                 this.sy = e.Y;
+                this.isPanning = false;
+                this.isRotating = false;
+                this.isZooming = true;
+            }
+        }
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            if (this.isRotating)
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                    this.isRotating = !this.isRotating;
+            }
+            else if (this.isPanning)
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    this.isPanning = !this.isPanning;
+            }
+            else if (this.isZooming)
+            {
+                this.isZooming = false;
             }
         }
 
@@ -109,7 +134,7 @@ namespace Managed3D.Rendering
         {
             base.OnMouseMove(e);
 
-            if (Control.MouseButtons == MouseButtons.Left)
+            if (this.isRotating)
             {
                 if (Control.ModifierKeys == Keys.Control)
                 {
@@ -124,7 +149,7 @@ namespace Managed3D.Rendering
                     this.renderer.ActiveCamera.Orientation *= new Quaternion(Vector3.Up, Angle.FromDegrees(-xdelta * sensitivity));
                 }
             }
-            else if (Control.MouseButtons == MouseButtons.Right)
+            else if (this.isPanning)
             {
                 var xdelta = e.X - this.tx;
                 var ydelta = e.Y - this.ty;
@@ -132,7 +157,7 @@ namespace Managed3D.Rendering
                 this.ty += ydelta;
                 this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(xdelta * (this.sensitivity * 2), ydelta * (this.sensitivity * 2), 0);
             }
-            else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
+            else if (this.isZooming)
             {
                 var xdelta = e.X - this.sx;
                 var ydelta = e.Y - this.sy;

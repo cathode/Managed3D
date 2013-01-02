@@ -145,12 +145,14 @@
     </Compile>
     <Compile Include="Geometry\Angle.cs" />
     <Compile Include="Geometry\CoordinateSystem.cs" />
+    <Compile Include="Geometry\EdgeFlags.cs" />
     <Compile Include="Geometry\Extents3.cs" />
     <Compile Include="Geometry\FastMesh.cs" />
     <Compile Include="Geometry\IMeshFragment.cs" />
     <Compile Include="Geometry\IRenderable.cs" />
     <Compile Include="Geometry\MeshData.cs" />
     <Compile Include="Geometry\IPath.cs" />
+    <Compile Include="Geometry\Path2.cs" />
     <Compile Include="Geometry\Primitives\Box.cs" />
     <Compile Include="Geometry\Primitives\MengerSponge.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
@@ -283,6 +285,7 @@
     <Compile Include="SceneGraph\Node.cs" />
     <Compile Include="SceneGraph\SpotLight.cs" />
     <Compile Include="SceneGraph\SpriteNode.cs" />
+    <Compile Include="SceneGraph\TransformOrder.cs" />
     <Compile Include="SceneGraph\VisibilityGroup.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\ContainerElement.cs" />

@@ -103,11 +103,23 @@ namespace Managed3D.Rendering.Software
         {
             base.OnStopping(e);
         }
-
-        private void DrawLine(Vertex3 a, Vertex3 b)
+        private void DrawEdge(Edge3 edge)
         {
-            var xdiff = b.X - a.X;
-            var ydiff = b.Y - a.Y;
+            if (edge.Flags.HasFlag(EdgeFlags.Invisible))
+                return;
+            else
+            {
+                var state = SoftwareRendererState.GlobalState;
+                var p = state.Transform(edge.P);
+                var q = state.Transform(edge.Q);
+
+                this.DrawLine(p.Position, p.Color, q.Position, q.Color);
+            }
+        }
+        private void DrawLine(Vector3 v1, Vector4f c1, Vector3 v2, Vector4f c2)
+        {
+            var xdiff = v2.X - v1.X;
+            var ydiff = v2.Y - v1.Y;
 
             if (xdiff == 0.0 && ydiff == 0.0)
                 return;
@@ -118,15 +130,15 @@ namespace Managed3D.Rendering.Software
             {
                 double xmin, xmax;
 
-                if (a.X < b.X)
+                if (v1.X < v2.X)
                 {
-                    xmin = a.X;
-                    xmax = b.X;
+                    xmin = v1.X;
+                    xmax = v2.X;
                 }
                 else
                 {
-                    xmin = b.X;
-                    xmax = a.X;
+                    xmin = v2.X;
+                    xmax = v1.X;
                 }
 
                 xmin = xmin < 0 ? 0 : xmin;
@@ -136,10 +148,10 @@ namespace Managed3D.Rendering.Software
 
                 for (double x = xmin; x <= xmax; ++x)
                 {
-                    double y = a.Y + ((x - a.X) * slope);
+                    double y = v1.Y + ((x - v1.X) * slope);
                     y = y < 0 ? 0 : y;
                     y = y >= this.BackBuffer.Height ? this.BackBuffer.Height - 1 : y;
-                    var color = a.Color + ((b.Color - a.Color) * ((x - a.X) / xdiff));
+                    var color = c1 + ((c2 - c1) * ((x - v1.X) / xdiff));
                     cp[(int)x, (int)y] = color;
                 }
             }
@@ -147,15 +159,15 @@ namespace Managed3D.Rendering.Software
             {
                 double ymin, ymax;
 
-                if (a.Y < b.Y)
+                if (v1.Y < v2.Y)
                 {
-                    ymin = a.Y;
-                    ymax = b.Y;
+                    ymin = v1.Y;
+                    ymax = v2.Y;
                 }
                 else
                 {
-                    ymin = b.Y;
-                    ymax = a.Y;
+                    ymin = v2.Y;
+                    ymax = v1.Y;
                 }
 
                 double slope = xdiff / ydiff;
@@ -165,10 +177,10 @@ namespace Managed3D.Rendering.Software
 
                 for (double y = ymin; y <= ymax; ++y)
                 {
-                    double x = a.X + ((y - a.Y) * slope);
+                    double x = v1.X + ((y - v1.Y) * slope);
                     x = x < 0 ? 0 : x;
                     x = x >= this.BackBuffer.Width ? this.BackBuffer.Width - 1 : x;
-                    var color = a.Color + ((b.Color - a.Color) * ((y - a.Y) / ydiff));
+                    var color = c1 + ((c2 - c1) * ((y - v1.Y) / ydiff));
                     cp[(int)x, (int)y] = color;
                 }
             }
@@ -242,8 +254,12 @@ namespace Managed3D.Rendering.Software
             }
         }
 
-        private void DrawTriangle(Vertex3 p1, Vertex3 p2, Vertex3 p3)
+        private void DrawTriangle(Triangle3 triangle)
         {
+            var p1 = triangle[0];
+            var p2 = triangle[1];
+            var p3 = triangle[2];
+
             // -----------------
             // Draw the triangle
             // -----------------
@@ -256,7 +272,7 @@ namespace Managed3D.Rendering.Software
             var ymid = (int)ps[1].Y;
             var yend = (int)ps[2].Y;
 
-            var e1 = new Edge3(ps[0], ps[1]);
+            var e1 = triangle.Edges[0];
             var e2 = new Edge3(ps[0], ps[2]);
             var e3 = new Edge3(ps[1], ps[2]);
 
@@ -269,17 +285,27 @@ namespace Managed3D.Rendering.Software
             {
 
             }
+        }
 
-            //this.DrawSpan(edges[0], edges[1]);
-            //this.DrawSpan(edges[0], edges[2]);
+        private void DrawQuad(Quad3 quad)
+        {
 
-            // draw edges of triangle, but check if two neighboring vertices are set to hide their outgoing edges we skip drawing that line.
-            if (!p1.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p2.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
-                this.DrawLine(p1, p2);
-            if (!p2.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p3.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
-                this.DrawLine(p2, p3);
-            if (!p3.Flags.HasFlag(VertexFlags.HideOutgoingEdges) || !p1.Flags.HasFlag(VertexFlags.HideOutgoingEdges))
-                this.DrawLine(p3, p1);
+        }
+
+        private void DrawPolygon(Polygon3 poly)
+        {
+            if (poly is Triangle3)
+                this.DrawTriangle((Triangle3)poly);
+            else if (poly is Quad3)
+                this.DrawQuad((Quad3)poly);
+            else
+                throw new NotImplementedException();
+
+            if (true)
+            {
+                foreach (var edge in poly.Edges)
+                    this.DrawEdge(edge);
+            }
         }
 
         private void RenderNode(Node node)
@@ -292,9 +318,18 @@ namespace Managed3D.Rendering.Software
             var state = SoftwareRendererState.GlobalState;
             state.PushMatrix();
 
-            state.Scale(node.Scale);
-            state.Rotate(node.Orientation);
-            state.Translate(node.Position);
+            if (node.TransformOrder == TransformOrder.RotateTranslateScale)
+            {
+                state.Rotate(node.Orientation);
+                state.Translate(node.Position);
+                state.Scale(node.Scale);
+            }
+            else if (node.TransformOrder == TransformOrder.TranslateRotateScale)
+            {
+                state.Translate(node.Position);
+                state.Rotate(node.Orientation);
+                state.Scale(node.Scale);
+            }
 
 
             // Traverse the graph starting at the current node, render them first.
@@ -307,29 +342,10 @@ namespace Managed3D.Rendering.Software
             {
                 foreach (var poly in renderable)
                 {
-                    var verts = new Vertex3[poly.Vertices.Length];
-                    for (int i = 0; i < verts.Length; ++i)
-                    {
-                        // transform and project vertices.
-                        verts[i] = state.Transform(poly.Vertices[i]);
-
-                    }
-                    if (verts.Length == 3)
-                    {
-                        this.DrawTriangle(verts[0], verts[1], verts[2]);
-                    }
-                    else if (verts.Length == 4)
-                    {
-                        verts[0].Flags |= VertexFlags.HideOutgoingEdges;
-                        verts[2].Flags |= VertexFlags.HideOutgoingEdges;
-
-                        this.DrawTriangle(verts[0], verts[1], verts[2]);
-                        this.DrawTriangle(verts[2], verts[3], verts[0]);
-                    }
+                    if (poly == null)
+                        continue;
                     else
-                    {
-                        throw new NotImplementedException();
-                    }
+                        this.DrawPolygon(poly);
                 }
             }
 
@@ -482,6 +498,10 @@ namespace Managed3D.Rendering.Software
                 return this.ProjectionMatrix * input;
             else
                 return input;
+        }
+        public Vector3 Transform(Vector3 input)
+        {
+            return this.WorldViewProjection * input;
         }
 
         public void Translate(Vector3 translation)

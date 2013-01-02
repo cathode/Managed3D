@@ -22,7 +22,7 @@ namespace Managed3D.Geometry
         /// Holds the vertices of the current <see cref="Polygon3"/>.
         /// </summary>
         private readonly Vertex3[] vertices;
-        private readonly Edge3[] edges;
+        protected readonly Edge3[] edges;
         #endregion
         #region Constructors
         /// <summary>
@@ -107,6 +107,18 @@ namespace Managed3D.Geometry
 
             this.RegenerateEdges();
         }
+
+        public Polygon3(Edge3[] edges, params int[] indices)
+        {
+            this.vertices = new Vertex3[indices.Length];
+            this.edges = new Edge3[indices.Length];
+
+            for (int i = 0; i < indices.Length; ++i)
+            {
+                this.edges[i] = edges[indices[i]];
+                this.vertices[i] = this.edges[i].P;
+            }
+        }
         #endregion
         #region Properties
         /// <summary>
@@ -152,7 +164,7 @@ namespace Managed3D.Geometry
             }
         }
 
-        public IEnumerable<Edge3> Edges
+        public Edge3[] Edges
         {
             get
             {
@@ -246,12 +258,7 @@ namespace Managed3D.Geometry
         /// <param name="z"></param>
         public void Translate(double x, double y, double z)
         {
-            foreach (var v in this.vertices)
-            {
-                v.X += x;
-                v.Y += y;
-                v.Z += z;
-            }
+            this.Translate(new Vector3(x,y,z));
         }
 
         /// <summary>
@@ -260,7 +267,11 @@ namespace Managed3D.Geometry
         /// <param name="value"></param>
         public void Translate(Vector3 value)
         {
-            this.Translate(value.X, value.Y, value.Z);
+           
+            foreach (var v in this.vertices)
+            {
+                v.Position += value;
+            }
         }
 
         /// <summary>
