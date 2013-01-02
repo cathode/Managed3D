@@ -101,6 +101,7 @@ namespace ManagedStudio3D
             renderer.Scene = Program.scene;
             renderer.ActiveCamera.Facing = CameraFacing.Isometric;
             renderer.ActiveCamera.Mode = CameraMode.Orthographic;
+            renderer.ActiveCamera.UpdateFacing();
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
 

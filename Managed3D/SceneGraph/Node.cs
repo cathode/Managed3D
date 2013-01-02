@@ -17,9 +17,10 @@ namespace Managed3D.SceneGraph
     public class Node
     {
         #region Fields
-        private readonly List<Node> children;
-        private readonly List<Constraint> constraints;
-        private readonly List<Mesh3> renderables;
+        private readonly Stack<Node> parents = new Stack<Node>();
+        private readonly List<Node> children = new List<Node>();
+        private readonly List<Constraint> constraints = new List<Constraint>();
+        private readonly List<Mesh3> renderables = new List<Mesh3>();
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
         private Quaternion orientation = Node.DefaultOrientation;
@@ -31,10 +32,6 @@ namespace Managed3D.SceneGraph
         /// </summary>
         public Node()
         {
-            this.children = new List<Node>();
-            this.constraints = new List<Constraint>();
-            this.renderables = new List<Mesh3>();
-           
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -42,10 +39,6 @@ namespace Managed3D.SceneGraph
         /// <param name="children"></param>
         public Node(params Node[] children)
         {
-            this.children = new List<Node>();
-            this.constraints = new List<Constraint>();
-            this.renderables = new List<Mesh3>();
-
             this.children.AddRange(children);
         }
 
@@ -356,6 +349,17 @@ namespace Managed3D.SceneGraph
             return ext;
         }
 
+        public Vector3 GetWorldPosition()
+        {
+            if (this.parents.Count == 0)
+                return this.Position;
+
+            var parent = this.parents.Peek();
+
+            var ppos = parent.GetWorldPosition();
+
+            return ppos + this.Position;
+        }
         
         #endregion
     }
