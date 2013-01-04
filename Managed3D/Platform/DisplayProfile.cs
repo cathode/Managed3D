@@ -307,5 +307,13 @@ namespace Managed3D.Platform
             }
         }
         #endregion
+        #region Methods
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Width > 0);
+            Contract.Invariant(this.Height > 0);
+        }
+        #endregion
     }
 }

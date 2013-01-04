@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -66,25 +67,37 @@ namespace Managed3D.Geometry
         public Quad3(Vertex3[] verts, int a, int b, int c, int d)
             : base(verts[a], verts[b], verts[c], verts[d])
         {
+            Contract.Requires(verts != null);
+            Contract.Requires(verts.Length > 3);
+            Contract.Requires(a >= 0);
+            Contract.Requires(a < verts.Length);
+            Contract.Requires(b >= 0);
+            Contract.Requires(b < verts.Length);
+            Contract.Requires(c >= 0);
+            Contract.Requires(c < verts.Length);
+            Contract.Requires(d >= 0);
+            Contract.Requires(d < verts.Length);
         }
 
         public Quad3(Edge3[] edges, int a, int b, int c, int d)
             : base(edges, a, b, c, d)
         {
-
+            Contract.Requires(edges != null);
+            Contract.Requires(edges.Length > 3);
         }
 
         public Quad3(double width, double height)
+            : base(new Vertex3(), new Vertex3(), new Vertex3(), new Vertex3())
         {
             var x1 = width / -2.0;
             var x2 = width / 2.0;
             var y1 = height / -2.0;
             var y2 = height / 2.0;
 
-            this.A = new Vertex3(x1, y1, 0.0);
-            this.B = new Vertex3(x1, y2, 0.0);
-            this.C = new Vertex3(x2, y2, 0.0);
-            this.D = new Vertex3(x2, y1, 0.0);
+            this.A.Position = new Vector3(x1, y1, 0.0);
+            this.B.Position = new Vector3(x1, y2, 0.0);
+            this.C.Position = new Vector3(x2, y2, 0.0);
+            this.D.Position = new Vector3(x2, y1, 0.0);
         }
         #endregion
         #region Properties
@@ -188,6 +201,13 @@ namespace Managed3D.Geometry
             {
                 return PrimitiveKind.Quad;
             }
+        }
+        #endregion
+        #region Methods
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Vertices.Length == 4);
         }
         #endregion
     }

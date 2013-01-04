@@ -6,6 +6,7 @@
  *****************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -24,10 +25,12 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon2"/> class.
         /// </summary>
-        /// <param name="sides">The number of sides of the new polygon.</param>
-        public Polygon2(int sides)
+        /// <param name="vertices">The number of sides of the new polygon.</param>
+        public Polygon2(int vertices)
         {
-            this.vertices = new Vertex2[sides];
+            Contract.Requires(vertices > 2);
+
+            this.vertices = new Vertex2[vertices];
         }      
         
         /// <summary>

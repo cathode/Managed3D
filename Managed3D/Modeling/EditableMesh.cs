@@ -185,12 +185,12 @@ namespace Managed3D.Modeling
             set;
         }
 
-        public Vector3 Start
+        public HVertex Start
         {
             get;
             set;
         }
-        public Vector3 End
+        public HVertex End
         {
             get;
             set;
@@ -211,9 +211,79 @@ namespace Managed3D.Modeling
         }
     }
 
+    public class HVertex
+    {
+        #region Constructors
+        public HVertex(Vector3 position, HEdge edge)
+        {
+            this.Position = position;
+            this.Edge = edge;
+        }
+        #endregion
+        #region Properties
+        public Vector3 Position
+        {
+            get;
+            set;
+        }
+
+        public HEdge Edge
+        {
+            get;
+            set;
+        }
+        #endregion
+        #region Methods
+        public IEnumerable<HFace> FacesAroundVertex()
+        {
+            if (this == Edge.Start)
+            {
+                var e = this.Edge.Next;
+                while (e != this.Edge)
+                {
+                  
+                }
+            }
+            else
+            {
+
+            }
+            yield break;
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Edge != null);
+        }
+        #endregion
+    }
+
     public class HFace
     {
-        
+        #region Constructors
+        public HFace(params HEdge[] edges)
+        {
+            Contract.Requires(edges != null);
+            Contract.Requires(edges.Length > 2); // Don't support degenerate faces (with only two edges).
+            this.Edge = edges[0];
+        }
+        #endregion
+        #region Properties
+        public HEdge Edge
+        {
+            get;
+            set;
+        }
+        #endregion
+        #region Methods
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Edge != null);
+            Contract.Invariant(this.Edge.Face == this);
+        }
+        #endregion
     }
 
     public class EMSparseAttribute

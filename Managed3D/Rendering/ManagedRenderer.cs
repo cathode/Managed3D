@@ -148,8 +148,6 @@ namespace Managed3D.Rendering
         protected override void OnRender(RenderEventArgs e)
         {
             base.OnRender(e);
-
-            
         }
 
         protected override void OnPostRender(RenderEventArgs e)
@@ -159,7 +157,8 @@ namespace Managed3D.Rendering
             this.SwapBuffers();
 
             foreach (var target in this.targets)
-                target.ConsumeFrameBuffer(this.FrontBuffer);
+                if (target != null)
+                    target.ConsumeFrameBuffer(this.FrontBuffer);
         }
 
         protected override void OnProfileChanged(EventArgs e)
@@ -167,8 +166,10 @@ namespace Managed3D.Rendering
             base.OnProfileChanged(e);
 
             foreach (var target in this.targets)
-                target.UpdateDisplayProfile(this.Profile);
+                if (target != null)
+                    target.UpdateDisplayProfile(this.Profile);
 
+            // Make sure we have exclusive control over both the front and the back buffers.
             this.AcquireFrontBufferLock();
             this.AcquireBackBufferLock();
 
@@ -179,7 +180,5 @@ namespace Managed3D.Rendering
             this.ReleaseFrontBufferLock();
         }
         #endregion
-
-       
     }
 }

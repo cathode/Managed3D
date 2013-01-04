@@ -6,6 +6,7 @@
  *****************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Managed3D.Geometry;
 
 namespace Managed3D.Rendering
@@ -24,12 +25,16 @@ namespace Managed3D.Rendering
         /// <summary>
         /// Initializes a new instance of the <see cref="ManagedBuffer"/> class.
         /// </summary>
-        /// <param name="width"></param>
+        /// <param name="width">The width of the buffer, in pixels.</param>
         /// <param name="height"></param>
         public ManagedBuffer(int width, int height)
-            : this(new Vector2i(width, height))
         {
+            Contract.Requires(width > 0);
+            Contract.Requires(height > 0);
 
+            this.size = new Vector2i(width, height);
+            this.color = new ManagedBufferColorPlane(this.size);
+            this.depth = new ManagedBufferDepthPlane(this.size);
         }
 
         /// <summary>
@@ -38,8 +43,8 @@ namespace Managed3D.Rendering
         /// <param name="size"></param>
         public ManagedBuffer(Vector2i size)
         {
-            if (size.X < 1 || size.Y < 1)
-                throw new ArgumentOutOfRangeException("size");
+            Contract.Requires(size.X > 0);
+            Contract.Requires(size.Y > 0);
 
             this.size = size;
             this.color = new ManagedBufferColorPlane(this.size);

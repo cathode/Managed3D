@@ -9,4 +9,4 @@ using System.Reflection;
 
 [assembly: AssemblyTitle("Managed3D.Rendering.OpenGL")]
 [assembly: AssemblyDescription("")]
-[assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]

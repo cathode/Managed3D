@@ -15,6 +15,7 @@ using System.Threading;
 using Managed3D.Geometry;
 using Managed3D.Platform;
 using Managed3D.SceneGraph;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Rendering
 {
@@ -44,11 +45,28 @@ namespace Managed3D.Rendering
         private ManagedRenderer renderer;
         #endregion
         #region Constructors
-        internal ManagedRendererHostControl(ManagedRenderer renderer)
+        public ManagedRendererHostControl(ManagedRenderer renderer)
         {
+            Contract.Requires(renderer != null);
+
             this.Padding = new Padding(0, 0, 0, 0);
             this.Margin = new Padding(0, 0, 0, 0);
             this.renderer = renderer;
+        }
+        #endregion
+        #region Properties
+        public ManagedRenderer Renderer
+        {
+            get
+            {
+                return this.renderer;
+            }
+            set
+            {
+                Contract.Requires(value != null);
+
+                this.renderer = value;
+            }
         }
         #endregion
         #region Methods
@@ -86,6 +104,8 @@ namespace Managed3D.Rendering
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            Contract.Requires(e != null);
+
             base.OnMouseDown(e);
 
             if (Control.MouseButtons == MouseButtons.Left)
@@ -99,7 +119,7 @@ namespace Managed3D.Rendering
                 this.tx = e.X;
                 this.ty = e.Y;
                 this.isPanning = true;
-                
+
             }
             else if (Control.MouseButtons == (MouseButtons.Left | MouseButtons.Right))
             {
@@ -112,6 +132,8 @@ namespace Managed3D.Rendering
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
+            Contract.Requires(e != null);
+
             base.OnMouseUp(e);
 
             if (this.isRotating)
@@ -132,6 +154,8 @@ namespace Managed3D.Rendering
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            Contract.Requires(e != null);
+
             base.OnMouseMove(e);
 
             if (this.isRotating)
@@ -170,8 +194,15 @@ namespace Managed3D.Rendering
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
+            Contract.Requires(e != null);
+
             base.OnKeyDown(e);
+
             var cam = this.renderer.ActiveCamera;
+
+            if (cam == null)
+                return;
+
             switch (e.KeyCode)
             {
                 case Keys.NumPad2:
@@ -231,7 +262,7 @@ namespace Managed3D.Rendering
                     break;
 
                 case Keys.D4:
-                     if (cam.VisibleGroups.HasFlag(VisibilityGroup.G3))
+                    if (cam.VisibleGroups.HasFlag(VisibilityGroup.G3))
                         cam.VisibleGroups &= ~VisibilityGroup.G3;
                     else
                         cam.VisibleGroups |= VisibilityGroup.G3;
@@ -270,6 +301,12 @@ namespace Managed3D.Rendering
         private unsafe void RendererPostRenderCallback(object sender, RenderEventArgs e)
         {
 
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Renderer != null);
         }
         #endregion
 

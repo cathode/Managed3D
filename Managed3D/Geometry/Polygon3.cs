@@ -28,51 +28,56 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon3"/> class.
         /// </summary>
-        /// <param name="edges">The number of edges of the new polygon.</param>
-        public Polygon3(int edges)
+        /// <param name="vertexCount">The number of vertices of the new polygon.</param>
+        public Polygon3(int vertexCount)
         {
-            Contract.Requires(edges > 2);
+            Contract.Requires(vertexCount > 2);
 
-            this.vertices = new Vertex3[edges];
+            Contract.Ensures(this.Vertices.Length == vertexCount);
+
+            this.vertices = new Vertex3[vertexCount];
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon3"/> class.
         /// </summary>
-        /// <param name="sides">The number of sides of the new polygon.</param>
+        /// <param name="vertexCount">The number of sides of the new polygon.</param>
         /// <param name="radius">The radius of the new polygon.</param>
         /// <remarks>
         /// Assumes <see cref="RadiusMode.Vertex"/>.
         /// </remarks>
-        public Polygon3(int sides, double radius)
-            : this(sides, radius, RadiusMode.Vertex)
+        public Polygon3(int vertexCount, double radius)
+            : this(vertexCount, radius, RadiusMode.Vertex)
         {
+            Contract.Requires(vertexCount > 2);
+            Contract.Ensures(this.Vertices.Length == vertexCount);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon3"/> class as a regular polygon with the specified radius.
         /// </summary>
-        /// <param name="sides">The number of sides of the new polygon.</param>
+        /// <param name="vertexCount">The number of sides of the new polygon.</param>
         /// <param name="radius">The radius of the new polygon.</param>
         /// <param name="mode">The <see cref="RadiusMode"/> that describes how the radius value is interpreted.</param>
-        public Polygon3(int sides, double radius, RadiusMode mode)
+        public Polygon3(int vertexCount, double radius, RadiusMode mode)
         {
-            Contract.Requires(sides > 2);
+            Contract.Requires(vertexCount > 2);
+            Contract.Ensures(this.Vertices.Length == vertexCount);
 
-            var m = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / sides));
+            var m = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / vertexCount));
 
             Vector3 v = new Vector3(radius, 0, 0);
 
             if (mode == RadiusMode.Edge)
             {
-                var rm = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / (sides * 2)));
+                var rm = Matrix4.CreateRotationMatrix(new Vector3(0, 1, 0), Angle.FromDegrees(360.0 / (vertexCount * 2)));
                 v = rm * v;
             }
 
-            this.vertices = new Vertex3[sides];
-            this.edges = new Edge3[sides];
+            this.vertices = new Vertex3[vertexCount];
+            this.edges = new Edge3[vertexCount];
 
-            for (int i = sides - 1; i >= 0; i--)
+            for (int i = vertexCount - 1; i >= 0; i--)
             {
                 this.vertices[i] = new Vertex3(v.X, v.Y, v.Z);
                 v = m * v;
@@ -80,16 +85,17 @@ namespace Managed3D.Geometry
 
             this.RegenerateEdges();
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Polygon3"/> class from the specified vertices.
         /// </summary>
         /// <param name="vertices">A collection of vertices to use for the new polygon.</param>
         public Polygon3(params Vertex3[] vertices)
         {
-            if (vertices == null)
-                throw new ArgumentNullException("vertices");
-            if (vertices.Length < 3)
-                throw new ArgumentException("Vertices contains less than 3 elements.", "vertices");
+            Contract.Requires(vertices != null);
+            Contract.Requires(vertices.Length > 2);
+            Contract.Ensures(this.Vertices.Length == vertices.Length);
+
             this.vertices = vertices;
             this.edges = new Edge3[vertices.Length];
             this.RegenerateEdges();
@@ -97,19 +103,34 @@ namespace Managed3D.Geometry
 
         public Polygon3(Vertex3[] verts, params int[] indices)
         {
+            Contract.Requires(verts != null);
+            Contract.Requires(indices != null);
+            Contract.Requires(indices.Length > 2);
+            Contract.Requires(indices.All(i => i < verts.Length && i >= 0));
+            Contract.Ensures(this.Vertices.Length == indices.Length);
+
             this.vertices = new Vertex3[indices.Length];
             this.edges = new Edge3[indices.Length];
 
-            for (int i = 0; i < indices.Length; i++)
-            {
-                this.vertices[i] = verts[indices[i]];
-            }
+            for (int i = 0; i < indices.Length; ++i)
+                if (indices[i] < verts.Length)
+                    this.vertices[i] = verts[indices[i]];
+                else
+                    throw new NotImplementedException();
+
 
             this.RegenerateEdges();
         }
 
         public Polygon3(Edge3[] edges, params int[] indices)
         {
+            Contract.Requires(edges != null);
+            Contract.Requires(edges.Length > 2);
+            Contract.Requires(indices != null);
+            Contract.Requires(indices.Length > 2);
+            Contract.Requires(indices.All(i => i < edges.Length && i >= 0));
+            Contract.Ensures(this.Vertices.Length == indices.Length);
+
             this.vertices = new Vertex3[indices.Length];
             this.edges = new Edge3[indices.Length];
 
@@ -130,7 +151,9 @@ namespace Managed3D.Geometry
             {
                 if (this.Vertices.Length == 3)
                     return true;
-                throw new NotImplementedException();
+
+                else
+                    return false;
             }
         }
 
@@ -156,6 +179,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets an array containing the vertices of the polygon.
+        /// </summary>
         public Vertex3[] Vertices
         {
             get
@@ -164,6 +190,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets an array containing the edges of the polygon.
+        /// </summary>
         public Edge3[] Edges
         {
             get
@@ -182,10 +211,14 @@ namespace Managed3D.Geometry
         {
             get
             {
+                Contract.Requires(index < this.Vertices.Length);
+
                 return this.vertices[index];
             }
             set
             {
+                Contract.Requires(index < this.Vertices.Length);
+
                 this.vertices[index] = value;
             }
         }
@@ -258,7 +291,7 @@ namespace Managed3D.Geometry
         /// <param name="z"></param>
         public void Translate(double x, double y, double z)
         {
-            this.Translate(new Vector3(x,y,z));
+            this.Translate(new Vector3(x, y, z));
         }
 
         /// <summary>
@@ -267,7 +300,7 @@ namespace Managed3D.Geometry
         /// <param name="value"></param>
         public void Translate(Vector3 value)
         {
-           
+
             foreach (var v in this.vertices)
             {
                 v.Position += value;
@@ -280,6 +313,17 @@ namespace Managed3D.Geometry
         public void Flip()
         {
             Array.Reverse(this.vertices);
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Vertices != null);
+            Contract.Invariant(this.Vertices.Length > 2);
+            Contract.Invariant(this.Vertices.All(v => v != null));
+            Contract.Invariant(this.Edges != null);
+            Contract.Invariant(this.Edges.Length == this.Vertices.Length);
+            Contract.Invariant(this.Edges.All(e => e != null));
         }
         #endregion
     }

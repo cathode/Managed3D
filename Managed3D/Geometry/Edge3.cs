@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -26,11 +27,20 @@ namespace Managed3D.Geometry
         /// <param name="b"></param>
         public Edge3(Vertex3 p, Vertex3 q)
         {
+            Contract.Requires(p != null);
+            Contract.Requires(q != null);
+
             this.P = p;
             this.Q = q;
         }
         public Edge3(Vertex3[] vertices, int p, int q)
         {
+            Contract.Requires(vertices != null);
+            Contract.Requires(p < vertices.Length);
+            Contract.Requires(q < vertices.Length);
+            Contract.Requires(vertices[p] != null);
+            Contract.Requires(vertices[q] != null);
+    
             this.P = vertices[p];
             this.Q = vertices[q];
         }
@@ -148,6 +158,12 @@ namespace Managed3D.Geometry
             throw new NotImplementedException();
         }
 
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.P != null);
+            Contract.Invariant(this.Q != null);
+        }
         #endregion
     }
 }

@@ -9,6 +9,7 @@ using System.Threading;
 using Managed3D.Platform;
 using Managed3D.SceneGraph;
 using Managed3D.Geometry;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Rendering
 {
@@ -20,7 +21,7 @@ namespace Managed3D.Rendering
     /// the <see cref="Renderer.Initialize"/> method must be called to perform any required set-up
     /// which the implementation might need to do prior to being able to render frames.
     /// </remarks>
-    public abstract class Renderer : IRenderer
+    public abstract class Renderer 
     {
         #region Fields
         /// <summary>
@@ -73,6 +74,8 @@ namespace Managed3D.Rendering
                 FocalDistance = 1000,
                 Mode = CameraMode.Perspective
             };
+
+            this.Scene = new Scene();
         }
         #endregion
         #region Events
@@ -164,7 +167,9 @@ namespace Managed3D.Rendering
             }
             set
             {
-                this.profile = value ?? DisplayProfile.Default;
+                Contract.Requires(value != null);
+
+                this.profile = value;
                 this.OnProfileChanged(EventArgs.Empty);
             }
         }
@@ -180,6 +185,8 @@ namespace Managed3D.Rendering
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this.scene = value;
                 this.OnSceneChanged(EventArgs.Empty);
             }
@@ -193,6 +200,8 @@ namespace Managed3D.Rendering
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this.activeCamera = value;
             }
         }
@@ -204,12 +213,11 @@ namespace Managed3D.Rendering
         /// <param name="options">The configuration data that describes how the renderer should be set up.</param>
         public void Initialize(RendererOptions options)
         {
-            if (options == null)
-                throw new ArgumentNullException("options");
+            Contract.Requires(options != null);
 
             this.OnInitializing(new RendererInitializationEventArgs(options));
 
-            this.Profile = options.Profile;
+            this.Profile = options.Profile ?? DisplayProfile.Default;
 
             this.isInitialized = true;
         }
@@ -358,6 +366,14 @@ namespace Managed3D.Rendering
         {
             if (this.Stopping != null)
                 this.Stopping(this, e);
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Scene != null);
+            Contract.Invariant(this.ActiveCamera != null);
+            Contract.Invariant(this.Profile != null);
         }
         #endregion
     }

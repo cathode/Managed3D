@@ -6,11 +6,12 @@
  *****************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Managed3D.Geometry;
 using Managed3D.SceneGraph;
-using System.Linq;
 
 namespace Managed3D.Rendering.Software
 {
@@ -484,11 +485,15 @@ namespace Managed3D.Rendering.Software
 
         public Vertex3 Transform(Vertex3 input)
         {
+            Contract.Requires(input != null);
+
             return this.WorldViewProjection * input;
         }
 
         public Vertex3 Transform(Vertex3 input, ReferenceSpace space)
         {
+            Contract.Requires(input != null);
+
             // Allow selective transformation based on the scope of the vertex input.
             if (space == ReferenceSpace.Object)
                 return this.WorldViewProjection * input;
@@ -530,6 +535,8 @@ namespace Managed3D.Rendering.Software
 
         public void Rotate(Quaternion rotation)
         {
+            Contract.Requires(rotation != null);
+
             this.WorldMatrix *= Matrix4.CreateRotationMatrix(rotation);
 
             this.UpdateDerivedMatrices();

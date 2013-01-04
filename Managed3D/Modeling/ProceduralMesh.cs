@@ -19,7 +19,10 @@ namespace Managed3D.Modeling
     public abstract class ProceduralMesh : Mesh3
     {
         #region Fields
-        private ProcedureParameterCollection parameters;
+        /// <summary>
+        /// Backing field for the <see cref="Parameters"/> property.
+        /// </summary>
+        private readonly ProcedureParameterCollection parameters;
         #endregion
         #region Constructors
         /// <summary>
@@ -27,6 +30,8 @@ namespace Managed3D.Modeling
         /// </summary>
         protected ProceduralMesh()
         {
+            this.parameters = new ProcedureParameterCollection();
+
             var pl = this.InitializeParameters();
 
             foreach (var p in pl)
@@ -34,7 +39,13 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Properties
-
+        protected ProcedureParameterCollection Parameters
+        {
+            get
+            {
+                return this.parameters;
+            }
+        }
         #endregion
         #region Methods
         public object GetParameterValue(string name)

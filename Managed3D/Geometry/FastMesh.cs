@@ -6,14 +6,13 @@ using System.Text;
 namespace Managed3D.Geometry
 {
     /// <summary>
-    /// Represents an immutable 3D mesh that can be streamed directly to graphics hardware.
+    /// Represents an immutable, low-overhead 3D mesh that can be streamed directly to graphics hardware.
     /// </summary>
-    public class FastMesh : IRenderable
+    public class FastMesh
     {
         #region Fields
         private FastVertex[] vertices;
-        private FastFace[] faces;
-        private FastEdge[] edges;
+        private int[] indices;
         #endregion
         #region Constructors
         /// <summary>
@@ -22,57 +21,25 @@ namespace Managed3D.Geometry
         /// <param name="vertexCount"></param>
         /// <param name="faceCount"></param>
         /// <param name="edgeCount"></param>
-        internal FastMesh(uint vertexCount, uint faceCount, uint edgeCount)
+        internal FastMesh(int vertexCount, int faceCount)
         {
             this.vertices = new FastVertex[vertexCount];
-            this.faces = new FastFace[faceCount];
-            this.edges = new FastEdge[edgeCount];
+            this.indices = new int[faceCount * 3];
         }
         #endregion
         #region Properties
-        public IEnumerable<IRenderableVertex> Vertices
-        {
-            get
-            {
-                for (int i = 0; i < this.vertices.Length; ++i)
-                    yield return this.vertices[i];
-            }
-        }
 
-        public IEnumerable<IRenderableFace> Faces
-        {
-            get
-            {
-                for (int i = 0; i < this.faces.Length; ++i)
-                    yield return this.faces[i];
-            }
-        }
-
-        public IEnumerable<IRenderableEdge> Edges
-        {
-            get
-            {
-                for (int i = 0; i < this.edges.Length; ++i)
-                    yield return this.edges[i];
-            }
-        }
         #endregion
         #region Methods
-        internal void SetGeometry(FastVertex[] vertices, FastFace[] faces, FastEdge[] edges)
-        {
-            this.vertices = vertices;
-            this.faces = faces;
-            this.edges = edges;
-        }
         #endregion
     }
 
-    public struct FastVertex : IRenderableVertex
+    public struct FastVertex
     {
         #region Fields
-        private double x;
-        private double y;
-        private double z;
+        private Vector3 position;
+        private Vector3 normal;
+        private Vector2 texCoords;
         #endregion
         #region Constructors
         /// <summary>
@@ -83,45 +50,22 @@ namespace Managed3D.Geometry
         /// <param name="z"></param>
         public FastVertex(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.position = new Vector3(x, y, z);
+            this.normal = Vector3.Zero;
+            this.texCoords = Vector2.Zero;
         }
+
         #endregion
         #region Properties
-        public double X
+        public Vector3 Position
         {
             get
             {
-                return this.x;
-            }
-            internal set
-            {
-                this.x = value;
-            }
-        }
-
-        public double Y
-        {
-            get
-            {
-                return this.y;
-            }
-            internal set
-            {
-                this.y = value;
-            }
-        }
-
-        public double Z
-        {
-            get
-            {
-                return this.z;
+                return this.position;
             }
             set
             {
-                this.z = value;
+                this.position = value;
             }
         }
         #endregion

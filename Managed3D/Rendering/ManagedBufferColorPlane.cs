@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Rendering
 {
@@ -20,6 +21,7 @@ namespace Managed3D.Rendering
         #region Fields
         private readonly Vector2i size;
         private readonly Vector4f[] pixels;
+        private readonly int pixelCount;
         #endregion
         #region Constructors
         /// <summary>
@@ -29,15 +31,24 @@ namespace Managed3D.Rendering
         /// <param name="height">The height (in pixels) of the new frame.</param>
         internal ManagedBufferColorPlane(Vector2i size)
         {
+            Contract.Ensures(this.Pixels.Length == size.X * size.Y);
+
             this.size = size;
+            this.pixelCount = size.X * size.Y;
             this.pixels = new Vector4f[this.size.X * this.size.Y];
         }
         #endregion
         #region Indexers
-        public Vector4f this[int x, int y]
+        public unsafe Vector4f this[int x, int y]
         {
             get
             {
+                fixed (Vector4f* ptr = &this.pixels[0])
+                {
+
+                    var p= *((Vector4f*)ptr + (((y * 16) + x) % this.pixelCount));
+                }
+
                 return this.pixels[(y * size.X) + x];
             }
             set
@@ -74,6 +85,8 @@ namespace Managed3D.Rendering
 
         public unsafe void WriteToBitmap(System.Drawing.Bitmap bitmap)
         {
+            Contract.Requires(bitmap != null);
+
             var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
             unchecked
@@ -91,6 +104,13 @@ namespace Managed3D.Rendering
             }
 
             bitmap.UnlockBits(bmpData);
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Pixels != null);
+            //Contract.Invariant(this.
         }
         #endregion
     }

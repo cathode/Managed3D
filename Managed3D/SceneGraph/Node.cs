@@ -7,6 +7,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using Managed3D.Geometry;
 
 namespace Managed3D.SceneGraph
@@ -39,12 +41,18 @@ namespace Managed3D.SceneGraph
         /// <param name="children"></param>
         public Node(params Node[] children)
         {
-            this.children.AddRange(children);
+            Contract.Requires(children != null);
+
+            foreach (var c in children)
+                if (c != null)
+                    this.Add(c);
         }
 
-        public Node(params Mesh3[] renderables) : this()
+        public Node(params Mesh3[] renderables)
         {
-            this.renderables.AddRange(renderables);
+            foreach (var r in renderables)
+                if (r != null)
+                    this.renderables.Add(r);
         }
         #endregion
         #region Properties
@@ -205,8 +213,8 @@ namespace Managed3D.SceneGraph
         {
             get
             {
-                foreach (var child in this.children)
-                    if (!child.IsGeometryStatic)
+                foreach (var node in this.children)
+                    if (node != null && !node.IsGeometryStatic)
                         return false;
 
                 return true;
@@ -250,6 +258,8 @@ namespace Managed3D.SceneGraph
         /// <param name="item">The <see cref="Node"/> instance to be added.</param>
         public void Add(Node item)
         {
+            Contract.Requires(item != null);
+
             if (item.ContainsDeep(this))
                 throw new InvalidOperationException("A recursive node addition was detected");
 
@@ -271,7 +281,10 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public bool Contains(Node item)
         {
-            return this.children.Contains(item);
+            if (!Node.ReferenceEquals(item, null))
+                return this.children.Contains(item);
+
+            return false;
         }
 
         /// <summary>
@@ -282,9 +295,12 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public bool ContainsDeep(Node item)
         {
-            foreach (var child in this.children)
-                if (child == item || child.ContainsDeep(item))
-                    return true;
+            if (!Node.ReferenceEquals(item, null))
+                foreach (var node in this.children)
+                    if (node != null)
+                        if (node == item || node.ContainsDeep(item))
+                            return true;
+
             return false;
         }
 
@@ -345,11 +361,14 @@ namespace Managed3D.SceneGraph
 
             foreach (var node in this.children)
             {
-                var nx = node.GetGraphExtents();
+                if (node != null)
+                {
+                    var nx = node.GetGraphExtents();
 
-                ext = new Vector3((nx.X > ext.X) ? nx.X : ext.X,
-                                  (nx.Y > ext.Y) ? nx.Y : ext.Y,
-                                  (nx.Z > ext.Z) ? nx.Z : ext.Z);
+                    ext = new Vector3((nx.X > ext.X) ? nx.X : ext.X,
+                                      (nx.Y > ext.Y) ? nx.Y : ext.Y,
+                                      (nx.Z > ext.Z) ? nx.Z : ext.Z);
+                }
             }
 
             return ext;
@@ -366,7 +385,12 @@ namespace Managed3D.SceneGraph
 
             return ppos + this.Position;
         }
-        
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.children != null);
+        }
         #endregion
     }
 }

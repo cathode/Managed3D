@@ -15,7 +15,7 @@ namespace Managed3D.Platform.Microsoft
     /// <summary>
     /// Represents a <see cref="DisplayProfileEnumerator"/> that is compatible with Microsoft Windows.
     /// </summary>
-    public class WindowsDisplayProfileEnumerator 
+    public class WindowsDisplayProfileEnumerator
     {
         public DisplayProfile[] GetProfiles()
         {
@@ -32,14 +32,14 @@ namespace Managed3D.Platform.Microsoft
                 {
                     //Console.WriteLine("Device Mode {0}: {1}x{2}, {3}-bit, {4}hz",
                     //                  i, devmode.dmPelsWidth, devmode.dmPelsHeight, devmode.dmBitsPerPel, devmode.dmDisplayFrequency);
-                    var profile = new DisplayProfile(devmode.dmPelsWidth, devmode.dmPelsHeight)
-                    {
-                        DeviceId = (int)id,
-                        RefreshRate = devmode.dmDisplayFrequency / 1.0,
-                        Depth = devmode.dmBitsPerPel,
-                        ProfileId = i,
-                    };
-                    profiles.Add(profile);
+                    if (devmode.dmPelsWidth > 0 && devmode.dmPelsHeight > 0)
+                        profiles.Add(new DisplayProfile(devmode.dmPelsWidth, devmode.dmPelsHeight)
+                        {
+                            DeviceId = (int)id,
+                            RefreshRate = devmode.dmDisplayFrequency / 1.0,
+                            Depth = devmode.dmBitsPerPel,
+                            ProfileId = i,
+                        });
                 }
                 d.cb = Marshal.SizeOf(d);
             }
@@ -51,7 +51,7 @@ namespace Managed3D.Platform.Microsoft
         private static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, uint dwFlags);
         [DllImport("user32.dll")]
         private static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
-       
+
         #endregion
         #region Types
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

@@ -30,23 +30,10 @@ namespace Managed3D.Rendering
                 return this.output;
             }
         }
-        public SceneGraph.Camera ActiveCamera
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
         #endregion
         #region Methods
         public void UpdateDisplayProfile(DisplayProfile profile)
         {
-            Contract.Requires(profile != null);
-
             if (this.output != null)
                 this.output.Dispose();
 
@@ -55,8 +42,6 @@ namespace Managed3D.Rendering
 
         public void ConsumeFrameBuffer(ManagedBuffer buffer)
         {
-            Contract.Requires(buffer != null);
-
             buffer.Color.WriteToBitmap(this.output);
         }
         #endregion

@@ -5,6 +5,7 @@
  * license. See the 'license.txt' file for details.                           *
  *****************************************************************************/
 using System;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -42,6 +43,9 @@ namespace Managed3D.Geometry
         public Triangle3(Vertex3 a, Vertex3 b, Vertex3 c)
             : base(a, b, c)
         {
+            Contract.Requires(a != null);
+            Contract.Requires(b != null);
+            Contract.Requires(c != null);
         }
         #endregion
         #region Properties
@@ -214,6 +218,9 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public Edge3 GetIntersection(Triangle3 other)
         {
+            if (other == null)
+                return null;
+
             var q1 = this.A.ToVector3();
             var q2 = this.B.ToVector3();
             var q3 = this.C.ToVector3();
@@ -225,6 +232,20 @@ namespace Managed3D.Geometry
 
             throw new NotImplementedException();
         }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.A != null);
+            Contract.Invariant(this.B != null);
+            Contract.Invariant(this.C != null);
+
+            Contract.Invariant(this.Edges != null);
+            Contract.Invariant(this.Edges.Length == 3);
+
+            Contract.Invariant(this.Vertices != null);
+            Contract.Invariant(this.Vertices.Length == 3);
+        }
         #endregion
         #region Operators
         /// <summary>
@@ -235,7 +256,13 @@ namespace Managed3D.Geometry
         /// <returns>true if the triangles represent the same geometry; otherwise, false.</returns>
         public static bool operator ==(Triangle3 t1, Triangle3 t2)
         {
-            return t1.A == t2.A && t1.B == t2.B && t1.C == t2.C;
+            if (Triangle3.ReferenceEquals(t1, null) || Triangle3.ReferenceEquals(t2, null))
+                if (Triangle3.ReferenceEquals(t1, t2))
+                    return true;
+                else
+                    return false;
+            else
+                return t1.A == t2.A && t1.B == t2.B && t1.C == t2.C;
         }
 
         /// <summary>
@@ -246,7 +273,13 @@ namespace Managed3D.Geometry
         /// <returns>true if the triangles represent different geometry; otherwise, false.</returns>
         public static bool operator !=(Triangle3 t1, Triangle3 t2)
         {
-            return t1.A != t2.A || t1.B != t2.B || t1.C != t2.C;
+            if (Triangle3.ReferenceEquals(t1, null) || Triangle3.ReferenceEquals(t2, null))
+                if (Triangle3.ReferenceEquals(t1, t2))
+                    return false;
+                else
+                    return true;
+            else
+                return t1.A != t2.A || t1.B != t2.B || t1.C != t2.C;
         }
         #endregion
     }

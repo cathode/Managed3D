@@ -176,7 +176,7 @@ namespace Managed3D.Platform
         /// <summary>
         /// Cleans up managed and unmanaged resources used by the current <see cref="DisplaySurface"/>.
         /// </summary>
-        public virtual void Dispose()
+        public void Dispose()
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);

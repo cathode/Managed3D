@@ -5,6 +5,8 @@
  * license. See the 'license.txt' file for details.                           *
  *****************************************************************************/
 using Managed3D.Geometry;
+using System;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -17,7 +19,7 @@ namespace Managed3D.Geometry
         private Vector3 position;
         private Vector3 normal;
         private Vector4f color;
-        private Vector2f textureCoordinates;
+        private Vector2 textureCoordinates;
         private VertexFlags flags;
         #endregion
         #region Constructors
@@ -125,6 +127,18 @@ namespace Managed3D.Geometry
                 this.normal = value;
             }
         }
+
+        public Vector2 TextureCoordinates
+        {
+            get
+            {
+                return this.textureCoordinates;
+            }
+            set
+            {
+                this.textureCoordinates = value;
+            }
+        }
         #endregion
         #region Methods
         public override string ToString()
@@ -135,6 +149,8 @@ namespace Managed3D.Geometry
         #region Operators
         public static explicit operator Vector3(Vertex3 vertex)
         {
+            Contract.Requires(vertex != null);
+
             return new Vector3(vertex.X, vertex.Y, vertex.Z);
         }
 

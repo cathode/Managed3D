@@ -6,6 +6,7 @@
  *****************************************************************************/
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -43,97 +44,97 @@ namespace Managed3D.Geometry
         /// Element at the first row, first column.
         /// </summary>
         [FieldOffset(0x00)]
-        private readonly double ax;
+        private readonly double aw;
 
         /// <summary>
         /// Element at the first row, second column.
         /// </summary>
         [FieldOffset(0x08)]
-        private readonly double ay;
+        private readonly double ax;
 
         /// <summary>
         /// Element at the first row, third column.
         /// </summary>
         [FieldOffset(0x10)]
-        private readonly double az;
+        private readonly double ay;
 
         /// <summary>
         /// Element at the first row, fourth column.
         /// </summary>
         [FieldOffset(0x18)]
-        private readonly double aw;
+        private readonly double az;
 
         /// <summary>
         /// Element at the second row, first column.
         /// </summary>
         [FieldOffset(0x20)]
-        private readonly double bx;
+        private readonly double bw;
 
         /// <summary>
         /// Element at the second row, second column.
         /// </summary>
         [FieldOffset(0x28)]
-        private readonly double by;
+        private readonly double bx;
 
         /// <summary>
         /// Element at the second row, third column.
         /// </summary>
         [FieldOffset(0x30)]
-        private readonly double bz;
+        private readonly double by;
 
         /// <summary>
         /// Element at the second row, fourth column.
         /// </summary>
         [FieldOffset(0x38)]
-        private readonly double bw;
+        private readonly double bz;
 
         /// <summary>
         /// Element at the third row, first column.
         /// </summary>
         [FieldOffset(0x40)]
-        private readonly double cx;
+        private readonly double cw;
 
         /// <summary>
         /// Element at the third row, second column.
         /// </summary>
         [FieldOffset(0x48)]
-        private readonly double cy;
+        private readonly double cx;
 
         /// <summary>
         /// Element at the third row, third column.
         /// </summary>
         [FieldOffset(0x50)]
-        private readonly double cz;
+        private readonly double cy;
 
         /// <summary>
         /// Element at the third row, fourth column.
         /// </summary>
         [FieldOffset(0x58)]
-        private readonly double cw;
+        private readonly double cz;
 
         /// <summary>
         /// Element at the fourth row, first column.
         /// </summary>
         [FieldOffset(0x60)]
-        private readonly double dx;
+        private readonly double dw;
 
         /// <summary>
         /// Element at the fourth row, second column.
         /// </summary>
         [FieldOffset(0x68)]
-        private readonly double dy;
+        private readonly double dx;
 
         /// <summary>
         /// Element at the fourth row, third column.
         /// </summary>
         [FieldOffset(0x70)]
-        private readonly double dz;
+        private readonly double dy;
 
         /// <summary>
         /// Element at the fourth row, fourth column.
         /// </summary>
         [FieldOffset(0x78)]
-        private readonly double dw;
+        private readonly double dz;
         #endregion
         #region Constructors
         /// <summary>
@@ -591,7 +592,6 @@ namespace Managed3D.Geometry
         /// <returns>A new <see cref="Matrix4"/> that describes the translation operation.</returns>
         public static Matrix4 CreateTranslationMatrix(Vector3 t)
         {
-
             return new Matrix4(1, 0, 0, t.X,
                                0, 1, 0, t.Y,
                                0, 0, 1, t.Z,
@@ -669,6 +669,7 @@ namespace Managed3D.Geometry
             var y = q.Y;
             var z = q.Z;
             var s = q.W;
+
             return new Matrix4(
                 1 - 2 * ((y * y) + (z * z)), 2 * ((x * y) - (s * z)), 2 * ((x * z) + (s * y)), 0,
                 2 * ((x * y) + (s * z)), 1 - 2 * ((x * x) + (z * z)), 2 * ((y * z) - (s * x)), 0,
@@ -745,6 +746,8 @@ namespace Managed3D.Geometry
 
         public static Matrix4 CreateRotationMatrix(Quaternion rotation)
         {
+            Contract.Requires(rotation != null);
+
             return rotation.ToRotationMatrix();
         }
         #endregion
@@ -779,9 +782,6 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static bool operator ==(Matrix4 left, Matrix4 right)
         {
-            if (Matrix4.ReferenceEquals(left, null) || Matrix4.ReferenceEquals(right, null))
-                return false;
-
             return left.ax == right.ax
                 && left.bx == right.bx
                 && left.cx == right.cx
@@ -867,6 +867,8 @@ namespace Managed3D.Geometry
 
         public static Vertex3 operator *(Matrix4 matrix, Vertex3 vertex)
         {
+            Contract.Requires(vertex != null);
+
             var result = Matrix4.Multiply(matrix, vertex.Position);
             return new Vertex3(result.X, result.Y, result.Z)
             {
