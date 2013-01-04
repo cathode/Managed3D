@@ -52,9 +52,11 @@ namespace ManagedStudio3D
                     Position = new Vector3(0, -150, 0),
                     Visibility = VisibilityGroup.G1,
                 },
-                new Node(new Cube(50))
+                new Node(new Cube(130))
                 {
-                    Position = new Vector3(0, 150, 0),
+                    Position = new Vector3(0, 120, 0),
+                    Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(40)),
+                    TransformOrder = Managed3D.SceneGraph.TransformOrder.RotateTranslateScale,
                     Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
                 }, new LabelNode("Sample Label")
                 {
@@ -64,12 +66,14 @@ namespace ManagedStudio3D
 
 
             root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
-            //scene.Root = root;
+            scene.Root = root;
 
-            var terrain = new Managed3D.Modeling.Primitives.Terrain(2, 2);
-            var node = new Node();
-            node.Renderables.AddRange(terrain.Generate());
-            scene.Root = node;
+            //var terrain = new Managed3D.Modeling.Primitives.Terrain(1, 1);
+            //var node = new Node();
+            //node.Renderables.AddRange(terrain.Generate());
+            //scene.Root = node;
+
+            Console.WriteLine(root.GetGraphExtents());
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();
             //Program.RunOpenGLMode();

@@ -263,6 +263,7 @@ namespace Managed3D.SceneGraph
             if (item.ContainsDeep(this))
                 throw new InvalidOperationException("A recursive node addition was detected");
 
+            item.parents.Push(this);
             this.children.Add(item);
         }
 
@@ -345,9 +346,55 @@ namespace Managed3D.SceneGraph
         /// Calculates the extents of the current node.
         /// </summary>
         /// <returns></returns>
-        public virtual Vector3 GetExtents()
+        public virtual Extents3 GetExtents()
         {
-            return new Vector3(0, 0, 0);
+            double x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+
+            var pos = this.GetWorldPosition();
+            Quaternion rot = this.GetWorldOrientation();
+            var rm = rot.ToRotationMatrix();
+            Matrix4 m = Matrix4.Identity;
+            if (this.TransformOrder == SceneGraph.TransformOrder.TranslateRotateScale)
+            {
+                m = rm * Matrix4.CreateTranslationMatrix(pos);
+            }
+            else
+            {
+                m = Matrix4.CreateTranslationMatrix(pos) * rm;
+            }
+            
+            foreach (var mesh in this.Renderables)
+                foreach (var poly in mesh.Polygons)
+                    foreach (var vt in poly.Vertices)
+                    {
+                        Vertex3 v = m * vt;
+
+                        x1 = (v.X > x1) ? v.X : x1;
+                        x2 = (v.X < x2) ? v.X : x2;
+
+                        y1 = (v.Y > y1) ? v.Y : y1;
+                        y2 = (v.Y < y2) ? v.Y : y2;
+
+                        z1 = (v.Z > z1) ? v.Z : z1;
+                        z2 = (v.Z < z2) ? v.Z : z2;
+                    }
+
+
+            var v1 = new Vector3(x1, y1, z1);
+            var v2 = new Vector3(x2, y2, z2);
+
+            return new Extents3(v1, v2);
+        }
+
+        public Quaternion GetWorldOrientation()
+        {
+            if (this.parents.Count == 0)
+                return this.Orientation;
+
+            var parent = this.parents.Peek();
+
+            var prot = parent.GetWorldOrientation();
+            return this.Orientation * prot;
         }
 
         /// <summary>
@@ -355,21 +402,13 @@ namespace Managed3D.SceneGraph
         /// all child nodes of the current node.
         /// </summary>
         /// <returns></returns>
-        public Vector3 GetGraphExtents()
+        public Extents3 GetGraphExtents()
         {
             var ext = this.GetExtents();
 
             foreach (var node in this.children)
-            {
                 if (node != null)
-                {
-                    var nx = node.GetGraphExtents();
-
-                    ext = new Vector3((nx.X > ext.X) ? nx.X : ext.X,
-                                      (nx.Y > ext.Y) ? nx.Y : ext.Y,
-                                      (nx.Z > ext.Z) ? nx.Z : ext.Z);
-                }
-            }
+                    ext |= node.GetGraphExtents();
 
             return ext;
         }

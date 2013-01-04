@@ -104,7 +104,7 @@ namespace Managed3D.Rendering
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            Contract.Requires(e != null);
+            //Contract.Requires(e != null);
 
             base.OnMouseDown(e);
 
@@ -132,7 +132,7 @@ namespace Managed3D.Rendering
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            Contract.Requires(e != null);
+            //Contract.Requires(e != null);
 
             base.OnMouseUp(e);
 
@@ -154,7 +154,7 @@ namespace Managed3D.Rendering
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            Contract.Requires(e != null);
+            //Contract.Requires(e != null);
 
             base.OnMouseMove(e);
 
@@ -194,7 +194,7 @@ namespace Managed3D.Rendering
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            Contract.Requires(e != null);
+            //Contract.Requires(e != null);
 
             base.OnKeyDown(e);
 
@@ -269,7 +269,7 @@ namespace Managed3D.Rendering
                     break;
 
                 case Keys.Z:
-                    //this.renderer.ZoomExtents(this.scene.Root.GetGraphExtents());
+                    this.renderer.ZoomExtents(this.scene.Root.GetGraphExtents());
                     break;
 
                 case Keys.Space:

@@ -127,6 +127,10 @@ namespace Managed3D.Geometry
             return new Vector3((this.a.X + this.b.X) / 2.0, (this.a.Y + this.b.Y) / 2.0, (this.a.Z + this.b.Z) / 2.0);
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}", this.A, this.B);
+        }
         [ContractInvariantMethod]
         private void Invariants()
         {
