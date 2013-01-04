@@ -55,7 +55,7 @@
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
     <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
     <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
     <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
@@ -184,6 +184,7 @@
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
+    <Compile Include="Modeling\Primitives\Terrain.cs" />
     <Compile Include="Modeling\ProceduralMesh.cs" />
     <Compile Include="Modeling\ProcedureParameter.cs" />
     <Compile Include="Modeling\ProcedureParameterCollection.cs" />

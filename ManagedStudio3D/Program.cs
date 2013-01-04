@@ -64,7 +64,12 @@ namespace ManagedStudio3D
 
 
             root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
-            scene.Root = root;
+            //scene.Root = root;
+
+            var terrain = new Managed3D.Modeling.Primitives.Terrain(2, 2);
+            var node = new Node();
+            node.Renderables.AddRange(terrain.Generate());
+            scene.Root = node;
             //Program.RunDirect3DMode();
             Program.RunSoftwareMode();
             //Program.RunOpenGLMode();
