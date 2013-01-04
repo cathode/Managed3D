@@ -22,6 +22,7 @@ namespace Managed3D.Rendering
         private readonly Vector2i size;
         private readonly Vector4f[] pixels;
         private readonly int pixelCount;
+        private readonly int stride;
         #endregion
         #region Constructors
         /// <summary>
@@ -35,6 +36,7 @@ namespace Managed3D.Rendering
 
             this.size = size;
             this.pixelCount = size.X * size.Y;
+            this.stride = size.X;
             this.pixels = new Vector4f[this.size.X * this.size.Y];
         }
         #endregion
@@ -44,16 +46,14 @@ namespace Managed3D.Rendering
             get
             {
                 fixed (Vector4f* ptr = &this.pixels[0])
-                {
-
-                    var p= *((Vector4f*)ptr + (((y * 16) + x) % this.pixelCount));
-                }
-
-                return this.pixels[(y * size.X) + x];
+                    return *((Vector4f*)ptr + (((y * this.stride) + x) % this.pixelCount));
             }
             set
             {
-                this.pixels[(y * size.X) + x] = value;
+                unchecked
+                {
+                    this.pixels[((y * this.stride) + x) % this.pixelCount] = value;
+                }
             }
         }
         #endregion
