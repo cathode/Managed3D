@@ -122,17 +122,25 @@ namespace Managed3D.Rendering
         }
 
         /// <summary>
-        /// Zooms the active camera to fit the entire scene in the viewport.
+        /// Zooms (scales) the active camera to fit the entire scene in the viewport, and repositions the camera so that it is
+        /// looking at the center of the scene geometry.
         /// </summary>
         /// <param name="vector3"></param>
-        public void ZoomExtents(Extents3 extents)
+        public virtual void ZoomExtents(Extents3 extents)
         {
             this.ActiveCamera.Position = extents.FindMidpoint() * -1;
 
-            var efactor = (extents.A.X - extents.B.Y) / 100.0;
+            var h = this.Profile.Height;
+            var h1 = h / 2.0;
+            var h2 = h / -2.0;
+            var ey = extents.A.Y - extents.B.Y;
+            var y1 = h1 / extents.A.Y;
+            var y2 = h2 / extents.B.Y;
+            var yf = (h / ey);
+            var efactor = (extents.A.Y - extents.B.Y) / 100.0;
             var sfactor = 100.0 / (this.Profile.Height / 2.0);
             var f = efactor * sfactor;
-            this.ActiveCamera.Scale = new Vector3(f, f, f);
+            this.ActiveCamera.Scale = new Vector3(yf, yf, yf);
         }
 
         protected void AcquireBackBufferLock()

@@ -394,6 +394,21 @@ namespace Managed3D.Rendering.Software
             }
             state.PopMatrix();
         }
+
+        public override void ZoomExtents(Extents3 extents)
+        {
+
+            this.ActiveCamera.Position = extents.FindMidpoint();
+            var m = this.projectionMatrix;
+            var v1 = m * extents.A;
+            var v2 = m * extents.B;
+            double h = this.Profile.Height;
+            double w = this.Profile.Width;
+            var f = ((v1.Y - v2.Y) / 100.0) * (100 / (h / w));
+            
+            this.ActiveCamera.Scale = new Vector3(f * 0.9, f * 0.9, f * 0.9);
+
+        }
         #endregion
     }
 

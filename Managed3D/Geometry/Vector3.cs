@@ -6,6 +6,7 @@
  *****************************************************************************/
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -71,6 +72,25 @@ namespace Managed3D.Geometry
             this.x = x;
             this.y = y;
             this.z = z;
+        }
+        #endregion
+        #region Indexers
+        public double this[int element]
+        {
+            get
+            {
+                Contract.Requires(element > -1);
+                Contract.Requires(element < 3);
+
+                if (element == 0)
+                    return this.x;
+                else if (element == 1)
+                    return this.y;
+                else if (element == 2)
+                    return this.z;
+                else
+                    throw new NotImplementedException();
+            }
         }
         #endregion
         #region Properties

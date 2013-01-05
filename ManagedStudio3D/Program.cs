@@ -68,10 +68,11 @@ namespace ManagedStudio3D
             root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
             scene.Root = root;
 
-            //var terrain = new Managed3D.Modeling.Primitives.Terrain(1, 1);
-            //var node = new Node();
-            //node.Renderables.AddRange(terrain.Generate());
-            //scene.Root = node;
+            var terrain = new Managed3D.Modeling.Primitives.Terrain(1, 1);
+            terrain.ChunkSize = 12;
+            var node = new Node();
+            node.Renderables.AddRange(terrain.Generate());
+            scene.Root = node;
 
             Console.WriteLine(root.GetGraphExtents());
             //Program.RunDirect3DMode();
@@ -117,7 +118,7 @@ namespace ManagedStudio3D
             renderer.ActiveCamera.Mode = CameraMode.Orthographic;
             renderer.ActiveCamera.UpdateFacing();
             renderer.Initialize(options);
-            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericVGA;
+            renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWSVGA;
 
             var target = new ManagedRendererHostForm(renderer);
             System.Windows.Forms.Application.Run(target);
