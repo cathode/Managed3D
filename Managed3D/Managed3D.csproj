@@ -184,6 +184,7 @@
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
+    <Compile Include="Modeling\Primitives\SimplexNoise.cs" />
     <Compile Include="Modeling\Primitives\Terrain.cs" />
     <Compile Include="Modeling\ProceduralMesh.cs" />
     <Compile Include="Modeling\ProcedureParameter.cs" />

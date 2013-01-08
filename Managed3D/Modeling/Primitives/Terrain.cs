@@ -86,18 +86,9 @@ namespace Managed3D.Modeling.Primitives
             {
                 for (int x = 0; x < stride + 1; ++x)
                 {
-                    var fx = x / n;
-                    // Interpolate in the X direction
-                    var xi = ((c0 * fx) + (c3 * (1.0 - fx))) + ((c1 * fx) + (c2 * (1.0 - fx)));
+                    var z = rng.Next(255) / 100.0;
 
-                    // Interpolate in the Y direction
-                    var zi = ((c0 * fx) + (c1 * (1.0 - fx))) + ((c3 * fx) + (c2 * (1.0 - fx)));
-
-                    //var z = (c1 / n) * (x + 1) * ((c1x + c2x) / 2.0) + (c2 / n) * (x + 1);
-                    //z += (c1 / n) * (y + 1) * ((c1y + c2y) / 2.0) + (c2 / n) * (y + 1);
-                    var z = (xi + zi) / 2.0;
-
-                    z = SimplexNoise.noise(x, y);
+                    z = SimplexNoise.noise(x, y, z);
                     var vt = new Vertex3((x + (position.X * this.ChunkSize)) * 4, z * 2, (y + (position.Y * this.ChunkSize)) * 4);
                     verts[(y * sv) + x] = vt;
                 }
