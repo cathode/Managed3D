@@ -13,5 +13,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2009-2012 William 'cathode' Shelley. All Rights Reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 [assembly: AssemblyVersion("0.1.*")]

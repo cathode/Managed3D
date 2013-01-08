@@ -184,6 +184,7 @@
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
+    <Compile Include="Modeling\Primitives\SimplexNoise.cs" />
     <Compile Include="Modeling\Primitives\Terrain.cs" />
     <Compile Include="Modeling\ProceduralMesh.cs" />
     <Compile Include="Modeling\ProcedureParameter.cs" />
@@ -256,7 +257,7 @@
     </Compile>
     <Compile Include="Rendering\IManagedRendererTarget.cs" />
     <Compile Include="Rendering\Materials\MaterialBase.cs" />
-    <Compile Include="Rendering\Raytraced\RaytracedRenderer.cs" />
+    <Compile Include="Rendering\Raytracing\RaytracerRenderer.cs" />
     <Compile Include="Rendering\RenderEventArgs.cs" />
     <Compile Include="Geometry\PrimitiveKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
