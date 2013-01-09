@@ -269,6 +269,7 @@
     <Compile Include="Rendering\Software\Shaders\FragmentShader.cs" />
     <Compile Include="Rendering\Software\Shaders\VertexShader.cs" />
     <Compile Include="Rendering\Software\SoftwareRenderer.cs" />
+    <Compile Include="Rendering\Software\SoftwareRendererState.cs" />
     <Compile Include="SceneGraph\CameraChangedEventArgs.cs" />
     <Compile Include="SceneGraph\CameraFacing.cs" />
     <Compile Include="SceneGraph\CameraMode.cs" />

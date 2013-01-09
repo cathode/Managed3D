@@ -1,13 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/******************************************************************************
+ * Managed3D: A 3D Graphics API for .NET and Mono - http://gearedstudios.com/ *
+ * Copyright © 2009-2012 William 'cathode' Shelley. All Rights Reserved.      *
+ * This software is released under the terms and conditions of the MIT/X11    *
+ * license. See the 'license.txt' file for details.                           *
+ *****************************************************************************/
+using System;
+using NUnit.Framework;
 using Managed3D.Geometry;
 
 namespace Tests.SceneGraph
 {
-    [TestClass]
+    [TestFixture]
     public class Extents3_Tests
     {
-        [TestMethod]
+        [Test]
         public void MidpointCalculation()
         {
             var exts = new Extents3(new Vector3(10, 10, 10), new Vector3(-10, -10, -10));

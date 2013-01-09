@@ -126,38 +126,18 @@ namespace Managed3D.SceneGraph
             set;
         }
 
+       
         public VisibilityGroup VisibleGroups
         {
             get;
             set;
         }
-
-        //public Vector3 Up
-        //{
-        //    get
-        //    {
-        //        return Vector3.Up;
-        //    }
-        //}
-
-        //public Vector3 Left
-        //{
-        //    get
-        //    {
-        //        return Vector3.Left;
-        //    }
-        //}
-
-        //public Vector3 Forward
-        //{
-        //    get
-        //    {
-        //        return Vector3.Forward;
-        //    }
-        //}
         #endregion
         #region Methods
-
+        /// <summary>
+        /// Creates a camera that provides an isometric view of the scene.
+        /// </summary>
+        /// <returns></returns>
         public static Camera CreateIsometric()
         {
             var cam = new Camera();
@@ -168,6 +148,11 @@ namespace Managed3D.SceneGraph
             return cam;
         }
 
+        /// <summary>
+        /// Creates a camera that is facing the specified direction by default.
+        /// </summary>
+        /// <param name="facing"></param>
+        /// <returns></returns>
         public static Camera CreateWithFacing(CameraFacing facing)
         {
             var cam = new Camera();
@@ -177,6 +162,9 @@ namespace Managed3D.SceneGraph
             return cam;
         }
 
+        /// <summary>
+        /// Updates the orientation of the camera to match the facing assigned to it.
+        /// </summary>
         public void UpdateFacing()
         {
             switch (this.Facing)
@@ -206,7 +194,7 @@ namespace Managed3D.SceneGraph
                     break;
 
                 case CameraFacing.Isometric:
-                    this.Orientation = new Quaternion(new Vector3(1.0, 0.0, 0.0), Angle.FromDegrees(35.264)) *new Quaternion(Vector3.Up, Angle.FromDegrees(45));
+                    this.Orientation = new Quaternion(new Vector3(1.0, 0.0, 0.0), Angle.FromDegrees(35.264)) * new Quaternion(Vector3.Up, Angle.FromDegrees(45));
                     break;
             }
         }

@@ -28,9 +28,7 @@ namespace Managed3D.Rendering.Software.Shaders
             protected override Fragment Shade(Fragment input)
             {
                 var frag = new Fragment();
-                frag.X = input.X;
-                frag.Y = input.Y;
-                frag.Z = input.Z;
+                frag.Position = input.Position;
                 frag.Color = new Geometry.Vector4f(1.0f, 0f, 0f, 1.0f);
 
                 return frag;

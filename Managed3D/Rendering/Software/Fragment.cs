@@ -12,11 +12,7 @@ namespace Managed3D.Rendering.Software
     public struct Fragment
     {
         #region Fields
-        public ushort X;
-        public ushort Y;
-
-        public double Z;
-
+        public Vector3 Position;
         public Vector4f Color;
 
         #endregion

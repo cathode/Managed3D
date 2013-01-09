@@ -16,10 +16,10 @@ namespace Managed3D.SceneGraph
     /// <summary>
     /// Represents a node within the scene graph.
     /// </summary>
-    public class Node
+    public class Node : ICollection<Node>
     {
         #region Fields
-        private readonly Stack<Node> parents = new Stack<Node>();
+        private readonly LinkedList<Node> parents = new LinkedList<Node>();
         private readonly List<Node> children = new List<Node>();
         private readonly List<Constraint> constraints = new List<Constraint>();
         private readonly List<Mesh3> renderables = new List<Mesh3>();
@@ -250,6 +250,31 @@ namespace Managed3D.SceneGraph
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets the <see cref="Node"/> that is the parent of the current node, or null if there is no parent.
+        /// </summary>
+        public Node Parent
+        {
+            get
+            {
+                if (this.parents.Count > 0)
+                    return this.parents.First.Value;
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current node has a parent node relationship.
+        /// </summary>
+        public bool HasParent
+        {
+            get
+            {
+                return this.Parent != null;
+            }
+        }
         #endregion
         #region Methods
         /// <summary>
@@ -258,13 +283,17 @@ namespace Managed3D.SceneGraph
         /// <param name="item">The <see cref="Node"/> instance to be added.</param>
         public void Add(Node item)
         {
-            Contract.Requires(item != null);
+            if (item != null)
+            {
+                if (item.ContainsDeep(this))
+                    throw new InvalidOperationException("A recursive node addition was detected");
 
-            if (item.ContainsDeep(this))
-                throw new InvalidOperationException("A recursive node addition was detected");
-
-            item.parents.Push(this);
-            this.children.Add(item);
+                if (!this.ContainsDeep(item))
+                {
+                    item.parents.AddFirst(this);
+                    this.children.Add(item);
+                }
+            }
         }
 
         /// <summary>
@@ -331,15 +360,13 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public bool Remove(Node item)
         {
-            return this.children.Remove(item);
-        }
+            if (this.children.Remove(item))
+            {
+                item.parents.Remove(this);
+                return true;
+            }
 
-        /// <summary>
-        /// Forces the node to update it's bounding volume information for potential visibility determination.
-        /// </summary>
-        public virtual void UpdateBoundingVolume()
-        {
-            throw new NotImplementedException();
+            return false;
         }
 
         /// <summary>
@@ -351,7 +378,7 @@ namespace Managed3D.SceneGraph
             double x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
 
             var pos = this.GetWorldPosition();
-            Quaternion rot = this.GetWorldOrientation();
+            Quaternion rot = this.Orientation;
             var rm = rot.ToRotationMatrix();
             Matrix4 m = Matrix4.Identity;
             if (this.TransformOrder == SceneGraph.TransformOrder.TranslateRotateScale)
@@ -362,7 +389,7 @@ namespace Managed3D.SceneGraph
             {
                 m = Matrix4.CreateTranslationMatrix(pos) * rm;
             }
-            
+
             foreach (var mesh in this.Renderables)
                 foreach (var poly in mesh.Polygons)
                     foreach (var vt in poly.Vertices)
@@ -386,12 +413,16 @@ namespace Managed3D.SceneGraph
             return new Extents3(v1, v2);
         }
 
+        /// <summary>
+        /// Gets the absolute orientation of the current node, relative to the world
+        /// </summary>
+        /// <returns></returns>
         public Quaternion GetWorldOrientation()
         {
             if (this.parents.Count == 0)
                 return this.Orientation;
 
-            var parent = this.parents.Peek();
+            var parent = this.Parent;
 
             var prot = parent.GetWorldOrientation();
             return this.Orientation * prot;
@@ -413,18 +444,30 @@ namespace Managed3D.SceneGraph
             return ext;
         }
 
+        /// <summary>
+        /// Determines the node's position, relative to the position of each of it's parents.
+        /// </summary>
+        /// <returns></returns>
         public Vector3 GetWorldPosition()
         {
             if (this.parents.Count == 0)
                 return this.Position;
 
-            var parent = this.parents.Peek();
+            var parent = this.Parent;
 
             var ppos = parent.GetWorldPosition();
 
             return ppos + this.Position;
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Defines invariant contracts for the <see cref="Node"/> class.
+        /// </summary>
         [ContractInvariantMethod]
         private void Invariants()
         {

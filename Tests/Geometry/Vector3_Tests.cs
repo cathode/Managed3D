@@ -1,13 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/******************************************************************************
+ * Managed3D: A 3D Graphics API for .NET and Mono - http://gearedstudios.com/ *
+ * Copyright © 2009-2012 William 'cathode' Shelley. All Rights Reserved.      *
+ * This software is released under the terms and conditions of the MIT/X11    *
+ * license. See the 'license.txt' file for details.                           *
+ *****************************************************************************/
+using System;
+using NUnit.Framework;
 using Managed3D.Geometry;
 
 namespace Tests.Geometry
 {
-    [TestClass]
+    [TestFixture]
     public class Vector3_Tests
     {
-        [TestMethod]
+        [Test]
         public void EqualityComparisons()
         {
             var v1 = new Vector3(55, 44, 0).Normalize();
@@ -16,7 +22,7 @@ namespace Tests.Geometry
             Assert.AreEqual(v1, v2);
         }
 
-        [TestMethod]
+        [Test]
         public void OrthoNormal()
         {
             var a = new Vector3(1, 0, 0);
@@ -31,7 +37,7 @@ namespace Tests.Geometry
             var dot = Vector3.DotProduct(a, b);
         }
 
-        [TestMethod]
+        [Test]
         public void OrthoNormal_ZeroResult()
         {
             var a = new Vector3(1, 0, 0);
