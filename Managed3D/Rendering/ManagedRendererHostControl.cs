@@ -39,7 +39,7 @@ namespace Managed3D.Rendering
         private bool isPanning;
         private bool isZooming;
         //private double autoRotate = 0.0;
-        private double sensitivity = 0.322;
+        private double sensitivity = 0.4;
         internal Managed3D.SceneGraph.Scene scene;
         private bool isAutoRotateEnabled;
         private ManagedRenderer renderer;
@@ -179,7 +179,9 @@ namespace Managed3D.Rendering
                 var ydelta = e.Y - this.ty;
                 this.tx += xdelta;
                 this.ty += ydelta;
-                this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(xdelta * (this.sensitivity * 2), ydelta * (this.sensitivity * 2), 0);
+                var s = this.renderer.ActiveCamera.Scale.X;
+
+                this.renderer.ActiveCamera.Position = (Vector3)this.renderer.ActiveCamera.Position + new Vector3(xdelta * (this.sensitivity * 3 * (1.0 / s)), ydelta * (this.sensitivity * 3 * (1.0 / s)), 0);
             }
             else if (this.isZooming)
             {
