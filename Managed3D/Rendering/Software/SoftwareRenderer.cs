@@ -104,6 +104,7 @@ namespace Managed3D.Rendering.Software
         {
             base.OnStopping(e);
         }
+
         private void DrawEdge(Edge3 edge)
         {
             if (edge.Flags.HasFlag(EdgeFlags.Invisible))
@@ -117,6 +118,7 @@ namespace Managed3D.Rendering.Software
                 this.DrawLine(p.Position, p.Color, q.Position, q.Color);
             }
         }
+
         private void DrawLine(Vector3 v1, Vector4f c1, Vector3 v2, Vector4f c2)
         {
             var xdiff = v2.X - v1.X;
@@ -184,23 +186,6 @@ namespace Managed3D.Rendering.Software
                     var color = c1 + ((c2 - c1) * ((y - v1.Y) / ydiff));
                     cp[(int)x, (int)y] = color;
                 }
-            }
-        }
-
-        private class Span
-        {
-            #region Fields
-            internal double X1;
-            internal double X2;
-            internal Vector4f C1;
-            internal Vector4f C2;
-            #endregion
-            internal Span(Vector4f c1, double x1, Vector4f c2, double x2)
-            {
-                this.C1 = c1;
-                this.C2 = c2;
-                this.X1 = x1;
-                this.X2 = x2;
             }
         }
 
@@ -290,7 +275,7 @@ namespace Managed3D.Rendering.Software
 
         private void DrawQuad(Quad3 quad)
         {
-
+            var emid = new Edge3(quad.A, quad.C);
         }
 
         private void DrawPolygon(Polygon3 poly)
@@ -300,7 +285,9 @@ namespace Managed3D.Rendering.Software
             else if (poly is Quad3)
                 this.DrawQuad((Quad3)poly);
             else
-                throw new NotImplementedException();
+            {
+                // NOP
+            }
 
             if (true)
             {
@@ -405,12 +392,28 @@ namespace Managed3D.Rendering.Software
             double h = this.Profile.Height;
             double w = this.Profile.Width;
             var f = ((v1.Y - v2.Y) / 100.0) * (100 / (h / w));
-            
+
             this.ActiveCamera.Scale = new Vector3(f * 0.9, f * 0.9, f * 0.9);
 
         }
         #endregion
+        #region Types
+        private class Span
+        {
+            #region Fields
+            internal double X1;
+            internal double X2;
+            internal Vector4f C1;
+            internal Vector4f C2;
+            #endregion
+            internal Span(Vector4f c1, double x1, Vector4f c2, double x2)
+            {
+                this.C1 = c1;
+                this.C2 = c2;
+                this.X1 = x1;
+                this.X2 = x2;
+            }
+        }
+        #endregion
     }
-
- 
 }

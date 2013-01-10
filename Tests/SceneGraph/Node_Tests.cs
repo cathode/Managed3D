@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using Managed3D.SceneGraph;
 using NUnit.Framework;
+using Managed3D.Geometry;
 
 namespace Tests.SceneGraph
 {
@@ -86,7 +87,7 @@ namespace Tests.SceneGraph
             root.Add(c1);
 
             Assert.That(() => c1.Add(root), Throws.InvalidOperationException);
-            
+
         }
 
         [Test]
@@ -129,7 +130,21 @@ namespace Tests.SceneGraph
             Assert.IsTrue(c1.Parent == r2);
             Assert.IsTrue(r2.Contains(c1));
             Assert.IsFalse(r1.Contains(c1));
-            
+
+        }
+
+        [Test]
+        public void EnsureCorrectExtentsForNode()
+        {
+            var root = new Node();
+            var extents = root.GetExtents();
+            Assert.AreEqual(Extents3.Empty, extents);
+        }
+
+        [Test]
+        public void EnsureCorrectGraphExtentsForNodes()
+        {
+
         }
     }
 }

@@ -24,5 +24,6 @@ namespace Tests.SceneGraph
 
             Assert.AreEqual(expected, actual);
         }
+
     }
 }

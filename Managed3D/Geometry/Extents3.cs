@@ -12,6 +12,7 @@ namespace Managed3D.Geometry
     public class Extents3
     {
         #region Fields
+        public static readonly Extents3 Empty = new Extents3(0, 0, 0);
         private readonly Vector3 a;
         private readonly Vector3 b;
         #endregion
@@ -166,6 +167,18 @@ namespace Managed3D.Geometry
                     Math.Min(e1.Bottom, e2.Bottom)));
 
         }
+
+        public static bool operator ==(Extents3 e1, Extents3 e2)
+        {
+            return (e1.A == e2.A) && (e1.B == e2.B);
+        }
+
+        public static bool operator !=(Extents3 e1, Extents3 e2)
+        {
+            return (e1.A != e2.A) || (e1.B != e2.B);
+        }
         #endregion
+
+
     }
 }
