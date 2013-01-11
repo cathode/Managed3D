@@ -62,6 +62,8 @@ namespace Managed3D.Rendering.Software
                 this.projectionMatrix *= (this.ActiveCamera.Mode == CameraMode.Perspective)
                     ? Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000)
                     : Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
+
+                
             }
         }
 

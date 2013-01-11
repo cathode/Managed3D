@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Managed3D.Platform.Microsoft
 {
+    /// <summary>
+    /// Indicates the type of pixels in a <see cref="PixelFormatDescriptor"/>.
+    /// </summary>
     public enum PfdPixelType : byte
     {
         Rgba = 0,

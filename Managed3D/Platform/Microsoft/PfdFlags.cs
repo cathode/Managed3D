@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Managed3D.Platform.Microsoft
 {
+    /// <summary>
+    /// Indicates supported options of a <see cref="PixelFormatDescriptor"/>.
+    /// </summary>
     [CLSCompliant(false)]
     [Flags]
     public enum PfdFlags : uint

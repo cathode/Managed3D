@@ -61,6 +61,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Geometry\Matrix4_Tests.cs" />
     <Compile Include="Geometry\Quaternion_Tests.cs" />
     <Compile Include="Geometry\Edge3_Test.cs" />
     <Compile Include="Geometry\Vector3_Tests.cs" />

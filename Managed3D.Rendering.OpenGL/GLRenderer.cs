@@ -78,10 +78,10 @@ namespace Managed3D.Rendering.OpenGL
         protected override void OnInitializing(RendererInitializationEventArgs e)
         {
             base.OnInitializing(e);
-            
+
             IntPtr hinst = IntPtr.Zero;
-            /*
-            this.windowHandle = User32.CreateWindowEx(WindowStyle.Left,
+
+            this.windowHandle = User32.CreateWindowEx(Managed3D.Platform.Microsoft.ExtendedWindowStyle.Left,
                 "GLRenderer",
                 "Managed3D GLRenderer",
                 0,
@@ -91,7 +91,7 @@ namespace Managed3D.Rendering.OpenGL
                 IntPtr.Zero,
                 hinst,
                 IntPtr.Zero);
-            */
+
 
             GL.ShadeModel(ShadeModel.Flat);
             GL.ClearDepth(1.0);
@@ -146,7 +146,7 @@ namespace Managed3D.Rendering.OpenGL
         {
             base.OnPostRender(e);
 
-           
+
         }
 
         protected virtual void ProcessNode(Node node)

@@ -43,17 +43,19 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Initializes a new instance of the <see cref="Extents3"/> class.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="length"></param>
-        /// <param name="height"></param>
-        public Extents3(double width, double length, double height)
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        public Extents3(double x, double y, double z)
         {
-            this.right = width / 2.0;
-            this.left = width / -2.0;
-            this.top = height / 2.0;
-            this.bottom = height / -2.0;
-            this.front = length / 2.0;
-            this.back = length / -2.0;
+            this.right = x / 2.0;
+            this.left = x / -2.0;
+
+            this.top = y / 2.0;
+            this.bottom = y / -2.0;
+
+            this.front = z / 2.0;
+            this.back = z / -2.0;
         }
 
         /// <summary>
@@ -191,13 +193,13 @@ namespace Managed3D.Geometry
             else if (Extents3.ReferenceEquals(e2, null))
                 return Extents3.ReferenceEquals(e1, null);
             else
-                return e1.A == e2.A && e1.B == e2.B;
+                return e1 == e2;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is Extents3)
-                return this.Equals((Extents3)obj);
+                return this == (Extents3)obj;
 
             return false;
         }
@@ -265,12 +267,23 @@ namespace Managed3D.Geometry
 
         public static bool operator ==(Extents3 e1, Extents3 e2)
         {
-            return Extents3.Equals(e1, e2);
+            return e1.right == e2.right
+                && e1.left == e2.left
+                && e1.front == e2.front
+                && e1.back == e2.back
+                && e1.top == e2.top
+                && e1.bottom == e2.bottom;
+
         }
 
         public static bool operator !=(Extents3 e1, Extents3 e2)
         {
-            return !Extents3.Equals(e1, e2);
+            return e1.right != e2.right
+                || e1.left != e2.left
+                || e1.front != e2.front
+                || e1.back != e2.back
+                || e1.top != e2.top
+                || e1.bottom != e2.bottom;
         }
         #endregion
 

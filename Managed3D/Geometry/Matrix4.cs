@@ -41,97 +41,97 @@ namespace Managed3D.Geometry
                                                               0, 0, 1, 0,
                                                               0, 0, 0, 1);
         /// <summary>
-        /// Element at the first row, first column.
+        /// Element at the first row, fourth column.
         /// </summary>
         [FieldOffset(0x00)]
         private readonly double aw;
 
         /// <summary>
-        /// Element at the first row, second column.
+        /// Element at the first row, first column.
         /// </summary>
         [FieldOffset(0x08)]
         private readonly double ax;
 
         /// <summary>
-        /// Element at the first row, third column.
+        /// Element at the first row, second column.
         /// </summary>
         [FieldOffset(0x10)]
         private readonly double ay;
 
         /// <summary>
-        /// Element at the first row, fourth column.
+        /// Element at the first row, third column.
         /// </summary>
         [FieldOffset(0x18)]
         private readonly double az;
 
         /// <summary>
-        /// Element at the second row, first column.
+        /// Element at the second row, fourth column.
         /// </summary>
         [FieldOffset(0x20)]
         private readonly double bw;
 
         /// <summary>
-        /// Element at the second row, second column.
+        /// Element at the second row, first column.
         /// </summary>
         [FieldOffset(0x28)]
         private readonly double bx;
 
         /// <summary>
-        /// Element at the second row, third column.
+        /// Element at the second row, second column.
         /// </summary>
         [FieldOffset(0x30)]
         private readonly double by;
 
         /// <summary>
-        /// Element at the second row, fourth column.
+        /// Element at the second row, third column.
         /// </summary>
         [FieldOffset(0x38)]
         private readonly double bz;
 
         /// <summary>
-        /// Element at the third row, first column.
+        /// Element at the third row, fourth column.
         /// </summary>
         [FieldOffset(0x40)]
         private readonly double cw;
 
         /// <summary>
-        /// Element at the third row, second column.
+        /// Element at the third row, first column.
         /// </summary>
         [FieldOffset(0x48)]
         private readonly double cx;
 
         /// <summary>
-        /// Element at the third row, third column.
+        /// Element at the third row, second column.
         /// </summary>
         [FieldOffset(0x50)]
         private readonly double cy;
 
         /// <summary>
-        /// Element at the third row, fourth column.
+        /// Element at the third row, third column.
         /// </summary>
         [FieldOffset(0x58)]
         private readonly double cz;
 
         /// <summary>
-        /// Element at the fourth row, first column.
+        /// Element at the fourth row, fourth column.
         /// </summary>
         [FieldOffset(0x60)]
         private readonly double dw;
 
         /// <summary>
-        /// Element at the fourth row, second column.
+        /// Element at the fourth row, first column.
         /// </summary>
         [FieldOffset(0x68)]
         private readonly double dx;
 
         /// <summary>
-        /// Element at the fourth row, third column.
+        /// Element at the fourth row, second column.
         /// </summary>
         [FieldOffset(0x70)]
         private readonly double dy;
 
         /// <summary>
-        /// Element at the fourth row, fourth column.
+        /// Element at the fourth row, third column.
         /// </summary>
         [FieldOffset(0x78)]
         private readonly double dz;
@@ -559,30 +559,44 @@ namespace Managed3D.Geometry
         /// <returns>A <see cref="Matrix4"/> that is the perspective projection matrix for the specified values.</returns>
         public static Matrix4 CreatePerspectiveProjectionMatrix(Angle fov, double aspect, double near, double far)
         {
-            fov = Angle.FromDegrees(45);
-            near = 0.1;
-            far = 100.0;
-            aspect = 0.75;
-            var fy = fov.Radians;
-            var f = near * Math.Tan(fy / 2.0);
-            var left = -f;
-            var right = f;
-            var bottom = -f / aspect;
-            var top = f / aspect;
+            return Matrix4.CreatePerspectiveProjectionMatrix(fov.Radians, aspect, near, far);
 
+            double fovyDegrees = 60;
+            double fovy = Angle.RadiansFromDegrees(fovyDegrees);
+            //var width = 800.0;
+            //var height = 600.0;
+            //var aspect = width / height;
 
-            var m0 = 2 * near / (right - left);
-            var m5 = 2 * near / (top - bottom);
-            var m8 = (right + left) / (right - left);
-            var m9 = (top + bottom) / (top - bottom);
-            var m10 = -(far + near) / (far - near);
-            var m11 = -1.0;
-            var m14 = -(2.0 * far * near) / (far - near);
+            //var near = 1.0;
+            //var far = 1000.0;
 
-            return new Matrix4(m0, 0, 0, 0,
-                               0, m5, 0, 0,
-                               m8, m9, m10, m11,
-                               0, 0, m14, 0);
+            double f = Math.Cos(fovy) / Math.Sin(fovy);
+
+            double m00 = f / aspect;
+
+            double m11 = f;
+            double m22 = (near + far) / (near - far);
+            double m32 = (2 * (far * near)) / (near - far);
+            double m23 = -1;
+
+            var m = new Matrix4(m00, 0, 0, 0,
+                                       0, m11, 0, 0,
+                                       0, 0, m22, m23,
+                                       0, 0, m32, 0);
+
+            return m;
+        }
+
+        public static Matrix4 CreatePerspectiveProjectionMatrix(double fov, double aspect, double near, double far)
+        {
+            double width = 0.2;
+            double height = 0.2;
+
+            return new Matrix4((2 * near) / width, 0, 0, 0,
+                               0, (2 * near) / height, 0, 0,
+                               0, 0, far / (far - near), 1,
+                               0, 0, (-far * near) / (far - near), 0);
+
         }
 
         /// <summary>
@@ -747,6 +761,14 @@ namespace Managed3D.Geometry
         public static Matrix4 CreateRotationMatrix(Quaternion rotation)
         {
             return rotation.ToRotationMatrix();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[{0}, {1}, {2}, {3}]\r\n", this.ax, this.ay, this.az, this.aw)
+                + string.Format("[{0}, {1}, {2}, {3}]\r\n", this.bx, this.by, this.bz, this.bw)
+                + string.Format("[{0}, {1}, {2}, {3}]\r\n", this.cx, this.cy, this.cz, this.cw)
+                + string.Format("[{0}, {1}, {2}, {3}]\r\n", this.dx, this.dy, this.dz, this.dw);
         }
         #endregion
         #region Operators

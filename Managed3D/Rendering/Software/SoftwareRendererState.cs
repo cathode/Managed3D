@@ -166,9 +166,10 @@ namespace Managed3D.Rendering.Software
         {
             this.ViewProjection = this.ProjectionMatrix * Matrix4.Identity;
             this.ViewProjection *= this.ViewMatrix;
-            this.WorldViewProjection = this.ProjectionMatrix * Matrix4.Identity;
+            this.WorldViewProjection = this.ProjectionMatrix;
             this.WorldViewProjection *= this.ViewMatrix;
             this.WorldViewProjection *= this.WorldMatrix;
+
         }
         #endregion
     }
