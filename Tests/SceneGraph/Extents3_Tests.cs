@@ -25,5 +25,21 @@ namespace Tests.SceneGraph
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void EqualityComparison()
+        {
+            var e1 = new Extents3(0, 1, 2);
+            var e2 = new Extents3(0, 1, 2);
+            var e3 = new Extents3(3, 2, 1);
+            var e4 = new Extents3(3, 2, 1);
+
+            Assert.AreEqual(e1, e2);
+            Assert.AreEqual(e3, e4);
+            Assert.AreNotEqual(e1, e3);
+            Assert.AreNotEqual(e2, e4);
+
+            Assert.IsTrue(e1 == e2);
+            Assert.IsTrue(e3 == e4);
+        }
     }
 }

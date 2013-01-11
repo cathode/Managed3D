@@ -5,6 +5,7 @@
  * license. See the 'license.txt' file for details.                           *
  *****************************************************************************/
 using System;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Geometry
 {
@@ -328,6 +329,9 @@ namespace Managed3D.Geometry
         /// <param name="digits">The number of fractional digits to round to.</param>
         public Vector2 Round(int digits)
         {
+            Contract.Requires(digits >= 0);
+            Contract.Requires(digits <= 15);
+
             return new Vector2(Math.Round(this.X, digits), Math.Round(this.Y, digits));
         }
 
@@ -349,6 +353,9 @@ namespace Managed3D.Geometry
         /// <returns>A new <see cref="Vector2"/> instance that is the rounded form of the specified vector.</returns>
         public static Vector2 Round(Vector2 vector, int digits)
         {
+            Contract.Requires(digits >= 0);
+            Contract.Requires(digits <= 15);
+
             return new Vector2(Math.Round(vector.X, digits), Math.Round(vector.Y, digits));
         }
 

@@ -35,7 +35,7 @@ namespace Managed3D.Modeling.Primitives
         #region Methods
         public void Initialize()
         {
-            var p = new byte[255];
+            var p = new byte[256];
             for (byte i = 255; i != 0; ++i)
                 p[i] = i;
 

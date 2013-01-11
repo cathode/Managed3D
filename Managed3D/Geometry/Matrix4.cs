@@ -746,8 +746,6 @@ namespace Managed3D.Geometry
 
         public static Matrix4 CreateRotationMatrix(Quaternion rotation)
         {
-            Contract.Requires(rotation != null);
-
             return rotation.ToRotationMatrix();
         }
         #endregion

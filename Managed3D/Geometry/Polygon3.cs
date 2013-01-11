@@ -212,12 +212,14 @@ namespace Managed3D.Geometry
             get
             {
                 Contract.Requires(index < this.Vertices.Length);
+                Contract.Ensures(Contract.Result<Vertex3>() != null);
 
                 return this.vertices[index];
             }
             set
             {
                 Contract.Requires(index < this.Vertices.Length);
+                Contract.Requires(value != null);
 
                 this.vertices[index] = value;
             }

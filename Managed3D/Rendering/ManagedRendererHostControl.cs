@@ -59,6 +59,8 @@ namespace Managed3D.Rendering
         {
             get
             {
+                Contract.Ensures(Contract.Result<ManagedRenderer>() != null);
+
                 return this.renderer;
             }
             set

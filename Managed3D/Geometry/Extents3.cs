@@ -3,18 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace Managed3D.Geometry
 {
     /// <summary>
-    /// Represents the extents of a 3D object.
+    /// Represents an axis-aligned bounding box specified by two points in 3d space. This class is immutable.
     /// </summary>
+    /// <remarks>
+    /// The first point (A) is the front, top, right corner of the box. The second point
+    /// (B) is the back, bottom, left corner of the box.
+    /// </remarks>
     public class Extents3
     {
         #region Fields
         public static readonly Extents3 Empty = new Extents3(0, 0, 0);
-        private readonly Vector3 a;
-        private readonly Vector3 b;
+
+        private readonly double right;
+        private readonly double top;
+        private readonly double front;
+        private readonly double left;
+        private readonly double bottom;
+        private readonly double back;
         #endregion
         #region Constructors
         /// <summary>
@@ -22,8 +32,12 @@ namespace Managed3D.Geometry
         /// </summary>
         public Extents3()
         {
-            this.a = Vector3.Zero;
-            this.b = Vector3.Zero;
+            this.left = 0;
+            this.right = 0;
+            this.top = 0;
+            this.bottom = 0;
+            this.front = 0;
+            this.back = 0;
         }
 
         /// <summary>
@@ -34,15 +48,12 @@ namespace Managed3D.Geometry
         /// <param name="height"></param>
         public Extents3(double width, double length, double height)
         {
-            var x1 = width / 2.0;
-            var x2 = width / -2.0;
-            var y1 = length / 2.0;
-            var y2 = length / -2.0;
-            var z1 = height / 2.0;
-            var z2 = height / -2.0;
-
-            this.a = new Vector3(x1, y1, z1);
-            this.b = new Vector3(x2, y2, z2);
+            this.right = width / 2.0;
+            this.left = width / -2.0;
+            this.top = height / 2.0;
+            this.bottom = height / -2.0;
+            this.front = length / 2.0;
+            this.back = length / -2.0;
         }
 
         /// <summary>
@@ -51,9 +62,35 @@ namespace Managed3D.Geometry
         /// <param name="a"></param>
         /// <param name="b"></param>
         public Extents3(Vector3 a, Vector3 b)
+            : this(a.X, a.Y, a.Z, b.X, b.Y, b.Z)
         {
-            this.a = a;
-            this.b = b;
+            Contract.Requires(a.X >= b.X);
+            Contract.Requires(a.Y >= b.Y);
+            Contract.Requires(a.Z >= b.Z);
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Extents3"/> class.
+        /// </summary>
+        /// <param name="right"></param>
+        /// <param name="top"></param>
+        /// <param name="front"></param>
+        /// <param name="left"></param>
+        /// <param name="bottom"></param>
+        /// <param name="back"></param>
+        public Extents3(double right, double top, double front, double left, double bottom, double back)
+        {
+            Contract.Requires(right >= left);
+            Contract.Requires(front >= back);
+            Contract.Requires(top >= bottom);
+
+            this.right = right;
+            this.top = top;
+            this.front = front;
+            this.left = left;
+            this.bottom = bottom;
+            this.back = back;
         }
         #endregion
         #region Properties
@@ -61,7 +98,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.a;
+                return new Vector3(this.right, this.top, this.front);
             }
         }
 
@@ -69,7 +106,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.b;
+                return new Vector3(this.left, this.bottom, this.back);
             }
 
         }
@@ -78,7 +115,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.a.X;
+                return this.right;
             }
         }
 
@@ -86,7 +123,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.b.X;
+                return this.left;
             }
         }
 
@@ -94,7 +131,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.a.Y;
+                return this.front;
             }
         }
 
@@ -102,7 +139,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.b.Y;
+                return this.back;
             }
         }
 
@@ -110,7 +147,7 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.a.Z;
+                return this.top;
             }
         }
 
@@ -118,24 +155,85 @@ namespace Managed3D.Geometry
         {
             get
             {
-                return this.b.Z;
+                return this.bottom;
+            }
+        }
+
+        public double Width
+        {
+            get
+            {
+                return this.Right - this.Left;
+            }
+        }
+
+        public double Length
+        {
+            get
+            {
+                return this.Front - this.Back;
+            }
+        }
+
+        public double Height
+        {
+            get
+            {
+                return this.Top - this.Bottom;
             }
         }
         #endregion
         #region Methods
+        public static bool Equals(Extents3 e1, Extents3 e2)
+        {
+            if (Extents3.ReferenceEquals(e1, null))
+                return Extents3.ReferenceEquals(e2, null);
+            else if (Extents3.ReferenceEquals(e2, null))
+                return Extents3.ReferenceEquals(e1, null);
+            else
+                return e1.A == e2.A && e1.B == e2.B;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Extents3)
+                return this.Equals((Extents3)obj);
+
+            return false;
+        }
+
+        public bool Equals(Extents3 other)
+        {
+            return Extents3.Equals(this, other);
+        }
+
         public Vector3 FindMidpoint()
         {
-            return new Vector3((this.a.X + this.b.X) / 2.0, (this.a.Y + this.b.Y) / 2.0, (this.a.Z + this.b.Z) / 2.0);
+            return new Vector3((this.left + this.right) / 2.0, (this.top + this.bottom) / 2.0, (this.front + this.back) / 2.0);
         }
 
         public override string ToString()
         {
             return string.Format("{0}, {1}", this.A, this.B);
         }
+
+        public override int GetHashCode()
+        {
+            return this.A.GetHashCode() ^ (this.B.GetHashCode() * 31);
+        }
+
+        /// <summary>
+        /// Invariant contracts for the <see cref="Extents3"/> class.
+        /// </summary>
         [ContractInvariantMethod]
         private void Invariants()
         {
-
+            Contract.Invariant(this.Width >= 0);
+            Contract.Invariant(this.Length >= 0);
+            Contract.Invariant(this.Height >= 0);
+            Contract.Invariant(this.Left <= this.Right);
+            Contract.Invariant(this.Bottom <= this.Top);
+            Contract.Invariant(this.Back <= this.Front);
         }
         #endregion
         #region Operators
@@ -156,26 +254,23 @@ namespace Managed3D.Geometry
 
         public static Extents3 operator |(Extents3 e1, Extents3 e2)
         {
-            return new Extents3(
-                new Vector3(
-                    Math.Max(e1.Right, e2.Right),
-                    Math.Max(e1.Front, e2.Front),
-                    Math.Max(e1.Top, e2.Top)),
-                new Vector3(
-                    Math.Min(e1.Left, e2.Left),
-                    Math.Min(e1.Back, e2.Back),
-                    Math.Min(e1.Bottom, e2.Bottom)));
+            return new Extents3(e1.Right >= e2.Right ? e1.Right : e2.Right,
+                                e1.Top >= e2.Top ? e1.Top : e2.Top,
+                                e1.Front >= e2.Front ? e1.Front : e2.Front,
 
+                                e1.Left <= e2.Left ? e1.Left : e2.Left,
+                                e1.Bottom <= e2.Bottom ? e1.Bottom : e2.Bottom,
+                                e1.Back <= e2.Back ? e1.Back : e2.Back);
         }
 
         public static bool operator ==(Extents3 e1, Extents3 e2)
         {
-            return (e1.A == e2.A) && (e1.B == e2.B);
+            return Extents3.Equals(e1, e2);
         }
 
         public static bool operator !=(Extents3 e1, Extents3 e2)
         {
-            return (e1.A != e2.A) || (e1.B != e2.B);
+            return !Extents3.Equals(e1, e2);
         }
         #endregion
 

@@ -13,22 +13,77 @@ namespace Managed3D.Geometry
     /// </summary>
     public struct Angle
     {
-        #region Constructors - Private
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Angle"/> struct.
+        /// </summary>
+        /// <param name="rads"></param>
+        public Angle(double rads)
+        {
+            this.rads = rads;
+        }
+
         private Angle(double value, AngleUnit unit)
         {
-            this.degrees = (unit == AngleUnit.Degrees) ? value : Angle.DegreesFromRadians(value);
+            if (unit == AngleUnit.Radians)
+                this.rads = value;
+            else
+                this.rads = Angle.RadiansFromDegrees(value);
         }
         #endregion
         #region Fields - Private
-        private readonly double degrees;
-        #endregion
-        #region Fields
         /// <summary>
         /// Holds an angle with zero degrees.
         /// </summary>
         public static readonly Angle Zero = new Angle();
+        private readonly double rads;
         #endregion
-        #region Methods - Public
+        #region Properties - Public
+        /// <summary>
+        /// Gets the cosine of the current <see cref="Angle"/>.
+        /// </summary>
+        public double Cosine
+        {
+            get
+            {
+                return Math.Cos(this.Radians);
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the current <see cref="Angle"/> in degrees.
+        /// </summary>
+        public double Degrees
+        {
+            get
+            {
+                return Angle.DegreesFromRadians(this.rads);
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the current <see cref="Angle"/> in radians.
+        /// </summary>
+        public double Radians
+        {
+            get
+            {
+                return this.rads;
+            }
+        }
+
+        /// <summary>
+        /// Gets the sine of the current <see cref="Angle"/>.
+        /// </summary>
+        public double Sine
+        {
+            get
+            {
+                return Math.Sin(this.Radians);
+            }
+        }
+        #endregion
+        #region Methods
         /// <summary>
         /// Adds the current <see cref="Angle"/> and a second <see cref="Angle"/> and returns the result.
         /// </summary>
@@ -100,7 +155,7 @@ namespace Managed3D.Geometry
         /// <returns>true if both angles are equal, otherwise false.</returns>
         public static bool Equals(Angle a, Angle b)
         {
-            return a.degrees == b.degrees;
+            return a.rads == b.rads;
         }
 
         /// <summary>
@@ -138,7 +193,7 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return __HashCode.Calculate(this.degrees);
+            return this.rads.GetHashCode() ^ ("angle".GetHashCode() + 402221);
         }
 
         /// <summary>
@@ -169,7 +224,7 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static bool operator ==(Angle a, Angle b)
         {
-            return (a.degrees == b.degrees);
+            return (a.rads == b.rads);
         }
 
         /// <summary>
@@ -180,7 +235,7 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static bool operator !=(Angle a, Angle b)
         {
-            return (a.degrees != b.degrees);
+            return (a.rads != b.rads);
         }
 
         /// <summary>
@@ -205,52 +260,7 @@ namespace Managed3D.Geometry
             return Angle.FromDegrees(a.Degrees - b.Degrees);
         }
         #endregion
-        #region Properties - Public
-        /// <summary>
-        /// Gets the cosine of the current <see cref="Angle"/>.
-        /// </summary>
-        public double Cosine
-        {
-            get
-            {
-                return Math.Cos(this.Radians);
-            }
-        }
-
-        /// <summary>
-        /// Gets the value of the current <see cref="Angle"/> in degrees.
-        /// </summary>
-        public double Degrees
-        {
-            get
-            {
-                return this.degrees;
-            }
-        }
-
-        /// <summary>
-        /// Gets the value of the current <see cref="Angle"/> in radians.
-        /// </summary>
-        public double Radians
-        {
-            get
-            {
-                return Angle.RadiansFromDegrees(this.degrees);
-            }
-        }
-
-        /// <summary>
-        /// Gets the sine of the current <see cref="Angle"/>.
-        /// </summary>
-        public double Sine
-        {
-            get
-            {
-                return Math.Sin(this.Radians);
-            }
-        }
-        #endregion
-        #region Types - Private
+        #region Types
         private enum AngleUnit
         {
             Degrees,

@@ -11,6 +11,7 @@ using System.Text;
 using Managed3D.SceneGraph;
 using NUnit.Framework;
 using Managed3D.Geometry;
+using Managed3D.Geometry.Primitives;
 
 namespace Tests.SceneGraph
 {
@@ -137,14 +138,43 @@ namespace Tests.SceneGraph
         public void EnsureCorrectExtentsForNode()
         {
             var root = new Node();
+
+            // Test extents of an empty node
             var extents = root.GetExtents();
             Assert.AreEqual(Extents3.Empty, extents);
+
+            // Test extents with a simple renderable.
+            root.Renderables.Add(new Managed3D.Geometry.Primitives.Box(10, 10, 10));
+            var expected = new Extents3(10, 10, 10);
+            extents = root.GetExtents();
+            Assert.AreEqual(expected, extents);
+
+            // Rotate the node, then get extents.
+            root.Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(45));
+
+            extents = root.GetExtents();
         }
 
         [Test]
         public void EnsureCorrectGraphExtentsForNodes()
         {
+            var root = new Node();
+            var c1 = new Node();
+            root.Renderables.Add(new Box(10, 50, 12));
+            root.Add(c1);
+            c1.Renderables.Add(new Box(50, 10, 15));
 
+            var expected = new Extents3(50, 50, 15);
+            var actual = root.GetGraphExtents();
+
+            Assert.AreEqual(expected, actual);
+
+            // Test node translation/position
+            c1.Position = new Vector3(10, 0, 0);
+            expected = new Extents3(new Vector3(35, 25, 7.5), new Vector3(-15, -25, -7.5));
+            actual = root.GetGraphExtents();
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

@@ -633,12 +633,15 @@ namespace Managed3D.Geometry
             }
         }
 
-        public Vector3 Round(int decimalPlaces)
+        public Vector3 Round(int digits)
         {
+            Contract.Requires(digits >= 0);
+            Contract.Requires(digits <= 15);
+
             return new Vector3(
-                Math.Round(this.x, decimalPlaces),
-                Math.Round(this.y, decimalPlaces),
-                Math.Round(this.z, decimalPlaces));
+                Math.Round(this.x, digits),
+                Math.Round(this.y, digits),
+                Math.Round(this.z, digits));
         }
 
         public override string ToString()

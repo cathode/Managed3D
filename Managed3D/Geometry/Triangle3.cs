@@ -236,15 +236,15 @@ namespace Managed3D.Geometry
         [ContractInvariantMethod]
         private void Invariants()
         {
-            Contract.Invariant(this.A != null);
-            Contract.Invariant(this.B != null);
-            Contract.Invariant(this.C != null);
-
             Contract.Invariant(this.Edges != null);
             Contract.Invariant(this.Edges.Length == 3);
 
             Contract.Invariant(this.Vertices != null);
             Contract.Invariant(this.Vertices.Length == 3);
+
+            Contract.Invariant(this.A != null);
+            Contract.Invariant(this.B != null);
+            Contract.Invariant(this.C != null);
         }
         #endregion
         #region Operators

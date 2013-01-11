@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Managed3D.Geometry;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Modeling
 {
@@ -25,6 +26,8 @@ namespace Managed3D.Modeling
         #region Methods
         public static Mesh3 GenerateSubtraction(Mesh3 mesh, BoundingVolume sub)
         {
+            Contract.Requires(mesh != null);
+
             // For each of the six planes defined by the bounding volume's sides, we need to slice the mesh on those planes.
 
             // Find all edges that pass through the plane.

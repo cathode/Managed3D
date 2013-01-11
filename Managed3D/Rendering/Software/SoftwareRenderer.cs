@@ -18,6 +18,7 @@ namespace Managed3D.Rendering.Software
     /// <summary>
     /// Provides a reference 3D renderer implemented entirely in managed code.
     /// </summary>
+    [ContractVerification(false)]
     public class SoftwareRenderer : ManagedRenderer
     {
         #region Fields

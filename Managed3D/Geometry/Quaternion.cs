@@ -10,7 +10,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a quaternion.
     /// </summary>
-    public class Quaternion
+    public struct Quaternion
     {
         #region Fields
         public static readonly Quaternion Identity = new Quaternion(1.0, 0.0, 0.0, 0.0);
@@ -181,9 +181,6 @@ namespace Managed3D.Geometry
 
         public static Quaternion Multiply(Quaternion q1, Quaternion q2)
         {
-            Contract.Requires(q1 != null);
-            Contract.Requires(q2 != null);
-
             var w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
             var x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
             var y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;
@@ -260,9 +257,6 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static Quaternion operator *(Quaternion q1, Quaternion q2)
         {
-            Contract.Requires(q1 != null);
-            Contract.Requires(q2 != null);
-
             return Quaternion.Multiply(q1, q2);
         }
         #endregion

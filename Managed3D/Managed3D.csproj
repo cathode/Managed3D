@@ -129,6 +129,49 @@
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>2</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug + Contracts|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug + Contracts\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsInferRequires>False</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestEnsures>True</CodeContractsSuggestEnsures>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions>-show progress -stats slowmethods -timeout 2 -maxwarnings 65536</CodeContractsExtraAnalysisOptions>
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>2</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -156,8 +199,8 @@
     <Compile Include="Geometry\Primitives\Box.cs" />
     <Compile Include="Geometry\Primitives\MengerSponge.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
-    <Compile Include="IO\ImporterBase.cs" />
-    <Compile Include="IO\ObjImporter.cs" />
+    <None Include="IO\ImporterBase.cs" />
+    <None Include="IO\ObjImporter.cs" />
     <Compile Include="Geometry\Primitives\Sphere.cs" />
     <Compile Include="Geometry\Ray3.cs" />
     <None Include="..\Managed3D.snk">
@@ -288,11 +331,11 @@
     <Compile Include="SceneGraph\SpriteNode.cs" />
     <Compile Include="SceneGraph\TransformOrder.cs" />
     <Compile Include="SceneGraph\VisibilityGroup.cs" />
-    <Compile Include="UI\Button.cs" />
-    <Compile Include="UI\ContainerElement.cs" />
-    <Compile Include="UI\Element.cs" />
-    <Compile Include="UI\ElementChildrenCollection.cs" />
-    <Compile Include="UI\Presentation\ElementMesher.cs" />
+    <None Include="UI\Button.cs" />
+    <None Include="UI\ContainerElement.cs" />
+    <None Include="UI\Element.cs" />
+    <None Include="UI\ElementChildrenCollection.cs" />
+    <None Include="UI\Presentation\ElementMesher.cs" />
     <Compile Include="SceneGraph\Camera.cs" />
     <Compile Include="Geometry\VertexFlags.cs" />
     <Compile Include="__HashCode.cs" />

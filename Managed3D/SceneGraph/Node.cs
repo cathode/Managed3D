@@ -360,11 +360,9 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public bool Remove(Node item)
         {
-            if (this.children.Remove(item))
-            {
-                item.parents.Remove(this);
-                return true;
-            }
+            if (item != null)
+                if (this.children.Remove(item))
+                    return item.parents.Remove(this);
 
             return false;
         }
@@ -419,6 +417,7 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public Quaternion GetWorldOrientation()
         {
+
             if (this.parents.Count == 0)
                 return this.Orientation;
 
@@ -472,6 +471,7 @@ namespace Managed3D.SceneGraph
         private void Invariants()
         {
             Contract.Invariant(this.children != null);
+            Contract.Invariant(this.parents != null);
         }
         #endregion
     }

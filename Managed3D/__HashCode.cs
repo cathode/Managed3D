@@ -7,9 +7,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D
 {
+    [ContractVerification(false)]
     internal static class __HashCode
     {
         private static readonly int[] seeds = new int[] { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };

@@ -146,8 +146,6 @@ namespace Managed3D.Rendering.Software
 
         public void Rotate(Quaternion rotation)
         {
-            Contract.Requires(rotation != null);
-
             this.WorldMatrix *= Matrix4.CreateRotationMatrix(rotation);
 
             this.UpdateDerivedMatrices();
