@@ -7,6 +7,11 @@ namespace Managed3D.Modeling
 {
     public interface IFace
     {
+        #region Properties
 
+        #endregion
+        #region Methods
+
+        #endregion
     }
 }
