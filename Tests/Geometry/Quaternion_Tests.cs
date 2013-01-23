@@ -8,7 +8,7 @@ using System;
 using NUnit.Framework;
 using Managed3D.Geometry;
 
-namespace Tests.Geometry
+namespace Managed3D.Geometry
 {
     /// <summary>
     /// Tests for the <see cref="Managed3D.Geometry.Quaternion"/> class.

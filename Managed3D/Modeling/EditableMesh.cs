@@ -10,21 +10,18 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Managed3D.Geometry;
-using WEdge = Managed3D.Modeling.EditableMeshEdge;
-using WFace = Managed3D.Modeling.EditableMeshFace;
-using WVertex = Managed3D.Modeling.EditableMeshVertex;
+
 namespace Managed3D.Modeling
 {
     /// <summary>
-    /// Provides an implementation of a 3d mesh that supports modifications to it's topology.
+    /// Provides an implementation of a 3d mesh that supports arbitrary modifications to it's topology.
     /// </summary>
-    public class EditableMesh : IRenderable
+    public class EditableMesh
     {
         #region Fields
-        private Dictionary<uint, WVertex> vertices;
-        private Dictionary<uint, WEdge> edges;
-        private Dictionary<uint, WFace> faces;
-        private Dictionary<ushort, EMSparseAttribute> attributes;
+        private Dictionary<long, EditableMeshVertex> vertices;
+        private Dictionary<long, EditableMeshFace> faces;
+        private Dictionary<long, EditableMeshEdge> edges;
         #endregion
         #region Constructors
         /// <summary>
@@ -32,280 +29,109 @@ namespace Managed3D.Modeling
         /// </summary>
         public EditableMesh()
         {
-            this.vertices = new Dictionary<uint, WVertex>();
-            this.edges = new Dictionary<uint, WEdge>();
-            this.faces = new Dictionary<uint, WFace>();
-            this.attributes = new Dictionary<ushort, EMSparseAttribute>();
+            this.vertices = new Dictionary<long, EditableMeshVertex>();
+            this.faces = new Dictionary<long, EditableMeshFace>();
+            this.edges = new Dictionary<long, EditableMeshEdge>();
         }
         #endregion
         #region Properties
-        IEnumerable<IRenderableVertex> IRenderable.Vertices
+        /// <summary>
+        /// Gets a value indicating the number of vertices contained in the mesh.
+        /// </summary>
+        public long VertexCount
         {
             get
             {
-                foreach (var wv in this.vertices.Values)
-                    yield return wv;
+                return this.vertices.Count;
             }
-        }
-
-        IEnumerable<IRenderableFace> IRenderable.Faces
-        {
-            get
-            {
-                foreach (var wf in this.faces.Values)
-                    yield return wf;
-            }
-        }
-
-        IEnumerable<IRenderableEdge> IRenderable.Edges
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-        #endregion
-        #region Methods
-        public uint CreateVertex(double x, double y, double z)
-        {
-            var vertex = new Vertex3(x, y, z);
-
-            throw new NotImplementedException();
-            //this.vertices.add
         }
 
         /// <summary>
-        /// Given two edges that share a common vertex, sets the edge 'wings' of each of the two given edges.
+        /// Gets a value indicating the number of edges contained in the mesh.
         /// </summary>
-        /// <param name="e1"></param>
-        /// <param name="e2"></param>
-        internal void SetWings(WEdge e1, WEdge e2)
+        public long EdgeCount
         {
-            Contract.Requires((e1.EdgeData.V0 == e2.EdgeData.V0) ||
-                              (e1.EdgeData.V0 == e2.EdgeData.V1) ||
-                              (e1.EdgeData.V1 == e2.EdgeData.V0) ||
-                              (e1.EdgeData.V1 == e1.EdgeData.V1));
-
-            if ((e1.AV == e2.AV) && (e1.BF == e2.AF))
+            get
             {
-                e1.BCW = e2;
-                e2.ACCW = e1;
-            }
-            else if ((e1.AV == e2.AV) && (e1.AF == e2.BF))
-            {
-                e1.ACCW = e2;
-                e2.BCW = e1;
-            }
-            else if ((e1.AV == e2.BV) && (e1.BF == e2.BF))
-            {
-                e1.BCW = e2;
-                e2.BCCW = e1;
-            }
-            else if ((e1.AV == e2.BV) && (e1.AF == e2.AF))
-            {
-                e1.ACCW = e2;
-                e2.ACW = e1;
-            }
-            else if ((e1.BV == e2.AV) && (e1.AF == e2.AF))
-            {
-                e1.ACW = e2;
-                e2.ACCW = e1;
-            }
-            else if ((e1.BV == e2.AV) && (e1.BF == e2.BF))
-            {
-                e1.BCCW = e2;
-                e2.BCW = e1;
-            }
-            else if ((e1.BV == e2.BV) && (e1.AF == e2.BF))
-            {
-                e1.ACW = e2;
-                e2.BCCW = e1;
-            }
-            else if ((e1.BV == e2.BV) && (e1.BF == e2.AF))
-            {
-                e1.BCCW = e2;
-                e2.ACW = e1;
-            }
-            else
-            {
-                throw new NotImplementedException();
+                return this.edges.Count;
             }
         }
 
-        internal static EditableMeshFace NextFaceAroundVertexCW(EditableMeshVertex vertex, EditableMeshFace known)
+        /// <summary>
+        /// Gets a value indicating the number of faces contained in the mesh.
+        /// </summary>
+        public long FaceCount
         {
-            EditableMeshEdge e = null;
-
-            while (e == null)
+            get
             {
-
+                return this.faces.Count;
             }
+        }
+        #endregion
+        #region Methods
+        public EditableMeshVertex GetVertex(long id)
+        {
+            return this.vertices[id];
+        }
 
+        public EditableMeshFace GetFace(long id)
+        {
+            return this.faces[id];
+        }
 
+        public EditableMeshEdge GetEdge(long id)
+        {
+            return this.edges[id];
+        }
+
+        public EditableMeshVertex CreateVertex(double x, double y, double z)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EditableMeshEdge CreateEdge(long v1, long v2)
+        {
 
             throw new NotImplementedException();
         }
 
-        internal static EditableMeshFace NextFaceAroundVertexCCW(EditableMeshVertex vertex, EditableMeshFace known)
+        public EditableMeshFace CreateFace(long id1, long id2, long id3)
         {
+            var v1 = this.GetVertex(id1);
+            var v2 = this.GetVertex(id2);
+            var v3 = this.GetVertex(id3);
 
+            throw new NotImplementedException();
+
+            var f = new EditableMeshFace(0);
+            return f;
+        }
+
+        public EditableMeshFace CreateFace(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3)
+        {
+            var v1 = this.CreateVertex(x1, y1, z1);
+            var v2 = this.CreateVertex(x2, y2, z2);
+            var v3 = this.CreateVertex(x3, y3, z3);
+
+            return this.CreateFace(v1.Id, v2.Id, v3.Id);
+        }
+
+        public EditableMeshVertex InsertVertexInEdge(long e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EditableMeshVertex InsertVertexInFace(long f)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EditableMeshVertex WeldVertex(long sourceId, long targetId)
+        {
             throw new NotImplementedException();
         }
         #endregion
 
 
-       
-    }
-
-    /// <summary>
-    /// Half-edge editable mesh implementation.
-    /// </summary>
-    public class EMesh
-    {
-
-    }
-
-    public class HEdge
-    {
-        public HEdge Opposite
-        {
-            get;
-            set;
-        }
-
-        public HEdge Next
-        {
-            get;
-            set;
-        }
-
-        public HEdge Previous
-        {
-            get;
-            set;
-        }
-
-        public HVertex Start
-        {
-            get;
-            set;
-        }
-        public HVertex End
-        {
-            get;
-            set;
-        }
-
-        public HFace Face
-        {
-            get;
-            set;
-        }
-
-        [ContractInvariantMethod]
-        private void Invariants()
-        {
-            Contract.Invariant(this == this.Next.Previous);
-            Contract.Invariant(this == this.Opposite.Opposite);
-            Contract.Invariant(this.Face == this.Next.Face);
-        }
-    }
-
-    public class HVertex
-    {
-        #region Constructors
-        public HVertex(Vector3 position, HEdge edge)
-        {
-            this.Position = position;
-            this.Edge = edge;
-        }
-        #endregion
-        #region Properties
-        public Vector3 Position
-        {
-            get;
-            set;
-        }
-
-        public HEdge Edge
-        {
-            get;
-            set;
-        }
-        #endregion
-        #region Methods
-        public IEnumerable<HFace> FacesAroundVertex()
-        {
-            if (this == Edge.Start)
-            {
-                var e = this.Edge.Next;
-                while (e != this.Edge)
-                {
-                  
-                }
-            }
-            else
-            {
-
-            }
-            yield break;
-        }
-
-        [ContractInvariantMethod]
-        private void Invariants()
-        {
-            Contract.Invariant(this.Edge != null);
-        }
-        #endregion
-    }
-
-    public class HFace
-    {
-        #region Constructors
-        public HFace(params HEdge[] edges)
-        {
-            Contract.Requires(edges != null);
-            Contract.Requires(edges.Length > 2); // Don't support degenerate faces (with only two edges).
-            this.Edge = edges[0];
-        }
-        #endregion
-        #region Properties
-        public HEdge Edge
-        {
-            get;
-            set;
-        }
-        #endregion
-        #region Methods
-        [ContractInvariantMethod]
-        private void Invariants()
-        {
-            Contract.Invariant(this.Edge != null);
-            Contract.Invariant(this.Edge.Face == this);
-        }
-        #endregion
-    }
-
-    public class EMSparseAttribute
-    {
-        #region Properties
-        public bool IsHidden
-        {
-            get;
-            set;
-        }
-
-        public Vector4f Color
-        {
-            get;
-            set;
-        }
-
-        public int SmoothingGroup
-        {
-            get;
-            set;
-        }
-        #endregion
     }
 }

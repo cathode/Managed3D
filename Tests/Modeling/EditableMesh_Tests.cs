@@ -7,15 +7,35 @@
 using System;
 using NUnit.Framework;
 
-namespace Tests.Modeling
+namespace Managed3D.Modeling
 {
     [TestFixture]
     public class EditableMesh_Tests
     {
-        [Test]
-        public void FaceEdgeTraversalTest()
-        {
 
+        [Test]
+        public void InsertVertexOnEdge()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void InsertVertexOnFace()
+        {
+            var mesh = new EditableMesh();
+            var face = mesh.CreateFace(-1, -1, -1, 1, 1, 1, 0, 0, 0);
+            var vert = mesh.InsertVertexInFace(face.Id);
+
+            Assert.AreEqual(4, mesh.VertexCount);
+            Assert.AreEqual(6, mesh.EdgeCount);
+            
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void FaceEdgeTraversal()
+        {
+            Assert.Inconclusive();
         }
     }
 }

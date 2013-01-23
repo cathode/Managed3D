@@ -8,7 +8,7 @@ using System;
 using NUnit.Framework;
 using Managed3D.SceneGraph;
 
-namespace Tests.SceneGraph
+namespace Managed3D.SceneGraph
 {
     [TestFixture]
     public class LabelNode_Tests

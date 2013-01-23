@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Modeling
 {
     /// <summary>
     /// Represents a render-dynamic edge.
     /// </summary>
-    public class EditableMeshEdge
+    public class EditableMeshEdge : IHalfEdge
     {
         #region Fields
         #endregion
@@ -24,122 +25,106 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Properties
-        /// <summary>
-        /// Gets or sets the edge data of the <see cref="EMEdge"/>.
-        /// </summary>
-        public EditableMeshEdgeData EdgeData
+        public EditableMeshEdge Opposite
         {
             get;
-            internal set;
+            set;
         }
 
         public EditableMeshEdge Next
         {
             get;
-            internal set;
+            set;
         }
 
         public EditableMeshEdge Previous
         {
             get;
-            internal set;
+            set;
         }
 
-        public EditableMeshFace AF
+        public EditableMeshVertex Start
         {
-            get
-            {
-                return this.EdgeData.F0;
-            }
-            internal set
-            {
-                this.EdgeData.F0 = value;
-            }
+            get;
+            set;
+        }
+        public EditableMeshVertex End
+        {
+            get;
+            set;
         }
 
-        public EditableMeshFace BF
+        public EditableMeshFace Face
         {
-            get
-            {
-                return this.EdgeData.F1;
-            }
-            internal set
-            {
-                this.EdgeData.F1 = value;
-            }
+            get;
+            set;
         }
 
-        public EditableMeshVertex AV
+        public int Id
         {
-            get
-            {
-                return this.EdgeData.V0;
-            }
-            internal set
-            {
-                this.EdgeData.V0 = value;
-            }
+            get;
+            set;
         }
 
-        public EditableMeshVertex BV
+        public object Tag { get; set; }
+        #endregion
+        #region MEthods
+        [ContractInvariantMethod]
+        private void Invariants()
         {
-            get
-            {
-                return this.EdgeData.V1;
-            }
-            internal set
-            {
-                this.EdgeData.V1 = value;
-            }
-        }
-        public EditableMeshEdge ACW
-        {
-            get
-            {
-                return this.EdgeData.E0;
-            }
-            internal set
-            {
-                this.EdgeData.E0 = value;
-            }
-        }
-
-        public EditableMeshEdge ACCW
-        {
-            get
-            {
-                return this.EdgeData.E1;
-            }
-            internal set
-            {
-                this.EdgeData.E1 = value;
-            }
-        }
-
-        public EditableMeshEdge BCW
-        {
-            get
-            {
-                return this.EdgeData.E2;
-            }
-            internal set
-            {
-                this.EdgeData.E2 = value;
-            }
-        }
-
-        public EditableMeshEdge BCCW
-        {
-            get
-            {
-                return this.EdgeData.E3;
-            }
-            internal set
-            {
-                this.EdgeData.E3 = value;
-            }
+            Contract.Invariant(this == this.Next.Previous);
+            Contract.Invariant(this == this.Opposite.Opposite);
+            Contract.Invariant(this.Face == this.Next.Face);
         }
         #endregion
 
+
+        IHalfEdge IHalfEdge.Next
+        {
+            get
+            {
+                return this.Next;
+            }
+        }
+
+        IHalfEdge IHalfEdge.Previous
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        IHalfEdge IHalfEdge.Opposite
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        IVertex IHalfEdge.Start
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        IVertex IHalfEdge.End
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        IFace IHalfEdge.Face
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

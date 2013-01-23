@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics.Contracts;
 using Managed3D.Geometry;
 
 namespace Managed3D.Modeling
@@ -9,117 +10,69 @@ namespace Managed3D.Modeling
     /// <summary>
     /// Represents an <see cref="EditableMesh"/> face (triangle).
     /// </summary>
-    public class EditableMeshFace : IRenderableFace
+    public class EditableMeshFace : IFace
     {
+        #region Fields
+        private readonly long id;
+        #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="EditableMeshFace"/> class.
         /// </summary>
-        public EditableMeshFace()
+        internal EditableMeshFace(long id)
         {
+            this.id = id;
         }
         #endregion
         #region Properties
-
-        public EditableMeshEdge EdgeRing
+        public EditableMeshEdge Edge
         {
             get;
-            internal set;
+            set;
+        }
+        
+
+        public long Id
+        {
+            get
+            {
+                return this.id;
+            }
         }
 
-        public EditableMeshFace Next
+        public IHalfEdge StartingEdge
         {
-            get;
-            internal set;
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public EditableMeshFace Previous
+        /// <summary>
+        /// Gets or sets an object that contains user data for the face.
+        /// </summary>
+        public object Tag
         {
             get;
-            internal set;
-        }
-
-        public int Index
-        {
-            get;
-            internal set;
+            set;
         }
         #endregion
         #region Methods
-        /// <summary>
-        /// Given an edge (which needs to be an edge of the current face), returns the face on the other side of the edge,
-        /// relative to the current face.
-        /// </summary>
-        /// <param name="edge"></param>
-        /// <returns></returns>
-        public EditableMeshFace FaceAcrossEdge(EditableMeshEdge edge)
+        public IEnumerable<IHalfEdge> GetEdges()
         {
-            if (this == edge.AF)
-                return edge.BF;
-            else if (this == edge.BF)
-                return edge.AF;
-            else
-                throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Allows enumeration over all the edges of the current face.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<EditableMeshEdge> GetEdges()
+        [ContractInvariantMethod]
+        private void Invariants()
         {
-            var e = this.EdgeRing;
-
-            if (e.AF == this)
-            {
-                yield return e;
-                do
-                {
-                    e = e.ACW;
-                    yield return e;
-                } while (e != this.EdgeRing);
-            }
-            else if (e.BF == this)
-            {
-                yield return e;
-                do
-                {
-                    e = e.BCW;
-                    yield return e;
-                } while (e != this.EdgeRing);
-            }
-            else
-            {
-                // edge ring is somehow not associated with the current face?!?
-                throw new NotImplementedException();
-            }
+            Contract.Invariant(this.Edge != null);
+            Contract.Invariant(this.Edge.Face == this);
         }
         #endregion
-
-
-
-        uint IRenderableFace.A
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        uint IRenderableFace.B
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        uint IRenderableFace.C
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

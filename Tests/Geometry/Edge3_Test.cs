@@ -8,7 +8,7 @@ using System;
 using NUnit.Framework;
 using Managed3D.Geometry;
 
-namespace Tests.Geometry
+namespace Managed3D.Geometry
 {
     [TestFixture]
     public class Edge3_Test

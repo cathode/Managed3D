@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Managed3D.Geometry;
 
-namespace Tests.Geometry
+namespace Managed3D.Geometry
 {
     [TestFixture]
     public class Matrix4_Tests

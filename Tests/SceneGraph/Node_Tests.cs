@@ -13,7 +13,7 @@ using NUnit.Framework;
 using Managed3D.Geometry;
 using Managed3D.Geometry.Primitives;
 
-namespace Tests.SceneGraph
+namespace Managed3D.SceneGraph
 {
     [TestFixture]
     public class Node_Tests
