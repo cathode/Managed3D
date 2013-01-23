@@ -67,7 +67,12 @@ namespace Managed3D.Rendering.OpenGL
 
         public override void Start()
         {
+            this.Initialize(RendererOptions.Empty);
 
+            while (true)
+            {
+                this.RenderFrame();
+            }
         }
 
         public override void Stop()
@@ -92,7 +97,7 @@ namespace Managed3D.Rendering.OpenGL
                 hinst,
                 IntPtr.Zero);
 
-
+            
             GL.ShadeModel(ShadeModel.Flat);
             GL.ClearDepth(1.0);
             GL.Hint(HintTarget.PerspectiveCorrection, HintMode.Nicest);
@@ -155,18 +160,18 @@ namespace Managed3D.Rendering.OpenGL
             //GL.Rotate(node.Orientation.Angle.Degrees, axis.X, axis.Y, axis.Z);
             GL.Translate(node.Position.X, node.Position.Y, node.Position.Z);
 
-            //if (node is GeometryNode)
-            //{
-            //    var mesh = ((GeometryNode)node).Geometry;
-            //    foreach (var poly in mesh.Polygons)
-            //    {
-            //        GL.Begin(BeginMode.Polygon);
-            //        foreach (var vert in poly.Vertices)
-            //            GL.Vertex3(vert.X, vert.Y, vert.Z);
 
-            //        GL.End();
-            //    }
-            //}
+            foreach (var mesh in node.Renderables)
+            {
+                foreach (var poly in mesh.Polygons)
+                {
+                    GL.Begin(BeginMode.Polygon);
+                    foreach (var vert in poly.Vertices)
+                        GL.Vertex3(vert.X, vert.Y, vert.Z);
+
+                    GL.End();
+                }
+            }
         }
 
         private void IdleFunc_Callback()

@@ -206,7 +206,7 @@
     <None Include="..\Managed3D.snk">
       <Link>Managed3D.snk</Link>
     </None>
-    <None Include="Modeling\EditableMesh.cs" />
+    <Compile Include="Modeling\EditableMesh.cs" />
     <Compile Include="Geometry\Vector2f.cs" />
     <Compile Include="Geometry\Vector2i.cs" />
     <Compile Include="Geometry\Vector3f.cs" />
@@ -218,12 +218,16 @@
     <Compile Include="Modeling\Chamfer.cs" />
     <Compile Include="Modeling\CsgModifier.cs" />
     <Compile Include="Modeling\CsgOperation.cs" />
-    <None Include="Modeling\EditableMeshEdge.cs" />
-    <None Include="Modeling\EditableMeshEdgeData.cs" />
-    <None Include="Modeling\EditableMeshFace.cs" />
-    <None Include="Modeling\EditableMeshVertex.cs" />
+    <Compile Include="Modeling\EditableMeshEdge.cs" />
+    <Compile Include="Modeling\EditableMeshEdgeData.cs" />
+    <Compile Include="Modeling\EditableMeshFace.cs" />
+    <Compile Include="Modeling\EditableMeshVertex.cs" />
     <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
+    <Compile Include="Modeling\IFace.cs" />
+    <Compile Include="Modeling\IHalfEdge.cs" />
+    <Compile Include="Modeling\IGeometrySource.cs" />
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
+    <Compile Include="Modeling\IVertex.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
@@ -233,6 +237,7 @@
     <Compile Include="Modeling\ProcedureParameter.cs" />
     <Compile Include="Modeling\ProcedureParameterCollection.cs" />
     <Compile Include="Modeling\SliceModifier.cs" />
+    <Compile Include="Modeling\VertexSelection.cs" />
     <Compile Include="Platform\DisplayAdapter.cs" />
     <Compile Include="Platform\DisplayDevice.cs" />
     <Compile Include="Platform\DisplayProfile.cs" />

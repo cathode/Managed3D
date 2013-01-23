@@ -76,8 +76,8 @@ namespace ManagedStudio3D
 
             Console.WriteLine(root.GetGraphExtents());
             //Program.RunDirect3DMode();
-            //Program.RunSoftwareMode();
-            Program.RunOpenGLMode();
+            Program.RunSoftwareMode();
+            //Program.RunOpenGLMode();
         }
 
         private static void RunDirect3DMode()
@@ -115,7 +115,7 @@ namespace ManagedStudio3D
             var options = new RendererOptions();
             renderer.Scene = Program.scene;
             renderer.ActiveCamera.Facing = CameraFacing.Isometric;
-            renderer.ActiveCamera.Mode = CameraMode.Perspective;
+            renderer.ActiveCamera.Mode = CameraMode.Orthographic;
             renderer.ActiveCamera.UpdateFacing();
             renderer.Initialize(options);
             renderer.Profile = Managed3D.Platform.DisplayProfile.GenericWSVGA;
