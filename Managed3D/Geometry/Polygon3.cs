@@ -158,17 +158,6 @@ namespace Managed3D.Geometry
         }
 
         /// <summary>
-        /// Gets the <see cref="PrimitiveKind"/> of the current <see cref="Polygon3"/>.
-        /// </summary>
-        public virtual PrimitiveKind Kind
-        {
-            get
-            {
-                return PrimitiveKind.Polygon;
-            }
-        }
-
-        /// <summary>
         /// Gets the surface normal of the current <see cref="Polygon3"/>.
         /// </summary>
         public virtual Vector3 Normal

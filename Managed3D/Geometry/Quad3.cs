@@ -192,16 +192,6 @@ namespace Managed3D.Geometry
             }
         }
 
-        /// <summary>
-        /// Overridden. Returns the primitive kind.
-        /// </summary>
-        public override PrimitiveKind Kind
-        {
-            get
-            {
-                return PrimitiveKind.Quad;
-            }
-        }
         #endregion
         #region Methods
         [ContractInvariantMethod]

@@ -94,13 +94,6 @@ namespace Managed3D.Geometry
             }
         }
 
-        public override PrimitiveKind Kind
-        {
-            get
-            {
-                return PrimitiveKind.Triangle;
-            }
-        }
 
         public override Vector3 Normal
         {

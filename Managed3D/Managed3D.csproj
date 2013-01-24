@@ -229,6 +229,11 @@
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\IVertex.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
+    <Compile Include="Modeling\Modifiers\Modifier.cs" />
+    <Compile Include="Modeling\Modifiers\Source\PrimitiveSourceModifier.cs" />
+    <Compile Include="Modeling\Modifiers\Topology\ChamferModifier.cs" />
+    <Compile Include="Modeling\Modifiers\Topology\TopologyModifier.cs" />
+    <Compile Include="Modeling\PrimitiveKind.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
     <Compile Include="Modeling\Primitives\SimplexNoise.cs" />
@@ -307,7 +312,7 @@
     <Compile Include="Rendering\Materials\MaterialBase.cs" />
     <Compile Include="Rendering\Raytracing\RaytracerRenderer.cs" />
     <Compile Include="Rendering\RenderEventArgs.cs" />
-    <Compile Include="Geometry\PrimitiveKind.cs" />
+    <None Include="Geometry\PrimitiveKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\RendererInitializationEventArgs.cs" />
