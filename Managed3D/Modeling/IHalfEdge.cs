@@ -18,5 +18,8 @@ namespace Managed3D.Modeling
         IFace Face { get; }
         object Tag { get; set; }
         #endregion
+        #region Methods
+
+        #endregion
     }
 }

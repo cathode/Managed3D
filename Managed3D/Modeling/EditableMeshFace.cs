@@ -13,42 +13,32 @@ namespace Managed3D.Modeling
     public class EditableMeshFace : IFace
     {
         #region Fields
-        private readonly long id;
+        private readonly int id;
         #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="EditableMeshFace"/> class.
         /// </summary>
-        internal EditableMeshFace(long id)
+        internal EditableMeshFace(int id)
         {
             this.id = id;
         }
         #endregion
         #region Properties
-        public EditableMeshEdge Edge
+        public EditableMeshEdge StartingEdge
         {
             get;
             set;
         }
-        
 
-        public long Id
+        /// <summary>
+        /// Gets the unique id of the face (it's index in the mesh that contains it).
+        /// </summary>
+        public int Id
         {
             get
             {
                 return this.id;
-            }
-        }
-
-        public IHalfEdge StartingEdge
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
             }
         }
 
@@ -60,19 +50,45 @@ namespace Managed3D.Modeling
             get;
             set;
         }
+
+        IHalfEdge IFace.StartingEdge
+        {
+            get
+            {
+                return this.StartingEdge;
+            }
+        }
         #endregion
         #region Methods
         public IEnumerable<IHalfEdge> GetEdges()
         {
-            throw new NotImplementedException();
+            var edge = this.StartingEdge;
+
+            // Follow the edge loop in winding order.
+            while (edge.Next != this.StartingEdge)
+            {
+                yield return edge;
+                edge = edge.Next;
+            }
         }
 
         [ContractInvariantMethod]
         private void Invariants()
         {
-            Contract.Invariant(this.Edge != null);
-            Contract.Invariant(this.Edge.Face == this);
+            Contract.Invariant(this.StartingEdge != null);
+            Contract.Invariant(this.StartingEdge.Face == this);
         }
         #endregion
+
+
+        public IEnumerable<IFace> GetNeighboringFaces()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IVertex> GetVertices()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

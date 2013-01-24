@@ -12,11 +12,17 @@ namespace Managed3D.Modeling
     /// </summary>
     public class EditableMeshVertex : IVertex
     {
+        #region Fields
+
+        #endregion
         #region Constructors
-        public EditableMeshVertex(Vector3 position, EditableMeshEdge edge)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditableMeshVertex"/> class.
+        /// </summary>
+        /// <param name="position">The position of the vertex.</param>
+        internal EditableMeshVertex(Vector3 position)
         {
             this.Position = position;
-            this.Edge = edge;
         }
         #endregion
         #region Properties
@@ -29,41 +35,11 @@ namespace Managed3D.Modeling
         public EditableMeshEdge Edge
         {
             get;
-            set;
+            internal set;
         }
-        #endregion
-        #region Methods
-        public IEnumerable<EditableMeshVertex> FacesAroundVertex()
-        {
-            if (this == Edge.Start)
-            {
-                var e = this.Edge.Next;
-                while (e != this.Edge)
-                {
-
-                }
-            }
-            else
-            {
-
-            }
-            yield break;
-        }
-
-        [ContractInvariantMethod]
-        private void Invariants()
-        {
-            Contract.Invariant(this.Edge != null);
-        }
-        #endregion
-
         public int Id
         {
             get
-            {
-                throw new NotImplementedException();
-            }
-            set
             {
                 throw new NotImplementedException();
             }
@@ -83,34 +59,44 @@ namespace Managed3D.Modeling
 
         public object Tag
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
+        }
+        #endregion
+        #region Methods
+        public IEnumerable<EditableMeshFace> GetNeighboringFaces()
+        {
+            // Start with the first outgoing edge.
+            var edge = this.Edge;
+
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<IVertex> GetNeighboringVertices()
+        IEnumerable<IVertex> IVertex.GetNeighboringVertices()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IHalfEdge> GetOutgoingEdges()
+        IEnumerable<IHalfEdge> IVertex.GetOutgoingEdges()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IHalfEdge> GetIncomingEdges()
+        IEnumerable<IHalfEdge> IVertex.GetIncomingEdges()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IFace> GetNeighboringFaces()
+        IEnumerable<IFace> IVertex.GetNeighboringFaces()
         {
             throw new NotImplementedException();
         }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.Edge != null);
+        }
+        #endregion
     }
 }

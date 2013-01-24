@@ -22,6 +22,12 @@ namespace Managed3D.Modeling
         private Dictionary<long, EditableMeshVertex> vertices;
         private Dictionary<long, EditableMeshFace> faces;
         private Dictionary<long, EditableMeshEdge> edges;
+        private Queue<int> freeVertexIds;
+        private Queue<int> freeFaceIds;
+        private Queue<int> freeEdgeIds;
+        private int topVertexId;
+        private int topFaceId;
+        private int topEdgeId;
         #endregion
         #region Constructors
         /// <summary>
@@ -32,6 +38,10 @@ namespace Managed3D.Modeling
             this.vertices = new Dictionary<long, EditableMeshVertex>();
             this.faces = new Dictionary<long, EditableMeshFace>();
             this.edges = new Dictionary<long, EditableMeshEdge>();
+
+            this.freeEdgeIds = new Queue<int>();
+            this.freeFaceIds = new Queue<int>();
+            this.freeVertexIds = new Queue<int>();
         }
         #endregion
         #region Properties
@@ -129,6 +139,52 @@ namespace Managed3D.Modeling
         public EditableMeshVertex WeldVertex(long sourceId, long targetId)
         {
             throw new NotImplementedException();
+        }
+
+        public EditableMeshEdge WeldEdges(int id1, int id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteVertex(int id)
+        {
+
+        }
+
+        public void DeleteEdge(int id)
+        {
+
+        }
+
+        public void DeleteFace(int id)
+        {
+
+        }
+
+        protected int GetVertexId()
+        {
+            if (this.freeVertexIds.Count == 0)
+                for (int i = 0; i < 32; ++i)
+                    this.freeVertexIds.Enqueue(this.topVertexId++);
+
+            return this.freeVertexIds.Dequeue();
+        }
+
+        protected int GetFaceId()
+        {
+            if (this.freeFaceIds.Count == 0)
+                for (int i = 0; i < 16; ++i)
+                    this.freeFaceIds.Enqueue(this.topFaceId++);
+
+            return this.freeFaceIds.Dequeue();
+        }
+
+        protected int GetEdgeId() {
+            if (this.freeEdgeIds.Count == 0)
+                for (int i = 0; i < 24; ++i)
+                    this.freeEdgeIds.Enqueue(this.topEdgeId++);
+
+            return this.freeEdgeIds.Dequeue();
         }
         #endregion
 

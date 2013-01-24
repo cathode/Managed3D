@@ -8,12 +8,15 @@ namespace Managed3D.Modeling
     public interface IFace
     {
         #region Properties
-        long Id { get; }
+        int Id { get; }
         IHalfEdge StartingEdge { get; }
         object Tag { get; set; }
         #endregion
         #region Methods
         IEnumerable<IHalfEdge> GetEdges();
+        IEnumerable<IFace> GetNeighboringFaces();
+        IEnumerable<IVertex> GetVertices();
+        
         #endregion
     }
 }
