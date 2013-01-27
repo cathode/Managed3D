@@ -13,14 +13,15 @@ namespace Managed3D.Modeling
     public class EditableMeshVertex : IVertex
     {
         #region Fields
-
+        private int id;
         #endregion
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="EditableMeshVertex"/> class.
         /// </summary>
+        /// <param name="id">The id of the vertex within the context of the mesh it belongs to.</param>
         /// <param name="position">The position of the vertex.</param>
-        internal EditableMeshVertex(Vector3 position)
+        internal EditableMeshVertex(int id, Vector3 position)
         {
             this.Position = position;
         }
@@ -41,20 +42,18 @@ namespace Managed3D.Modeling
         {
             get
             {
-                throw new NotImplementedException();
+                return this.id;
+            }
+            internal set
+            {
+                this.id = value;
             }
         }
 
         public Vector3 Normal
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public object Tag

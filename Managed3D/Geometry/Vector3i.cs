@@ -61,11 +61,22 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector3i)
+                return this.Equals((Vector3i)obj);
+
+            return false;
+        }
         public static bool Equals(Vector3i v1, Vector3i v2)
         {
             return (v1.x == v2.x)
                 && (v1.y == v2.y)
                 && (v1.z == v2.z);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
         #endregion
         #region Operators

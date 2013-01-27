@@ -23,7 +23,7 @@ namespace Managed3D.Modeling
             }
         }
 
-        public SelectionTarget Target
+        public SelectionTarget Targets
         {
             get
             {

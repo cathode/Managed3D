@@ -14,7 +14,7 @@ namespace Managed3D.Modeling
             set;
         }
 
-        SelectionTarget Target
+        SelectionTarget Targets
         {
             get;
             set;

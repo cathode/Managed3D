@@ -13,7 +13,7 @@ namespace Managed3D.Modeling
     public class EditableMeshFace : IFace
     {
         #region Fields
-        private readonly int id;
+        private int id;
         #endregion
         #region Constructors
         /// <summary>
@@ -39,6 +39,10 @@ namespace Managed3D.Modeling
             get
             {
                 return this.id;
+            }
+            internal set
+            {
+                this.id = value;
             }
         }
 

@@ -74,7 +74,7 @@ namespace Managed3D.Geometry
                 else if (element == 3)
                     return this.w;
                 else
-                    throw new NotImplementedException();
+                    return 0;
             }
         }
         #endregion
