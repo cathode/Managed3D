@@ -94,5 +94,13 @@ namespace Managed3D.Modeling
         {
             throw new NotImplementedException();
         }
+
+        public SelectionTarget SelectionKind
+        {
+            get
+            {
+                return SelectionTarget.Face;
+            }
+        }
     }
 }

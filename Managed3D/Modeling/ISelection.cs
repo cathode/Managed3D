@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Managed3D.Modeling
 {
-    public class Model 
+    public interface ISelection
     {
-
+        IEnumerable<T> GetItems<T>(SelectionTarget kind) where T : ISelectable;
     }
 }

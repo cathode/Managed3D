@@ -6,10 +6,10 @@ using System.Text;
 namespace Managed3D.Modeling
 {
     /// <summary>
-    /// Represents an interface for a type that produces geometry based 
+    /// Represents an interface for a type that produces geometry based on one or more parameters.
     /// </summary>
     public interface IGeometrySource
     {
-        
+        EditableMesh Generate();
     }
 }

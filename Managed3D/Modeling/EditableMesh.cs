@@ -146,16 +146,28 @@ namespace Managed3D.Modeling
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deletes a vertex, resulting in cascading deletions of faces and edges.
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteVertex(int id)
         {
 
         }
 
+        /// <summary>
+        /// Deletes an edge, resulting in cascading deletions of faces and orphaned vertices.
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteEdge(int id)
         {
 
         }
 
+        /// <summary>
+        /// Deletes a face, resulting in cascading deletions of half-edges and orphaned vertices.
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteFace(int id)
         {
 
@@ -187,7 +199,5 @@ namespace Managed3D.Modeling
             return this.freeEdgeIds.Dequeue();
         }
         #endregion
-
-
     }
 }

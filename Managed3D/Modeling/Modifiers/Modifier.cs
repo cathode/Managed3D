@@ -7,6 +7,6 @@ namespace Managed3D.Modeling.Modifiers
 {
     public abstract class Modifier
     {
-
+        public abstract void Apply();
     }
 }

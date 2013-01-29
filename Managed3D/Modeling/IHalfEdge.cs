@@ -6,7 +6,7 @@ using Managed3D.Geometry;
 
 namespace Managed3D.Modeling
 {
-    public interface IHalfEdge
+    public interface IHalfEdge : ISelectable
     {
         #region Properties
         int Id { get; }

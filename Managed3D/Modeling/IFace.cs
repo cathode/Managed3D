@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Managed3D.Modeling
 {
-    public interface IFace
+    public interface IFace : ISelectable
     {
         #region Properties
         int Id { get; }

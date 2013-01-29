@@ -8,5 +8,9 @@ namespace Managed3D.Modeling.Modifiers.Topology
     public class ChamferModifier : Modifier
     {
 
+        public override void Apply()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

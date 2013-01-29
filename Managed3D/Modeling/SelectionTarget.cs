@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Managed3D.Modeling
 {
+    /// <summary>
+    /// Represents supported targets for a selection.
+    /// </summary>
     [Flags]
     public enum SelectionTarget
     {

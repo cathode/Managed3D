@@ -9,7 +9,7 @@ namespace Managed3D.Modeling
     /// <summary>
     /// Represents the vertex of an editable mesh.
     /// </summary>
-    public interface IVertex
+    public interface IVertex : ISelectable
     {
         #region Properties
         int Id { get; }

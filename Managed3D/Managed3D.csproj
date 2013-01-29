@@ -226,6 +226,8 @@
     <Compile Include="Modeling\IFace.cs" />
     <Compile Include="Modeling\IHalfEdge.cs" />
     <Compile Include="Modeling\IGeometrySource.cs" />
+    <Compile Include="Modeling\ISelectable.cs" />
+    <Compile Include="Modeling\ISelection.cs" />
     <Compile Include="Modeling\ISelectionModifier.cs" />
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\IVertex.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Modeling\ProceduralMesh.cs" />
     <Compile Include="Modeling\ProcedureParameter.cs" />
     <Compile Include="Modeling\ProcedureParameterCollection.cs" />
+    <Compile Include="Modeling\Selection.cs" />
     <Compile Include="Modeling\SelectionAction.cs" />
     <Compile Include="Modeling\SelectionTarget.cs" />
     <Compile Include="Modeling\SelectVolumeModifier.cs" />

@@ -97,5 +97,13 @@ namespace Managed3D.Modeling
             Contract.Invariant(this.Edge != null);
         }
         #endregion
+
+        public SelectionTarget SelectionKind
+        {
+            get
+            {
+                return SelectionTarget.Vertex;
+            }
+        }
     }
 }
