@@ -28,7 +28,7 @@ namespace Managed3D.Modeling
 
             Assert.AreEqual(4, mesh.VertexCount);
             Assert.AreEqual(6, mesh.EdgeCount);
-            
+
             Assert.Inconclusive();
         }
 
@@ -36,6 +36,14 @@ namespace Managed3D.Modeling
         public void FaceEdgeTraversal()
         {
             Assert.Inconclusive();
+        }
+
+        [Test]
+        public void BoxSourceTest()
+        {
+            var src = new Managed3D.Modeling.Modifiers.Source.PrimitiveSourceModifier() { Kind = PrimitiveKind.Box, };
+
+            var mesh = src.Generate();
         }
     }
 }

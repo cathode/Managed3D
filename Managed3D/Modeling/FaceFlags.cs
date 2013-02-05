@@ -11,12 +11,10 @@ using System.Text;
 
 namespace Managed3D.Modeling
 {
-    public interface IUnaryGeometryOperation
+    [Flags]
+    public enum FaceFlags
     {
-        Managed3D.Geometry.Mesh3 Input
-        {
-            get;
-            set;
-        }
+        None = 0x0000,
+        NullFace = 0x0001,
     }
 }

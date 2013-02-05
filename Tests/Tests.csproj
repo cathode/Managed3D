@@ -66,6 +66,7 @@
     <Compile Include="Geometry\Edge3_Test.cs" />
     <Compile Include="Geometry\Vector3_Tests.cs" />
     <Compile Include="Modeling\EditableMesh_Tests.cs" />
+    <Compile Include="Modeling\Selection_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneGraph\LabelNode_Tests.cs" />
     <Compile Include="SceneGraph\Extents3_Tests.cs" />
@@ -76,6 +77,9 @@
       <Project>{4d281c09-1c91-4c84-b0dc-aaff8839264e}</Project>
       <Name>Managed3D</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modeling\Modifiers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

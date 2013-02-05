@@ -8,15 +8,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Managed3D.Modeling
 {
-    public interface IUnaryGeometryOperation
+    public sealed class EditableMeshEdgeCollection : KeyedCollection<int, EditableMeshEdge>
     {
-        Managed3D.Geometry.Mesh3 Input
+        protected override int GetKeyForItem(EditableMeshEdge item)
         {
-            get;
-            set;
+            return item.Id;
         }
     }
 }

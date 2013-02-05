@@ -19,9 +19,9 @@ namespace Managed3D.Modeling
     public class EditableMesh
     {
         #region Fields
-        private Dictionary<long, EditableMeshVertex> vertices;
-        private Dictionary<long, EditableMeshFace> faces;
-        private Dictionary<long, EditableMeshEdge> edges;
+        private EditableMeshVertexCollection vertices;
+        private EditableMeshFaceCollection faces;
+        private EditableMeshEdgeCollection edges;
         private Queue<int> freeVertexIds;
         private Queue<int> freeFaceIds;
         private Queue<int> freeEdgeIds;
@@ -35,9 +35,9 @@ namespace Managed3D.Modeling
         /// </summary>
         public EditableMesh()
         {
-            this.vertices = new Dictionary<long, EditableMeshVertex>();
-            this.faces = new Dictionary<long, EditableMeshFace>();
-            this.edges = new Dictionary<long, EditableMeshEdge>();
+            this.vertices = new EditableMeshVertexCollection();
+            this.faces = new EditableMeshFaceCollection();
+            this.edges = new EditableMeshEdgeCollection();
 
             this.freeEdgeIds = new Queue<int>();
             this.freeFaceIds = new Queue<int>();
@@ -79,33 +79,45 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Methods
-        public EditableMeshVertex GetVertex(long id)
+        public EditableMeshVertex GetVertex(int id)
         {
             return this.vertices[id];
         }
 
-        public EditableMeshFace GetFace(long id)
+        public EditableMeshFace GetFace(int id)
         {
             return this.faces[id];
         }
 
-        public EditableMeshEdge GetEdge(long id)
+        public EditableMeshEdge GetEdge(int id)
         {
             return this.edges[id];
         }
 
         public EditableMeshVertex CreateVertex(double x, double y, double z)
         {
-            throw new NotImplementedException();
+            var id = this.GetVertexId();
+            var v = new EditableMeshVertex(id, new Vector3(x, y, z));
+            this.vertices.Add(v);
+            return v;
         }
 
-        public EditableMeshEdge CreateEdge(long v1, long v2)
+        public EditableMeshEdge CreateEdge(int id0, int id1)
         {
+            var v0 = this.GetVertex(id0);
+            var v1 = this.GetVertex(id1);
 
-            throw new NotImplementedException();
+            if (v0.Edge != null)
+                if ((v0.Edge.Start.Id == id0 && v0.Edge.End.Id == id1) || (v0.Edge.End.Id == id0 && v0.Edge.End.Id == id1))
+                    return v0.Edge;
+
+            var e = new EditableMeshEdge(this.GetEdgeId(), v0, v1);
+            this.edges.Add(e);
+            v0.Edge = e;
+            return e;
         }
 
-        public EditableMeshFace CreateFace(long id1, long id2, long id3)
+        public EditableMeshFace CreateFace(int id1, int id2, int id3)
         {
             var v1 = this.GetVertex(id1);
             var v2 = this.GetVertex(id2);
@@ -116,7 +128,17 @@ namespace Managed3D.Modeling
             var f = new EditableMeshFace(0);
             return f;
         }
+        public EditableMeshFace CreateFace(EditableMeshVertex v0, EditableMeshVertex v1, EditableMeshVertex v2, EditableMeshVertex v3)
+        {
+            var e0 = this.CreateEdge(v0.Id, v1.Id);
+            var e1 = this.CreateEdge(v1.Id, v2.Id);
+            var e2 = this.CreateEdge(v2.Id, v3.Id);
+            var e3 = this.CreateEdge(v3.Id, v0.Id);
 
+            var f = new EditableMeshFace(this.GetFaceId()) { StartingEdge = e0 };
+            this.faces.Add(f);
+            return f;
+        }
         public EditableMeshFace CreateFace(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3)
         {
             var v1 = this.CreateVertex(x1, y1, z1);
@@ -126,17 +148,17 @@ namespace Managed3D.Modeling
             return this.CreateFace(v1.Id, v2.Id, v3.Id);
         }
 
-        public EditableMeshVertex InsertVertexInEdge(long e)
+        public EditableMeshVertex InsertVertexInEdge(int e)
         {
             throw new NotImplementedException();
         }
 
-        public EditableMeshVertex InsertVertexInFace(long f)
+        public EditableMeshVertex InsertVertexInFace(int f)
         {
             throw new NotImplementedException();
         }
 
-        public EditableMeshVertex WeldVertex(long sourceId, long targetId)
+        public EditableMeshVertex WeldVertex(int sourceId, int targetId)
         {
             throw new NotImplementedException();
         }
@@ -191,13 +213,30 @@ namespace Managed3D.Modeling
             return this.freeFaceIds.Dequeue();
         }
 
-        protected int GetEdgeId() {
+        protected int GetEdgeId()
+        {
             if (this.freeEdgeIds.Count == 0)
                 for (int i = 0; i < 24; ++i)
                     this.freeEdgeIds.Enqueue(this.topEdgeId++);
 
             return this.freeEdgeIds.Dequeue();
         }
+
+        public Mesh3 ConvertToRenderableMesh()
+        {
+            var m = new Mesh3();
+            
+            var tl = new List<Triangle3>();
+
+            foreach (var face in this.faces)
+            {
+                
+            }
+
+            return m;
+        }
         #endregion
+
+
     }
 }

@@ -215,12 +215,13 @@
     <Compile Include="Geometry\Vector4i.cs" />
     <Compile Include="Geometry\__Extensions.cs" />
     <Compile Include="Modeling\BoundingVolume.cs" />
-    <Compile Include="Modeling\Chamfer.cs" />
-    <Compile Include="Modeling\CsgModifier.cs" />
-    <Compile Include="Modeling\CsgOperation.cs" />
     <Compile Include="Modeling\EditableMeshEdge.cs" />
+    <Compile Include="Modeling\EditableMeshEdgeCollection.cs" />
     <Compile Include="Modeling\EditableMeshFace.cs" />
+    <Compile Include="Modeling\EditableMeshFaceCollection.cs" />
+    <Compile Include="Modeling\FaceFlags.cs" />
     <Compile Include="Modeling\EditableMeshVertex.cs" />
+    <Compile Include="Modeling\EditableMeshVertexCollection.cs" />
     <Compile Include="Modeling\IBinaryGeometryOperation.cs" />
     <Compile Include="Modeling\IElement.cs" />
     <Compile Include="Modeling\IFace.cs" />
@@ -233,6 +234,8 @@
     <Compile Include="Modeling\IVertex.cs" />
     <Compile Include="Modeling\Model.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
+    <Compile Include="Modeling\Modifiers\Topology\TranslationModifier.cs" />
+    <Compile Include="Modeling\Modifiers\VolumeSelectionModifier.cs" />
     <Compile Include="Modeling\PlanarSelectionModifier.cs" />
     <Compile Include="Modeling\Modifiers\Modifier.cs" />
     <Compile Include="Modeling\Modifiers\Source\PrimitiveSourceModifier.cs" />
@@ -250,7 +253,7 @@
     <Compile Include="Modeling\SelectionAction.cs" />
     <Compile Include="Modeling\SelectionTarget.cs" />
     <Compile Include="Modeling\SelectVolumeModifier.cs" />
-    <Compile Include="Modeling\SliceModifier.cs" />
+    <Compile Include="Modeling\Modifiers\Topology\SliceModifier.cs" />
     <Compile Include="Modeling\VertexSelection.cs" />
     <Compile Include="Platform\DisplayAdapter.cs" />
     <Compile Include="Platform\DisplayDevice.cs" />

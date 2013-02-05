@@ -8,18 +8,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Managed3D.Geometry;
 
-namespace Managed3D.Modeling
+namespace Managed3D.Modeling.Modifiers
 {
-    /// <summary>
-    /// Chamfers the edges of a mesh.
-    /// </summary>
-    public class Chamfer
+    public class VolumeSelectionModifier : Modifier, ISelectionModifier
     {
-        public void Apply(Mesh3 mesh)
+        #region Constructors
+        public VolumeSelectionModifier()
+        {
+
+        }
+        #endregion
+        #region Properties
+        public BoundingVolume SelectionVolume { get; set; }
+        public SelectionAction Action { get; set; }
+        public SelectionTarget Targets { get; set; }
+        #endregion
+        #region Methods
+        public override void Apply(Model model)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
