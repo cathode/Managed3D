@@ -42,6 +42,12 @@ namespace Managed3D.Geometry
             this.position = new Vector3(x, y, z);
             this.color = Vector4f.Color(0, 0, 0, 1);
         }
+
+        public Vertex3(Vector3 position)
+        {
+            this.position = position;
+            this.color = new Vector4f(0, 0, 0, 1);
+        }
         #endregion
         #region Properties
         /// <summary>

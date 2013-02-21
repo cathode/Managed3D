@@ -22,7 +22,9 @@ namespace Managed3D.Modeling
         private EditableMeshEdge opposite;
         private EditableMeshFace face;
         private EditableMeshEdge next;
+        private EditableMeshEdge prev;
         private EditableMeshVertex end;
+        private EditableMeshVertex start;
         #endregion
         #region Constructors
         /// <summary>
@@ -32,6 +34,7 @@ namespace Managed3D.Modeling
         {
             // TODO: Complete member initialization
             this.id = id;
+            this.start = v0;
             this.end = v1;
         }
         #endregion
@@ -50,13 +53,29 @@ namespace Managed3D.Modeling
             {
                 return this.next;
             }
+            internal set
+            {
+                this.next = value;
+            }
+        }
+
+        public EditableMeshEdge Previous
+        {
+            get
+            {
+                return this.prev;
+            }
+            internal set
+            {
+                this.prev = value;
+            }
         }
 
         public EditableMeshVertex Start
         {
             get
             {
-                return this.Opposite.End;
+                return this.start;
             }
         }
         public EditableMeshVertex End
@@ -73,6 +92,10 @@ namespace Managed3D.Modeling
             {
                 return this.face;
             }
+            internal set
+            {
+                this.face = value;
+            }
         }
 
         public int Id
@@ -83,17 +106,20 @@ namespace Managed3D.Modeling
             }
         }
 
-        public object Tag { get; set;
+        public object Tag
+        {
+            get;
+            set;
         }
         #endregion
         #region MEthods
         [ContractInvariantMethod]
         private void Invariants()
         {
-            Contract.Invariant(this != this.Next);
-            Contract.Invariant(this == this.Next.Opposite.Next);
-            Contract.Invariant(this == this.Opposite.Opposite);
-            Contract.Invariant(this.Face == this.Next.Face);
+            //Contract.Invariant(this != this.Next);
+            //Contract.Invariant(this == this.Next.Opposite.Next);
+            //Contract.Invariant(this == this.Opposite.Opposite);
+            //Contract.Invariant(this.Face == this.Next.Face);
         }
         #endregion
 

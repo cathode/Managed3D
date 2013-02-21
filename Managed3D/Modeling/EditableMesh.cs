@@ -79,21 +79,43 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Methods
+        /// <summary>
+        /// Gets an existing vertex with the specified id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public EditableMeshVertex GetVertex(int id)
         {
             return this.vertices[id];
         }
 
+        /// <summary>
+        /// Gets an existing face with the specified id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public EditableMeshFace GetFace(int id)
         {
             return this.faces[id];
         }
 
+        /// <summary>
+        /// Gets an existing edge with the specified id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public EditableMeshEdge GetEdge(int id)
         {
             return this.edges[id];
         }
 
+        /// <summary>
+        /// Creates a new vertex at the specified coordinates.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
         public EditableMeshVertex CreateVertex(double x, double y, double z)
         {
             var id = this.GetVertexId();
@@ -102,6 +124,12 @@ namespace Managed3D.Modeling
             return v;
         }
 
+        /// <summary>
+        /// Creates a new edge between the vertices with the specified indices.
+        /// </summary>
+        /// <param name="id0"></param>
+        /// <param name="id1"></param>
+        /// <returns></returns>
         public EditableMeshEdge CreateEdge(int id0, int id1)
         {
             var v0 = this.GetVertex(id0);
@@ -135,8 +163,23 @@ namespace Managed3D.Modeling
             var e2 = this.CreateEdge(v2.Id, v3.Id);
             var e3 = this.CreateEdge(v3.Id, v0.Id);
 
+            e0.Next = e1;
+            e1.Next = e2;
+            e2.Next = e3;
+            e3.Next = e0;
+            e0.Previous = e3;
+            e1.Previous = e0;
+            e2.Previous = e1;
+            e3.Previous = e2;
+
             var f = new EditableMeshFace(this.GetFaceId()) { StartingEdge = e0 };
             this.faces.Add(f);
+
+            e0.Face = f;
+            e1.Face = f;
+            e2.Face = f;
+            e3.Face = f;
+
             return f;
         }
         public EditableMeshFace CreateFace(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3)
@@ -225,13 +268,26 @@ namespace Managed3D.Modeling
         public Mesh3 ConvertToRenderableMesh()
         {
             var m = new Mesh3();
-            
+
             var tl = new List<Triangle3>();
 
             foreach (var face in this.faces)
             {
-                
+                var cforward = face.StartingEdge;
+
+                while (cforward != face.StartingEdge)
+                {
+                    var en = cforward.Next;
+
+                    tl.Add(new Triangle3(
+                           new Vertex3(cforward.Start.Position),
+                           new Vertex3(cforward.End.Position),
+                           new Vertex3(en.End.Position)
+                    ));
+                    cforward = en;
+                }
             }
+            m.Polygons = tl.ToArray();
 
             return m;
         }

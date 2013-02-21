@@ -44,6 +44,7 @@ namespace Managed3D.Modeling
             var src = new Managed3D.Modeling.Modifiers.Source.PrimitiveSourceModifier() { Kind = PrimitiveKind.Box, };
 
             var mesh = src.Generate();
+            var renderable = mesh.ConvertToRenderableMesh();
         }
     }
 }
