@@ -97,6 +97,9 @@ namespace Managed3D.Rendering.Direct3D
             using (var bytecode = ShaderBytecode.CompileFromFile("./Shaders/PSDefault.hlsl", "PShader", "ps_4_0", ShaderFlags.None, EffectFlags.None))
                 this.pixelShader = new PixelShader(device, bytecode);
 
+            context.VertexShader.Set(vertexShader);
+            context.PixelShader.Set(pixelShader);
+
             form.KeyDown += (o, e) =>
             {
                 if (e.Alt && e.KeyCode == Keys.Enter)
@@ -165,9 +168,10 @@ namespace Managed3D.Rendering.Direct3D
         protected override void OnRender(RenderEventArgs e)
         {
             base.OnRender(e);
-            for (var i = 0; i < 2; ++i)
+            context.Draw(3, 0);
+            for (var i = 0; i < 60; ++i)
             {
-                context.Draw(3, i);
+                context.Draw(9, i * 3);
             }
         }
         protected override void OnPostRender(RenderEventArgs e)
@@ -203,7 +207,7 @@ namespace Managed3D.Rendering.Direct3D
                     for (int j = 0; j < renderable.Polygons[i].Vertices.Length; ++j)
                     {
                         var v = renderable.Polygons[i].Vertices[j].Position;
-                        vstack.Enqueue(new SlimDX.Vector3((float)v.X, (float)v.Y, (float)v.Z));
+                        vstack.Enqueue(new SlimDX.Vector3((float)v.X * 0.005f, (float)v.Y * 0.05f, (float)v.Z * 0.005f));
                         fq.Enqueue(renderable.Polygons[i].Vertices.Length);
                     }
 
@@ -215,12 +219,16 @@ namespace Managed3D.Rendering.Direct3D
                     vstream.Write(vstack.Dequeue());
                 vstream.Position = 0;
 
-                var vbuffer = new SlimDX.Direct3D11.Buffer(device, vstream, n, ResourceUsage.Default,
-                    BindFlags.VertexBuffer, CpuAccessFlags.None, ResourceOptionFlags.None, 0);
+                using (var vbuffer = new SlimDX.Direct3D11.Buffer(device, vstream, n, ResourceUsage.Default,
+                    BindFlags.VertexBuffer, CpuAccessFlags.None, ResourceOptionFlags.None, 0))
+                {
 
-                var elements = new[] { new InputElement("POSITION", 0, Format.R32G32B32_Float, 0) };
-                 var layout = new InputLayout(device, inputSignature, elements);
-                //context.InputAssembler.InputLayout = layout
+                    var elements = new[] { new InputElement("POSITION", 0, Format.R32G32B32_Float, 0) };
+                    var layout = new InputLayout(device, inputSignature, elements);
+                    context.InputAssembler.InputLayout = layout;
+                    context.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
+                    context.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(vbuffer, 12, 0));
+                }
             }
         }
         #endregion
@@ -233,6 +241,12 @@ namespace Managed3D.Rendering.Direct3D
             renderTarget.Dispose();
             swapChain.Dispose();
             device.Dispose();
+            inputSignature.Dispose();
+            pixelShader.Dispose();
+            vertexShader.Dispose();
+            device.Dispose();
+            context.Dispose();
+            renderTarget.Dispose();
         }
     }
 }
