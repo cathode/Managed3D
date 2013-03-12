@@ -885,6 +885,12 @@ namespace Managed3D.Geometry
             return Matrix4.Multiply(matrix, vector);
         }
 
+        /// <summary>
+        /// Multiplies a matrix and a <see cref="Vertex3"/>, effectively applying a vertex transformation.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="vertex"></param>
+        /// <returns></returns>
         public static Vertex3 operator *(Matrix4 matrix, Vertex3 vertex)
         {
             Contract.Requires(vertex != null);
@@ -908,7 +914,5 @@ namespace Managed3D.Geometry
             return Matrix4.Multiply(matrix, vector);
         }
         #endregion
-
-
     }
 }
