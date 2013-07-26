@@ -65,6 +65,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="BitmapRenderer.cs" />
+    <Compile Include="D3DCameraControl.cs" />
     <Compile Include="D3DRenderer.cs" />
     <Compile Include="D3DRendererBitmapTarget.cs" />
     <Compile Include="ID3DRendererTarget.cs" />
