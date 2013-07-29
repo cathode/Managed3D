@@ -55,6 +55,7 @@ namespace Managed3D.Geometry
         public Quad3(Vertex3 a, Vertex3 b, Vertex3 c, Vertex3 d)
             : base(a, b, c, d)
         {
+            
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Quad3"/> class.
@@ -112,6 +113,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[0] = value;
             }
         }
@@ -127,6 +130,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[1] = value;
             }
         }
@@ -142,6 +147,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[2] = value;
             }
         }
@@ -157,6 +164,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[3] = value;
             }
         }

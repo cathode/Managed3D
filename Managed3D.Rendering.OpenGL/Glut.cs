@@ -14,7 +14,7 @@ namespace Managed3D.Rendering.OpenGL
     /// Exposes unmanaged functions of the OpenGL Utility Toolkit (GLUT) library.
     /// </summary>
     [CLSCompliant(false)]
-    public static class GLUT
+    public unsafe static class GLUT
     {
         #region Fields
         public const string DLL = "glut32.dll";
@@ -42,8 +42,8 @@ namespace Managed3D.Rendering.OpenGL
         #endregion
         #region Methods
         #region Initialization
-        [DllImport(GLUT.DLL, EntryPoint = "glutInit")]
-        public static extern void Init(ref int argcp, string[] argv);
+        [DllImport(GLUT.DLL, EntryPoint = "glutInit", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Init(int* argcp, string[] argv);
 
         [DllImport(GLUT.DLL, EntryPoint = "glutInitDisplayMode")]
         public static extern void InitDisplayMode(uint mode);
@@ -71,7 +71,7 @@ namespace Managed3D.Rendering.OpenGL
         [DllImport(GLUT.DLL, EntryPoint = "glutSwapBuffers")]
         public static extern void SwapBuffers();
 
-        [DllImport(GLUT.DLL, EntryPoint="glutPostRedisplay")]
+        [DllImport(GLUT.DLL, EntryPoint = "glutPostRedisplay")]
         public static extern void PostRedisplay();
         //public static extern int GetWindow();
         //public static extern void SetWindow(int win);
@@ -83,7 +83,7 @@ namespace Managed3D.Rendering.OpenGL
         [DllImport(GLUT.DLL, EntryPoint = "glutIdleFunc")]
         public static extern void IdleFunc(Action callback);
 
-        [DllImport(GLUT.DLL, EntryPoint="glutTimerFunc")]
+        [DllImport(GLUT.DLL, EntryPoint = "glutTimerFunc")]
         public static extern void TimerFunc(int msecs, Action callback, int value);
 
         #endregion

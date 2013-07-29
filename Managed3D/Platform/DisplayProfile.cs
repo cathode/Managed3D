@@ -292,6 +292,8 @@ namespace Managed3D.Platform
         {
             get
             {
+                Contract.Ensures(Contract.Result<int>() >= 0);
+
                 return this.height;
             }
         }
@@ -303,6 +305,8 @@ namespace Managed3D.Platform
         {
             get
             {
+                Contract.Ensures(Contract.Result<int>() >= 0);
+
                 return this.width;
             }
         }

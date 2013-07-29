@@ -472,6 +472,7 @@ namespace Managed3D.SceneGraph
         {
             Contract.Invariant(this.children != null);
             Contract.Invariant(this.parents != null);
+            
         }
         #endregion
     }

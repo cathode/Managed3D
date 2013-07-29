@@ -2,3 +2,5 @@ if exist %SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319 set MSBUILDPATH=%SYSTEM
 if exist %SYSTEMROOT%\Microsoft.NET\Framework64\v4.0.30319 set MSBUILDPATH=%SYSTEMROOT%\Microsoft.NET\Framework64\v4.0.30319
 
 %MSBUILDPATH%\msbuild.exe Managed3D.msbuild
+
+PAUSE

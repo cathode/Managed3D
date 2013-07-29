@@ -60,6 +60,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[0] = value;
             }
         }
@@ -75,6 +77,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[1] = value;
             }
         }
@@ -90,6 +94,8 @@ namespace Managed3D.Geometry
             }
             set
             {
+                Contract.Requires(value != null);
+
                 this[2] = value;
             }
         }
@@ -141,6 +147,8 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public Vector3 GetIntersection(Edge3 line)
         {
+            Contract.Requires(line != null);
+
             // Set up vector variables;
             Vector3 a, b, c, p, q;
             a = this.A.ToVector3();

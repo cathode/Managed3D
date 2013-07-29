@@ -16,12 +16,10 @@ namespace Managed3D.Rendering
     /// </summary>
     public sealed class ManagedBuffer
     {
-        #region Fields
         private readonly Vector2i size;
         private readonly ManagedBufferColorPlane color;
         private readonly ManagedBufferDepthPlane depth;
-        #endregion
-        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ManagedBuffer"/> class.
         /// </summary>
@@ -29,8 +27,8 @@ namespace Managed3D.Rendering
         /// <param name="height"></param>
         public ManagedBuffer(int width, int height)
         {
-            Contract.Requires(width > 0);
-            Contract.Requires(height > 0);
+            Contract.Requires(width >= 0);
+            Contract.Requires(height >= 0);
 
             this.size = new Vector2i(width, height);
             this.color = new ManagedBufferColorPlane(this.size);
@@ -43,15 +41,14 @@ namespace Managed3D.Rendering
         /// <param name="size"></param>
         public ManagedBuffer(Vector2i size)
         {
-            Contract.Requires(size.X > 0);
-            Contract.Requires(size.Y > 0);
+            Contract.Requires(size.X >= 0);
+            Contract.Requires(size.Y >= 0);
 
             this.size = size;
             this.color = new ManagedBufferColorPlane(this.size);
             this.depth = new ManagedBufferDepthPlane(this.size);
         }
-        #endregion
-        #region Properties
+
         /// <summary>
         /// Gets the height (in pixels) of the managed buffer.
         /// </summary>
@@ -106,6 +103,12 @@ namespace Managed3D.Rendering
                 return this.depth;
             }
         }
-        #endregion
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.color != null);
+            Contract.Invariant(this.depth != null);
+        }
     }
 }

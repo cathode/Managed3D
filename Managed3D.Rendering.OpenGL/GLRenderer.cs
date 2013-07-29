@@ -12,6 +12,7 @@ using Managed3D.SceneGraph;
 using Managed3D.Geometry;
 using Managed3D.Platform.Microsoft;
 using Managed3D.Platform.Microsoft.OpenGL;
+using OpenTK;
 
 namespace Managed3D.Rendering.OpenGL
 {
@@ -69,10 +70,8 @@ namespace Managed3D.Rendering.OpenGL
         {
             this.Initialize(RendererOptions.Empty);
 
-            while (true)
-            {
-                this.RenderFrame();
-            }
+            
+            //GLUT.MainLoop();
         }
 
         public override void Stop()
@@ -83,7 +82,18 @@ namespace Managed3D.Rendering.OpenGL
         protected override void OnInitializing(RendererInitializationEventArgs e)
         {
             base.OnInitializing(e);
-
+            unsafe
+            {
+                int argc = 1;
+                string[] argv = new string[] { "empty" };
+                GLUT.Init(&argc, argv);
+                GLUT.InitDisplayMode(GLUT.RGB | GLUT.DOUBLE);
+                GLUT.InitWindowSize(640, 480);
+                GLUT.CreateWindow("Managed3D.Rendering.OpenGL.GLRenderer");
+                GLUT.DisplayFunc(this.RenderFrame);
+                GLUT.IdleFunc(this.Idle);
+            }
+            /*
             IntPtr hinst = IntPtr.Zero;
 
             this.windowHandle = User32.CreateWindowEx(Managed3D.Platform.Microsoft.ExtendedWindowStyle.Left,
@@ -102,6 +112,12 @@ namespace Managed3D.Rendering.OpenGL
             GL.ClearDepth(1.0);
             GL.Hint(HintTarget.PerspectiveCorrection, HintMode.Nicest);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            */
+        }
+
+        private void Idle()
+        {
+
         }
 
         protected override void OnSceneChanged(EventArgs e)

@@ -542,6 +542,8 @@ namespace Managed3D.Geometry
 
         public static Vector3 InterpolateN(params Vector3[] vectors)
         {
+            Contract.Requires(vectors != null);
+
             double weight = 1.0 / vectors.Length;
             Vector3 r = Vector3.Zero;
             for (int i = 0; i < vectors.Length; i++)

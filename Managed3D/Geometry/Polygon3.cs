@@ -23,6 +23,8 @@ namespace Managed3D.Geometry
         /// </summary>
         private readonly Vertex3[] vertices;
         protected readonly Edge3[] edges;
+
+        private int vertexCount;
         #endregion
         #region Constructors
         /// <summary>
@@ -36,6 +38,8 @@ namespace Managed3D.Geometry
             Contract.Ensures(this.Vertices.Length == vertexCount);
 
             this.vertices = new Vertex3[vertexCount];
+
+            this.vertexCount = this.vertices.Length;
         }
 
         /// <summary>
@@ -200,6 +204,14 @@ namespace Managed3D.Geometry
                 return this.edges;
             }
         }
+
+        public int VertexCount
+        {
+            get
+            {
+                return this.vertices.Length;
+            }
+        }
         #endregion
         #region Indexers
         /// <summary>
@@ -211,14 +223,16 @@ namespace Managed3D.Geometry
         {
             get
             {
-                Contract.Requires(index < this.Vertices.Length);
+                Contract.Requires(index >= 0);
+                Contract.Requires(index < this.VertexCount);
                 Contract.Ensures(Contract.Result<Vertex3>() != null);
 
                 return this.vertices[index];
             }
             set
             {
-                Contract.Requires(index < this.Vertices.Length);
+                Contract.Requires(index >= 0);
+                Contract.Requires(index < this.VertexCount);
                 Contract.Requires(value != null);
 
                 this.vertices[index] = value;
@@ -321,11 +335,11 @@ namespace Managed3D.Geometry
         private void Invariants()
         {
             Contract.Invariant(this.Vertices != null);
-            Contract.Invariant(this.Vertices.Length > 2);
-            Contract.Invariant(this.Vertices.All(v => v != null));
+            //Contract.Invariant(this.VertexCount >= 2);
+            Contract.Invariant(Contract.ForAll(this.vertices, v => v != null));
             Contract.Invariant(this.Edges != null);
-            Contract.Invariant(this.Edges.Length == this.Vertices.Length);
-            Contract.Invariant(this.Edges.All(e => e != null));
+            Contract.Invariant(this.Edges.Length == this.VertexCount);
+            Contract.Invariant(Contract.ForAll(this.edges, e => e != null));
         }
         #endregion
     }

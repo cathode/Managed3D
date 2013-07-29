@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Managed3D.Geometry;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Rendering
 {
@@ -39,7 +40,7 @@ namespace Managed3D.Rendering
         /// </summary>
         private ManagedBuffer frontBuffer;
 
-        private List<IManagedRendererTarget> targets;
+        private readonly List<IManagedRendererTarget> targets;
         #endregion
         #region Constructors
         /// <summary>
@@ -51,6 +52,8 @@ namespace Managed3D.Rendering
             this.backBufferLock = new object();
             this.targets = new List<IManagedRendererTarget>();
             this.Scene = new SceneGraph.Scene();
+            this.backBuffer = new ManagedBuffer(0, 0);
+            this.frontBuffer = new ManagedBuffer(0, 0);
         }
         #endregion
         #region Properties
@@ -191,6 +194,12 @@ namespace Managed3D.Rendering
 
             this.ReleaseBackBufferLock();
             this.ReleaseFrontBufferLock();
+        }
+
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.targets != null);
         }
         #endregion
     }

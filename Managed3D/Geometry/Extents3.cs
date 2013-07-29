@@ -267,6 +267,14 @@ namespace Managed3D.Geometry
 
         public static bool operator ==(Extents3 e1, Extents3 e2)
         {
+            if (object.ReferenceEquals(e1, null))
+                if (object.ReferenceEquals(e2, null))
+                    return true;
+                else
+                    return false;
+            else if (object.ReferenceEquals(e2, null))
+                return false;
+
             return e1.right == e2.right
                 && e1.left == e2.left
                 && e1.front == e2.front
