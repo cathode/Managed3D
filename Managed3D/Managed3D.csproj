@@ -235,11 +235,6 @@
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\IVertex.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
-    <Compile Include="Modeling\Parametrics\Feature.cs" />
-    <Compile Include="Modeling\Parametrics\DistanceRelationship.cs" />
-    <Compile Include="Modeling\Parametrics\Entity.cs" />
-    <Compile Include="Modeling\Parametrics\RelationshipBase.cs" />
-    <Compile Include="Modeling\Parametrics\Sketch.cs" />
     <Compile Include="Modeling\PlanarSelectionModifier.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />

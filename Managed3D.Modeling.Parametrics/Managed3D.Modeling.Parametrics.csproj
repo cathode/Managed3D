@@ -39,15 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentDocument.cs" />
     <Compile Include="ComponentVariation.cs" />
     <Compile Include="DistanceRelationship.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Processes\Extrude.cs" />
     <Compile Include="RelationshipBase.cs" />
     <Compile Include="Sketch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Managed3D\Managed3D.csproj">
+      <Project>{4d281c09-1c91-4c84-b0dc-aaff8839264e}</Project>
+      <Name>Managed3D</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
