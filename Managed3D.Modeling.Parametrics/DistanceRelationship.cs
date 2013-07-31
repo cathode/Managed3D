@@ -10,6 +10,12 @@ namespace Managed3D.Modeling.Parametrics
     /// </summary>
     public class DistanceRelationship : RelationshipBase
     {
-        
+        public decimal Value { get; set; }
+
+
+        public override bool IsSolvable()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

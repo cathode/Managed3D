@@ -170,10 +170,13 @@
     <CodeContractsExtraRewriteOptions />
     <CodeContractsExtraAnalysisOptions>-show progress -stats slowmethods -timeout 2 -maxwarnings 65536</CodeContractsExtraAnalysisOptions>
     <CodeContractsBaseLineFile />
-    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>2</CodeContractsAnalysisWarningLevel>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsSQLServerOption />
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -235,11 +238,6 @@
     <Compile Include="Modeling\IUnaryGeometryOperation.cs" />
     <Compile Include="Modeling\IVertex.cs" />
     <Compile Include="Modeling\ModifierNode.cs" />
-    <Compile Include="Modeling\Parametrics\Feature.cs" />
-    <Compile Include="Modeling\Parametrics\DistanceRelationship.cs" />
-    <Compile Include="Modeling\Parametrics\Entity.cs" />
-    <Compile Include="Modeling\Parametrics\RelationshipBase.cs" />
-    <Compile Include="Modeling\Parametrics\Sketch.cs" />
     <Compile Include="Modeling\PlanarSelectionModifier.cs" />
     <Compile Include="Modeling\Primitives\Box.cs" />
     <Compile Include="Modeling\Primitives\Cone.cs" />
