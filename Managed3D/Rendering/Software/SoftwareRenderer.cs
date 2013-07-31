@@ -59,9 +59,12 @@ namespace Managed3D.Rendering.Software
             {
                 var buffer = this.BackBuffer;
                 this.projectionMatrix = Matrix4.CreateTranslationMatrix(buffer.Width / 2.0, buffer.Height / 2.0, 0);
-                this.projectionMatrix *= (this.ActiveCamera.Mode == CameraMode.Perspective)
-                    ? Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000)
-                    : Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
+
+                // Set up projection matrix for new profile.
+                if (this.ActiveCamera.Mode == CameraMode.Perspective)
+                    this.projectionMatrix *= Matrix4.CreatePerspectiveProjectionMatrix(this.ActiveCamera.FieldOfView, (double)buffer.Width / buffer.Height, 0.1, 1000);
+                else
+                    Matrix4.CreateOrthographicProjectionMatrix(buffer.Width, buffer.Height, 0.1, 1000.0);
             }
         }
 

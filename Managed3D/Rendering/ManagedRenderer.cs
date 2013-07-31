@@ -146,16 +146,22 @@ namespace Managed3D.Rendering
             this.ActiveCamera.Scale = new Vector3(yf, yf, yf);
         }
 
+        /// <summary>
+        /// Locks the back buffer so the renderer can safely write to it.
+        /// </summary>
         protected void AcquireBackBufferLock()
         {
             Monitor.Enter(this.backBufferLock);
         }
 
+        /// <summary>
+        /// Unlocks the back buffer so that it's contents can be swapped to the front buffer and displayed.
+        /// </summary>
         protected void ReleaseBackBufferLock()
         {
             Monitor.Exit(this.backBufferLock);
-            //Monitor
         }
+
         protected override void OnPreRender(RenderEventArgs e)
         {
             base.OnPreRender(e);
@@ -177,6 +183,11 @@ namespace Managed3D.Rendering
                     target.ConsumeFrameBuffer(this.FrontBuffer);
         }
 
+        /// <summary>
+        /// Raises the <see cref="ManagedRenderer.ProfileChanged"/> event and performs some basic functionality,
+        /// such as resizing the front-buffer and back-buffer if necessary to match the changed display profile.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
         protected override void OnProfileChanged(EventArgs e)
         {
             base.OnProfileChanged(e);
@@ -196,6 +207,9 @@ namespace Managed3D.Rendering
             this.ReleaseFrontBufferLock();
         }
 
+        /// <summary>
+        /// Invariant contracts for the <see cref="ManagedRenderer"/> class.
+        /// </summary>
         [ContractInvariantMethod]
         private void Invariants()
         {

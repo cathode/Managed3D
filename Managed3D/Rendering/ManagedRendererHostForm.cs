@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics.Contracts;
 
 namespace Managed3D.Rendering
 {
@@ -25,6 +26,8 @@ namespace Managed3D.Rendering
         #region Constructors
         public ManagedRendererHostForm(ManagedRenderer renderer)
         {
+            Contract.Requires(renderer != null);
+
             this.renderer = renderer;
             this.renderer.PostRender += new EventHandler<RenderEventArgs>(renderer_PostRender);
             this.AutoSize = true;
@@ -87,6 +90,8 @@ namespace Managed3D.Rendering
 
         public void UpdateDisplayProfile(Platform.DisplayProfile profile)
         {
+            Contract.Requires(profile != null);
+
             if (!this.IsDisposed && !this.hostControl.IsDisposed)
             {
                 this.hostControl.Invoke((Action)delegate
@@ -98,6 +103,8 @@ namespace Managed3D.Rendering
 
         public void ConsumeFrameBuffer(ManagedBuffer buffer)
         {
+            Contract.Requires(buffer != null);
+
             if (!this.IsDisposed && !this.hostControl.IsDisposed)
             {
                 try
@@ -112,6 +119,16 @@ namespace Managed3D.Rendering
                 {
                 }
             }
+        }
+
+        /// <summary>
+        /// Invariant contracts for the <see cref="ManagedRendererHostForm"/> class.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void Invariants()
+        {
+            Contract.Invariant(this.renderer != null);
+            Contract.Invariant(this.hostControl != null);
         }
     }
 }
