@@ -57,8 +57,8 @@ Global
 		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D732820C-DA52-4B5E-9E86-F4F5EECDDD0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug + Contracts|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug + Contracts|Any CPU.Build.0 = Debug|Any CPU
+		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug + Contracts|Any CPU.ActiveCfg = Debug + Contracts|Any CPU
+		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug + Contracts|Any CPU.Build.0 = Debug + Contracts|Any CPU
 		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF445D21-9E1F-4D66-A36D-CCD8D54314A1}.Release|Any CPU.ActiveCfg = Release|Any CPU

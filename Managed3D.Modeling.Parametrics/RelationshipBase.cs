@@ -11,5 +11,11 @@ namespace Managed3D.Modeling.Parametrics
     public abstract class RelationshipBase
     {
 
+        public Entity A { get; set; }
+
+        public Entity B { get; set; }
+
+
+        public abstract bool IsSolvable();
     }
 }

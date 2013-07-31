@@ -7,6 +7,6 @@ namespace Managed3D.Modeling.Parametrics
 {
     public class Entity
     {
-
+        
     }
 }
