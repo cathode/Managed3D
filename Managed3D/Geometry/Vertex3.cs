@@ -104,6 +104,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets or sets the object-space coordinates of the vertex.
+        /// </summary>
         public Vector3 Position
         {
             get
@@ -116,6 +119,9 @@ namespace Managed3D.Geometry
             }
         }
 
+        /// <summary>
+        /// Gets or sets the normal vector of the vertex.
+        /// </summary>
         public Vector3 Normal
         {
             get

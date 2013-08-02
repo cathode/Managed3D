@@ -40,7 +40,7 @@ namespace Managed3D.Geometry
             Contract.Requires(q < vertices.Length);
             Contract.Requires(vertices[p] != null);
             Contract.Requires(vertices[q] != null);
-    
+
             this.P = vertices[p];
             this.Q = vertices[q];
         }
@@ -82,13 +82,15 @@ namespace Managed3D.Geometry
         }
         #endregion
         #region Methods
-        public Vector3 GetCenter()
+        public Vector3 GetMidpoint()
         {
-            throw new NotImplementedException();
-
-            //return (this.P + this.Q) / 2.0;
+            return (this.P.Position + this.Q.Position) / 2.0;
         }
 
+        /// <summary>
+        /// Calculates the point at which the edge intersects the XY plane.
+        /// </summary>
+        /// <returns></returns>
         public Vector3 GetIntersectionXY()
         {
             return this.GetIntersectionXY(0.0);
@@ -129,7 +131,7 @@ namespace Managed3D.Geometry
 
             var k1 = -x2 / (x1 - x2);
             var k2 = 1 - k1;
-            var xf =  1.0 / (x2 - x1);
+            var xf = 1.0 / (x2 - x1);
 
             //var xdist = 
             //k1 *= x;
@@ -165,5 +167,10 @@ namespace Managed3D.Geometry
             Contract.Invariant(this.Q != null);
         }
         #endregion
+
+        public double GetLength()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

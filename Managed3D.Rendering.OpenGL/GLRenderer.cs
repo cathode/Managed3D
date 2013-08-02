@@ -12,7 +12,7 @@ using Managed3D.SceneGraph;
 using Managed3D.Geometry;
 using Managed3D.Platform.Microsoft;
 using Managed3D.Platform.Microsoft.OpenGL;
-using OpenTK;
+//using OpenTK;
 
 namespace Managed3D.Rendering.OpenGL
 {

@@ -283,16 +283,15 @@ namespace Managed3D.SceneGraph
         /// <param name="item">The <see cref="Node"/> instance to be added.</param>
         public void Add(Node item)
         {
-            if (item != null)
-            {
-                if (item.ContainsDeep(this))
-                    throw new InvalidOperationException("A recursive node addition was detected");
+            Contract.Requires(item != null);
 
-                if (!this.ContainsDeep(item))
-                {
-                    item.parents.AddFirst(this);
-                    this.children.Add(item);
-                }
+            if (item.ContainsDeep(this))
+                throw new InvalidOperationException("A recursive node addition was detected");
+
+            if (!this.ContainsDeep(item))
+            {
+                item.parents.AddFirst(this);
+                this.children.Add(item);
             }
         }
 
@@ -472,7 +471,7 @@ namespace Managed3D.SceneGraph
         {
             Contract.Invariant(this.children != null);
             Contract.Invariant(this.parents != null);
-            
+
         }
         #endregion
     }

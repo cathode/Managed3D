@@ -72,6 +72,7 @@ namespace Tests.SceneGraph
             catch (Exception ex)
             {
                 Assert.Pass();
+                return;
             }
             Assert.Fail();
         }
@@ -175,6 +176,23 @@ namespace Tests.SceneGraph
             actual = root.GetGraphExtents();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void EnsureNodeCannotContainItself()
+        {
+            var root = new Node();
+
+            try
+            {
+                root.Add(root);
+            }
+            catch (Exception ex)
+            {
+                Assert.Pass();
+            }
+
+            Assert.Fail();
         }
     }
 }

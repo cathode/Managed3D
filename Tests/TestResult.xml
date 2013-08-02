@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Users\wshelley\Documents\GitHub\Managed3D\Tests\Managed3D_Tests.nunit" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-08-02" time="11:11:59">
+  <environment nunit-version="2.6.2.12296" clr-version="2.0.50727.5472" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.2\bin" machine-name="PDX-WSHELLEY" user="wshelley" user-domain="IMPERIALMFG" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="C:\Users\wshelley\Documents\GitHub\Managed3D\Tests\Managed3D_Tests.nunit" executed="True" result="Failure" success="False" time="0.097" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="C:\Users\wshelley\Documents\GitHub\Managed3D\Tests\bin\Debug\Tests.dll" executed="True" result="Failure" success="False" time="0.076" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="0.076" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="SceneGraph" executed="True" result="Failure" success="False" time="0.076" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="Node_Tests" executed="True" result="Failure" success="False" time="0.074" asserts="0">
+                    <results>
+                      <test-case name="Tests.SceneGraph.Node_Tests.InvalidOperationsShouldFail" executed="True" result="Failure" success="False" time="0.061" asserts="0">
+                        <failure>
+                          <message><![CDATA[]]></message>
+                          <stack-trace><![CDATA[at Tests.SceneGraph.Node_Tests.InvalidOperationsShouldFail() in c:\Users\wshelley\Documents\GitHub\Managed3D\Tests\SceneGraph\Node_Tests.cs:line 76
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

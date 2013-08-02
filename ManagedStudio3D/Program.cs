@@ -75,8 +75,8 @@ namespace ManagedStudio3D
             //scene.Root = node;
 
             Console.WriteLine(root.GetGraphExtents());
-            Program.RunDirect3DMode();
-            //Program.RunSoftwareMode();
+            //Program.RunDirect3DMode();
+            Program.RunSoftwareMode();
             //Program.RunOpenGLMode();
         }
 
