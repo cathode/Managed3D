@@ -26,19 +26,50 @@ namespace Tests.Geometry
         }
 
         [Test]
-        public void Length()
+        public void EnsureEdgeLengthsAreCorrect()
         {
+            // Test for line along X axis.
             var e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(1, 0, 0));
 
-            var expected = 1.0d;
-
+            var expected = 1.0;
             var actual = e.GetLength();
-
             Assert.AreEqual(expected, actual);
+
+            // Test for line along Y axis.
+            e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(0, 1, 0));
+            actual = e.GetLength();
+            Assert.AreEqual(expected, actual);
+
+            // Test for line along Z axis.
+            e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(0, 0, 1));
+            actual = e.GetLength();
+            Assert.AreEqual(expected, actual);
+
+            // Test for line along XY plane.
+            e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(4, 3, 0));
+            expected = 5.0;
+            actual = e.GetLength();
+            Assert.AreEqual(expected, actual);
+
+            // Test for line along YZ plane.
+            e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(0, 4, 3));
+            expected = 5.0;
+            actual = e.GetLength();
+            Assert.AreEqual(expected, actual);
+
+            // Test for line along XZ plane.
+            e = new Edge3(new Vertex3(0, 0, 0), new Vertex3(4, 0, 3));
+            expected = 5.0;
+            actual = e.GetLength();
+            Assert.AreEqual(expected, actual);
+
+            // Test for line along XYZ plane.
+
+            // Not implemented test yet.
         }
 
         [Test]
-        public void Intersections()
+        public void Edge3_Intersections()
         {
             var e1 = new Edge3(new Vertex3(0, 0, -1), new Vertex3(0, 0, 1));
             var e2 = new Edge3(new Vertex3(0, -5, 0), new Vertex3(0, 5, 0));

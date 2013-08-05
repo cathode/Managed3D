@@ -160,6 +160,23 @@ namespace Managed3D.Geometry
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Calculates the length of the edge.
+        /// </summary>
+        /// <returns></returns>
+        public double GetLength()
+        {
+            // Calculate deltas
+            var xd = Math.Abs(this.P.X - this.Q.X);
+            var yd = Math.Abs(this.P.Y - this.Q.Y);
+            var zd = Math.Abs(this.P.Z - this.Q.Z);
+
+            // Pythagorean forumla in 3 dimensions
+            var dist = Math.Sqrt(xd * xd + yd * yd + zd * zd);
+
+            return dist;
+        }
+
         [ContractInvariantMethod]
         private void Invariants()
         {
@@ -168,9 +185,5 @@ namespace Managed3D.Geometry
         }
         #endregion
 
-        public double GetLength()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
