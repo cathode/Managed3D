@@ -56,7 +56,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\OpenTK.1.1.1508.5724\lib\NET40\OpenTK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -69,28 +71,30 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="AttribMask.cs" />
-    <Compile Include="BeginMode.cs" />
-    <Compile Include="BufferedVertex3.cs" />
-    <Compile Include="GL.cs" />
-    <Compile Include="GLDeviceContext.cs" />
-    <Compile Include="GLEW.cs" />
+    <None Include="AttribMask.cs" />
+    <None Include="BeginMode.cs" />
+    <None Include="BufferedVertex3.cs" />
+    <None Include="GL.cs" />
+    <None Include="GLDeviceContext.cs" />
+    <None Include="GLEW.cs" />
+    <Compile Include="GameHelper.cs" />
     <Compile Include="GLRenderer.cs" />
     <Compile Include="GLRendererResources.cs" />
-    <Compile Include="GLU.cs" />
-    <Compile Include="Glut.cs" />
-    <Compile Include="HintMode.cs" />
-    <Compile Include="HintTarget.cs" />
-    <Compile Include="Managed3D\Platform\Microsoft\OpenGL\WGL.cs" />
-    <Compile Include="MaterialFace.cs" />
-    <Compile Include="MatrixMode.cs" />
-    <Compile Include="PolygonMode.cs" />
+    <None Include="GLU.cs" />
+    <None Include="Glut.cs" />
+    <None Include="HintMode.cs" />
+    <None Include="HintTarget.cs" />
+    <None Include="Managed3D\Platform\Microsoft\OpenGL\WGL.cs" />
+    <None Include="MaterialFace.cs" />
+    <None Include="MatrixMode.cs" />
+    <None Include="packages.config" />
+    <None Include="PolygonMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShadeModel.cs" />
+    <None Include="ShadeModel.cs" />
     <None Include="..\Managed3D.snk">
       <Link>Managed3D.snk</Link>
     </None>
-    <Compile Include="VertexBuffer3.cs" />
+    <None Include="VertexBuffer3.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Managed3D\Managed3D.csproj">
