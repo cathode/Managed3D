@@ -406,7 +406,10 @@ namespace Managed3D.Geometry
         /// <returns></returns>
         public static Vector3 CrossProduct(Vector3 a, Vector3 b)
         {
-            return new Vector3((a.Y * b.Z) - (a.Z * b.Y), (a.Z * b.X) - (a.X * b.Z), (a.X * b.Y) - (a.Y * b.X));
+            return new Vector3(
+                (a.Y * b.Z) - (a.Z * b.Y),
+                (a.Z * b.X) - (a.X * b.Z),
+                (a.X * b.Y) - (a.Y * b.X));
         }
 
         /// <summary>

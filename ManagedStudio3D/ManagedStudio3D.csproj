@@ -6,7 +6,7 @@
     <!--<ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>-->
     <ProjectGuid>{3D433939-E619-497D-BC08-51562C2924F7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ManagedStudio3D</RootNamespace>
     <AssemblyName>ManagedStudio3D</AssemblyName>
@@ -60,9 +60,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -87,9 +84,9 @@
     <None Include="SupportedRasterizer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Managed3D.Rendering.Direct3D\Managed3D.Rendering.Direct3D.csproj">
-      <Project>{6C772D1A-74CF-46C7-B471-DD8FE6C64E08}</Project>
-      <Name>Managed3D.Rendering.Direct3D</Name>
+    <ProjectReference Include="..\Managed3D.Modeling.Parametrics\Managed3D.Modeling.Parametrics.csproj">
+      <Project>{cf445d21-9e1f-4d66-a36d-ccd8d54314a1}</Project>
+      <Name>Managed3D.Modeling.Parametrics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Managed3D.Rendering.OpenGL\Managed3D.Rendering.OpenGL.csproj">
       <Project>{FA159E90-1017-4A96-B782-2BFFA3397D00}</Project>

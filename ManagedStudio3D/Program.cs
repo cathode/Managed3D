@@ -8,7 +8,7 @@ using System;
 using Managed3D.Geometry;
 using Managed3D.Geometry.Primitives;
 using Managed3D.Rendering;
-using Managed3D.Rendering.Direct3D;
+//using Managed3D.Rendering.Direct3D;
 using Managed3D.Rendering.OpenGL;
 using Managed3D.Rendering.Software;
 using Managed3D.SceneGraph;
@@ -35,34 +35,35 @@ namespace ManagedStudio3D
             c1.Polygons[0].Edges[0].Flags = EdgeFlags.Invisible;
 
             var root = new Node(
-                new Node(c1)
-                {
-                    Position = new Vector3(150, 0, 0),
-                    Visibility = VisibilityGroup.G0,
-                    TransformOrder = TransformOrder.RotateTranslateScale,
-                },
+                //new Node(c1)
+                //{
+                //    Position = new Vector3(150, 0, 0),
+                //    Visibility = VisibilityGroup.G0,
+                //    TransformOrder = TransformOrder.RotateTranslateScale,
+                //},
                 new Node(new Cube(50))
                 {
-                    Position = new Vector3(-150, 0, 0),
+                    Position = new Vector3(0, 0, 0),
                     Visibility = VisibilityGroup.G0 | VisibilityGroup.G1,
                     TransformOrder = TransformOrder.TranslateRotateScale,
-                },
-                new Node(new Cube(50))
-                {
-                    Position = new Vector3(0, -150, 0),
-                    Visibility = VisibilityGroup.G1,
-                },
-                new Node(new Cube(130))
-                {
-                    Position = new Vector3(0, 120, 0),
-                    Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(40)),
-                    TransformOrder = Managed3D.SceneGraph.TransformOrder.RotateTranslateScale,
-                    Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
-                }, new LabelNode("Sample Label")
-                {
-                    Position = new Vector3(100, 100, 0),
-                    Visibility = VisibilityGroup.G2,
-                });
+                }
+                //new Node(new Cube(50))
+                //{
+                //    Position = new Vector3(0, -150, 0),
+                //    Visibility = VisibilityGroup.G1,
+                //},
+                //new Node(new Cube(130))
+                //{
+                //    Position = new Vector3(0, 120, 0),
+                //    Orientation = new Quaternion(Vector3.Up, Angle.FromDegrees(40)),
+                //    TransformOrder = Managed3D.SceneGraph.TransformOrder.RotateTranslateScale,
+                //    Visibility = VisibilityGroup.G1 | VisibilityGroup.G2,
+                //}, new LabelNode("Sample Label")
+                //{
+                //    Position = new Vector3(100, 100, 0),
+                //    Visibility = VisibilityGroup.G2,
+                //}
+            );
 
 
             //root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
@@ -76,10 +77,10 @@ namespace ManagedStudio3D
 
             Console.WriteLine(root.GetGraphExtents());
             //Program.RunDirect3DMode();
-            Program.RunSoftwareMode();
-            //Program.RunOpenGLMode();
+            //Program.RunSoftwareMode();
+            Program.RunOpenGLMode();
         }
-
+        /*
         private static void RunDirect3DMode()
         {
             var renderer = new D3DRenderer()
@@ -97,12 +98,15 @@ namespace ManagedStudio3D
 
             renderer.Start();
         }
+        */
 
         private static void RunOpenGLMode()
         {
             var renderer = new GLRenderer();
             var options = new RendererOptions();
             renderer.Scene = scene;
+            renderer.ActiveCamera.Position = new Vector3(0, 0, 0);
+
             renderer.Initialize(options);
             renderer.Start();
         }
