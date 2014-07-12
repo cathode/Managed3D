@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,42 +72,21 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <None Include="AttribMask.cs" />
-    <None Include="BeginMode.cs" />
-    <None Include="BufferedVertex3.cs" />
-    <None Include="GL.cs" />
-    <None Include="GLDeviceContext.cs" />
-    <None Include="GLEW.cs" />
-    <Compile Include="GameHelper.cs" />
-    <Compile Include="GLRenderer.cs" />
-    <Compile Include="GLRendererResources.cs" />
-    <None Include="GLU.cs" />
-    <None Include="Glut.cs" />
-    <None Include="HintMode.cs" />
-    <None Include="HintTarget.cs" />
-    <None Include="Managed3D\Platform\Microsoft\OpenGL\WGL.cs" />
-    <None Include="MaterialFace.cs" />
-    <None Include="MatrixMode.cs" />
-    <None Include="packages.config" />
-    <None Include="PolygonMode.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="ShadeModel.cs" />
     <None Include="..\Managed3D.snk">
       <Link>Managed3D.snk</Link>
     </None>
-    <None Include="VertexBuffer3.cs" />
+    <Compile Include="GLRenderer.cs" />
+    <Compile Include="GLRendererResources.cs" />
+    <None Include="Managed3D\Platform\Microsoft\OpenGL\WGL.cs" />
+    <None Include="packages.config" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Shaders\vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Managed3D\Managed3D.csproj">
       <Project>{4D281C09-1C91-4C84-B0DC-AAFF8839264E}</Project>
       <Name>Managed3D</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\References\glut32.dll">
-      <Link>glut32.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -59,27 +59,7 @@ namespace Managed3D.Rendering.OpenGL
 
             gw.RenderFrame += (sender, e) =>
                 {
-                    // render graphics
-                    GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-                    GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-                    GL.MatrixMode(MatrixMode.Projection);
-                    GL.LoadIdentity();
-                    //GL.Ortho(-1.0, 1.0, -1.0, 1.0, 0.0, 4.0);
-                    //GL.matr
-
-                    GL.Begin(PrimitiveType.Triangles);
-
-                    GL.Color3(255, 0, 255);
-                    GL.Vertex2(-1.0f, 1.0f);
-                    GL.Color3(255, 255, 0);
-                    GL.Vertex2(0.0f, -1.0f);
-                    GL.Color3(0, 255, 255);
-                    GL.Vertex2(1.0f, 1.0f);
-
-                    GL.End();
-
-                    gameWindow.SwapBuffers();
+                    this.RenderFrame();
                 };
         }
 
@@ -116,49 +96,23 @@ namespace Managed3D.Rendering.OpenGL
             this.Initialize(RendererOptions.Empty);
 
 
+            this.gameWindow.Closed += gameWindow_Closed;
             this.gameWindow.Run(60.0);
-            //GLUT.MainLoop();
         }
 
-        public override void Stop()
+        void gameWindow_Closed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Stop();
+
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
         protected override void OnInitializing(RendererInitializationEventArgs e)
         {
             base.OnInitializing(e);
-            unsafe
-            {
-                int argc = 1;
-                string[] argv = new string[] { "empty" };
-                //GLUT.Init(&argc, argv);
-                //GLUT.InitDisplayMode(GLUT.RGB | GLUT.DOUBLE);
-                //GLUT.InitWindowSize(640, 480);
-                //GLUT.CreateWindow("Managed3D.Rendering.OpenGL.GLRenderer");
-                //GLUT.DisplayFunc(this.RenderFrame);
-                //GLUT.IdleFunc(this.Idle);
-            }
-            /*
-            IntPtr hinst = IntPtr.Zero;
 
-            this.windowHandle = User32.CreateWindowEx(Managed3D.Platform.Microsoft.ExtendedWindowStyle.Left,
-                "GLRenderer",
-                "Managed3D GLRenderer",
-                0,
-                0, 0,
-                this.Profile.Width, this.Profile.Height,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                hinst,
-                IntPtr.Zero);
+            gameWindow.Title = "Managed3D Sample Application";
 
-            
-            GL.ShadeModel(ShadeModel.Flat);
-            GL.ClearDepth(1.0);
-            GL.Hint(HintTarget.PerspectiveCorrection, HintMode.Nicest);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            */
         }
 
         private void Idle()
@@ -184,37 +138,48 @@ namespace Managed3D.Rendering.OpenGL
             //GL.LoadIdentity();
         }
 
+        double r = 10.0;
+
         protected override void OnRender(RenderEventArgs e)
         {
             base.OnRender(e);
 
             // render graphics
+            GL.ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            float[] mat_specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+            float[] mat_shininess = { 50.0f };
+            float[] light_position = { 100.0f, 100.0f, 100.0f, 0.0f };
+            float[] light_ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
+
+            GL.ShadeModel(ShadingModel.Smooth);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Specular, mat_specular);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Shininess, mat_shininess);
+            GL.Light(LightName.Light0, LightParameter.Position, light_position);
+            GL.Light(LightName.Light0, LightParameter.Ambient, light_ambient);
+            GL.Light(LightName.Light0, LightParameter.Diffuse, mat_specular);
+
+
+            GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Light0);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.ColorMaterial);
+            GL.Enable(EnableCap.CullFace);
 
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.Ortho(-1.0, 1.0, -1.0, 1.0, 0.0, 4.0);
 
-            GL.Begin(PrimitiveType.Triangles);
+            GL.Scale(0.01, 0.01, 0.01);
 
-            GL.Color3(255, 0, 255);
-            GL.Vertex2(-1.0f, 1.0f);
-            GL.Color3(255, 255, 0);
-            GL.Vertex2(0.0f, -1.0f);
-            GL.Color3(0, 255, 255);
-            GL.Vertex2(1.0f, 1.0f);
+            var ct = this.ActiveCamera.Position;
 
-            GL.End();
+            GL.Translate(-ct.X, -ct.Y, -ct.Z);
+            GL.Rotate(this.r++, 1, 0, 1);
 
-            this.gameWindow.SwapBuffers();
+            this.ProcessNode(this.Scene.Root);
 
-
-            if (this.Scene == null || this.Scene.Root == null)
-                return;
-
-            //GL.Rotate(30, 1.0, 0, 0);
-
-            //this.ProcessNode(this.Scene.Root);
+            gameWindow.SwapBuffers();
 
         }
 
@@ -239,22 +204,34 @@ namespace Managed3D.Rendering.OpenGL
 
         protected virtual void ProcessNode(Node node)
         {
-            //var axis = node.Orientation.Axis;
-            //GL.Rotate(node.Orientation.Angle.Degrees, axis.X, axis.Y, axis.Z);
-            //GL.Translate(node.Position.X, node.Position.Y, node.Position.Z);
+            var axis = node.Orientation.GetAxis();
+            GL.PushMatrix();
+            GL.Rotate(node.Orientation.GetAngle().Degrees, axis.X, axis.Y, axis.Z);
+            GL.Translate(node.Position.X, node.Position.Y, node.Position.Z);
 
 
-            //foreach (var mesh in node.Renderables)
-            //{
-            //    foreach (var poly in mesh.Polygons)
-            //    {
-            //        GL.Begin(BeginMode.Polygon);
-            //        foreach (var vert in poly.Vertices)
-            //            GL.Vertex3(vert.X, vert.Y, vert.Z);
+            foreach (var mesh in node.Renderables)
+            {
+                foreach (var poly in mesh.Polygons)
+                {
+                    GL.Begin(PrimitiveType.Polygon);
+                    var n = poly.Normal;
 
-            //        GL.End();
-            //    }
-            //}
+                    GL.Normal3(n.X, n.Y, n.Z);
+
+                    foreach (var vert in poly.Vertices.Reverse())
+                        GL.Vertex3(vert.X, vert.Y, vert.Z);
+
+                    GL.End();
+                }
+            }
+
+            foreach (var child in node.Children)
+            {
+                this.ProcessNode(child);
+            }
+            GL.PopMatrix();
+
         }
 
         private void IdleFunc_Callback()
