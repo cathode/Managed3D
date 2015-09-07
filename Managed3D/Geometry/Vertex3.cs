@@ -13,7 +13,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents a vertex of a polygon in three-dimensional space.
     /// </summary>
-    public class Vertex3
+    public class Vertex3 : IRenderableVertex
     {
         #region Fields
         private Vector3 position;

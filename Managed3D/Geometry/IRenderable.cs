@@ -21,7 +21,7 @@ namespace Managed3D.Geometry
         /// <summary>
         /// Gets a collection of vertices to render.
         /// </summary>
-        IEnumerable<IRenderableVertex> Vertices
+        IList<IRenderableVertex> Vertices
         {
             get;
         }

@@ -15,7 +15,7 @@ namespace Managed3D.Geometry
     /// <summary>
     /// Represents an unstructured grid in 3d-space comprised of polygons.
     /// </summary>
-    public class Mesh3 : IEnumerable<Polygon3>
+    public class Mesh3 : IEnumerable<Polygon3>, IRenderable
     {
         #region Fields
         private Polygon3[] polygons;
@@ -60,5 +60,20 @@ namespace Managed3D.Geometry
             return this.GetEnumerator();
         }
         #endregion
+
+        public IList<IRenderableVertex> Vertices
+        {
+            get { return this.vertices; }
+        }
+
+        public IEnumerable<IRenderableFace> Faces
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IEnumerable<IRenderableEdge> Edges
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

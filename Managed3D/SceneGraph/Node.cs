@@ -22,7 +22,7 @@ namespace Managed3D.SceneGraph
         private readonly LinkedList<Node> parents = new LinkedList<Node>();
         private readonly List<Node> children = new List<Node>();
         private readonly List<Constraint> constraints = new List<Constraint>();
-        private readonly List<Mesh3> renderables = new List<Mesh3>();
+        private IRenderable renderable;
         private Vector3 position = Node.DefaultPosition;
         private Vector3 scale = Node.DefaultScale;
         private Quaternion orientation = Node.DefaultOrientation;
@@ -48,11 +48,9 @@ namespace Managed3D.SceneGraph
                     this.Add(c);
         }
 
-        public Node(params Mesh3[] renderables)
+        public Node(IRenderable renderable)
         {
-            foreach (var r in renderables)
-                if (r != null)
-                    this.renderables.Add(r);
+            this.renderable = renderable;
         }
         #endregion
         #region Properties
@@ -232,11 +230,15 @@ namespace Managed3D.SceneGraph
             }
         }
 
-        public List<Mesh3> Renderables
+        public IRenderable Renderable
         {
             get
             {
-                return this.renderables;
+                return this.renderable;
+            }
+            set
+            {
+                this.renderable = value;
             }
         }
 
@@ -372,42 +374,45 @@ namespace Managed3D.SceneGraph
         /// <returns></returns>
         public virtual Extents3 GetExtents()
         {
-            double x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
-
-            var pos = this.GetWorldPosition();
-            Quaternion rot = this.Orientation;
-            var rm = rot.ToRotationMatrix();
-            Matrix4 m = Matrix4.Identity;
-            if (this.TransformOrder == SceneGraph.TransformOrder.TranslateRotateScale)
+            if (this.renderable != null)
             {
-                m = rm * Matrix4.CreateTranslationMatrix(pos);
+                double x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+
+                var pos = this.GetWorldPosition();
+                Quaternion rot = this.Orientation;
+                var rm = rot.ToRotationMatrix();
+                Matrix4 m = Matrix4.Identity;
+                if (this.TransformOrder == SceneGraph.TransformOrder.TranslateRotateScale)
+                {
+                    m = rm * Matrix4.CreateTranslationMatrix(pos);
+                }
+                else
+                {
+                    m = Matrix4.CreateTranslationMatrix(pos) * rm;
+                }
+
+                foreach (var vt in this.renderable.Vertices)
+                {
+                    Vertex3 v = m * new Vertex3(vt.X, vt.Y, vt.Z);
+
+                    x1 = (v.X > x1) ? v.X : x1;
+                    x2 = (v.X < x2) ? v.X : x2;
+
+                    y1 = (v.Y > y1) ? v.Y : y1;
+                    y2 = (v.Y < y2) ? v.Y : y2;
+
+                    z1 = (v.Z > z1) ? v.Z : z1;
+                    z2 = (v.Z < z2) ? v.Z : z2;
+                }
+
+
+                var v1 = new Vector3(x1, y1, z1);
+                var v2 = new Vector3(x2, y2, z2);
+
+                return new Extents3(v1, v2);
             }
             else
-            {
-                m = Matrix4.CreateTranslationMatrix(pos) * rm;
-            }
-
-            foreach (var mesh in this.Renderables)
-                foreach (var poly in mesh.Polygons)
-                    foreach (var vt in poly.Vertices)
-                    {
-                        Vertex3 v = m * vt;
-
-                        x1 = (v.X > x1) ? v.X : x1;
-                        x2 = (v.X < x2) ? v.X : x2;
-
-                        y1 = (v.Y > y1) ? v.Y : y1;
-                        y2 = (v.Y < y2) ? v.Y : y2;
-
-                        z1 = (v.Z > z1) ? v.Z : z1;
-                        z2 = (v.Z < z2) ? v.Z : z2;
-                    }
-
-
-            var v1 = new Vector3(x1, y1, z1);
-            var v2 = new Vector3(x2, y2, z2);
-
-            return new Extents3(v1, v2);
+                return new Extents3(0, 0, 0);
         }
 
         /// <summary>

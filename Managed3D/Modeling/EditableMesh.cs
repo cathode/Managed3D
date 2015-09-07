@@ -21,7 +21,7 @@ namespace Managed3D.Modeling
     public class EditableMesh : IRenderable
     {
         #region Fields
-        private Dictionary<uint, WVertex> vertices;
+        private List<WVertex> vertices;
         private Dictionary<uint, WEdge> edges;
         private Dictionary<uint, WFace> faces;
         private Dictionary<ushort, EMSparseAttribute> attributes;
@@ -39,12 +39,11 @@ namespace Managed3D.Modeling
         }
         #endregion
         #region Properties
-        IEnumerable<IRenderableVertex> IRenderable.Vertices
+        IList<IRenderableVertex> IRenderable.Vertices
         {
             get
             {
-                foreach (var wv in this.vertices.Values)
-                    yield return wv;
+                return this.vertices;
             }
         }
 

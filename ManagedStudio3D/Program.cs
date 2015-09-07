@@ -41,12 +41,12 @@ namespace ManagedStudio3D
                 //    Visibility = VisibilityGroup.G0,
                 //    TransformOrder = TransformOrder.RotateTranslateScale,
                 //},
-                new Node(new Cube(50))
-                {
-                    Position = new Vector3(0, 0, 0),
-                    Visibility = VisibilityGroup.G0 | VisibilityGroup.G1,
-                    TransformOrder = TransformOrder.TranslateRotateScale,
-                }
+                //new Node(new Cube(50))
+                //{
+                //    Position = new Vector3(0, 0, 0),
+                //    Visibility = VisibilityGroup.G0 | VisibilityGroup.G1,
+                //    TransformOrder = TransformOrder.TranslateRotateScale,
+                //}
                 //new Node(new Cube(50))
                 //{
                 //    Position = new Vector3(0, -150, 0),
@@ -66,7 +66,7 @@ namespace ManagedStudio3D
             );
 
 
-            //root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 5)));
+            root.Add(new Node(new Managed3D.Modeling.Primitives.Cone(40, 90, 12)));
             scene.Root = root;
 
             //var terrain = new Managed3D.Modeling.Primitives.Terrain(1, 1);

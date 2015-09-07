@@ -145,7 +145,7 @@ namespace Tests.SceneGraph
             Assert.AreEqual(Extents3.Empty, extents);
 
             // Test extents with a simple renderable.
-            root.Renderables.Add(new Managed3D.Geometry.Primitives.Box(10, 10, 10));
+            root.Renderable = new Managed3D.Geometry.Primitives.Box(10, 10, 10);
             var expected = new Extents3(10, 10, 10);
             extents = root.GetExtents();
             Assert.AreEqual(expected, extents);
@@ -159,11 +159,9 @@ namespace Tests.SceneGraph
         [Test]
         public void EnsureCorrectGraphExtentsForNodes()
         {
-            var root = new Node();
-            var c1 = new Node();
-            root.Renderables.Add(new Box(10, 50, 12));
+            var root = new Node(new Box(10, 50, 12));
+            var c1 = new Node(new Box(50, 10, 15));
             root.Add(c1);
-            c1.Renderables.Add(new Box(50, 10, 15));
 
             var expected = new Extents3(50, 50, 15);
             var actual = root.GetGraphExtents();

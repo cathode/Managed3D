@@ -197,7 +197,7 @@ namespace Managed3D.Rendering.Direct3D
             if (node.HasChildren)
                 foreach (var child in node.Children)
                     this.AssembleNode(child);
-
+            /*
             foreach (var renderable in node.Renderables)
             {
                 var vstack = new Queue<SlimDX.Vector3>(renderable.Polygons.Length * 3);
@@ -230,6 +230,7 @@ namespace Managed3D.Rendering.Direct3D
                     context.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(vbuffer, 12, 0));
                 }
             }
+            */
         }
         #endregion
 

@@ -113,6 +113,29 @@ namespace Managed3D.Rendering.OpenGL
 
             gameWindow.Title = "Managed3D Sample Application";
 
+            float[] mat_specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+            float[] mat_shininess = { 50.0f };
+            float[] light_position = { 100.0f, 100.0f, 100.0f, 0.0f };
+            float[] light_ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
+
+            GL.ShadeModel(ShadingModel.Smooth);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Specular, mat_specular);
+            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Shininess, mat_shininess);
+            GL.Light(LightName.Light0, LightParameter.Position, light_position);
+            GL.Light(LightName.Light0, LightParameter.Ambient, light_ambient);
+            GL.Light(LightName.Light0, LightParameter.Diffuse, mat_specular);
+
+
+            GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Light0);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.ColorMaterial);
+            GL.Enable(EnableCap.CullFace);
+
+
+
+            //GL.Translate(0, 0, -0.25);
+            //GL.Scale(0.5, 0.5, 0.5);
         }
 
         private void Idle()
@@ -148,25 +171,50 @@ namespace Managed3D.Rendering.OpenGL
             GL.ClearColor(0.2f, 0.2f, 0.2f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            float[] mat_specular = { 1.0f, 1.0f, 1.0f, 1.0f };
-            float[] mat_shininess = { 50.0f };
-            float[] light_position = { 100.0f, 100.0f, 100.0f, 0.0f };
-            float[] light_ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
-
-            GL.ShadeModel(ShadingModel.Smooth);
-            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Specular, mat_specular);
-            GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Shininess, mat_shininess);
-            GL.Light(LightName.Light0, LightParameter.Position, light_position);
-            GL.Light(LightName.Light0, LightParameter.Ambient, light_ambient);
-            GL.Light(LightName.Light0, LightParameter.Diffuse, mat_specular);
 
 
-            GL.Enable(EnableCap.Lighting);
-            GL.Enable(EnableCap.Light0);
-            GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.ColorMaterial);
-            GL.Enable(EnableCap.CullFace);
+            /*
+            GL.Begin(BeginMode.Quads);
+            // Front Face
+            GL.Normal3(0.0f, 0.0f, 0.5f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(1.0f, 1.0f, 1.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(-1.0f, 1.0f, 1.0f);
+            // Back Face
+            GL.Normal3(0.0f, 0.0f, -0.5f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, -1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(-1.0f, 1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(1.0f, 1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, -1.0f);
+            // Top Face
+            GL.Normal3(0.0f, 0.5f, 0.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(-1.0f, 1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(-1.0f, 1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(1.0f, 1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(1.0f, 1.0f, -1.0f);
+            // Bottom Face
+            GL.Normal3(0.0f, -0.5f, 0.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(-1.0f, -1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(1.0f, -1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, 1.0f);
+            // Right Face
+            GL.Normal3(0.5f, 0.0f, 0.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, -1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(1.0f, 1.0f, -1.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(1.0f, 1.0f, 1.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, 1.0f);
+            // Left Face
+            GL.Normal3(-0.5f, 0.0f, 0.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, -1.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, 1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(-1.0f, 1.0f, 1.0f);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(-1.0f, 1.0f, -1.0f);
+            GL.End();*/
 
+
+            //GL.sp
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
 
@@ -175,7 +223,11 @@ namespace Managed3D.Rendering.OpenGL
             var ct = this.ActiveCamera.Position;
 
             GL.Translate(-ct.X, -ct.Y, -ct.Z);
-            GL.Rotate(this.r++, 1, 0, 1);
+
+            var rt = this.ActiveCamera.Orientation;
+
+            this.ActiveCamera.Orientation = rt.RotateBy(1.5);
+            GL.Rotate(rt.W, rt.X, rt.Y, rt.Z);
 
             this.ProcessNode(this.Scene.Root);
 
@@ -210,21 +262,20 @@ namespace Managed3D.Rendering.OpenGL
             GL.Translate(node.Position.X, node.Position.Y, node.Position.Z);
 
 
-            foreach (var mesh in node.Renderables)
+
+            foreach (var poly in node.Renderable.Faces)
             {
-                foreach (var poly in mesh.Polygons)
-                {
-                    GL.Begin(PrimitiveType.Polygon);
-                    var n = poly.Normal;
+                //GL.Begin(PrimitiveType.Polygon);
+                //var n = poly.Normal;
 
-                    GL.Normal3(n.X, n.Y, n.Z);
+                //GL.Normal3(n.X, n.Y, n.Z);
 
-                    foreach (var vert in poly.Vertices.Reverse())
-                        GL.Vertex3(vert.X, vert.Y, vert.Z);
+                //foreach (var vert in poly.Vertices.Reverse())
+                 //   GL.Vertex3(vert.X, vert.Y, vert.Z);
 
-                    GL.End();
-                }
+                //GL.End();
             }
+
 
             foreach (var child in node.Children)
             {

@@ -330,16 +330,15 @@ namespace Managed3D.Rendering.Software
                 foreach (var child in node)
                     this.RenderNode(child);
 
-            foreach (var renderable in node.Renderables)
-            {
-                foreach (var poly in renderable)
+      
+                foreach (var poly in node.Renderable.Faces)
                 {
                     if (poly == null)
                         continue;
-                    else
-                        this.DrawPolygon(poly);
+                    //else
+                        //this.DrawPolygon(poly);
                 }
-            }
+            
 
             if (node is SpriteNode)
             {

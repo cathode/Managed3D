@@ -76,8 +76,6 @@ namespace Managed3D.Geometry.Primitives
         #endregion
         #region Fields
         private double size;
-        #endregion
-        #region Fields
         /// <summary>
         /// Holds the default size of a new <see cref="Cube"/>, if none is specified when the object is created.
         /// </summary>
